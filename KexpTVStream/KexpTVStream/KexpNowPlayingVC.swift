@@ -79,6 +79,7 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate {
                 self.artistNameLabel.hidden = false
                 self.trackNameLabel.hidden = false
                 self.albumNameLabel.hidden = false
+                self.trackLabel.text = "Track:"
                 
                 self.artistNameLabel.text = nowPlaying.artist
                 self.trackNameLabel.text = nowPlaying.songTitle
