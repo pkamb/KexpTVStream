@@ -3,6 +3,7 @@
     {
       "orientation" : "landscape",
       "idiom" : "tv",
+      "filename" : "TopShelf-1920x720.png",
       "extent" : "full-screen",
       "minimum-system-version" : "9.0",
       "scale" : "1x"
