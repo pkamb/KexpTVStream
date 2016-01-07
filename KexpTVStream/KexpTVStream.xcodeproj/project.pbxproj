@@ -19,6 +19,7 @@
 		46CDFB491C30B0F30001A004 /* KexpStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB481C30B0F30001A004 /* KexpStyle.swift */; };
 		46CDFB4B1C30D8AC0001A004 /* CurrentDj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB4A1C30D8AC0001A004 /* CurrentDj.swift */; };
 		B5DB77680DBF3C0A1A837B2E /* Pods_KexpTVStream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 842C0B17663603CB9999DE72 /* Pods_KexpTVStream.framework */; };
+		C91709301C3E073000E010A6 /* InternetReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = C917092F1C3E073000E010A6 /* InternetReachability.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		46CDFB4A1C30D8AC0001A004 /* CurrentDj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentDj.swift; sourceTree = "<group>"; };
 		842C0B17663603CB9999DE72 /* Pods_KexpTVStream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KexpTVStream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D4D9AA2AE854CA5681BB5EF /* Pods-KexpTVStream.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KexpTVStream.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KexpTVStream/Pods-KexpTVStream.debug.xcconfig"; sourceTree = "<group>"; };
+		C917092F1C3E073000E010A6 /* InternetReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternetReachability.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				C917092C1C3E048400E010A6 /* UI */,
 				C917092B1C3E047300E010A6 /* Models */,
 				46CDFB1F1C30A7170001A004 /* AppDelegate.swift */,
+				C917092F1C3E073000E010A6 /* InternetReachability.swift */,
 				46CDFB481C30B0F30001A004 /* KexpStyle.swift */,
 				46CDFB411C30A7730001A004 /* Supporting files */,
 			);
@@ -340,6 +343,7 @@
 				46CDFB251C30A7170001A004 /* KexpTVStream.xcdatamodeld in Sources */,
 				46CDFB491C30B0F30001A004 /* KexpStyle.swift in Sources */,
 				46CDFB471C30A8AD0001A004 /* NowPlaying.swift in Sources */,
+				C91709301C3E073000E010A6 /* InternetReachability.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
