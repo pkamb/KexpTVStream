@@ -108,7 +108,18 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate {
     
     // MARK: - @IBAction
     @IBAction func playKexpAction(sender: AnyObject) {
-        (playPauseButton.selected) ? setPlayMode(false) : setPlayMode(true)
+        if (playPauseButton.selected) && !InternetReachability.isConnectedToNetwork() {
+            let alert = UIAlertController(title: "Whoops!", message: "Unable to connect to the Internet", preferredStyle: .Alert)
+            let alertAction = UIAlertAction(title: "OK", style: .Default, handler:nil)
+            
+            alert.addAction(alertAction)
+            self .presentViewController(alert, animated: true, completion: nil)
+
+            return;
+        }
+
+        setPlayMode(!playPauseButton.selected)
+        
         playPauseButton.selected = !playPauseButton.selected
     }
     
