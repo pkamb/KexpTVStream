@@ -3,7 +3,7 @@
     {
       "orientation" : "landscape",
       "idiom" : "tv",
-      "filename" : "TopShelf-1920x720.png",
+      "filename" : "SplashScreen-1920x1080.png",
       "extent" : "full-screen",
       "minimum-system-version" : "9.0",
       "scale" : "1x"
