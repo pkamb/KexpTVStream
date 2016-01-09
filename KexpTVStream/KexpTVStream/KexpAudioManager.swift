@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 
 private let kexpStreamUrl = "http://live-aacplus-64.kexp.org/kexp64.aac"
+private let kexpBackupStreamUrl = "http://live-mp3-128.kexp.org:8000/listen.pls"
 
 protocol KexpAudioManagerDelegate {
     func KexpAudioPlayerDidStartPlaying()
@@ -22,6 +23,8 @@ class KexpAudioManager: NSObject {
     var audioPlayerItem: AVPlayerItem?
     var audioPlayer: AVPlayer?
     
+    var currentKexp = kexpStreamUrl
+    
     var delegate: KexpAudioManagerDelegate?
     
     override init() {
@@ -29,7 +32,7 @@ class KexpAudioManager: NSObject {
     }
     
     private func initStream() {
-        if let streamURL = NSURL.init(string: kexpStreamUrl) {
+        if let streamURL = NSURL.init(string: currentKexp) {
             audioPlayerItem = AVPlayerItem(URL: streamURL)
             audioPlayerItem?.addObserver(self, forKeyPath: "status", options: [], context: nil)
             audioPlayerItem?.addObserver(self, forKeyPath: "playbackBufferEmpty", options: .New, context: nil)
@@ -73,6 +76,7 @@ class KexpAudioManager: NSObject {
                     print("Status: Failed to Play")
                     deInitStream()
                     delegate?.KexpAudioPlayerDidStopPlaying()
+                    currentKexp = kexpBackupStreamUrl
                 }
             }
             else if (keyPath == "playbackBufferEmpty") {
