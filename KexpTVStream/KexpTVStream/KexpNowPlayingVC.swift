@@ -52,12 +52,16 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate {
     }
     
     // MARK: - KexpAudioManagerDelegate Methods
-    func KexpAudioPlayerDidStartPlaying() {
+    func kexpAudioPlayerDidStartPlaying() {
         getNowPlayingInfo()
     }
     
-    func KexpAudioPlayerDidStopPlaying() {
+    func kexpAudioPlayerDidStopPlaying() {
         setPlayMode(false)
+    }
+    
+    func kexpAudioPlayerFailedToPlay() {
+        showAlert("The KEXP stream is down, please contact KEXP if the issue persists.")
     }
     
     // MARK: - Networking methods
@@ -109,11 +113,7 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate {
     // MARK: - @IBAction
     @IBAction func playKexpAction(sender: AnyObject) {
         if (playPauseButton.selected) && !InternetReachability.isConnectedToNetwork() {
-            let alert = UIAlertController(title: "Whoops!", message: "Unable to connect to the Internet", preferredStyle: .Alert)
-            let alertAction = UIAlertAction(title: "OK", style: .Default, handler:nil)
-            
-            alert.addAction(alertAction)
-            self .presentViewController(alert, animated: true, completion: nil)
+            showAlert("Unable to connect to the Internet")
 
             return;
         }
@@ -121,6 +121,16 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate {
         setPlayMode(!playPauseButton.selected)
         
         playPauseButton.selected = !playPauseButton.selected
+    }
+    
+    private func showAlert(alertMessage: String) {
+        let alert = UIAlertController(title: "Whoops!", message: alertMessage, preferredStyle: .Alert)
+        let alertAction = UIAlertAction(title: "OK", style: .Default, handler:nil)
+        
+        alert.addAction(alertAction)
+        self .presentViewController(alert, animated: true, completion: nil)
+        
+        return;
     }
     
     private func setPlayMode(isPlaying: Bool) {

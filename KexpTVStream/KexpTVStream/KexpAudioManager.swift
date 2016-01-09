@@ -13,8 +13,9 @@ private let kexpStreamUrl = "http://live-aacplus-64.kexp.org/kexp64.aac"
 private let kexpBackupStreamUrl = "http://live-mp3-128.kexp.org:8000/listen.pls"
 
 protocol KexpAudioManagerDelegate {
-    func KexpAudioPlayerDidStartPlaying()
-    func KexpAudioPlayerDidStopPlaying()
+    func kexpAudioPlayerDidStartPlaying()
+    func kexpAudioPlayerDidStopPlaying()
+    func kexpAudioPlayerFailedToPlay()
 }
 
 class KexpAudioManager: NSObject {
@@ -70,20 +71,25 @@ class KexpAudioManager: NSObject {
         if let playerItem = object as? AVPlayerItem {
             if (keyPath == "status") {
                 if (playerItem.status == .ReadyToPlay) {
-                    delegate?.KexpAudioPlayerDidStartPlaying()
+                    delegate?.kexpAudioPlayerDidStartPlaying()
                     currentKexp = kexpStreamUrl
                 }
                 else if (playerItem.status == .Failed) {
                     print("Status: Failed to Play")
                     deInitStream()
-                    delegate?.KexpAudioPlayerDidStopPlaying()
-                    currentKexp = kexpBackupStreamUrl
+                    delegate?.kexpAudioPlayerDidStopPlaying()
+                    
+                    if (currentKexp == kexpBackupStreamUrl) {
+                       delegate?.kexpAudioPlayerFailedToPlay()
+                    } else {
+                        currentKexp = kexpBackupStreamUrl
+                    }
                 }
             }
             else if (keyPath == "playbackBufferEmpty") {
                 pause()
                 deInitStream()
-                delegate?.KexpAudioPlayerDidStopPlaying()
+                delegate?.kexpAudioPlayerDidStopPlaying()
             }
         }
     }
