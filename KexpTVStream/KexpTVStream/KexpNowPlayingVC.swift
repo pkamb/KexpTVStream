@@ -38,7 +38,7 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate {
         getNowPlayingInfo()
         getCurrentDjInfo()
         
-        NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: "getNowPlayingInfo", userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(20, target: self, selector: "getNowPlayingInfo", userInfo: nil, repeats: true)
         NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: "getCurrentDjInfo", userInfo: nil, repeats: true)
     }
 
