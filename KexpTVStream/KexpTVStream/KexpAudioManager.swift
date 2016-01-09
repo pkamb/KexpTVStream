@@ -54,6 +54,8 @@ class KexpAudioManager: NSObject {
         
         audioPlayer = nil;
         audioPlayerItem = nil;
+        
+        currentKexp = kexpStreamUrl
     }
     
     func play() {
