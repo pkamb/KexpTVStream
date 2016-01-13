@@ -62,7 +62,7 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate {
     }
     
     func kexpAudioPlayerDidStopPlaying() {
-        setPlayMode(false)
+        setPlayMode()
     }
     
     func kexpAudioPlayerFailedToPlay() {
@@ -123,9 +123,9 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate {
             return;
         }
 
-        setPlayMode(!playPauseButton.selected)
+        setPlayMode()
         
-        playPauseButton.selected = !playPauseButton.selected
+        playPauseButton.selected = KexpAudioManager.sharedInstance.isPlaying()
     }
     
     private func showAlert(alertMessage: String) {
@@ -138,8 +138,8 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate {
         return;
     }
     
-    private func setPlayMode(isPlaying: Bool) {
-        if (isPlaying) {
+    private func setPlayMode() {
+        if (!KexpAudioManager.sharedInstance.isPlaying()) {
             playPauseButton.setImage(UIImage(named: "pauseButton"), forState: .Normal)
             KexpAudioManager.sharedInstance.play()
         }
