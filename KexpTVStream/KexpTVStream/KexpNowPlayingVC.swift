@@ -30,16 +30,21 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate {
         addStyleToView()
         
         KexpAudioManager.sharedInstance.delegate = self
+        KexpAudioManager.sharedInstance.setupRemoteCommandCenter()
         
         let tapRecognizer = UITapGestureRecognizer(target: self, action: "playKexpAction:")
         tapRecognizer.allowedPressTypes = [NSNumber(integer: UIPressType.PlayPause.rawValue)];
         self.view.addGestureRecognizer(tapRecognizer)
-        
-        getNowPlayingInfo()
-        getCurrentDjInfo()
-        
+
         NSTimer.scheduledTimerWithTimeInterval(20, target: self, selector: "getNowPlayingInfo", userInfo: nil, repeats: true)
         NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: "getCurrentDjInfo", userInfo: nil, repeats: true)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        getNowPlayingInfo()
+        getCurrentDjInfo()
     }
 
     private func updateAlbumArtWork(albumArtUrl: String) {
