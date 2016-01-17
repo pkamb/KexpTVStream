@@ -1,15 +1,14 @@
 //
-//  KexpTVStreamTests.swift
-//  KexpTVStreamTests
+//  KexpConfigResponseUnitTest.swift
+//  KexpTVStream
 //
-//  Created by Dustin Bergman on 12/27/15.
-//  Copyright © 2015 Dustin Bergman. All rights reserved.
+//  Created by Dustin Bergman on 1/17/16.
+//  Copyright © 2016 Dustin Bergman. All rights reserved.
 //
 
 import XCTest
-@testable import KexpTVStream
 
-class KexpTVStreamTests: XCTestCase {
+class KexpConfigResponseUnitTest: XCTestCase {
     
     override func setUp() {
         super.setUp()
