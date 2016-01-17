@@ -15,7 +15,7 @@ class NowPlaying: NSObject {
     var songTitle: String?
     var airBreak = true
     
-    init(nowPlayingDictionary: NSDictionary) {
+    init(nowPlayingDictionary: Dictionary<String, AnyObject>) {
         album = nowPlayingDictionary["Album"] as? String
         albumArtWork = nowPlayingDictionary["AlbumArt"] as? String
         artist = nowPlayingDictionary["Artist"] as? String

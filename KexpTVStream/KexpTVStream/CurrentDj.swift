@@ -14,7 +14,7 @@ class CurrentDj {
     var showTitle: String?
     var showType: String?
     
-    init(currentDjDictionary: NSDictionary) {
+    init(currentDjDictionary: Dictionary<String, AnyObject>) {
         djFirstName = currentDjDictionary["DJFirstName"] as? String
         djName = currentDjDictionary["DJName"] as? String
         showTitle = currentDjDictionary["Title"] as? String
