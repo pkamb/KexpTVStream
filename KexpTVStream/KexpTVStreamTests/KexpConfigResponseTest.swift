@@ -8,7 +8,7 @@
 
 import XCTest
 
-class KexpConfigResponseUnitTest: XCTestCase {
+class KexpConfigResponseTest: XCTestCase {
 
     lazy var configSettings: KexpConfigSettings = self.getKexpSettings()
 
