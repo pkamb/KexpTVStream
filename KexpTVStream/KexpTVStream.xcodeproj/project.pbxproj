@@ -24,8 +24,14 @@
 		C908817B1C4C5C08004C2F76 /* KexpTestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B1645F1C4C4C0700AFC7F6 /* KexpTestUtilities.swift */; };
 		C908817D1C4C63C0004C2F76 /* KexpNowPlayingResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C908817C1C4C63C0004C2F76 /* KexpNowPlayingResponse.json */; };
 		C908817F1C4C640E004C2F76 /* KexpCurrentDJResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C908817E1C4C640E004C2F76 /* KexpCurrentDJResponse.json */; };
+		C90881811C4C743B004C2F76 /* KexpNowPlayingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90881801C4C743B004C2F76 /* KexpNowPlayingTest.swift */; };
+		C90881821C4C74AE004C2F76 /* NowPlaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB441C30A8AD0001A004 /* NowPlaying.swift */; };
+		C90881831C4C75EE004C2F76 /* KexpNowPlayingResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C908817C1C4C63C0004C2F76 /* KexpNowPlayingResponse.json */; };
+		C90881841C4C761B004C2F76 /* KexpCurrentDJResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C908817E1C4C640E004C2F76 /* KexpCurrentDJResponse.json */; };
+		C90881851C4C7628004C2F76 /* CurrentDj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB4A1C30D8AC0001A004 /* CurrentDj.swift */; };
+		C90881881C4C77BA004C2F76 /* KexpCurrentDJTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90881871C4C77BA004C2F76 /* KexpCurrentDJTest.swift */; };
 		C91709301C3E073000E010A6 /* InternetReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = C917092F1C3E073000E010A6 /* InternetReachability.swift */; };
-		C9B1645E1C4C4AA300AFC7F6 /* KexpConfigResponseUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B1645D1C4C4AA300AFC7F6 /* KexpConfigResponseUnitTest.swift */; };
+		C9B1645E1C4C4AA300AFC7F6 /* KexpConfigResponseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B1645D1C4C4AA300AFC7F6 /* KexpConfigResponseTest.swift */; };
 		C9B164601C4C4C0700AFC7F6 /* KexpTestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B1645F1C4C4C0700AFC7F6 /* KexpTestUtilities.swift */; };
 		C9B164621C4C522D00AFC7F6 /* KexpConfigSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B164611C4C522D00AFC7F6 /* KexpConfigSettings.swift */; };
 /* End PBXBuildFile section */
@@ -61,9 +67,11 @@
 		C9063B851C4BDE3100B1B1C6 /* KexpConfigResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = KexpConfigResponse.json; sourceTree = "<group>"; };
 		C908817C1C4C63C0004C2F76 /* KexpNowPlayingResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = KexpNowPlayingResponse.json; sourceTree = "<group>"; };
 		C908817E1C4C640E004C2F76 /* KexpCurrentDJResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = KexpCurrentDJResponse.json; sourceTree = "<group>"; };
+		C90881801C4C743B004C2F76 /* KexpNowPlayingTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpNowPlayingTest.swift; sourceTree = "<group>"; };
+		C90881871C4C77BA004C2F76 /* KexpCurrentDJTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpCurrentDJTest.swift; sourceTree = "<group>"; };
 		C917092F1C3E073000E010A6 /* InternetReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternetReachability.swift; sourceTree = "<group>"; };
 		C9B1645C1C4C4AA200AFC7F6 /* KexpTVStreamTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "KexpTVStreamTests-Bridging-Header.h"; path = "KexpTVStreamTests/KexpTVStreamTests-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
-		C9B1645D1C4C4AA300AFC7F6 /* KexpConfigResponseUnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpConfigResponseUnitTest.swift; sourceTree = "<group>"; };
+		C9B1645D1C4C4AA300AFC7F6 /* KexpConfigResponseTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpConfigResponseTest.swift; sourceTree = "<group>"; };
 		C9B1645F1C4C4C0700AFC7F6 /* KexpTestUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpTestUtilities.swift; sourceTree = "<group>"; };
 		C9B164611C4C522D00AFC7F6 /* KexpConfigSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpConfigSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -142,7 +150,9 @@
 		46CDFB331C30A7180001A004 /* KexpTVStreamTests */ = {
 			isa = PBXGroup;
 			children = (
-				C9B1645D1C4C4AA300AFC7F6 /* KexpConfigResponseUnitTest.swift */,
+				C9B1645D1C4C4AA300AFC7F6 /* KexpConfigResponseTest.swift */,
+				C90881801C4C743B004C2F76 /* KexpNowPlayingTest.swift */,
+				C90881871C4C77BA004C2F76 /* KexpCurrentDJTest.swift */,
 				C9B1645F1C4C4C0700AFC7F6 /* KexpTestUtilities.swift */,
 				C9063B841C4BDDD300B1B1C6 /* Test Responses */,
 				46CDFB361C30A7180001A004 /* Info.plist */,
@@ -298,7 +308,9 @@
 			files = (
 				46CDFB2A1C30A7180001A004 /* Assets.xcassets in Resources */,
 				C908817A1C4C5BCE004C2F76 /* KexpConfigResponse.json in Resources */,
+				C90881831C4C75EE004C2F76 /* KexpNowPlayingResponse.json in Resources */,
 				46CDFB281C30A7170001A004 /* Main.storyboard in Resources */,
+				C90881841C4C761B004C2F76 /* KexpCurrentDJResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,9 +397,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C90881881C4C77BA004C2F76 /* KexpCurrentDJTest.swift in Sources */,
 				C9B164601C4C4C0700AFC7F6 /* KexpTestUtilities.swift in Sources */,
+				C90881851C4C7628004C2F76 /* CurrentDj.swift in Sources */,
+				C90881821C4C74AE004C2F76 /* NowPlaying.swift in Sources */,
 				C90881791C4C55EA004C2F76 /* KexpConfigSettings.swift in Sources */,
-				C9B1645E1C4C4AA300AFC7F6 /* KexpConfigResponseUnitTest.swift in Sources */,
+				C9B1645E1C4C4AA300AFC7F6 /* KexpConfigResponseTest.swift in Sources */,
+				C90881811C4C743B004C2F76 /* KexpNowPlayingTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
