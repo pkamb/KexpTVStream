@@ -1,0 +1,21 @@
+{
+    ArchiveID: 294,
+    DJFirstName: "Martha",
+    DJID: 19,
+    DJLastName: "Bussard",
+    DJName: "Quilty 3000",
+    DayOfTheWeek: 7,
+    Djid_1: 19,
+    EndHour: 18,
+    EndTime: "/Date(-2209068000000-0800)/",
+    OldDJID: 7,
+    ProgramID: 1,
+    ShowDJ: "Quilty 3000",
+    ShowFound: true,
+    ShowID: 0,
+    ShowTitleFriendly: "Variety Mix",
+    StartHour: 15,
+    StartTime: "/Date(-2209078800000-0800)/",
+    Subtitle: "Rock, Eclectic",
+    Title: "Variety Mix"
+}
