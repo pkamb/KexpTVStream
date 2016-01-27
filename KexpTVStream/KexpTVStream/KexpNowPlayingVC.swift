@@ -9,7 +9,7 @@
 import UIKit
 import AlamofireImage
 
-class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate {
+class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet var playPauseButton: UIButton!
     @IBOutlet var kexpLogo: UIImageView!
@@ -23,31 +23,30 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate {
     @IBOutlet var trackNameLabel: UILabel!
     @IBOutlet var albumNameLabel: UILabel!
     @IBOutlet var albumArtworkView: UIImageView!
+    @IBOutlet var tableView: UITableView!
+    
+    var playlistArray = NSMutableArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-         KexpController.getKEXPConfig()
-        
         addStyleToView()
         
         KexpAudioManager.sharedInstance.delegate = self
-        KexpAudioManager.sharedInstance.setupRemoteCommandCenter()
         
         let tapRecognizer = UITapGestureRecognizer(target: self, action: "playKexpAction:")
         tapRecognizer.allowedPressTypes = [NSNumber(integer: UIPressType.PlayPause.rawValue)];
         self.view.addGestureRecognizer(tapRecognizer)
-
-        NSTimer.scheduledTimerWithTimeInterval(20, target: self, selector: "getNowPlayingInfo", userInfo: nil, repeats: true)
-        NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: "getCurrentDjInfo", userInfo: nil, repeats: true)
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-
+        
+        artistNameLabel.text = "-"
+        albumNameLabel.text = "-"
+        trackNameLabel.text = "-"
+        
         getNowPlayingInfo()
         getCurrentDjInfo()
+        
+        NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: "getNowPlayingInfo", userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: "getCurrentDjInfo", userInfo: nil, repeats: true)
     }
 
     private func updateAlbumArtWork(albumArtUrl: String) {
@@ -60,50 +59,55 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate {
     }
     
     // MARK: - KexpAudioManagerDelegate Methods
-    func kexpAudioPlayerDidStartPlaying() {
-        UIApplication.sharedApplication().idleTimerDisabled = true
+    func KexpAudioPlayerDidStartPlaying() {
         getNowPlayingInfo()
     }
     
-    func kexpAudioPlayerDidStopPlaying() {
-        UIApplication.sharedApplication().idleTimerDisabled = false
-        setPlayMode()
-    }
-    
-    func kexpAudioPlayerFailedToPlay() {
-        showAlert("The KEXP stream is down, please contact KEXP if the issue persists.")
+    func KexpAudioPlayerDidStopPlaying() {
+        setPlayMode(false)
     }
     
     // MARK: - Networking methods
     func getNowPlayingInfo() {
-        KexpController.getNowPlayingInfo({ [unowned self] (nowPlaying) -> Void in
-            if (nowPlaying.airBreak == true) {
-                self.artistLabel.hidden = true
-                self.trackLabel.text = "Air Break..."
-                self.albumLabel.hidden = true
-                self.artistNameLabel.hidden = true
-                self.trackNameLabel.hidden = true
-                self.albumNameLabel.hidden = true
-                self.albumArtworkView.image = UIImage.init(named: "vinylPlaceHolder")
+        KexpController.getNowPlayingInfo({ [weak self] (nowPlaying) -> Void in
+            if (nowPlaying.airBreak) {
+                self!.artistLabel.hidden = true
+                self!.trackLabel.text = "Air Break..."
+                self!.albumLabel.hidden = true
+                self!.artistNameLabel.hidden = true
+                self!.trackNameLabel.hidden = true
+                self!.albumNameLabel.hidden = true
+                self!.albumArtworkView.image = UIImage.init(named: "vinylPlaceHolder")
             }
             else {
-                self.artistLabel.hidden = false
-                self.trackLabel.hidden = false
-                self.albumLabel.hidden = false
-                self.artistNameLabel.hidden = false
-                self.trackNameLabel.hidden = false
-                self.albumNameLabel.hidden = false
-                self.trackLabel.text = "Track:"
+                self!.artistLabel.hidden = false
+                self!.trackLabel.hidden = false
+                self!.albumLabel.hidden = false
+                self!.artistNameLabel.hidden = false
+                self!.trackNameLabel.hidden = false
+                self!.albumNameLabel.hidden = false
                 
-                self.artistNameLabel.text = nowPlaying.artist
-                self.trackNameLabel.text = nowPlaying.songTitle
-                self.albumNameLabel.text = nowPlaying.album
+                self!.artistNameLabel.text = nowPlaying.artist
+                self!.trackNameLabel.text = nowPlaying.songTitle
+                self!.albumNameLabel.text = nowPlaying.album
                 
                 if let albumArtUrl = nowPlaying.albumArtWork {
-                    self.updateAlbumArtWork(albumArtUrl)
+                    self!.updateAlbumArtWork(albumArtUrl)
                 }
                 else {
-                   self.albumArtworkView.image = UIImage.init(named: "vinylPlaceHolder")
+                   self!.albumArtworkView.image = UIImage(named: "vinylPlaceHolder")
+                }
+                
+                if (self!.playlistArray.count == 0) {
+                    self!.playlistArray.addObject(nowPlaying)
+
+                    self!.tableView.reloadData()
+                }
+                else if let lastItemAdded = self!.playlistArray[0] as? NowPlaying {
+                    if ((nowPlaying.artist != lastItemAdded.artist) && (nowPlaying.songTitle != lastItemAdded.songTitle)) {
+                        self!.playlistArray.insertObject(nowPlaying, atIndex: 0)
+                        self!.tableView.reloadData()
+                    }
                 }
             }
         })
@@ -122,29 +126,12 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate {
     
     // MARK: - @IBAction
     @IBAction func playKexpAction(sender: AnyObject) {
-        if (playPauseButton.selected) && !InternetReachability.isConnectedToNetwork() {
-            showAlert("Unable to connect to the Internet")
-
-            return;
-        }
-
-        setPlayMode()
-        
-        playPauseButton.selected = KexpAudioManager.sharedInstance.isPlaying()
+        (playPauseButton.selected) ? setPlayMode(false) : setPlayMode(true)
+        playPauseButton.selected = !playPauseButton.selected
     }
     
-    private func showAlert(alertMessage: String) {
-        let alert = UIAlertController(title: "Whoops!", message: alertMessage, preferredStyle: .Alert)
-        let alertAction = UIAlertAction(title: "OK", style: .Default, handler:nil)
-        
-        alert.addAction(alertAction)
-        self .presentViewController(alert, animated: true, completion: nil)
-        
-        return;
-    }
-    
-    private func setPlayMode() {
-        if (!KexpAudioManager.sharedInstance.isPlaying()) {
+    private func setPlayMode(isPlaying: Bool) {
+        if (isPlaying) {
             playPauseButton.setImage(UIImage(named: "pauseButton"), forState: .Normal)
             KexpAudioManager.sharedInstance.play()
         }
@@ -165,5 +152,25 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate {
         
         albumArtworkView.layer.cornerRadius = 30.0
         albumArtworkView.clipsToBounds = true
+    }
+    
+    // MARK: - UITableView Datasource/Delegate
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return playlistArray.count
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: nil)
+        
+        if let item = playlistArray[indexPath.row] as? NowPlaying {
+            cell.textLabel?.text = item.artist
+            cell.detailTextLabel?.text = item.songTitle
+        }
+        
+        return cell
     }
 }

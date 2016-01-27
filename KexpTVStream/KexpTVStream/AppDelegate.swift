@@ -16,7 +16,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+//        if ([[UIApplication sharedApplication] respondsToSelector:@selector(beginReceivingRemoteControlEvents)]){
+//            [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+//            [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:NULL];
+//            [self becomeFirstResponder];
+//            NSLog(@"Responds!");
+//        }
+
+        UIApplication.sharedApplication().beginReceivingRemoteControlEvents();
+        
+        
         return true
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        print("pause")
     }
 
     func applicationWillResignActive(application: UIApplication) {
