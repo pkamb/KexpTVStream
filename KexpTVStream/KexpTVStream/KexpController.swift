@@ -15,6 +15,7 @@ typealias DJChangeBlock = (currentDjInfo: CurrentDj) -> Void
 
 private let kexpNowPlayingURL = "http://www.kexp.org/s/s.aspx?x=3"
 private let kexpCurrentDJURL = "http://www.kexp.org/s/s.aspx?x=5"
+private let kexpConfigURL = "http://www.kexp.org/content/applications/AppleTV/config/KexpConfigResponse.json"
 
 class KexpController {
 
@@ -37,6 +38,17 @@ class KexpController {
                     
                     currentDjUpdate(currentDjInfo: djInfo)
                 }
+        }
+    }
+    
+    class func getKEXPConfig() {
+        Alamofire.request(.GET, kexpConfigURL).response { (req, res, data, error) -> Void in
+            if let jsonData = data {
+                let configJSON = JSON(data: jsonData)
+                let configSetting = KexpConfigSettings(configSettingJSON: configJSON)
+                
+                print(configSetting)
+            }
         }
     }
 }

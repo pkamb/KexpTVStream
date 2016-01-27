@@ -27,6 +27,9 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+         KexpController.getKEXPConfig()
+        
         addStyleToView()
         
         KexpAudioManager.sharedInstance.delegate = self
