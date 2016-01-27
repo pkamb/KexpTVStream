@@ -7,26 +7,22 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class KexpTestUtilities {
     
-    class func getJSONFromTestFile(testFileName: String) -> Dictionary<String, AnyObject>{
+    class func getJSONFromTestFile(testFileName: String)  -> JSON? {
         let filePath = NSBundle.mainBundle().pathForResource(testFileName, ofType: "json")
         if let fPath = filePath {
             let content = NSData(contentsOfFile: fPath)
             
-            do {
-                if let jsonContent = content {
-                    let jsonDictionary = try NSJSONSerialization.JSONObjectWithData(jsonContent, options:NSJSONReadingOptions.AllowFragments) as? Dictionary<String, AnyObject>
-                    
-                    return jsonDictionary ?? Dictionary<String, AnyObject>()
-                }
-            }
-            catch let error as NSError {
-                print("A JSON parsing error occurred, here are the details:\n \(error)")
+            if let jsonContent = content {
+                let json = JSON(data: jsonContent)
+                
+                return json
             }
         }
         
-        return Dictionary<String, AnyObject>()
+        return nil
     }
 }

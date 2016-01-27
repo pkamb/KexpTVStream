@@ -19,16 +19,13 @@
 		46CDFB4B1C30D8AC0001A004 /* CurrentDj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB4A1C30D8AC0001A004 /* CurrentDj.swift */; };
 		B5DB77680DBF3C0A1A837B2E /* Pods_KexpTVStream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 842C0B17663603CB9999DE72 /* Pods_KexpTVStream.framework */; };
 		C9063B861C4BDE3100B1B1C6 /* KexpConfigResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C9063B851C4BDE3100B1B1C6 /* KexpConfigResponse.json */; };
-		C90881791C4C55EA004C2F76 /* KexpConfigSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B164611C4C522D00AFC7F6 /* KexpConfigSettings.swift */; };
 		C908817A1C4C5BCE004C2F76 /* KexpConfigResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C9063B851C4BDE3100B1B1C6 /* KexpConfigResponse.json */; };
 		C908817B1C4C5C08004C2F76 /* KexpTestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B1645F1C4C4C0700AFC7F6 /* KexpTestUtilities.swift */; };
 		C908817D1C4C63C0004C2F76 /* KexpNowPlayingResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C908817C1C4C63C0004C2F76 /* KexpNowPlayingResponse.json */; };
 		C908817F1C4C640E004C2F76 /* KexpCurrentDJResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C908817E1C4C640E004C2F76 /* KexpCurrentDJResponse.json */; };
 		C90881811C4C743B004C2F76 /* KexpNowPlayingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90881801C4C743B004C2F76 /* KexpNowPlayingTest.swift */; };
-		C90881821C4C74AE004C2F76 /* NowPlaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB441C30A8AD0001A004 /* NowPlaying.swift */; };
 		C90881831C4C75EE004C2F76 /* KexpNowPlayingResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C908817C1C4C63C0004C2F76 /* KexpNowPlayingResponse.json */; };
 		C90881841C4C761B004C2F76 /* KexpCurrentDJResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C908817E1C4C640E004C2F76 /* KexpCurrentDJResponse.json */; };
-		C90881851C4C7628004C2F76 /* CurrentDj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB4A1C30D8AC0001A004 /* CurrentDj.swift */; };
 		C90881881C4C77BA004C2F76 /* KexpCurrentDJTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90881871C4C77BA004C2F76 /* KexpCurrentDJTest.swift */; };
 		C91709301C3E073000E010A6 /* InternetReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = C917092F1C3E073000E010A6 /* InternetReachability.swift */; };
 		C9B1645E1C4C4AA300AFC7F6 /* KexpConfigResponseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B1645D1C4C4AA300AFC7F6 /* KexpConfigResponseTest.swift */; };
@@ -399,9 +396,6 @@
 			files = (
 				C90881881C4C77BA004C2F76 /* KexpCurrentDJTest.swift in Sources */,
 				C9B164601C4C4C0700AFC7F6 /* KexpTestUtilities.swift in Sources */,
-				C90881851C4C7628004C2F76 /* CurrentDj.swift in Sources */,
-				C90881821C4C74AE004C2F76 /* NowPlaying.swift in Sources */,
-				C90881791C4C55EA004C2F76 /* KexpConfigSettings.swift in Sources */,
 				C9B1645E1C4C4AA300AFC7F6 /* KexpConfigResponseTest.swift in Sources */,
 				C90881811C4C743B004C2F76 /* KexpNowPlayingTest.swift in Sources */,
 			);

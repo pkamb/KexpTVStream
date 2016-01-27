@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import KexpTVStream
 
 class KexpCurrentDJTest: XCTestCase {
 
@@ -22,9 +23,14 @@ class KexpCurrentDJTest: XCTestCase {
     }
     
     func getCurrentDJResponse() -> CurrentDj {
-        let jsonDictionary = KexpTestUtilities.getJSONFromTestFile("KexpCurrentDJResponse")
-        let currentDjResponse =  CurrentDj.init(currentDjDictionary: jsonDictionary)
+        let JSONData = KexpTestUtilities.getJSONFromTestFile("KexpCurrentDJResponse")
         
-        return currentDjResponse
+        if let JSONData = JSONData {
+            let currentDjResponse =  CurrentDj(currentDjJSON: JSONData)
+            
+            return currentDjResponse
+        }
+        
+        return CurrentDj.init(currentDjJSON: nil)
     }
 }

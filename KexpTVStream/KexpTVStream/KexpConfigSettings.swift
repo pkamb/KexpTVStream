@@ -7,17 +7,18 @@
 //
 
 import UIKit
+import SwiftyJSON
 
-class KexpConfigSettings: NSObject {
-    var streamUrl: String?
-    var backupStreamUrl: String?
-    var nowPlayingLogo: String?
-    var updated: Int?
+class KexpConfigSettings {
+    let streamUrl: String?
+    let backupStreamUrl: String?
+    let nowPlayingLogo: String?
+    let updated: Int?
     
-    init(configSettingDictionary: Dictionary<String, AnyObject>) {
-        streamUrl = configSettingDictionary["kexpStreamUrl"] as? String
-        backupStreamUrl = configSettingDictionary["kexpBackupStreamUrl"] as? String
-        nowPlayingLogo = configSettingDictionary["kexpNowPlayingLogo"] as? String
-        updated = configSettingDictionary["updated"] as? Int
+    init(configSettingJSON: JSON) {
+        streamUrl = configSettingJSON["kexpStreamUrl"].string
+        backupStreamUrl = configSettingJSON["kexpBackupStreamUrl"].string
+        nowPlayingLogo = configSettingJSON["kexpNowPlayingLogo"].string
+        updated = configSettingJSON["updated"].int
     }
 }

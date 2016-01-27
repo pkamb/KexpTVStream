@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import KexpTVStream
 
 class KexpNowPlayingTest: XCTestCase {
     lazy var nowPlaying: NowPlaying = self.getNowPlayingResponse()
@@ -22,9 +23,14 @@ class KexpNowPlayingTest: XCTestCase {
     }
     
     func getNowPlayingResponse() -> NowPlaying {
-        let jsonDictionary = KexpTestUtilities.getJSONFromTestFile("KexpNowPlayingResponse")
-        let nowPlayingResponse =  NowPlaying(nowPlayingDictionary: jsonDictionary)
+        let JSONData = KexpTestUtilities.getJSONFromTestFile("KexpNowPlayingResponse")
         
-        return nowPlayingResponse
+        if let JSONData = JSONData {
+            let nowPlayingResponse =  NowPlaying(nowPlayingJSON: JSONData)
+        
+            return nowPlayingResponse
+        }
+        
+        return NowPlaying(nowPlayingJSON: nil)
     }
 }

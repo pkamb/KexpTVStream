@@ -7,22 +7,20 @@
 //
 
 import UIKit
+import SwiftyJSON
 
-class NowPlaying: NSObject {
-    var album: String?
-    var albumArtWork: String?
-    var artist: String?
-    var songTitle: String?
-    var airBreak = true
+class NowPlaying {
+    let album: String?
+    let albumArtWork: String?
+    let artist: String?
+    let songTitle: String?
+    let airBreak :Bool?
     
-    init(nowPlayingDictionary: Dictionary<String, AnyObject>) {
-        album = nowPlayingDictionary["Album"] as? String
-        albumArtWork = nowPlayingDictionary["AlbumArt"] as? String
-        artist = nowPlayingDictionary["Artist"] as? String
-        songTitle = nowPlayingDictionary["SongTitle"] as? String
-        
-        if let breakTime = nowPlayingDictionary["AirBreak"] as? Bool {
-            airBreak = breakTime
-        }
+    init(nowPlayingJSON: JSON) {
+        album = nowPlayingJSON["Album"].string
+        albumArtWork = nowPlayingJSON["AlbumArt"].string
+        artist = nowPlayingJSON["Artist"].string
+        songTitle = nowPlayingJSON["SongTitle"].string
+        airBreak = nowPlayingJSON["AirBreak"].bool
     }
 }

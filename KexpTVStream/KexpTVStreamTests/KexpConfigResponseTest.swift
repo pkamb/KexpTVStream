@@ -7,6 +7,8 @@
 //
 
 import XCTest
+import SwiftyJSON
+@testable import KexpTVStream
 
 class KexpConfigResponseTest: XCTestCase {
 
@@ -22,9 +24,14 @@ class KexpConfigResponseTest: XCTestCase {
     }
     
     func getKexpSettings() -> KexpConfigSettings {
-        let jsonDictionary = KexpTestUtilities.getJSONFromTestFile("KexpConfigResponse")
-        let kexpConfigResponse =  KexpConfigSettings(configSettingDictionary: jsonDictionary)
+        let JSONData = KexpTestUtilities.getJSONFromTestFile("KexpConfigResponse")
         
-        return kexpConfigResponse
+        if let JSONData = JSONData {
+            let kexpConfigResponse =  KexpConfigSettings(configSettingJSON: JSONData)
+            
+            return kexpConfigResponse
+        }
+        
+       return KexpConfigSettings(configSettingJSON: nil)  
     }
 }

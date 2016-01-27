@@ -7,17 +7,18 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class CurrentDj {
-    var djFirstName: String?
-    var djName: String?
-    var showTitle: String?
-    var showType: String?
+    let djFirstName: String?
+    let djName: String?
+    let showTitle: String?
+    let showType: String?
     
-    init(currentDjDictionary: Dictionary<String, AnyObject>) {
-        djFirstName = currentDjDictionary["DJFirstName"] as? String
-        djName = currentDjDictionary["DJName"] as? String
-        showTitle = currentDjDictionary["Title"] as? String
-        showType = currentDjDictionary["Subtitle"] as? String
+    init(currentDjJSON: JSON) {
+        djFirstName = currentDjJSON["DJFirstName"].string
+        djName = currentDjJSON["DJName"].string
+        showTitle = currentDjJSON["Title"].string
+        showType = currentDjJSON["Subtitle"].string
     }
 }
