@@ -58,10 +58,12 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate {
     
     // MARK: - KexpAudioManagerDelegate Methods
     func kexpAudioPlayerDidStartPlaying() {
+        UIApplication.sharedApplication().idleTimerDisabled = true
         getNowPlayingInfo()
     }
     
     func kexpAudioPlayerDidStopPlaying() {
+        UIApplication.sharedApplication().idleTimerDisabled = false
         setPlayMode()
     }
     
@@ -72,7 +74,7 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate {
     // MARK: - Networking methods
     func getNowPlayingInfo() {
         KexpController.getNowPlayingInfo({ [unowned self] (nowPlaying) -> Void in
-            if (nowPlaying.airBreak) {
+            if (nowPlaying.airBreak == true) {
                 self.artistLabel.hidden = true
                 self.trackLabel.text = "Air Break..."
                 self.albumLabel.hidden = true
