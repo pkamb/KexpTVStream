@@ -27,13 +27,16 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-         KexpController.getKEXPConfig()
-        
         addStyleToView()
         
-        KexpAudioManager.sharedInstance.delegate = self
-        KexpAudioManager.sharedInstance.setupRemoteCommandCenter()
+        KexpController.getKEXPConfig {[weak self] (kexpConfig) -> Void in
+            KexpAudioManager.setup(kexpConfig)
+            KexpAudioManager.sharedInstance.delegate = self
+            KexpAudioManager.sharedInstance.setupRemoteCommandCenter()
+
+            self!.loadKexpLogo(kexpConfig.nowPlayingLogo)
+            self!.playPauseButton.enabled = true
+        }
         
         let tapRecognizer = UITapGestureRecognizer(target: self, action: "playKexpAction:")
         tapRecognizer.allowedPressTypes = [NSNumber(integer: UIPressType.PlayPause.rawValue)];
@@ -151,6 +154,16 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate {
         else {
             playPauseButton.setImage(UIImage(named: "playButton"), forState: .Normal)
             KexpAudioManager.sharedInstance.pause()
+        }
+    }
+    
+    private func loadKexpLogo(logoUrl: String?) {
+        guard let imageUrl = logoUrl as String? else { return }
+        if let logo =  NSURL(string: imageUrl) {
+            kexpLogo.af_setImageWithURL(
+                logo,
+                placeholderImage: UIImage.init(named: "kexp")
+            )
         }
     }
     
