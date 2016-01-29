@@ -12,6 +12,7 @@ import SwiftyJSON
 
 typealias TrackChangeBlock = (nowplaying: NowPlaying) -> Void
 typealias DJChangeBlock = (currentDjInfo: CurrentDj) -> Void
+typealias ConfigurationSettingsBlock = (kexpConfig: KexpConfigSettings) -> Void
 
 private let kexpNowPlayingURL = "http://www.kexp.org/s/s.aspx?x=3"
 private let kexpCurrentDJURL = "http://www.kexp.org/s/s.aspx?x=5"
@@ -41,13 +42,22 @@ class KexpController {
         }
     }
     
-    class func getKEXPConfig() {
-        Alamofire.request(.GET, kexpConfigURL).response { (req, res, data, error) -> Void in
-            if let jsonData = data {
-                let configJSON = JSON(data: jsonData)
-                let configSetting = KexpConfigSettings(configSettingJSON: configJSON)
-                
-                print(configSetting)
+    class func getKEXPConfig(configurationSetup: ConfigurationSettingsBlock) {
+        let configSetting:KexpConfigSettings?
+        
+        if let url = NSURL(string: kexpConfigURL) {
+            let kexpConfigData = NSData(contentsOfURL: url)
+            
+            if let kexpConfigData = kexpConfigData {
+                let configJSON = JSON(data: kexpConfigData)
+                configSetting = KexpConfigSettings(configSettingJSON: configJSON)
+            }
+            else {
+                configSetting = KexpConfigSettings(configSettingJSON: nil)
+            }
+            
+            if let configSetting = configSetting {
+                configurationSetup(kexpConfig: configSetting)
             }
         }
     }
