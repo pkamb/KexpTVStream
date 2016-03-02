@@ -56,10 +56,12 @@ class KexpAudioManager: NSObject {
                 audioPlayerItem?.addObserver(self, forKeyPath: "playbackLikelyToKeepUp", options: .New, context: nil)
                 audioPlayerItem?.addObserver(self, forKeyPath: "timedMetadata", options: .New, context: nil)
 
-                audioPlayer = AVPlayer(playerItem: audioPlayerItem!)
-
-                try! AVAudioSession.sharedInstance().setActive(true)
-                try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, withOptions: [])
+                if let audioPlayerItem = audioPlayerItem {
+                    audioPlayer = AVPlayer(playerItem: audioPlayerItem)
+                    
+                    try! AVAudioSession.sharedInstance().setActive(true)
+                    try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, withOptions: [])
+                }
             }
         }
     }
