@@ -9,12 +9,17 @@
 import UIKit
 import CoreData
 
+private let kexpFlurryKey = "4DYG4DMSNS3S4XCYTCG6"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        #if RELEASE
+           Flurry.startSession(kexpFlurryKey)
+        #endif
         
 //        if ([[UIApplication sharedApplication] respondsToSelector:@selector(beginReceivingRemoteControlEvents)]){
 //            [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];

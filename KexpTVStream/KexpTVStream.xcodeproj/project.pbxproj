@@ -31,6 +31,7 @@
 		C9B1645E1C4C4AA300AFC7F6 /* KexpConfigResponseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B1645D1C4C4AA300AFC7F6 /* KexpConfigResponseTest.swift */; };
 		C9B164601C4C4C0700AFC7F6 /* KexpTestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B1645F1C4C4C0700AFC7F6 /* KexpTestUtilities.swift */; };
 		C9B164621C4C522D00AFC7F6 /* KexpConfigSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B164611C4C522D00AFC7F6 /* KexpConfigSettings.swift */; };
+		C9FACB391C869C6C004E2AA7 /* libFlurrytvOS_1.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9FACB381C869C6C004E2AA7 /* libFlurrytvOS_1.0.0.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,10 +68,13 @@
 		C90881801C4C743B004C2F76 /* KexpNowPlayingTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpNowPlayingTest.swift; sourceTree = "<group>"; };
 		C90881871C4C77BA004C2F76 /* KexpCurrentDJTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpCurrentDJTest.swift; sourceTree = "<group>"; };
 		C917092F1C3E073000E010A6 /* InternetReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternetReachability.swift; sourceTree = "<group>"; };
+		C92F93AF1C8BEB7200FD469E /* KexpTVStream-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KexpTVStream-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		C9B1645C1C4C4AA200AFC7F6 /* KexpTVStreamTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "KexpTVStreamTests-Bridging-Header.h"; path = "KexpTVStreamTests/KexpTVStreamTests-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		C9B1645D1C4C4AA300AFC7F6 /* KexpConfigResponseTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpConfigResponseTest.swift; sourceTree = "<group>"; };
 		C9B1645F1C4C4C0700AFC7F6 /* KexpTestUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpTestUtilities.swift; sourceTree = "<group>"; };
 		C9B164611C4C522D00AFC7F6 /* KexpConfigSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpConfigSettings.swift; sourceTree = "<group>"; };
+		C9FACB371C869C6C004E2AA7 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		C9FACB381C869C6C004E2AA7 /* libFlurrytvOS_1.0.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurrytvOS_1.0.0.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +83,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5DB77680DBF3C0A1A837B2E /* Pods_KexpTVStream.framework in Frameworks */,
+				C9FACB391C869C6C004E2AA7 /* libFlurrytvOS_1.0.0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +137,7 @@
 		46CDFB1E1C30A7170001A004 /* KexpTVStream */ = {
 			isa = PBXGroup;
 			children = (
+				C9FACB361C869C42004E2AA7 /* Flurry */,
 				C917092E1C3E049F00E010A6 /* Audio */,
 				C917092D1C3E049700E010A6 /* API */,
 				C917092C1C3E048400E010A6 /* UI */,
@@ -160,6 +166,7 @@
 		46CDFB411C30A7730001A004 /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
+				C92F93AF1C8BEB7200FD469E /* KexpTVStream-Bridging-Header.h */,
 				C9B1645C1C4C4AA200AFC7F6 /* KexpTVStreamTests-Bridging-Header.h */,
 				46CDFB261C30A7170001A004 /* Main.storyboard */,
 				46CDFB291C30A7180001A004 /* Assets.xcassets */,
@@ -211,6 +218,15 @@
 				46CDFB421C30A8AD0001A004 /* KexpAudioManager.swift */,
 			);
 			name = Audio;
+			sourceTree = "<group>";
+		};
+		C9FACB361C869C42004E2AA7 /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				C9FACB371C869C6C004E2AA7 /* Flurry.h */,
+				C9FACB381C869C6C004E2AA7 /* libFlurrytvOS_1.0.0.a */,
+			);
+			name = Flurry;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -460,6 +476,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				SDKROOT = appletvos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 3;
@@ -490,6 +507,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -497,6 +515,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "-DRELEASE";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.1;
@@ -510,11 +529,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = KexpTVStream/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/KexpTVStream",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dus.KexpTVStream;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "KexpTVStream-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -524,11 +550,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = KexpTVStream/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/KexpTVStream",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dus.KexpTVStream;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "KexpTVStream-Bridging-Header.h";
 			};
 			name = Release;
 		};

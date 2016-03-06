@@ -31,8 +31,15 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
         super.viewDidLoad()
         
         addStyleToView()
-        
-        KexpAudioManager.sharedInstance.delegate = self
+
+        KexpController.getKEXPConfig {[weak self] (kexpConfig) -> Void in
+            KexpAudioManager.setup(kexpConfig)
+            KexpAudioManager.sharedInstance.delegate = self
+            KexpAudioManager.sharedInstance.setupRemoteCommandCenter()
+
+            self!.loadKexpLogo(kexpConfig.nowPlayingLogo)
+            self!.playPauseButton.enabled = true
+        }
         
         let tapRecognizer = UITapGestureRecognizer(target: self, action: "playKexpAction:")
         tapRecognizer.allowedPressTypes = [NSNumber(integer: UIPressType.PlayPause.rawValue)];
@@ -59,12 +66,18 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
     }
     
     // MARK: - KexpAudioManagerDelegate Methods
-    func KexpAudioPlayerDidStartPlaying() {
+    func kexpAudioPlayerDidStartPlaying() {
+        UIApplication.sharedApplication().idleTimerDisabled = true
         getNowPlayingInfo()
     }
     
-    func KexpAudioPlayerDidStopPlaying() {
-        setPlayMode(false)
+    func kexpAudioPlayerDidStopPlaying() {
+        UIApplication.sharedApplication().idleTimerDisabled = false
+        setPlayMode()
+    }
+    
+    func kexpAudioPlayerFailedToPlay() {
+        showAlert("The KEXP stream is down, please contact KEXP if the issue persists.")
     }
     
     // MARK: - Networking methods
@@ -126,18 +139,45 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
     
     // MARK: - @IBAction
     @IBAction func playKexpAction(sender: AnyObject) {
-        (playPauseButton.selected) ? setPlayMode(false) : setPlayMode(true)
-        playPauseButton.selected = !playPauseButton.selected
+        if (playPauseButton.selected) && !InternetReachability.isConnectedToNetwork() {
+            showAlert("Unable to connect to the Internet")
+            
+            return;
+        }
+        
+        setPlayMode()
+        
+        playPauseButton.selected = KexpAudioManager.sharedInstance.isPlaying()
     }
     
-    private func setPlayMode(isPlaying: Bool) {
-        if (isPlaying) {
+    private func showAlert(alertMessage: String) {
+        let alert = UIAlertController(title: "Whoops!", message: alertMessage, preferredStyle: .Alert)
+        let alertAction = UIAlertAction(title: "OK", style: .Default, handler:nil)
+        
+        alert.addAction(alertAction)
+        self .presentViewController(alert, animated: true, completion: nil)
+        
+        return;
+    }
+    
+    private func setPlayMode() {
+        if (!KexpAudioManager.sharedInstance.isPlaying()) {
             playPauseButton.setImage(UIImage(named: "pauseButton"), forState: .Normal)
             KexpAudioManager.sharedInstance.play()
         }
         else {
             playPauseButton.setImage(UIImage(named: "playButton"), forState: .Normal)
             KexpAudioManager.sharedInstance.pause()
+        }
+    }
+    
+    private func loadKexpLogo(logoUrl: String?) {
+        guard let imageUrl = logoUrl as String? else { return }
+        if let logo =  NSURL(string: imageUrl) {
+            kexpLogo.af_setImageWithURL(
+                logo,
+                placeholderImage: UIImage.init(named: "kexp")
+            )
         }
     }
     
