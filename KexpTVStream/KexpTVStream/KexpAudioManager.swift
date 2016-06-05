@@ -121,7 +121,7 @@ class KexpAudioManager: NSObject {
         
         let pauseCommand = remoteCommandCenter.pauseCommand
         pauseCommand.enabled = true
-        pauseCommand.addTarget(self, action: "pauseEvent")
+        pauseCommand.addTarget(self, action: #selector(KexpAudioManager.pauseEvent))
     }
     
     func pauseEvent() {
