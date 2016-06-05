@@ -49,11 +49,15 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
         albumNameLabel.text = "-"
         trackNameLabel.text = "-"
         
+        tableView.estimatedRowHeight = 120.0
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.registerClass(KexpPlaylistCell.self, forCellReuseIdentifier: "NowPLayingCell")
+        
         getNowPlayingInfo()
         getCurrentDjInfo()
-        
-        NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: "getNowPlayingInfo", userInfo: nil, repeats: true)
-        NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: "getCurrentDjInfo", userInfo: nil, repeats: true)
+
+        NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: #selector(KexpNowPlayingVC.getNowPlayingInfo), userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: #selector(KexpNowPlayingVC.getCurrentDjInfo), userInfo: nil, repeats: true)
     }
 
     private func updateAlbumArtWork(albumArtUrl: String) {
@@ -116,7 +120,7 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
 
                     self!.tableView.reloadData()
                 }
-                else if let lastItemAdded = self!.playlistArray[0] as? NowPlaying {
+                else if let lastItemAdded = self!.playlistArray.firstObject as? NowPlaying {
                     if ((nowPlaying.artist != lastItemAdded.artist) && (nowPlaying.songTitle != lastItemAdded.songTitle)) {
                         self!.playlistArray.insertObject(nowPlaying, atIndex: 0)
                         self!.tableView.reloadData()
@@ -198,17 +202,12 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return playlistArray.count
     }
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
+
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: nil)
+        let cell = tableView.dequeueReusableCellWithIdentifier("NowPLayingCell", forIndexPath: indexPath) as! KexpPlaylistCell
         
-        if let item = playlistArray[indexPath.row] as? NowPlaying {
-            cell.textLabel?.text = item.artist
-            cell.detailTextLabel?.text = item.songTitle
+        if let songNowPlaying = playlistArray[indexPath.row] as? NowPlaying {
+            cell.configureNowPlayingCell(songNowPlaying)
         }
         
         return cell
