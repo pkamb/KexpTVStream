@@ -13,6 +13,7 @@ class NowPlaying: NSObject {
     var albumArtWork: String?
     var artist: String?
     var songTitle: String?
+    var timePlayed = NSDate()
     var airBreak = true
     
     init(nowPlayingDictionary: NSDictionary) {
