@@ -31,6 +31,7 @@
 		C9B1645E1C4C4AA300AFC7F6 /* KexpConfigResponseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B1645D1C4C4AA300AFC7F6 /* KexpConfigResponseTest.swift */; };
 		C9B164601C4C4C0700AFC7F6 /* KexpTestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B1645F1C4C4C0700AFC7F6 /* KexpTestUtilities.swift */; };
 		C9B164621C4C522D00AFC7F6 /* KexpConfigSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B164611C4C522D00AFC7F6 /* KexpConfigSettings.swift */; };
+		C9EDD0B21C8E195600562A9C /* KexpPlaylistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EDD0B11C8E195600562A9C /* KexpPlaylistCell.swift */; };
 		C9FACB391C869C6C004E2AA7 /* libFlurrytvOS_1.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9FACB381C869C6C004E2AA7 /* libFlurrytvOS_1.0.0.a */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +74,7 @@
 		C9B1645D1C4C4AA300AFC7F6 /* KexpConfigResponseTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpConfigResponseTest.swift; sourceTree = "<group>"; };
 		C9B1645F1C4C4C0700AFC7F6 /* KexpTestUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpTestUtilities.swift; sourceTree = "<group>"; };
 		C9B164611C4C522D00AFC7F6 /* KexpConfigSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpConfigSettings.swift; sourceTree = "<group>"; };
+		C9EDD0B11C8E195600562A9C /* KexpPlaylistCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpPlaylistCell.swift; sourceTree = "<group>"; };
 		C9FACB371C869C6C004E2AA7 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		C9FACB381C869C6C004E2AA7 /* libFlurrytvOS_1.0.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurrytvOS_1.0.0.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,6 +139,7 @@
 		46CDFB1E1C30A7170001A004 /* KexpTVStream */ = {
 			isa = PBXGroup;
 			children = (
+				C9EDD0B31C8E408D00562A9C /* Style */,
 				C9FACB361C869C42004E2AA7 /* Flurry */,
 				C917092E1C3E049F00E010A6 /* Audio */,
 				C917092D1C3E049700E010A6 /* API */,
@@ -199,6 +202,7 @@
 		C917092C1C3E048400E010A6 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				C9EDD0B01C8E18B600562A9C /* Playlist */,
 				46CDFB3F1C30A7630001A004 /* KexpNowPlayingVC.swift */,
 			);
 			name = UI;
@@ -218,6 +222,21 @@
 				46CDFB421C30A8AD0001A004 /* KexpAudioManager.swift */,
 			);
 			name = Audio;
+			sourceTree = "<group>";
+		};
+		C9EDD0B01C8E18B600562A9C /* Playlist */ = {
+			isa = PBXGroup;
+			children = (
+				C9EDD0B11C8E195600562A9C /* KexpPlaylistCell.swift */,
+			);
+			name = Playlist;
+			sourceTree = "<group>";
+		};
+		C9EDD0B31C8E408D00562A9C /* Style */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Style;
 			sourceTree = "<group>";
 		};
 		C9FACB361C869C42004E2AA7 /* Flurry */ = {
@@ -399,6 +418,7 @@
 				46CDFB4B1C30D8AC0001A004 /* CurrentDj.swift in Sources */,
 				C908817B1C4C5C08004C2F76 /* KexpTestUtilities.swift in Sources */,
 				46CDFB451C30A8AD0001A004 /* KexpAudioManager.swift in Sources */,
+				C9EDD0B21C8E195600562A9C /* KexpPlaylistCell.swift in Sources */,
 				46CDFB251C30A7170001A004 /* KexpTVStream.xcdatamodeld in Sources */,
 				46CDFB491C30B0F30001A004 /* KexpStyle.swift in Sources */,
 				46CDFB471C30A8AD0001A004 /* NowPlaying.swift in Sources */,
