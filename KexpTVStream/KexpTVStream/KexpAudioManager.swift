@@ -33,13 +33,13 @@ class KexpAudioManager: NSObject {
     
     init(kexpConfigSettings: KexpConfigSettings) {
         self.kexpConfig = kexpConfigSettings
-        currentKexp = kexpConfigSettings.streamUrl
+        currentKexpUrlString = kexpConfigSettings.streamUrl
     }
     
     var audioPlayerItem: AVPlayerItem?
     var audioPlayer: AVPlayer?
     
-    var currentKexp: String?
+    var currentKexpUrlString: String?
     
     var delegate: KexpAudioManagerDelegate?
     
@@ -48,21 +48,20 @@ class KexpAudioManager: NSObject {
     }
     
     private func initStream() {
-        if let currentKexp = currentKexp {
-            if let streamURL = NSURL(string: currentKexp) {
-                audioPlayerItem = AVPlayerItem(URL: streamURL)
-                audioPlayerItem?.addObserver(self, forKeyPath: "status", options: [], context: nil)
-                audioPlayerItem?.addObserver(self, forKeyPath: "playbackBufferEmpty", options: .New, context: nil)
-                audioPlayerItem?.addObserver(self, forKeyPath: "playbackLikelyToKeepUp", options: .New, context: nil)
-                audioPlayerItem?.addObserver(self, forKeyPath: "timedMetadata", options: .New, context: nil)
-                
-                if let audioPlayerItem = audioPlayerItem {
-                    audioPlayer = AVPlayer(playerItem: audioPlayerItem)
-                    
-                    try! AVAudioSession.sharedInstance().setActive(true)
-                    try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, withOptions: [])
-                }
-            }
+        guard let currentKexpUrlString = currentKexpUrlString else { return }
+        guard let streamURL = NSURL(string: currentKexpUrlString) else { return }
+
+        audioPlayerItem = AVPlayerItem(URL: streamURL)
+        audioPlayerItem?.addObserver(self, forKeyPath: "status", options: [], context: nil)
+        audioPlayerItem?.addObserver(self, forKeyPath: "playbackBufferEmpty", options: .New, context: nil)
+        audioPlayerItem?.addObserver(self, forKeyPath: "playbackLikelyToKeepUp", options: .New, context: nil)
+        audioPlayerItem?.addObserver(self, forKeyPath: "timedMetadata", options: .New, context: nil)
+        
+        if let audioPlayerItem = audioPlayerItem {
+            audioPlayer = AVPlayer(playerItem: audioPlayerItem)
+            
+            try! AVAudioSession.sharedInstance().setActive(true)
+            try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, withOptions: [])
         }
     }
     
@@ -87,41 +86,42 @@ class KexpAudioManager: NSObject {
     }
     
     func isPlaying() -> Bool {
-        return ((audioPlayer?.rate > 0) && (audioPlayer?.error == nil))
+        return audioPlayer?.rate > 0 && audioPlayer?.error == nil
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        if let playerItem = object as? AVPlayerItem {
-            if (keyPath == "status") {
-                if (playerItem.status == .ReadyToPlay) {
-                    delegate?.kexpAudioPlayerDidStartPlaying()
-                    currentKexp = kexpConfig?.streamUrl
-                }
-                else if (playerItem.status == .Failed) {
-                    deInitStream()
-                    delegate?.kexpAudioPlayerDidStopPlaying()
-                    
-                    if (currentKexp == kexpConfig?.backupStreamUrl) {
-                        delegate?.kexpAudioPlayerFailedToPlay()
-                    } else {
-                        currentKexp = kexpConfig?.backupStreamUrl
-                    }
-                }
+        guard let playerItem = object as? AVPlayerItem else { return }
+        guard let delegate = delegate else { return }
+        guard let kexpConfig = kexpConfig else { return }
+
+        if keyPath == "status" {
+            if playerItem.status == .ReadyToPlay {
+                delegate.kexpAudioPlayerDidStartPlaying()
+                currentKexpUrlString = kexpConfig.streamUrl
             }
-            else if (keyPath == "playbackBufferEmpty") {
-                pause()
+            else if playerItem.status == .Failed {
                 deInitStream()
-                delegate?.kexpAudioPlayerDidStopPlaying()
+                delegate.kexpAudioPlayerDidStopPlaying()
+                
+                if currentKexpUrlString == kexpConfig.backupStreamUrl {
+                    delegate.kexpAudioPlayerFailedToPlay()
+                } else {
+                    currentKexpUrlString = kexpConfig.backupStreamUrl
+                }
             }
+        }
+        else if keyPath == "playbackBufferEmpty" {
+            pause()
+            deInitStream()
+            delegate.kexpAudioPlayerDidStopPlaying()
         }
     }
     
     func setupRemoteCommandCenter() {
         let remoteCommandCenter = MPRemoteCommandCenter.sharedCommandCenter()
         
-        let pauseCommand = remoteCommandCenter.pauseCommand
-        pauseCommand.enabled = true
-        pauseCommand.addTarget(self, action: #selector(KexpAudioManager.pauseEvent))
+        remoteCommandCenter.pauseCommand.enabled = true
+        remoteCommandCenter.pauseCommand.addTarget(self, action: #selector(KexpAudioManager.pauseEvent))
     }
     
     func pauseEvent() {
