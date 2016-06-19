@@ -60,21 +60,19 @@ class KexpPlaylistCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         selectionStyle = .None
-        
-        let bottomBorder = UIView()
-        bottomBorder.translatesAutoresizingMaskIntoConstraints = false
+        focusStyle = .Custom
+        contentView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.2)
+
         albumArtImageView.translatesAutoresizingMaskIntoConstraints = false
-        bottomBorder.backgroundColor = UIColor.grayColor()
         
         contentView.addSubview(artistLabel)
         contentView.addSubview(trackLabel)
         contentView.addSubview(albumArtImageView)
         contentView.addSubview(albumLabel)
         contentView.addSubview(timePlayedLabel)
-        contentView.addSubview(bottomBorder)
 
-        let views = ["artistLabel": artistLabel, "albumArtImageView": albumArtImageView, "trackLabel": trackLabel, "albumLabel": albumLabel, "timePlayedLabel": timePlayedLabel, "bottomBorder": bottomBorder]
-        let metrics = ["albumArtSize": albumArtSize, "bottomBorderHeight": bottomBorderHeight]
+        let views = ["artistLabel": artistLabel, "albumArtImageView": albumArtImageView, "trackLabel": trackLabel, "albumLabel": albumLabel, "timePlayedLabel": timePlayedLabel]
+        let metrics = ["albumArtSize": albumArtSize,]
         
         NSLayoutConstraint.activateConstraints(
             NSLayoutConstraint.constraintsWithVisualFormat(
@@ -111,16 +109,7 @@ class KexpPlaylistCell: UITableViewCell {
                 views: views
             )
         )
-        
-        NSLayoutConstraint.activateConstraints(
-            NSLayoutConstraint.constraintsWithVisualFormat(
-                "H:|[bottomBorder]|",
-                options: [],
-                metrics:metrics,
-                views: views
-            )
-        )
-        
+
         NSLayoutConstraint.activateConstraints(
             NSLayoutConstraint.constraintsWithVisualFormat(
                 "V:|-[albumArtImageView(albumArtSize)]-|",
@@ -138,19 +127,11 @@ class KexpPlaylistCell: UITableViewCell {
                 views: views
             )
         )
-        
-        NSLayoutConstraint.activateConstraints(
-            NSLayoutConstraint.constraintsWithVisualFormat(
-                "V:[bottomBorder(bottomBorderHeight)]|",
-                options: [],
-                metrics:metrics,
-                views: views
-            )
-        )
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        
         assertionFailure("Not implemented!")
     }
     
@@ -162,7 +143,7 @@ class KexpPlaylistCell: UITableViewCell {
         albumArtImageView.image = UIImage(named: "vinylPlaceHolder")
     
         if let albumURLString = song.albumArtWork as String? {
-            if let albumURL = NSURL.init(string: albumURLString) {
+            if let albumURL = NSURL(string: albumURLString) {
                 albumArtImageView.af_setImageWithURL(albumURL)
             }
         }
