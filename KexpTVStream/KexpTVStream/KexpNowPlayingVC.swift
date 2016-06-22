@@ -82,12 +82,14 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
     
     // MARK: - Networking methods
     func getNowPlayingInfo() {
-        KexpController.getNowPlayingInfo({ [weak self] (nowPlaying) -> Void in
+        KexpController.getNowPlayingInfo({ [weak self] nowPlaying -> Void in
             guard let strongSelf = self else { return }
+            guard let nowPlaying = nowPlaying else { return }
             
              strongSelf.artistNameLabel.text = "-"
              strongSelf.albumNameLabel.text = "-"
              strongSelf.trackNameLabel.text = "-"
+
 
             if (nowPlaying.airBreak) {
                 strongSelf.artistLabel.hidden = true
@@ -99,6 +101,7 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
                 strongSelf.albumArtworkView.image = UIImage(named: "vinylPlaceHolder")
             }
             else {
+                strongSelf.trackLabel.text = "Track:"
                 strongSelf.artistLabel.hidden = false
                 strongSelf.trackLabel.hidden = false
                 strongSelf.albumLabel.hidden = false
@@ -118,7 +121,7 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
                     strongSelf.tableView.reloadData()
                 }
                 else if let lastItemAdded = strongSelf.playlistArray.firstObject as? NowPlaying {
-                    if nowPlaying.artist != lastItemAdded.artist && nowPlaying.songTitle != lastItemAdded.songTitle {
+                    if nowPlaying.playId != lastItemAdded.playId {
                         strongSelf.playlistArray.insertObject(nowPlaying, atIndex: 0)
                         strongSelf.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: .Automatic)
                     }
@@ -128,9 +131,10 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
     }
     
     func getCurrentDjInfo() {
-        KexpController.getDjInfo { [weak self] (currentDjInfo) -> Void in
+        KexpController.getDjInfo { [weak self] currentDjInfo -> Void in
             guard let strongSelf = self else { return }
-            guard let showTitle = currentDjInfo.showTitle else { strongSelf.djInfoLabel.text = "ON NOW: UNKNOWN"; return }
+            guard let currentDjInfo = currentDjInfo else { return }
+            guard let showTitle = currentDjInfo.showTitle else { strongSelf.djInfoLabel.text = "ON NOW: "; return }
             guard let djName = currentDjInfo.djName else { strongSelf.djInfoLabel.text = "ON NOW: \(showTitle)"; return }
     
             strongSelf.djInfoLabel.text = "ON NOW: " + showTitle + " with " + djName
