@@ -10,8 +10,8 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-typealias TrackChangeBlock = (nowplaying: NowPlaying) -> Void
-typealias DJChangeBlock = (currentDjInfo: CurrentDj) -> Void
+typealias TrackChangeBlock = (nowplaying: NowPlaying?) -> Void
+typealias DJChangeBlock = (currentDjInfo: CurrentDj?) -> Void
 typealias ConfigurationSettingsBlock = (kexpConfig: KexpConfigSettings) -> Void
 
 private let kexpNowPlayingURL = "http://www.kexp.org/s/s.aspx?x=3"
@@ -21,44 +21,34 @@ private let kexpConfigURL = "http://www.kexp.org/content/applications/AppleTV/co
 class KexpController {
 
    class func getNowPlayingInfo(currentTrackUpdate: TrackChangeBlock) {
-        Alamofire.request(.GET, kexpNowPlayingURL, parameters: [:])
+        Alamofire.request(.GET, kexpNowPlayingURL, parameters: nil)
             .responseJSON { response in
-                if let nowplayingResponse = response.result.value as? [String:AnyObject] {
-                    let nowPlaying = NowPlaying(nowPlayingDictionary: nowplayingResponse)
-                    print(nowplayingResponse)
-                    currentTrackUpdate(nowplaying: nowPlaying)
-                }
+                guard let jsonResponse = response.result.value else { currentTrackUpdate(nowplaying: nil); return }
+                
+                let nowPlayingResponse = JSON(jsonResponse)
+                let nowPlaying = NowPlaying(nowPlayingJSON: nowPlayingResponse)
+                print(nowPlayingResponse)
+                currentTrackUpdate(nowplaying: nowPlaying)
         }
     }
     
     class func getDjInfo(currentDjUpdate: DJChangeBlock) {
-        Alamofire.request(.GET, kexpCurrentDJURL, parameters: [:])
+        Alamofire.request(.GET, kexpCurrentDJURL, parameters: nil)
             .responseJSON { response in
-                if let currentDJResponse = response.result.value as? [String:AnyObject] {
-                    let djInfo = CurrentDj(currentDjDictionary: currentDJResponse)
-                    currentDjUpdate(currentDjInfo: djInfo)
-                }
+                guard let jsonResponse = response.result.value else { currentDjUpdate(currentDjInfo: nil); return }
+                
+                let currentDJResponse = JSON(jsonResponse)
+                let djInfo = CurrentDj(currentDjJSON: currentDJResponse)
+                currentDjUpdate(currentDjInfo: djInfo)
         }
     }
-
     
     class func getKEXPConfig(configurationSetup: ConfigurationSettingsBlock) {
-        let configSetting:KexpConfigSettings?
-        
-        if let url = NSURL(string: kexpConfigURL) {
-            let kexpConfigData = NSData(contentsOfURL: url)
-            
-            if let kexpConfigData = kexpConfigData {
-                let configJSON = JSON(data: kexpConfigData)
-                configSetting = KexpConfigSettings(configSettingJSON: configJSON)
-            }
-            else {
-                configSetting = KexpConfigSettings(configSettingJSON: nil)
-            }
-            
-            if let configSetting = configSetting {
-                configurationSetup(kexpConfig: configSetting)
-            }
-        }
+        guard let url = NSURL(string: kexpConfigURL) else { return }
+        guard let kexpConfigData = NSData(contentsOfURL: url) else { return }
+
+        let configJSON = JSON(data: kexpConfigData)
+        let configSetting = KexpConfigSettings(configSettingJSON: configJSON)
+        configurationSetup(kexpConfig: configSetting)
     }
 }
