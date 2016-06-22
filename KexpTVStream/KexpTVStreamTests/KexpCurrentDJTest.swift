@@ -31,6 +31,6 @@ class KexpCurrentDJTest: XCTestCase {
             return currentDjResponse
         }
         
-        return CurrentDj.init(currentDjJSON: nil)
+        return CurrentDj(currentDjJSON: nil)
     }
 }

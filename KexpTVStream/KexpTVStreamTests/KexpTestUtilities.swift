@@ -13,6 +13,7 @@ class KexpTestUtilities {
     
     class func getJSONFromTestFile(testFileName: String)  -> JSON? {
         let filePath = NSBundle.mainBundle().pathForResource(testFileName, ofType: "json")
+        
         if let fPath = filePath {
             let content = NSData(contentsOfFile: fPath)
             

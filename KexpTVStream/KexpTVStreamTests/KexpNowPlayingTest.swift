@@ -15,6 +15,7 @@ class KexpNowPlayingTest: XCTestCase {
     func testConfigResponse() {
         XCTAssertNotNil(nowPlaying);
         
+        XCTAssert(nowPlaying.playId?.characters.count > 0, "No play Id found")
         XCTAssert(nowPlaying.album?.characters.count > 0, "No album Found")
         XCTAssert(nowPlaying.albumArtWork?.characters.count > 0, "No album Artwork found")
         XCTAssert(nowPlaying.artist?.characters.count > 0, "No artist found")
