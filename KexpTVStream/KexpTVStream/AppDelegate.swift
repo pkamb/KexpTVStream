@@ -8,8 +8,10 @@
 
 import UIKit
 import CoreData
+import HockeySDK
 
 private let kexpFlurryKey = "4DYG4DMSNS3S4XCYTCG6"
+private let kexpHockeyAppKey = "3a42808beb664c7d9642e1fab0c07839"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,18 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         #if RELEASE
-           Flurry.startSession(kexpFlurryKey)
+            Flurry.startSession(kexpFlurryKey)
+            BITHockeyManager.sharedHockeyManager().configureWithIdentifier(kexpHockeyAppKey)
+            BITHockeyManager.sharedHockeyManager().crashManager.crashManagerStatus = .AutoSend
+            BITHockeyManager.sharedHockeyManager().startManager()
         #endif
-        
-//        if ([[UIApplication sharedApplication] respondsToSelector:@selector(beginReceivingRemoteControlEvents)]){
-//            [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
-//            [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:NULL];
-//            [self becomeFirstResponder];
-//            NSLog(@"Responds!");
-//        }
 
         UIApplication.sharedApplication().beginReceivingRemoteControlEvents();
-        
         
         return true
     }

@@ -90,7 +90,6 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
              strongSelf.albumNameLabel.text = "-"
              strongSelf.trackNameLabel.text = "-"
 
-
             if (nowPlaying.airBreak) {
                 strongSelf.artistLabel.hidden = true
                 strongSelf.trackLabel.text = "Air Break..."

@@ -6,5 +6,6 @@ target 'KexpTVStream' do
 pod 'Alamofire', '~> 3.0'
 pod 'AlamofireImage', '~> 2.0'
 pod 'SwiftyJSON'
+pod 'HockeySDK-tvOS', :podspec => 'https://download.hockeyapp.net/preseason/sdk/tvos/HockeySDK-tvOS.podspec'
 
 end
