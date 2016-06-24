@@ -204,4 +204,17 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
 
         return cell
     }
+    
+    func tableView(tableView: UITableView, didUpdateFocusInContext context: UITableViewFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
+        
+        if let previouslyFocusedIndexPath = context.previouslyFocusedIndexPath {
+            let previousFocusCell = tableView.cellForRowAtIndexPath(previouslyFocusedIndexPath)
+            previousFocusCell?.contentView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.2)
+        }
+        
+        if let nextFocusedIndexPath = context.nextFocusedIndexPath {
+            let nextFocusCell = tableView.cellForRowAtIndexPath(nextFocusedIndexPath)
+            nextFocusCell?.contentView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
+        }
+    }
 }
