@@ -45,7 +45,11 @@ class KexpController {
     
     class func getKEXPConfig(configurationSetup: ConfigurationSettingsBlock) {
         guard let url = NSURL(string: kexpConfigURL) else { return }
-        guard let kexpConfigData = NSData(contentsOfURL: url) else { return }
+        guard let kexpConfigData = NSData(contentsOfURL: url) else {
+            let configSetting = KexpConfigSettings(configSettingJSON: nil)
+            configurationSetup(kexpConfig: configSetting)
+            return
+        }
 
         let configJSON = JSON(data: kexpConfigData)
         let configSetting = KexpConfigSettings(configSettingJSON: configJSON)
