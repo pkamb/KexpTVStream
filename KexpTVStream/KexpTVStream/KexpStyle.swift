@@ -11,7 +11,7 @@ import UIKit
 let KexpOrangeColorHex = "#FEAC30"
 
 struct FontSizes {
-    static let xxsmall = CGFloat(12.0)
+    static let xxsmall = CGFloat(16.0)
     static let xsmall = CGFloat(24.0)
     static let small = CGFloat(38.0)
     static let medium = CGFloat(46.0)

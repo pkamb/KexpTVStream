@@ -14,6 +14,14 @@ private let bottomBorderHeight:CGFloat = 1.0
 
 class KexpPlaylistCell: UITableViewCell {
     
+    private var nowPlayingStackView: UIStackView = {
+        let nowPlayingStackView = UIStackView()
+        nowPlayingStackView.axis = .Vertical
+        nowPlayingStackView.distribution = .FillEqually
+        nowPlayingStackView.translatesAutoresizingMaskIntoConstraints = false
+        return nowPlayingStackView
+    }()
+    
     private var artistLabel: UILabel = {
         let artistLabel = UILabel()
         artistLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -65,51 +73,56 @@ class KexpPlaylistCell: UITableViewCell {
 
         albumArtImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        contentView.addSubview(artistLabel)
-        contentView.addSubview(trackLabel)
+        contentView.addSubview(nowPlayingStackView)
         contentView.addSubview(albumArtImageView)
-        contentView.addSubview(albumLabel)
-        contentView.addSubview(timePlayedLabel)
 
-        let views = ["artistLabel": artistLabel, "albumArtImageView": albumArtImageView, "trackLabel": trackLabel, "albumLabel": albumLabel, "timePlayedLabel": timePlayedLabel]
-        let metrics = ["albumArtSize": albumArtSize,]
+        let views = ["albumArtImageView": albumArtImageView, "nowPlayingStackView": nowPlayingStackView]
+        let metrics = ["albumArtSize": albumArtSize]
         
         NSLayoutConstraint.activateConstraints(
             NSLayoutConstraint.constraintsWithVisualFormat(
-                "H:|-[albumArtImageView(albumArtSize)]-[artistLabel]-|",
+                "H:|-[albumArtImageView(albumArtSize)]-[nowPlayingStackView]-|",
                 options: [],
                 metrics:metrics,
                 views: views
             )
         )
         
-        NSLayoutConstraint.activateConstraints(
-            NSLayoutConstraint.constraintsWithVisualFormat(
-                "H:|-[albumArtImageView(albumArtSize)]-[trackLabel]-|",
-                options: [],
-                metrics:metrics,
-                views: views
-            )
-        )
+        nowPlayingStackView.addArrangedSubview(trackLabel)
         
-        NSLayoutConstraint.activateConstraints(
-            NSLayoutConstraint.constraintsWithVisualFormat(
-                "H:|-[albumArtImageView(albumArtSize)]-[albumLabel]-|",
-                options: [],
-                metrics:metrics,
-                views: views
-            )
-        )
+        nowPlayingStackView.addArrangedSubview(albumLabel)
+        nowPlayingStackView.addArrangedSubview(timePlayedLabel)
         
-        NSLayoutConstraint.activateConstraints(
-            NSLayoutConstraint.constraintsWithVisualFormat(
-                "H:|-[albumArtImageView(albumArtSize)]-[timePlayedLabel]-|",
-                options: [],
-                metrics:metrics,
-                views: views
-            )
-        )
-
+        
+        
+//
+//        NSLayoutConstraint.activateConstraints(
+//            NSLayoutConstraint.constraintsWithVisualFormat(
+//                "H:|-[albumArtImageView(albumArtSize)]-[trackLabel]-|",
+//                options: [],
+//                metrics:metrics,
+//                views: views
+//            )
+//        )
+//        
+//        NSLayoutConstraint.activateConstraints(
+//            NSLayoutConstraint.constraintsWithVisualFormat(
+//                "H:|-[albumArtImageView(albumArtSize)]-[albumLabel]-|",
+//                options: [],
+//                metrics:metrics,
+//                views: views
+//            )
+//        )
+//        
+//        NSLayoutConstraint.activateConstraints(
+//            NSLayoutConstraint.constraintsWithVisualFormat(
+//                "H:|-[albumArtImageView(albumArtSize)]-[timePlayedLabel]-|",
+//                options: [],
+//                metrics:metrics,
+//                views: views
+//            )
+//        )
+//
         NSLayoutConstraint.activateConstraints(
             NSLayoutConstraint.constraintsWithVisualFormat(
                 "V:|-[albumArtImageView(albumArtSize)]-|",
@@ -121,12 +134,21 @@ class KexpPlaylistCell: UITableViewCell {
         
         NSLayoutConstraint.activateConstraints(
             NSLayoutConstraint.constraintsWithVisualFormat(
-                "V:|-[artistLabel][trackLabel][albumLabel][timePlayedLabel]",
+                "V:|-[nowPlayingStackView]-|",
                 options: [],
                 metrics:metrics,
                 views: views
             )
         )
+//
+//        NSLayoutConstraint.activateConstraints(
+//            NSLayoutConstraint.constraintsWithVisualFormat(
+//                "V:|-[artistLabel][trackLabel][albumLabel][timePlayedLabel]",
+//                options: [],
+//                metrics:metrics,
+//                views: views
+//            )
+//        )
     }
     
     required init?(coder aDecoder: NSCoder) {

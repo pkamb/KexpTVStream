@@ -85,10 +85,6 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
         KexpController.getNowPlayingInfo({ [weak self] nowPlaying -> Void in
             guard let strongSelf = self else { return }
             guard let nowPlaying = nowPlaying else { return }
-            
-             strongSelf.artistNameLabel.text = "-"
-             strongSelf.albumNameLabel.text = "-"
-             strongSelf.trackNameLabel.text = "-"
 
             if (nowPlaying.airBreak) {
                 strongSelf.artistLabel.hidden = true
@@ -133,7 +129,7 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
         KexpController.getDjInfo { [weak self] currentDjInfo -> Void in
             guard let strongSelf = self else { return }
             guard let currentDjInfo = currentDjInfo else { return }
-            guard let showTitle = currentDjInfo.showTitle else { strongSelf.djInfoLabel.text = "ON NOW: "; return }
+            guard let showTitle = currentDjInfo.showTitle else { strongSelf.djInfoLabel.text = "ON NOW: Unknown"; return }
             guard let djName = currentDjInfo.djName else { strongSelf.djInfoLabel.text = "ON NOW: \(showTitle)"; return }
     
             strongSelf.djInfoLabel.text = "ON NOW: " + showTitle + " with " + djName
@@ -188,6 +184,10 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
         
         albumArtworkView.layer.cornerRadius = 30.0
         albumArtworkView.clipsToBounds = true
+        
+        artistNameLabel.text = "-"
+        albumNameLabel.text = "-"
+        trackNameLabel.text = "-"
     }
     
     // MARK: - UITableView Datasource/Delegate
