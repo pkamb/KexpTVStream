@@ -88,6 +88,7 @@ class KexpPlaylistCell: UITableViewCell {
             )
         )
         
+        nowPlayingStackView.addArrangedSubview(artistLabel)
         nowPlayingStackView.addArrangedSubview(trackLabel)
         nowPlayingStackView.addArrangedSubview(albumLabel)
         nowPlayingStackView.addArrangedSubview(timePlayedLabel)
