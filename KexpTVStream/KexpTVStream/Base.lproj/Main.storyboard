@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="10117" systemVersion="15C50" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -31,51 +31,6 @@
                                     <constraint firstAttribute="width" constant="500" id="yCZ-8C-q2S"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IGA-vM-hGu">
-                                <rect key="frame" x="597" y="460" width="761" height="61"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="61" id="4Lv-7o-1N9"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="theArtist" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="1219" translatesAutoresizingMaskIntoConstraints="NO" id="gM7-KS-v2Z">
-                                <rect key="frame" x="597" y="526" width="761" height="69"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kbg-TT-333">
-                                <rect key="frame" x="597" y="645" width="761" height="61"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="61" id="dXv-fQ-iBc"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="theTrack" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="1219" translatesAutoresizingMaskIntoConstraints="NO" id="WH0-bT-mBh">
-                                <rect key="frame" x="597" y="711" width="761" height="69"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Album:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uls-Tc-ZIe">
-                                <rect key="frame" x="597" y="830" width="761" height="61"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="61" id="1mV-we-9rN"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="theAlbum" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="1219" translatesAutoresizingMaskIntoConstraints="NO" id="fAF-co-ID9">
-                                <rect key="frame" x="597" y="896" width="761" height="69"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="COJ-WO-eIn">
                                 <rect key="frame" x="1490" y="69" width="273" height="215"/>
                                 <constraints>
@@ -104,43 +59,81 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="htM-is-yV2"/>
                                 </connections>
                             </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="equalSpacing" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="rwy-EJ-qug" userLabel="Main Stack View Container">
+                                <rect key="frame" x="623" y="467" width="780" height="461"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="meP-88-7zN" userLabel="Artist Info Stack View ">
+                                        <rect key="frame" x="0.0" y="0.0" width="780" height="127"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="200" misplaced="YES" text="Artist:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IGA-vM-hGu">
+                                                <rect key="frame" x="0.0" y="0.0" width="780" height="58"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="theArtist" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="1219" translatesAutoresizingMaskIntoConstraints="NO" id="gM7-KS-v2Z">
+                                                <rect key="frame" x="0.0" y="58" width="780" height="69"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="nkY-Ap-3ve" userLabel="Track Info Stack View ">
+                                        <rect key="frame" x="0.0" y="167" width="780" height="127"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Track:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kbg-TT-333">
+                                                <rect key="frame" x="0.0" y="0.0" width="780" height="58"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="theTrack" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="1219" translatesAutoresizingMaskIntoConstraints="NO" id="WH0-bT-mBh">
+                                                <rect key="frame" x="0.0" y="58" width="780" height="69"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hhH-9o-bI8" userLabel="Album Info Stack View">
+                                        <rect key="frame" x="0.0" y="334" width="780" height="127"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Album:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uls-Tc-ZIe">
+                                                <rect key="frame" x="0.0" y="0.0" width="780" height="58"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="theAlbum" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="1219" translatesAutoresizingMaskIntoConstraints="NO" id="fAF-co-ID9">
+                                                <rect key="frame" x="0.0" y="58" width="780" height="69"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="uls-Tc-ZIe" firstAttribute="leading" secondItem="miB-S0-IEX" secondAttribute="trailing" constant="20" id="9a8-Hu-MRn"/>
-                            <constraint firstItem="fAF-co-ID9" firstAttribute="leading" secondItem="miB-S0-IEX" secondAttribute="trailing" constant="20" id="BPK-9S-J4J"/>
-                            <constraint firstItem="uls-Tc-ZIe" firstAttribute="top" secondItem="WH0-bT-mBh" secondAttribute="bottom" constant="50" id="ELq-0g-L0v"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="uls-Tc-ZIe" secondAttribute="trailing" constant="542" id="HG6-hw-0dU"/>
-                            <constraint firstItem="fAF-co-ID9" firstAttribute="top" secondItem="uls-Tc-ZIe" secondAttribute="bottom" constant="5" id="I8c-CK-XFI"/>
-                            <constraint firstItem="11T-ze-rdW" firstAttribute="leading" secondItem="gM7-KS-v2Z" secondAttribute="trailing" constant="45" id="JYw-Q2-JsX"/>
-                            <constraint firstItem="gM7-KS-v2Z" firstAttribute="top" secondItem="IGA-vM-hGu" secondAttribute="bottom" constant="5" id="Jzw-Lh-ksQ"/>
-                            <constraint firstItem="11T-ze-rdW" firstAttribute="leading" secondItem="Kbg-TT-333" secondAttribute="trailing" constant="45" id="LhS-0q-4ab"/>
-                            <constraint firstItem="IGA-vM-hGu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="577" id="ME5-v9-HjH"/>
+                            <constraint firstItem="rwy-EJ-qug" firstAttribute="leading" secondItem="miB-S0-IEX" secondAttribute="trailing" constant="46" id="0YM-TQ-byX"/>
+                            <constraint firstItem="rwy-EJ-qug" firstAttribute="top" secondItem="miB-S0-IEX" secondAttribute="top" id="H7A-0j-X3e"/>
+                            <constraint firstItem="rwy-EJ-qug" firstAttribute="trailing" secondItem="11T-ze-rdW" secondAttribute="leading" id="LQZ-0p-9zL"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="11T-ze-rdW" secondAttribute="bottom" constant="29" id="MtC-HA-Z4z"/>
-                            <constraint firstItem="IGA-vM-hGu" firstAttribute="leading" secondItem="YEu-mZ-qzA" secondAttribute="trailing" constant="-832" id="NSw-3J-wOG"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="miB-S0-IEX" secondAttribute="bottom" constant="113" id="QId-sh-44k"/>
                             <constraint firstItem="2tg-70-mMt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="57" id="QiD-HB-oqN"/>
-                            <constraint firstItem="WH0-bT-mBh" firstAttribute="leading" secondItem="miB-S0-IEX" secondAttribute="trailing" constant="20" id="Qxq-Ci-mDa"/>
                             <constraint firstItem="COJ-WO-eIn" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="69" id="RK9-rv-EJR"/>
-                            <constraint firstItem="IGA-vM-hGu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="577" id="Sir-Vn-qYo"/>
                             <constraint firstItem="miB-S0-IEX" firstAttribute="top" secondItem="2tg-70-mMt" secondAttribute="bottom" constant="98" id="Sml-iZ-wHA"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="IGA-vM-hGu" secondAttribute="trailing" constant="542" id="TuZ-CV-X53"/>
                             <constraint firstAttribute="trailingMargin" secondItem="11T-ze-rdW" secondAttribute="trailing" constant="50" id="X48-rz-9TJ"/>
-                            <constraint firstItem="Kbg-TT-333" firstAttribute="top" secondItem="gM7-KS-v2Z" secondAttribute="bottom" constant="50" id="Zbm-4W-ouw"/>
                             <constraint firstItem="miB-S0-IEX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="57" id="aeN-1W-hMq"/>
-                            <constraint firstItem="Kbg-TT-333" firstAttribute="leading" secondItem="miB-S0-IEX" secondAttribute="trailing" constant="20" id="dEc-1l-mv3"/>
                             <constraint firstItem="COJ-WO-eIn" firstAttribute="leading" secondItem="YEu-mZ-qzA" secondAttribute="trailing" constant="61" id="dc7-Iq-wxk"/>
                             <constraint firstItem="YEu-mZ-qzA" firstAttribute="leading" secondItem="2tg-70-mMt" secondAttribute="trailing" constant="44" id="dx4-ct-T0I"/>
-                            <constraint firstItem="IGA-vM-hGu" firstAttribute="top" secondItem="COJ-WO-eIn" secondAttribute="bottom" constant="176" id="ewv-tb-cyR"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="WH0-bT-mBh" secondAttribute="trailing" constant="542" id="lp9-Pc-ps5"/>
                             <constraint firstItem="11T-ze-rdW" firstAttribute="leading" secondItem="COJ-WO-eIn" secondAttribute="leading" constant="-87" id="m8y-G3-VIh"/>
                             <constraint firstItem="YEu-mZ-qzA" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="69" id="nTl-KK-m31"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="fAF-co-ID9" secondAttribute="bottom" constant="115" id="nUr-EL-3he"/>
-                            <constraint firstItem="11T-ze-rdW" firstAttribute="leading" secondItem="fAF-co-ID9" secondAttribute="trailing" constant="45" id="pOw-an-b3w"/>
                             <constraint firstItem="2tg-70-mMt" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="69" id="rGj-ng-q74"/>
                             <constraint firstAttribute="trailingMargin" secondItem="COJ-WO-eIn" secondAttribute="trailing" constant="137" id="rHV-um-u0b"/>
-                            <constraint firstItem="gM7-KS-v2Z" firstAttribute="leading" secondItem="miB-S0-IEX" secondAttribute="trailing" constant="20" id="sCb-xW-8ca"/>
-                            <constraint firstItem="WH0-bT-mBh" firstAttribute="top" secondItem="Kbg-TT-333" secondAttribute="bottom" constant="5" id="smT-J4-NQK"/>
                             <constraint firstAttribute="trailingMargin" secondItem="miB-S0-IEX" secondAttribute="trailing" constant="1323" id="uGs-3e-dlf"/>
                             <constraint firstItem="11T-ze-rdW" firstAttribute="top" secondItem="COJ-WO-eIn" secondAttribute="bottom" constant="37" id="wYd-Kp-5BG"/>
                         </constraints>

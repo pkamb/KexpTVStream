@@ -86,7 +86,7 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
             guard let strongSelf = self else { return }
             guard let nowPlaying = nowPlaying else { return }
 
-            if (nowPlaying.airBreak) {
+            if nowPlaying.airBreak {
                 strongSelf.artistLabel.hidden = true
                 strongSelf.trackLabel.text = "Air Break..."
                 strongSelf.albumLabel.hidden = true
