@@ -9,6 +9,9 @@
 import UIKit
 import AlamofireImage
 
+private let nowPlayingTimeInterval:NSTimeInterval = 15.0
+private let currentDJTimeInterval:NSTimeInterval = 60.0
+
 class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet var playPauseButton: UIButton!
@@ -54,8 +57,14 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
         getNowPlayingInfo()
         getCurrentDjInfo()
 
-        NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: #selector(KexpNowPlayingVC.getNowPlayingInfo), userInfo: nil, repeats: true)
-        NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: #selector(KexpNowPlayingVC.getCurrentDjInfo), userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(nowPlayingTimeInterval, target: self, selector: #selector(KexpNowPlayingVC.getNowPlayingInfo), userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(currentDJTimeInterval, target: self, selector: #selector(KexpNowPlayingVC.getCurrentDjInfo), userInfo: nil, repeats: true)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
     }
 
     private func updateAlbumArtWork(albumArtUrl: String?) {

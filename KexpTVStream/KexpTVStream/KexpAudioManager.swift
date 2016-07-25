@@ -47,9 +47,17 @@ class KexpAudioManager: NSObject {
         super.init()
     }
     
+    deinit {
+        deInitStream()
+    }
+    
     private func initStream() {
         guard let currentKexpUrlString = currentKexpUrlString else { return }
         guard let streamURL = NSURL(string: currentKexpUrlString) else { return }
+        
+        if audioPlayerItem != nil {
+            deInitStream()
+        }
 
         audioPlayerItem = AVPlayerItem(URL: streamURL)
         audioPlayerItem?.addObserver(self, forKeyPath: "status", options: [], context: nil)
