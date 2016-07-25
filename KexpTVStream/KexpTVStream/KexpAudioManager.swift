@@ -12,7 +12,7 @@ import MediaPlayer
 
 protocol KexpAudioManagerDelegate {
     func kexpAudioPlayerDidStartPlaying()
-    func kexpAudioPlayerDidStopPlaying()
+    func kexpAudioPlayerDidStopPlaying(hardStop: Bool)
     func kexpAudioPlayerFailedToPlay()
 }
 
@@ -49,11 +49,14 @@ class KexpAudioManager: NSObject {
     
     deinit {
         deInitStream()
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     private func initStream() {
         guard let currentKexpUrlString = currentKexpUrlString else { return }
         guard let streamURL = NSURL(string: currentKexpUrlString) else { return }
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(KexpAudioManager.handleInterruption(_:)), name: AVAudioSessionInterruptionNotification, object: nil)
         
         if audioPlayerItem != nil {
             deInitStream()
@@ -68,8 +71,8 @@ class KexpAudioManager: NSObject {
         if let audioPlayerItem = audioPlayerItem {
             audioPlayer = AVPlayer(playerItem: audioPlayerItem)
             
-            try! AVAudioSession.sharedInstance().setActive(true)
-            try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, withOptions: [])
+            _ = try? AVAudioSession.sharedInstance().setActive(true)
+            _ = try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, withOptions: [])
         }
     }
     
@@ -109,7 +112,7 @@ class KexpAudioManager: NSObject {
             }
             else if playerItem.status == .Failed {
                 deInitStream()
-                delegate.kexpAudioPlayerDidStopPlaying()
+                delegate.kexpAudioPlayerDidStopPlaying(false)
                 
                 if currentKexpUrlString == kexpConfig.backupStreamUrl {
                     delegate.kexpAudioPlayerFailedToPlay()
@@ -121,7 +124,7 @@ class KexpAudioManager: NSObject {
         else if keyPath == "playbackBufferEmpty" {
             pause()
             deInitStream()
-            delegate.kexpAudioPlayerDidStopPlaying()
+            delegate.kexpAudioPlayerDidStopPlaying(false)
         }
     }
     
@@ -133,7 +136,20 @@ class KexpAudioManager: NSObject {
     }
     
     func pauseEvent() {
-        delegate?.kexpAudioPlayerDidStopPlaying()
+        delegate?.kexpAudioPlayerDidStopPlaying(false)
         pause()
+    }
+    
+    // MARK: - NSNotification
+    // This is called when audio is taken from another app. Sending a HardStop when an AVAudioSessionInterruptionType is fired
+    func handleInterruption(notification: NSNotification) {
+        guard let interruptionTypeUInt = notification.userInfo?[AVAudioSessionInterruptionTypeKey] as? UInt else { return }
+
+        if let interruptionType = AVAudioSessionInterruptionType(rawValue: interruptionTypeUInt) {
+            if interruptionType == .Began || interruptionType == .Ended {
+                pause()
+                delegate?.kexpAudioPlayerDidStopPlaying(true)
+            }
+        }
     }
 }

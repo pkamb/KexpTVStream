@@ -60,12 +60,6 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
         NSTimer.scheduledTimerWithTimeInterval(nowPlayingTimeInterval, target: self, selector: #selector(KexpNowPlayingVC.getNowPlayingInfo), userInfo: nil, repeats: true)
         NSTimer.scheduledTimerWithTimeInterval(currentDJTimeInterval, target: self, selector: #selector(KexpNowPlayingVC.getCurrentDjInfo), userInfo: nil, repeats: true)
     }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        
-    }
 
     private func updateAlbumArtWork(albumArtUrl: String?) {
         guard let albumUrlString = albumArtUrl else { albumArtworkView.image = UIImage(named: "vinylPlaceHolder"); return }
@@ -80,9 +74,9 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
         getNowPlayingInfo()
     }
     
-    func kexpAudioPlayerDidStopPlaying() {
+    func kexpAudioPlayerDidStopPlaying(hardStop: Bool) {
         UIApplication.sharedApplication().idleTimerDisabled = false
-        setPlayMode()
+        setPlayMode(hardStop)
     }
     
     func kexpAudioPlayerFailedToPlay() {
@@ -151,7 +145,7 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
             showAlert("Unable to connect to the Internet")
         }
         else {
-            setPlayMode()
+            setPlayMode(false)
             playPauseButton.selected = KexpAudioManager.sharedInstance.isPlaying()
         }
     }
@@ -164,8 +158,8 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
         presentViewController(alert, animated: true, completion: nil)
     }
     
-    private func setPlayMode() {
-        if (!KexpAudioManager.sharedInstance.isPlaying()) {
+    private func setPlayMode(hardStop: Bool) {
+        if (!KexpAudioManager.sharedInstance.isPlaying() && !hardStop) {
             playPauseButton.setImage(UIImage(named: "pauseButton"), forState: .Normal)
             KexpAudioManager.sharedInstance.play()
         }
