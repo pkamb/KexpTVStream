@@ -261,6 +261,7 @@
 				46CDFB1A1C30A7170001A004 /* Resources */,
 				1285160E37F0CBFA3E85FCCB /* Embed Pods Frameworks */,
 				2CCF055AE6FED1BD14D88564 /* Copy Pods Resources */,
+				C9BC2DA21D45AEE600B05DF7 /* Build Number */,
 			);
 			buildRules = (
 			);
@@ -403,6 +404,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KexpTVStream/Pods-KexpTVStream-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		C9BC2DA21D45AEE600B05DF7 /* Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build Number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
