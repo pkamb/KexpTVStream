@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		299223DBEF0F12FCAE5217E1 /* Pods_KexpTVStream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3261FC857A74870443504C3 /* Pods_KexpTVStream.framework */; };
 		46CDFB201C30A7170001A004 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB1F1C30A7170001A004 /* AppDelegate.swift */; };
 		46CDFB251C30A7170001A004 /* KexpTVStream.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB231C30A7170001A004 /* KexpTVStream.xcdatamodeld */; };
 		46CDFB281C30A7170001A004 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46CDFB261C30A7170001A004 /* Main.storyboard */; };
@@ -17,7 +18,6 @@
 		46CDFB471C30A8AD0001A004 /* NowPlaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB441C30A8AD0001A004 /* NowPlaying.swift */; };
 		46CDFB491C30B0F30001A004 /* KexpStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB481C30B0F30001A004 /* KexpStyle.swift */; };
 		46CDFB4B1C30D8AC0001A004 /* CurrentDj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB4A1C30D8AC0001A004 /* CurrentDj.swift */; };
-		B5DB77680DBF3C0A1A837B2E /* Pods_KexpTVStream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 842C0B17663603CB9999DE72 /* Pods_KexpTVStream.framework */; };
 		C9063B861C4BDE3100B1B1C6 /* KexpConfigResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C9063B851C4BDE3100B1B1C6 /* KexpConfigResponse.json */; };
 		C908817A1C4C5BCE004C2F76 /* KexpConfigResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C9063B851C4BDE3100B1B1C6 /* KexpConfigResponse.json */; };
 		C908817B1C4C5C08004C2F76 /* KexpTestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B1645F1C4C4C0700AFC7F6 /* KexpTestUtilities.swift */; };
@@ -46,7 +46,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3E5B80A9E1E86A2E4EE1F6F7 /* Pods-KexpTVStream.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KexpTVStream.release.xcconfig"; path = "Pods/Target Support Files/Pods-KexpTVStream/Pods-KexpTVStream.release.xcconfig"; sourceTree = "<group>"; };
 		46CDFB1C1C30A7170001A004 /* KexpTVStream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KexpTVStream.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46CDFB1F1C30A7170001A004 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		46CDFB241C30A7170001A004 /* KexpTVStream.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KexpTVStream.xcdatamodel; sourceTree = "<group>"; };
@@ -61,8 +60,7 @@
 		46CDFB441C30A8AD0001A004 /* NowPlaying.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NowPlaying.swift; sourceTree = "<group>"; };
 		46CDFB481C30B0F30001A004 /* KexpStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpStyle.swift; sourceTree = "<group>"; };
 		46CDFB4A1C30D8AC0001A004 /* CurrentDj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentDj.swift; sourceTree = "<group>"; };
-		842C0B17663603CB9999DE72 /* Pods_KexpTVStream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KexpTVStream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D4D9AA2AE854CA5681BB5EF /* Pods-KexpTVStream.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KexpTVStream.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KexpTVStream/Pods-KexpTVStream.debug.xcconfig"; sourceTree = "<group>"; };
+		954A56F5E0A1C1602EAEB3A6 /* Pods-KexpTVStream.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KexpTVStream.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KexpTVStream/Pods-KexpTVStream.debug.xcconfig"; sourceTree = "<group>"; };
 		C9063B851C4BDE3100B1B1C6 /* KexpConfigResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = KexpConfigResponse.json; sourceTree = "<group>"; };
 		C908817C1C4C63C0004C2F76 /* KexpNowPlayingResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = KexpNowPlayingResponse.json; sourceTree = "<group>"; };
 		C908817E1C4C640E004C2F76 /* KexpCurrentDJResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = KexpCurrentDJResponse.json; sourceTree = "<group>"; };
@@ -77,6 +75,8 @@
 		C9EDD0B11C8E195600562A9C /* KexpPlaylistCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpPlaylistCell.swift; sourceTree = "<group>"; };
 		C9FACB371C869C6C004E2AA7 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		C9FACB381C869C6C004E2AA7 /* libFlurrytvOS_1.0.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurrytvOS_1.0.0.a; sourceTree = "<group>"; };
+		DBDAEB51E7D2BC273605A3A0 /* Pods-KexpTVStream.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KexpTVStream.release.xcconfig"; path = "Pods/Target Support Files/Pods-KexpTVStream/Pods-KexpTVStream.release.xcconfig"; sourceTree = "<group>"; };
+		E3261FC857A74870443504C3 /* Pods_KexpTVStream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KexpTVStream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,8 +84,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5DB77680DBF3C0A1A837B2E /* Pods_KexpTVStream.framework in Frameworks */,
 				C9FACB391C869C6C004E2AA7 /* libFlurrytvOS_1.0.0.a in Frameworks */,
+				299223DBEF0F12FCAE5217E1 /* Pods_KexpTVStream.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,21 +99,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		08EFF23F7E405F57DBED00C8 /* Pods */ = {
+		03B7635283D899BC9E5D96A1 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				9D4D9AA2AE854CA5681BB5EF /* Pods-KexpTVStream.debug.xcconfig */,
-				3E5B80A9E1E86A2E4EE1F6F7 /* Pods-KexpTVStream.release.xcconfig */,
+				954A56F5E0A1C1602EAEB3A6 /* Pods-KexpTVStream.debug.xcconfig */,
+				DBDAEB51E7D2BC273605A3A0 /* Pods-KexpTVStream.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		3D067AF20493CB1933A9F614 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				842C0B17663603CB9999DE72 /* Pods_KexpTVStream.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		46CDFB131C30A7170001A004 = {
@@ -122,8 +114,8 @@
 				46CDFB1E1C30A7170001A004 /* KexpTVStream */,
 				46CDFB331C30A7180001A004 /* KexpTVStreamTests */,
 				46CDFB1D1C30A7170001A004 /* Products */,
-				08EFF23F7E405F57DBED00C8 /* Pods */,
-				3D067AF20493CB1933A9F614 /* Frameworks */,
+				03B7635283D899BC9E5D96A1 /* Pods */,
+				D5E8CBEBBEA5CF3DFE8F27F9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -248,6 +240,14 @@
 			name = Flurry;
 			sourceTree = "<group>";
 		};
+		D5E8CBEBBEA5CF3DFE8F27F9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E3261FC857A74870443504C3 /* Pods_KexpTVStream.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -255,13 +255,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 46CDFB391C30A7180001A004 /* Build configuration list for PBXNativeTarget "KexpTVStream" */;
 			buildPhases = (
-				2399D40B1B4B22036970EFC5 /* Check Pods Manifest.lock */,
+				2766500F8E4BC53C211437B7 /* [CP] Check Pods Manifest.lock */,
 				46CDFB181C30A7170001A004 /* Sources */,
 				46CDFB191C30A7170001A004 /* Frameworks */,
 				46CDFB1A1C30A7170001A004 /* Resources */,
-				1285160E37F0CBFA3E85FCCB /* Embed Pods Frameworks */,
-				2CCF055AE6FED1BD14D88564 /* Copy Pods Resources */,
 				C9BC2DA21D45AEE600B05DF7 /* Build Number */,
+				BFB28150A581ECA332273E0D /* [CP] Embed Pods Frameworks */,
+				CFF1C296059EA90E344689BF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -303,6 +303,7 @@
 					46CDFB1B1C30A7170001A004 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = J93BBX354J;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.BackgroundModes.appletvos = {
 								enabled = 1;
@@ -311,6 +312,7 @@
 					};
 					46CDFB2F1C30A7180001A004 = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0800;
 						TestTargetID = 46CDFB1B1C30A7170001A004;
 					};
 				};
@@ -360,29 +362,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1285160E37F0CBFA3E85FCCB /* Embed Pods Frameworks */ = {
+		2766500F8E4BC53C211437B7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KexpTVStream/Pods-KexpTVStream-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2399D40B1B4B22036970EFC5 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -390,19 +377,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		2CCF055AE6FED1BD14D88564 /* Copy Pods Resources */ = {
+		BFB28150A581ECA332273E0D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KexpTVStream/Pods-KexpTVStream-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KexpTVStream/Pods-KexpTVStream-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C9BC2DA21D45AEE600B05DF7 /* Build Number */ = {
@@ -418,6 +405,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "#!/bin/bash\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
+		};
+		CFF1C296059EA90E344689BF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KexpTVStream/Pods-KexpTVStream-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -560,7 +562,7 @@
 		};
 		46CDFB3A1C30A7180001A004 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9D4D9AA2AE854CA5681BB5EF /* Pods-KexpTVStream.debug.xcconfig */;
+			baseConfigurationReference = 954A56F5E0A1C1602EAEB3A6 /* Pods-KexpTVStream.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -576,12 +578,13 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "KexpTVStream-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		46CDFB3B1C30A7180001A004 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3E5B80A9E1E86A2E4EE1F6F7 /* Pods-KexpTVStream.release.xcconfig */;
+			baseConfigurationReference = DBDAEB51E7D2BC273605A3A0 /* Pods-KexpTVStream.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -596,6 +599,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.dus.KexpTVStream;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "KexpTVStream-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -610,6 +614,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "KexpTVStreamTests/KexpTVStreamTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KexpTVStream.app/KexpTVStream";
 			};
 			name = Debug;
@@ -624,6 +629,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.dus.KexpTVStreamTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "KexpTVStreamTests/KexpTVStreamTests-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KexpTVStream.app/KexpTVStream";
 			};
 			name = Release;
