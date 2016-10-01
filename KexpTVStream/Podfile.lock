@@ -1,13 +1,13 @@
 PODS:
-  - Alamofire (3.1.4)
-  - AlamofireImage (2.2.0):
-    - Alamofire (~> 3.1)
+  - Alamofire (4.0.0)
+  - AlamofireImage (3.0.0):
+    - Alamofire (~> 4.0)
   - HockeySDK-tvOS (4.1.0-beta.1)
-  - SwiftyJSON (2.3.2)
+  - SwiftyJSON (3.0.0)
 
 DEPENDENCIES:
-  - Alamofire (~> 3.0)
-  - AlamofireImage (~> 2.0)
+  - Alamofire
+  - AlamofireImage
   - HockeySDK-tvOS (from `https://download.hockeyapp.net/preseason/sdk/tvos/HockeySDK-tvOS.podspec`)
   - SwiftyJSON
 
@@ -16,9 +16,11 @@ EXTERNAL SOURCES:
     :podspec: https://download.hockeyapp.net/preseason/sdk/tvos/HockeySDK-tvOS.podspec
 
 SPEC CHECKSUMS:
-  Alamofire: fbc829692f351fa1d8a31dd75fd7f7f56fea31fb
-  AlamofireImage: bedb8a4bdfb98eda81ba12952fba6e9e90420922
+  Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
+  AlamofireImage: 6594aa1139a67dcd36cde6da79ea4e5b318e60fb
   HockeySDK-tvOS: ee43955ab5eb2d72fc3faca460364a20c4e38f97
-  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+  SwiftyJSON: f57b2b44bc166617372d1c70773591fe9f0f5fd4
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: bf9e9a10a58996b142f4722da4751f4dd8d41052
+
+COCOAPODS: 1.0.1

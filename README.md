@@ -6,11 +6,12 @@ This project has the following dependencies:
 - Cocoapods
 
 #Important!!
-This project needs to run with cocoapods 0.39.0 or higher
+This project needs to run with cocoapods 1.1.0.rc.2 or higher
 ```
 sudo sudo gem uninstall cocoapods
-sudo gem install cocoapods -v 0.39.0
+sudo gem install cocoapods -v 1.1.0.rc.2
 ```
+xCode 8+
 
 # Installation
 To make it easy to configure your environment, a script is included in the repository that will install the above dependencies and git hooks. To run this script, do the following:  

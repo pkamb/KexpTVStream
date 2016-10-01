@@ -15,7 +15,7 @@ class NowPlaying {
     var albumArtWork: String?
     var artist: String?
     var songTitle: String?
-    var timePlayed = NSDate()
+    var timePlayed = Date()
     var airBreak = true
     
     init(nowPlayingJSON: JSON?) {

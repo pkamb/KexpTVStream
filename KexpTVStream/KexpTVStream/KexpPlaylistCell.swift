@@ -16,8 +16,8 @@ class KexpPlaylistCell: UITableViewCell {
     
     private var nowPlayingStackView: UIStackView = {
         let nowPlayingStackView = UIStackView()
-        nowPlayingStackView.axis = .Vertical
-        nowPlayingStackView.distribution = .FillEqually
+        nowPlayingStackView.axis = .vertical
+        nowPlayingStackView.distribution = .fillEqually
         nowPlayingStackView.translatesAutoresizingMaskIntoConstraints = false
         return nowPlayingStackView
     }()
@@ -25,7 +25,7 @@ class KexpPlaylistCell: UITableViewCell {
     private var artistLabel: UILabel = {
         let artistLabel = UILabel()
         artistLabel.translatesAutoresizingMaskIntoConstraints = false
-        artistLabel.font = UIFont.boldSystemFontOfSize(FontSizes.xsmall)
+        artistLabel.font = UIFont.boldSystemFont(ofSize: FontSizes.xsmall)
         artistLabel.numberOfLines = 1
         return artistLabel
     }()
@@ -33,7 +33,7 @@ class KexpPlaylistCell: UITableViewCell {
     private var trackLabel: UILabel = {
         let trackLabel = UILabel()
         trackLabel.translatesAutoresizingMaskIntoConstraints = false
-        trackLabel.font = UIFont.italicSystemFontOfSize(FontSizes.xsmall)
+        trackLabel.font = UIFont.italicSystemFont(ofSize: FontSizes.xsmall)
         trackLabel.numberOfLines = 1
         return trackLabel
     }()
@@ -41,24 +41,24 @@ class KexpPlaylistCell: UITableViewCell {
     private var albumLabel: UILabel = {
         let albumLabel = UILabel()
         albumLabel.translatesAutoresizingMaskIntoConstraints = false
-        albumLabel.font = UIFont.systemFontOfSize(FontSizes.xsmall)
+        albumLabel.font = UIFont.systemFont(ofSize: FontSizes.xsmall)
         albumLabel.numberOfLines = 1
-        albumLabel.textColor = UIColor.grayColor()
+        albumLabel.textColor = UIColor.gray
         return albumLabel
     }()
     
     private var timePlayedLabel: UILabel = {
         let timePlayedLabel = UILabel()
         timePlayedLabel.translatesAutoresizingMaskIntoConstraints = false
-        timePlayedLabel.font = UIFont.systemFontOfSize(FontSizes.xxsmall)
+        timePlayedLabel.font = UIFont.systemFont(ofSize: FontSizes.xxsmall)
         timePlayedLabel.numberOfLines = 1
         return timePlayedLabel
     }()
     
-    private let dateFormatter: NSDateFormatter = {
-        let dateFormatter = NSDateFormatter()
+    private let dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "hh:mma MM/dd/YYYY"
-        dateFormatter.timeZone = NSTimeZone.localTimeZone()
+        dateFormatter.timeZone = TimeZone.autoupdatingCurrent
         return dateFormatter
     }()
 
@@ -67,21 +67,21 @@ class KexpPlaylistCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        selectionStyle = .None
-        focusStyle = .Custom
-        contentView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.2)
+        selectionStyle = .none
+        focusStyle = .custom
+        contentView.backgroundColor = UIColor.white.withAlphaComponent(0.2)
 
         albumArtImageView.translatesAutoresizingMaskIntoConstraints = false
         
         contentView.addSubview(nowPlayingStackView)
         contentView.addSubview(albumArtImageView)
 
-        let views = ["albumArtImageView": albumArtImageView, "nowPlayingStackView": nowPlayingStackView]
+        let views = ["albumArtImageView": albumArtImageView, "nowPlayingStackView": nowPlayingStackView] as [String : Any]
         let metrics = ["albumArtSize": albumArtSize]
         
-        NSLayoutConstraint.activateConstraints(
-            NSLayoutConstraint.constraintsWithVisualFormat(
-                "H:|-[albumArtImageView(albumArtSize)]-[nowPlayingStackView]-|",
+        NSLayoutConstraint.activate(
+            NSLayoutConstraint.constraints(
+                withVisualFormat: "H:|-[albumArtImageView(albumArtSize)]-[nowPlayingStackView]-|",
                 options: [],
                 metrics:metrics,
                 views: views
@@ -93,18 +93,18 @@ class KexpPlaylistCell: UITableViewCell {
         nowPlayingStackView.addArrangedSubview(albumLabel)
         nowPlayingStackView.addArrangedSubview(timePlayedLabel)
         
-        NSLayoutConstraint.activateConstraints(
-            NSLayoutConstraint.constraintsWithVisualFormat(
-                "V:|-[albumArtImageView(albumArtSize)]-|",
+        NSLayoutConstraint.activate(
+            NSLayoutConstraint.constraints(
+                withVisualFormat: "V:|-[albumArtImageView(albumArtSize)]-|",
                 options: [],
                 metrics:metrics,
                 views: views
             )
         )
         
-        NSLayoutConstraint.activateConstraints(
-            NSLayoutConstraint.constraintsWithVisualFormat(
-                "V:|-[nowPlayingStackView]-|",
+        NSLayoutConstraint.activate(
+            NSLayoutConstraint.constraints(
+                withVisualFormat: "V:|-[nowPlayingStackView]-|",
                 options: [],
                 metrics:metrics,
                 views: views
@@ -118,16 +118,16 @@ class KexpPlaylistCell: UITableViewCell {
         assertionFailure("Not implemented!")
     }
     
-    func configureNowPlayingCell(song: NowPlaying) {
+    func configureNowPlayingCell(_ song: NowPlaying) {
         artistLabel.text = song.artist
         trackLabel.text = song.songTitle
         albumLabel.text = song.album
-        timePlayedLabel.text = dateFormatter.stringFromDate(song.timePlayed)
+        timePlayedLabel.text = dateFormatter.string(from: song.timePlayed as Date)
         albumArtImageView.image = UIImage(named: "vinylPlaceHolder")
     
         if let albumURLString = song.albumArtWork as String? {
-            if let albumURL = NSURL(string: albumURLString) {
-                albumArtImageView.af_setImageWithURL(albumURL)
+            if let albumURL = URL(string: albumURLString) {
+                albumArtImageView.af_setImage(withURL: albumURL, placeholderImage: nil, filter: nil)
             }
         }
     }
