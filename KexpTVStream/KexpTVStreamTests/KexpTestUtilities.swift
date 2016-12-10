@@ -15,14 +15,12 @@ class KexpTestUtilities {
         let filePath = Bundle.main.path(forResource:testFileName, ofType: "json")
         
         if let fPath = filePath {
-            
-            let content = try! Data(contentsOf: URL(string: fPath)!)
-            
-           // if let jsonContent = content {
-                let json = JSON(data: content)
-                
-                return json
-          //  }
+            if let pathUrl = URL(string: "file://\(fPath)") {
+                let content = try! Data(contentsOf: pathUrl)
+                    let json = JSON(data: content)
+                    
+                    return json
+            }
         }
         
         return nil

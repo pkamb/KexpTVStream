@@ -79,7 +79,7 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
         getNowPlayingInfo()
     }
     
-    func kexpAudioPlayerDidStopPlaying(hardStop: Bool) {
+    func kexpAudioPlayerDidStopPlaying(_ hardStop: Bool) {
         UIApplication.shared.isIdleTimerDisabled = false
         setPlayMode(hardStop)
     }
@@ -155,7 +155,7 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
         }
     }
     
-    private func showAlert(_ alertMessage: String) {
+    fileprivate func showAlert(_ alertMessage: String) {
         let alert = UIAlertController(title: "Whoops!", message: alertMessage, preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "OK", style: .default, handler:nil)
         
@@ -163,7 +163,7 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
         present(alert, animated: true, completion: nil)
     }
     
-    private func setPlayMode(_ hardStop: Bool) {
+    fileprivate func setPlayMode(_ hardStop: Bool) {
         if (!KexpAudioManager.sharedInstance.isPlaying() && !hardStop) {
             playPauseButton.setImage(UIImage(named: "pauseButton"), for: UIControlState())
             KexpAudioManager.sharedInstance.play()
@@ -174,7 +174,7 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
         }
     }
     
-    private func loadKexpLogo(_ logoUrl: String?) {
+    fileprivate func loadKexpLogo(_ logoUrl: String?) {
         guard let imageUrlString = logoUrl as String? else { kexpLogo.image = UIImage(named: "kexp"); return }
         guard let imageUrl = URL(string: imageUrlString) else { kexpLogo.image = UIImage(named: "kexp"); return }
 
@@ -182,7 +182,7 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
     }
     
     // MARK: - VC Styling
-    private func addStyleToView() {
+    fileprivate func addStyleToView() {
         let backgroundLayer = KexpStyle.kexpBackgroundGradient()
         backgroundLayer.frame = view.frame
         view.layer.insertSublayer(backgroundLayer, at: 0)

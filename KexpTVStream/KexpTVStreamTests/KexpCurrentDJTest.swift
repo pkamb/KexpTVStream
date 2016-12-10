@@ -16,10 +16,34 @@ class KexpCurrentDJTest: XCTestCase {
     func testConfigResponse() {
         XCTAssertNotNil(currentDj);
         
-        XCTAssert(currentDj.djFirstName?.characters.count > 0, "No DJ first name found")
-        XCTAssert(currentDj.djName?.characters.count > 0, "No DJ name found")
-        XCTAssert(currentDj.showTitle?.characters.count > 0, "No show title found")
-        XCTAssert(currentDj.showType?.characters.count > 0, "No DJ showType found")
+        if let djFirstName = currentDj.djFirstName {
+              XCTAssert(djFirstName.characters.count > 0, "No DJ first name found")
+        }
+        else {
+            XCTAssertNotNil(currentDj.djFirstName)
+        }
+      
+        if let djName = currentDj.djName {
+            XCTAssert(djName.characters.count > 0, "No DJ name found")
+        }
+        else {
+            XCTAssertNotNil(currentDj.djName)
+        }
+        
+        if let showTitle = currentDj.showTitle {
+            XCTAssert(showTitle.characters.count > 0, "No show title found")
+        }
+        else {
+            XCTAssertNotNil(currentDj.showTitle)
+        }
+        
+        if let showType = currentDj.showType {
+            XCTAssert(showType.characters.count > 0, "No DJ showType found")
+        }
+        else {
+           XCTAssertNotNil(currentDj.showType)
+        }
+
     }
     
     func getCurrentDJResponse() -> CurrentDj {

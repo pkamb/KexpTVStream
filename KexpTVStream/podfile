@@ -9,3 +9,10 @@ pod 'SwiftyJSON'
 pod 'HockeySDK-tvOS', :podspec => 'https://download.hockeyapp.net/preseason/sdk/tvos/HockeySDK-tvOS.podspec'
 
 end
+
+target 'KexpTVStreamTests' do
+    pod 'Alamofire'
+pod 'AlamofireImage'
+pod 'SwiftyJSON'
+pod 'HockeySDK-tvOS', :podspec => 'https://download.hockeyapp.net/preseason/sdk/tvos/HockeySDK-tvOS.podspec'
+end

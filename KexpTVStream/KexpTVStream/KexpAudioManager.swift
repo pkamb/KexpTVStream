@@ -12,7 +12,7 @@ import MediaPlayer
 
 protocol KexpAudioManagerDelegate {
     func kexpAudioPlayerDidStartPlaying()
-    func kexpAudioPlayerDidStopPlaying(hardStop: Bool)
+    func kexpAudioPlayerDidStopPlaying(_ hardStop: Bool)
     func kexpAudioPlayerFailedToPlay()
 }
 
@@ -100,7 +100,7 @@ class KexpAudioManager: NSObject {
             }
             else if playerItem.status == .failed {
                 deInitStream()
-                delegate.kexpAudioPlayerDidStopPlaying(hardStop: false)
+                delegate.kexpAudioPlayerDidStopPlaying(false)
                 
                 if currentKexpUrlString == kexpConfig.backupStreamUrl {
                     delegate.kexpAudioPlayerFailedToPlay()
@@ -119,7 +119,7 @@ class KexpAudioManager: NSObject {
     }
     
     func pauseEvent() {
-        delegate?.kexpAudioPlayerDidStopPlaying(hardStop: false)
+        delegate?.kexpAudioPlayerDidStopPlaying(false)
         pause()
     }
     
@@ -131,7 +131,7 @@ class KexpAudioManager: NSObject {
         if let interruptionType = AVAudioSessionInterruptionType(rawValue: interruptionTypeUInt) {
             if interruptionType == .began || interruptionType == .ended {
                 pause()
-                delegate?.kexpAudioPlayerDidStopPlaying(hardStop: true)
+                delegate?.kexpAudioPlayerDidStopPlaying(true)
             }
         }
     }

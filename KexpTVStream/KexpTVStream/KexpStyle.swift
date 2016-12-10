@@ -37,7 +37,7 @@ class KexpStyle {
     }
     
     class func colorWithHexString (_ hex:String) -> UIColor {
-        var cString:String = hex.trimmingCharacters(in: NSCharacterSet.whitespaces).uppercased()
+        var cString:String = hex.trimmingCharacters(in: CharacterSet.whitespaces).uppercased()
         
         if (cString.hasPrefix("#")) {
             cString = (cString as NSString).substring(from: 1)

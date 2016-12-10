@@ -14,7 +14,7 @@ private let bottomBorderHeight:CGFloat = 1.0
 
 class KexpPlaylistCell: UITableViewCell {
     
-    private var nowPlayingStackView: UIStackView = {
+    fileprivate var nowPlayingStackView: UIStackView = {
         let nowPlayingStackView = UIStackView()
         nowPlayingStackView.axis = .vertical
         nowPlayingStackView.distribution = .fillEqually
@@ -22,7 +22,7 @@ class KexpPlaylistCell: UITableViewCell {
         return nowPlayingStackView
     }()
     
-    private var artistLabel: UILabel = {
+    fileprivate var artistLabel: UILabel = {
         let artistLabel = UILabel()
         artistLabel.translatesAutoresizingMaskIntoConstraints = false
         artistLabel.font = UIFont.boldSystemFont(ofSize: FontSizes.xsmall)
@@ -30,7 +30,7 @@ class KexpPlaylistCell: UITableViewCell {
         return artistLabel
     }()
     
-    private var trackLabel: UILabel = {
+    fileprivate var trackLabel: UILabel = {
         let trackLabel = UILabel()
         trackLabel.translatesAutoresizingMaskIntoConstraints = false
         trackLabel.font = UIFont.italicSystemFont(ofSize: FontSizes.xsmall)
@@ -38,7 +38,7 @@ class KexpPlaylistCell: UITableViewCell {
         return trackLabel
     }()
     
-    private var albumLabel: UILabel = {
+    fileprivate var albumLabel: UILabel = {
         let albumLabel = UILabel()
         albumLabel.translatesAutoresizingMaskIntoConstraints = false
         albumLabel.font = UIFont.systemFont(ofSize: FontSizes.xsmall)
@@ -47,7 +47,7 @@ class KexpPlaylistCell: UITableViewCell {
         return albumLabel
     }()
     
-    private var timePlayedLabel: UILabel = {
+    fileprivate var timePlayedLabel: UILabel = {
         let timePlayedLabel = UILabel()
         timePlayedLabel.translatesAutoresizingMaskIntoConstraints = false
         timePlayedLabel.font = UIFont.systemFont(ofSize: FontSizes.xxsmall)
@@ -55,14 +55,14 @@ class KexpPlaylistCell: UITableViewCell {
         return timePlayedLabel
     }()
     
-    private let dateFormatter: DateFormatter = {
+    fileprivate let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "hh:mma MM/dd/YYYY"
         dateFormatter.timeZone = TimeZone.autoupdatingCurrent
         return dateFormatter
     }()
 
-    private let albumArtImageView = UIImageView()
+    fileprivate let albumArtImageView = UIImageView()
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
