@@ -1,0 +1,483 @@
+{
+    "count": 2242456,
+    "next": "http://legacy-api.kexp.org/play/?limit=20&offset=20",
+    "previous": null,
+    "results": [{
+                "playid": 2307521,
+                "playtype": {
+                "playtypeid": 1,
+                "name": "Media play"
+                },
+                "airdate": "2017-01-31T05:00:46Z",
+                "artist": {
+                "artistid": 184258,
+                "name": "NOIA",
+                "islocal": false
+                },
+                "release": {
+                "releaseid": 283934,
+                "name": "Habits EP",
+                "largeimageuri": null,
+                "smallimageuri": null
+                },
+                "releaseevent": {
+                "releaseeventid": 348746,
+                "year": 2016
+                },
+                "track": {
+                "trackid": 1123652,
+                "name": "Nostalgia Del Futuro"
+                },
+                "label": {
+                "labelid": 33489,
+                "name": "Cascine"
+                },
+                "comments": [{
+                             "commentid": 948480,
+                             "text": "Debut release from this Barcelona-raised, NYC-based vocalist and electronic producer ~ https://noiamusic.bandcamp.com/"
+                             }]
+                }, {
+                "playid": 2307520,
+                "playtype": {
+                "playtypeid": 1,
+                "name": "Media play"
+                },
+                "airdate": "2017-01-31T04:52:42Z",
+                "artist": {
+                "artistid": 189957,
+                "name": "Viviano Torres",
+                "islocal": false
+                },
+                "release": null,
+                "releaseevent": null,
+                "track": {
+                "trackid": 1139370,
+                "name": "Mini Kusuto (Rafael Aragon Remix)"
+                },
+                "label": null,
+                "comments": []
+                }, {
+                "playid": 2307519,
+                "playtype": {
+                "playtypeid": 1,
+                "name": "Media play"
+                },
+                "airdate": "2017-01-31T04:48:58Z",
+                "artist": {
+                "artistid": 189956,
+                "name": "Seu Maia",
+                "islocal": false
+                },
+                "release": null,
+                "releaseevent": null,
+                "track": {
+                "trackid": 1139369,
+                "name": "Coco Raizes De Arcoverde (DJ Nirso Remix)"
+                },
+                "label": null,
+                "comments": []
+                }, {
+                "playid": 2307518,
+                "playtype": {
+                "playtypeid": 4,
+                "name": "Air break"
+                },
+                "airdate": "2017-01-31T04:45:00Z",
+                "artist": null,
+                "release": null,
+                "releaseevent": null,
+                "track": null,
+                "label": null,
+                "comments": []
+                }, {
+                "playid": 2307517,
+                "playtype": {
+                "playtypeid": 1,
+                "name": "Media play"
+                },
+                "airdate": "2017-01-31T04:41:28Z",
+                "artist": {
+                "artistid": 187447,
+                "name": "Sin Orbita",
+                "islocal": false
+                },
+                "release": {
+                "releaseid": 289598,
+                "name": "Principio y Final",
+                "largeimageuri": null,
+                "smallimageuri": null
+                },
+                "releaseevent": null,
+                "track": {
+                "trackid": 1133620,
+                "name": "Perlas"
+                },
+                "label": null,
+                "comments": [{
+                             "commentid": 948479,
+                             "text": "Chile. debut LP. www.facebook.com/sinorbita"
+                             }]
+                }, {
+                "playid": 2307516,
+                "playtype": {
+                "playtypeid": 1,
+                "name": "Media play"
+                },
+                "airdate": "2017-01-31T04:36:19Z",
+                "artist": {
+                "artistid": 135081,
+                "name": "Elastic Bond",
+                "islocal": false
+                },
+                "release": {
+                "releaseid": 291659,
+                "name": "Honey Bun",
+                "largeimageuri": "https://images-na.ssl-images-amazon.com/images/I/51jLbbBpCjL.jpg",
+                "smallimageuri": "https://images-na.ssl-images-amazon.com/images/I/51jLbbBpCjL._SL75_.jpg"
+                },
+                "releaseevent": null,
+                "track": {
+                "trackid": 1136053,
+                "name": "Un Lugar (feat. Ephniko)"
+                },
+                "label": null,
+                "comments": [{
+                             "commentid": 948478,
+                             "text": "Miami.  www.facebook.com/TheElasticBond  -  watch their full live at KEXP performance: http://youtu.be/Xe5G2I7P9VU"
+                             }]
+                }, {
+                "playid": 2307515,
+                "playtype": {
+                "playtypeid": 1,
+                "name": "Media play"
+                },
+                "airdate": "2017-01-31T04:31:52Z",
+                "artist": {
+                "artistid": 188528,
+                "name": "Timoneki",
+                "islocal": false
+                },
+                "release": null,
+                "releaseevent": null,
+                "track": {
+                "trackid": 1139368,
+                "name": "Ay Mamá (Sotomayor Remix)"
+                },
+                "label": null,
+                "comments": [{
+                             "commentid": 948477,
+                             "text": "Mexico. - El Sonido Concert Calendar http://bit.ly/1IHLoOt (upcoming Latin events in #Seattle and the PacNW) - www.facebook.com/timoneki - and check Sotomayor's KEXP live set! https://youtu.be/0zpqx0kmL9o"
+                             }]
+                }, {
+                "playid": 2307514,
+                "playtype": {
+                "playtypeid": 4,
+                "name": "Air break"
+                },
+                "airdate": "2017-01-31T04:28:59Z",
+                "artist": null,
+                "release": null,
+                "releaseevent": null,
+                "track": null,
+                "label": null,
+                "comments": []
+                }, {
+                "playid": 2307513,
+                "playtype": {
+                "playtypeid": 1,
+                "name": "Media play"
+                },
+                "airdate": "2017-01-31T04:25:18Z",
+                "artist": {
+                "artistid": 189955,
+                "name": "The Bongo Hop",
+                "islocal": false
+                },
+                "release": null,
+                "releaseevent": null,
+                "track": {
+                "trackid": 1139367,
+                "name": "Ventana (feat. Nidia Gongora)"
+                },
+                "label": null,
+                "comments": [{
+                             "commentid": 948476,
+                             "text": "Colombia. www.facebook.com/bongohopmusic"
+                             }]
+                }, {
+                "playid": 2307512,
+                "playtype": {
+                "playtypeid": 1,
+                "name": "Media play"
+                },
+                "airdate": "2017-01-31T04:21:34Z",
+                "artist": {
+                "artistid": 189954,
+                "name": "Líber Terán",
+                "islocal": false
+                },
+                "release": null,
+                "releaseevent": null,
+                "track": {
+                "trackid": 1139366,
+                "name": "Apuntando Al Cielo"
+                },
+                "label": null,
+                "comments": [{
+                             "commentid": 948475,
+                             "text": "Mexico City. www.facebook.com/Líber-Terán-oficial-170360816362794"
+                             }]
+                }, {
+                "playid": 2307511,
+                "playtype": {
+                "playtypeid": 1,
+                "name": "Media play"
+                },
+                "airdate": "2017-01-31T04:18:32Z",
+                "artist": {
+                "artistid": 6371,
+                "name": "Manu Chao",
+                "islocal": false
+                },
+                "release": null,
+                "releaseevent": null,
+                "track": {
+                "trackid": 1139365,
+                "name": "No Solo En China Hay Futuro"
+                },
+                "label": null,
+                "comments": [{
+                             "commentid": 948474,
+                             "text": "www.facebook.com/manuchao brand new music!"
+                             }]
+                }, {
+                "playid": 2307510,
+                "playtype": {
+                "playtypeid": 4,
+                "name": "Air break"
+                },
+                "airdate": "2017-01-31T04:16:00Z",
+                "artist": null,
+                "release": null,
+                "releaseevent": null,
+                "track": null,
+                "label": null,
+                "comments": []
+                }, {
+                "playid": 2307509,
+                "playtype": {
+                "playtypeid": 1,
+                "name": "Media play"
+                },
+                "airdate": "2017-01-31T04:11:13Z",
+                "artist": {
+                "artistid": 119150,
+                "name": "Jorge Drexler",
+                "islocal": false
+                },
+                "release": {
+                "releaseid": 197794,
+                "name": "12 Segundos de Oscuridad",
+                "largeimageuri": "http://ecx.images-amazon.com/images/I/41q9zOMVX%2BL.jpg",
+                "smallimageuri": "http://ecx.images-amazon.com/images/I/41q9zOMVX%2BL._SL75_.jpg"
+                },
+                "releaseevent": {
+                "releaseeventid": 253253,
+                "year": null
+                },
+                "track": {
+                "trackid": 939841,
+                "name": "Disneylandia"
+                },
+                "label": {
+                "labelid": 41166,
+                "name": "WEA"
+                },
+                "comments": [{
+                             "commentid": 948473,
+                             "text": "Uruguay. www.facebook.com/JorgeDrexlerOficial"
+                             }]
+                }, {
+                "playid": 2307508,
+                "playtype": {
+                "playtypeid": 1,
+                "name": "Media play"
+                },
+                "airdate": "2017-01-31T04:07:57Z",
+                "artist": {
+                "artistid": 189953,
+                "name": "Salvador y el Unicornio",
+                "islocal": false
+                },
+                "release": null,
+                "releaseevent": null,
+                "track": {
+                "trackid": 1139364,
+                "name": "Carolina"
+                },
+                "label": null,
+                "comments": [{
+                             "commentid": 948472,
+                             "text": "Mexico City - www.facebook.com/salvadorandtheunicorn brand new track"
+                             }]
+                }, {
+                "playid": 2307507,
+                "playtype": {
+                "playtypeid": 1,
+                "name": "Media play"
+                },
+                "airdate": "2017-01-31T04:03:43Z",
+                "artist": {
+                "artistid": 161737,
+                "name": "Adelaida",
+                "islocal": false
+                },
+                "release": {
+                "releaseid": 292316,
+                "name": "Paraíso",
+                "largeimageuri": null,
+                "smallimageuri": null
+                },
+                "releaseevent": null,
+                "track": {
+                "trackid": 1139363,
+                "name": "Los Dientes"
+                },
+                "label": null,
+                "comments": [{
+                             "commentid": 948471,
+                             "text": "Chile. new album! https://www.facebook.com/Adelaidabanda"
+                             }]
+                }, {
+                "playid": 2307506,
+                "playtype": {
+                "playtypeid": 1,
+                "name": "Media play"
+                },
+                "airdate": "2017-01-31T04:00:30Z",
+                "artist": {
+                "artistid": 108947,
+                "name": "Tijuana No!",
+                "islocal": false
+                },
+                "release": {
+                "releaseid": 200322,
+                "name": "Contra-Revolución Avenue",
+                "largeimageuri": null,
+                "smallimageuri": null
+                },
+                "releaseevent": {
+                "releaseeventid": 256451,
+                "year": null
+                },
+                "track": {
+                "trackid": 947798,
+                "name": "Gente"
+                },
+                "label": {
+                "labelid": 31731,
+                "name": "Sony BMG"
+                },
+                "comments": [{
+                             "commentid": 948470,
+                             "text": "Ska, rock and punk from Tijuana. The group officially disbanded in December 2002."
+                             }]
+                }, {
+                "playid": 2307505,
+                "playtype": {
+                "playtypeid": 4,
+                "name": "Air break"
+                },
+                "airdate": "2017-01-31T03:57:39Z",
+                "artist": null,
+                "release": null,
+                "releaseevent": null,
+                "track": null,
+                "label": null,
+                "comments": []
+                }, {
+                "playid": 2307504,
+                "playtype": {
+                "playtypeid": 1,
+                "name": "Media play"
+                },
+                "airdate": "2017-01-31T03:54:08Z",
+                "artist": {
+                "artistid": 184860,
+                "name": "Pommez Internacional",
+                "islocal": false
+                },
+                "release": {
+                "releaseid": 286201,
+                "name": "Canto Serpiente",
+                "largeimageuri": null,
+                "smallimageuri": null
+                },
+                "releaseevent": null,
+                "track": {
+                "trackid": 1139362,
+                "name": "Río Jordán"
+                },
+                "label": null,
+                "comments": [{
+                             "commentid": 948469,
+                             "text": "Buenos Aires, Argentina. www.facebook.com/pommezinternacional"
+                             }]
+                }, {
+                "playid": 2307503,
+                "playtype": {
+                "playtypeid": 1,
+                "name": "Media play"
+                },
+                "airdate": "2017-01-31T03:51:20Z",
+                "artist": {
+                "artistid": 188529,
+                "name": "Kou Keri Kou",
+                "islocal": false
+                },
+                "release": {
+                "releaseid": 291999,
+                "name": "Kou Keri Kou",
+                "largeimageuri": null,
+                "smallimageuri": null
+                },
+                "releaseevent": null,
+                "track": {
+                "trackid": 1139361,
+                "name": "Canto Negro"
+                },
+                "label": null,
+                "comments": [{
+                             "commentid": 948468,
+                             "text": "Spain. www.facebook.com/koukerikouu album coming in 2017"
+                             }]
+                }, {
+                "playid": 2307502,
+                "playtype": {
+                "playtypeid": 1,
+                "name": "Media play"
+                },
+                "airdate": "2017-01-31T03:48:36Z",
+                "artist": {
+                "artistid": 142342,
+                "name": "Buscabulla",
+                "islocal": false
+                },
+                "release": {
+                "releaseid": 292314,
+                "name": "Buscabulla EP II",
+                "largeimageuri": null,
+                "smallimageuri": null
+                },
+                "releaseevent": null,
+                "track": {
+                "trackid": 1137198,
+                "name": "Frío (feat. Helado Negro)"
+                },
+                "label": null,
+                "comments": [{
+                             "commentid": 948467,
+                             "text": "NYC. www.facebook.com/buscabullabuscabulla - brand new track!!"
+                             }]
+                }]
+}
