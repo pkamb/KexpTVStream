@@ -12,8 +12,7 @@ import SwiftyJSON
 class KexpTestUtilities {
     
     class func getJSONFromTestFile(_ testFileName: String)  -> JSON? {
-        let filePath = Bundle.main.path(forResource:testFileName, ofType: "json")
-        
+        let filePath = Bundle.main.path(forResource: testFileName, ofType: "json")
         if let fPath = filePath {
             if let pathUrl = URL(string: "file://\(fPath)") {
                 let content = try! Data(contentsOf: pathUrl)
