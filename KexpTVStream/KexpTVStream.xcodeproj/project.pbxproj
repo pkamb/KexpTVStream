@@ -19,18 +19,23 @@
 		46CDFB4B1C30D8AC0001A004 /* CurrentDj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB4A1C30D8AC0001A004 /* CurrentDj.swift */; };
 		962A140DF48B6B2932FE9465 /* Pods_KexpTVStreamTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0CAA22E221BBEB7D01447E /* Pods_KexpTVStreamTests.framework */; };
 		ACB85C390EF5C43F0B11AF88 /* Pods_KexpTVStream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6623FCBF1F274641DABA19F /* Pods_KexpTVStream.framework */; };
-		C90881811C4C743B004C2F76 /* KexpNowPlayingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90881801C4C743B004C2F76 /* KexpNowPlayingTest.swift */; };
-		C90881881C4C77BA004C2F76 /* KexpCurrentDJTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90881871C4C77BA004C2F76 /* KexpCurrentDJTest.swift */; };
+		C90881811C4C743B004C2F76 /* KexpPlayResponseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90881801C4C743B004C2F76 /* KexpPlayResponseTest.swift */; };
+		C90881881C4C77BA004C2F76 /* KexpShowResponseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90881871C4C77BA004C2F76 /* KexpShowResponseTest.swift */; };
 		C91709301C3E073000E010A6 /* InternetReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = C917092F1C3E073000E010A6 /* InternetReachability.swift */; };
-		C98EC40A1E419BAB006FBF56 /* KexpCurrentlyPlayingResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C98EC4091E419BAB006FBF56 /* KexpCurrentlyPlayingResponse.json */; };
-		C98EC40B1E419F8E006FBF56 /* KexpCurrentlyPlayingResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C98EC4091E419BAB006FBF56 /* KexpCurrentlyPlayingResponse.json */; };
+		C93FDFC11E441BED00263E8B /* ShowSampleResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C93FDFC01E441BED00263E8B /* ShowSampleResponse.json */; };
+		C93FDFC21E441BED00263E8B /* ShowSampleResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C93FDFC01E441BED00263E8B /* ShowSampleResponse.json */; };
+		C93FDFC71E44209A00263E8B /* Shows.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93FDFC61E44209A00263E8B /* Shows.swift */; };
+		C93FDFC81E44209A00263E8B /* Shows.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93FDFC61E44209A00263E8B /* Shows.swift */; };
+		C93FDFCA1E44215A00263E8B /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93FDFC91E44215A00263E8B /* Show.swift */; };
+		C93FDFCB1E44215A00263E8B /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93FDFC91E44215A00263E8B /* Show.swift */; };
+		C93FDFCD1E44241C00263E8B /* Host.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93FDFCC1E44241C00263E8B /* Host.swift */; };
+		C93FDFCE1E44241C00263E8B /* Host.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93FDFCC1E44241C00263E8B /* Host.swift */; };
+		C98EC40A1E419BAB006FBF56 /* PlaySampleResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C98EC4091E419BAB006FBF56 /* PlaySampleResponse.json */; };
+		C98EC40B1E419F8E006FBF56 /* PlaySampleResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C98EC4091E419BAB006FBF56 /* PlaySampleResponse.json */; };
 		C9B1645E1C4C4AA300AFC7F6 /* KexpConfigResponseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B1645D1C4C4AA300AFC7F6 /* KexpConfigResponseTest.swift */; };
 		C9B164601C4C4C0700AFC7F6 /* KexpTestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B1645F1C4C4C0700AFC7F6 /* KexpTestUtilities.swift */; };
 		C9B164621C4C522D00AFC7F6 /* KexpConfigSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B164611C4C522D00AFC7F6 /* KexpConfigSettings.swift */; };
-		C9B2B2A61E4052CA008F13D8 /* KexpConfigResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C9B2B2A31E4052CA008F13D8 /* KexpConfigResponse.json */; };
-		C9B2B2A71E4052CA008F13D8 /* KexpCurrentDJResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C9B2B2A41E4052CA008F13D8 /* KexpCurrentDJResponse.json */; };
-		C9B2B2A81E4052CA008F13D8 /* KexpNowPlayingResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C9B2B2A51E4052CA008F13D8 /* KexpNowPlayingResponse.json */; };
-		C9B2B2AC1E405365008F13D8 /* CurrentlyPlaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B2B2AB1E405365008F13D8 /* CurrentlyPlaying.swift */; };
+		C9B2B2AC1E405365008F13D8 /* Play.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B2B2AB1E405365008F13D8 /* Play.swift */; };
 		C9B2B2AE1E4054FD008F13D8 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B2B2AD1E4054FD008F13D8 /* Song.swift */; };
 		C9B2B2B01E4057AE008F13D8 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B2B2AF1E4057AE008F13D8 /* Comment.swift */; };
 		C9EDD0B21C8E195600562A9C /* KexpPlaylistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EDD0B11C8E195600562A9C /* KexpPlaylistCell.swift */; };
@@ -68,20 +73,21 @@
 		4C57EEF456081D1CB64BCCF9 /* Pods-KexpTVStream.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KexpTVStream.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KexpTVStream/Pods-KexpTVStream.debug.xcconfig"; sourceTree = "<group>"; };
 		78E3AB477D2FF07E1439780E /* Pods-KexpTVStreamTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KexpTVStreamTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KexpTVStreamTests/Pods-KexpTVStreamTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A6623FCBF1F274641DABA19F /* Pods_KexpTVStream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KexpTVStream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C90881801C4C743B004C2F76 /* KexpNowPlayingTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpNowPlayingTest.swift; sourceTree = "<group>"; };
-		C90881871C4C77BA004C2F76 /* KexpCurrentDJTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpCurrentDJTest.swift; sourceTree = "<group>"; };
+		C90881801C4C743B004C2F76 /* KexpPlayResponseTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpPlayResponseTest.swift; sourceTree = "<group>"; };
+		C90881871C4C77BA004C2F76 /* KexpShowResponseTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpShowResponseTest.swift; sourceTree = "<group>"; };
 		C917092F1C3E073000E010A6 /* InternetReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternetReachability.swift; sourceTree = "<group>"; };
 		C92F93AF1C8BEB7200FD469E /* KexpTVStream-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KexpTVStream-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
-		C98EC4091E419BAB006FBF56 /* KexpCurrentlyPlayingResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = KexpCurrentlyPlayingResponse.json; path = KexpTVStream/KexpCurrentlyPlayingResponse.json; sourceTree = SOURCE_ROOT; };
+		C93FDFC01E441BED00263E8B /* ShowSampleResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = ShowSampleResponse.json; path = KexpTVStream/ShowSampleResponse.json; sourceTree = SOURCE_ROOT; };
+		C93FDFC61E44209A00263E8B /* Shows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shows.swift; sourceTree = "<group>"; };
+		C93FDFC91E44215A00263E8B /* Show.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
+		C93FDFCC1E44241C00263E8B /* Host.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Host.swift; sourceTree = "<group>"; };
+		C98EC4091E419BAB006FBF56 /* PlaySampleResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = PlaySampleResponse.json; path = KexpTVStream/PlaySampleResponse.json; sourceTree = SOURCE_ROOT; };
 		C99515E21DFC8E5400794780 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/KexpTVStream-eexlbuvhsdmjawgkglvdwjemjoey/Build/Products/Debug-appletvsimulator/SwiftyJSON/SwiftyJSON.framework"; sourceTree = "<group>"; };
 		C9B1645C1C4C4AA200AFC7F6 /* KexpTVStreamTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "KexpTVStreamTests-Bridging-Header.h"; path = "KexpTVStreamTests/KexpTVStreamTests-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		C9B1645D1C4C4AA300AFC7F6 /* KexpConfigResponseTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpConfigResponseTest.swift; sourceTree = "<group>"; };
 		C9B1645F1C4C4C0700AFC7F6 /* KexpTestUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpTestUtilities.swift; sourceTree = "<group>"; };
 		C9B164611C4C522D00AFC7F6 /* KexpConfigSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpConfigSettings.swift; sourceTree = "<group>"; };
-		C9B2B2A31E4052CA008F13D8 /* KexpConfigResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = KexpConfigResponse.json; path = Archive/KexpConfigResponse.json; sourceTree = "<group>"; };
-		C9B2B2A41E4052CA008F13D8 /* KexpCurrentDJResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = KexpCurrentDJResponse.json; path = Archive/KexpCurrentDJResponse.json; sourceTree = "<group>"; };
-		C9B2B2A51E4052CA008F13D8 /* KexpNowPlayingResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = KexpNowPlayingResponse.json; path = Archive/KexpNowPlayingResponse.json; sourceTree = "<group>"; };
-		C9B2B2AB1E405365008F13D8 /* CurrentlyPlaying.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentlyPlaying.swift; sourceTree = "<group>"; };
+		C9B2B2AB1E405365008F13D8 /* Play.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Play.swift; sourceTree = "<group>"; };
 		C9B2B2AD1E4054FD008F13D8 /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		C9B2B2AF1E4057AE008F13D8 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		C9EDD0B11C8E195600562A9C /* KexpPlaylistCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpPlaylistCell.swift; sourceTree = "<group>"; };
@@ -151,8 +157,8 @@
 			isa = PBXGroup;
 			children = (
 				C9B1645D1C4C4AA300AFC7F6 /* KexpConfigResponseTest.swift */,
-				C90881801C4C743B004C2F76 /* KexpNowPlayingTest.swift */,
-				C90881871C4C77BA004C2F76 /* KexpCurrentDJTest.swift */,
+				C90881801C4C743B004C2F76 /* KexpPlayResponseTest.swift */,
+				C90881871C4C77BA004C2F76 /* KexpShowResponseTest.swift */,
 				C9B1645F1C4C4C0700AFC7F6 /* KexpTestUtilities.swift */,
 				C9063B841C4BDDD300B1B1C6 /* Test Responses */,
 				46CDFB361C30A7180001A004 /* Info.plist */,
@@ -187,8 +193,8 @@
 		C9063B841C4BDDD300B1B1C6 /* Test Responses */ = {
 			isa = PBXGroup;
 			children = (
-				C98EC4091E419BAB006FBF56 /* KexpCurrentlyPlayingResponse.json */,
-				C9B2B29E1E404E45008F13D8 /* Archive */,
+				C93FDFC01E441BED00263E8B /* ShowSampleResponse.json */,
+				C98EC4091E419BAB006FBF56 /* PlaySampleResponse.json */,
 			);
 			name = "Test Responses";
 			sourceTree = "<group>";
@@ -196,10 +202,12 @@
 		C917092B1C3E047300E010A6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				46CDFB4A1C30D8AC0001A004 /* CurrentDj.swift */,
-				46CDFB441C30A8AD0001A004 /* NowPlaying.swift */,
+				C93FDFBC1E441AFC00263E8B /* Legacy */,
 				C9B164611C4C522D00AFC7F6 /* KexpConfigSettings.swift */,
-				C9B2B2AB1E405365008F13D8 /* CurrentlyPlaying.swift */,
+				C93FDFC61E44209A00263E8B /* Shows.swift */,
+				C93FDFC91E44215A00263E8B /* Show.swift */,
+				C93FDFCC1E44241C00263E8B /* Host.swift */,
+				C9B2B2AB1E405365008F13D8 /* Play.swift */,
 				C9B2B2AD1E4054FD008F13D8 /* Song.swift */,
 				C9B2B2AF1E4057AE008F13D8 /* Comment.swift */,
 			);
@@ -231,14 +239,13 @@
 			name = Audio;
 			sourceTree = "<group>";
 		};
-		C9B2B29E1E404E45008F13D8 /* Archive */ = {
+		C93FDFBC1E441AFC00263E8B /* Legacy */ = {
 			isa = PBXGroup;
 			children = (
-				C9B2B2A31E4052CA008F13D8 /* KexpConfigResponse.json */,
-				C9B2B2A41E4052CA008F13D8 /* KexpCurrentDJResponse.json */,
-				C9B2B2A51E4052CA008F13D8 /* KexpNowPlayingResponse.json */,
+				46CDFB4A1C30D8AC0001A004 /* CurrentDj.swift */,
+				46CDFB441C30A8AD0001A004 /* NowPlaying.swift */,
 			);
-			name = Archive;
+			name = Legacy;
 			sourceTree = "<group>";
 		};
 		C9EDD0B01C8E18B600562A9C /* Playlist */ = {
@@ -373,7 +380,8 @@
 			files = (
 				46CDFB2A1C30A7180001A004 /* Assets.xcassets in Resources */,
 				46CDFB281C30A7170001A004 /* Main.storyboard in Resources */,
-				C98EC40B1E419F8E006FBF56 /* KexpCurrentlyPlayingResponse.json in Resources */,
+				C98EC40B1E419F8E006FBF56 /* PlaySampleResponse.json in Resources */,
+				C93FDFC11E441BED00263E8B /* ShowSampleResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,10 +389,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C98EC40A1E419BAB006FBF56 /* KexpCurrentlyPlayingResponse.json in Resources */,
-				C9B2B2A71E4052CA008F13D8 /* KexpCurrentDJResponse.json in Resources */,
-				C9B2B2A61E4052CA008F13D8 /* KexpConfigResponse.json in Resources */,
-				C9B2B2A81E4052CA008F13D8 /* KexpNowPlayingResponse.json in Resources */,
+				C98EC40A1E419BAB006FBF56 /* PlaySampleResponse.json in Resources */,
+				C93FDFC21E441BED00263E8B /* ShowSampleResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,16 +511,19 @@
 				C9B2B2AE1E4054FD008F13D8 /* Song.swift in Sources */,
 				C9B164621C4C522D00AFC7F6 /* KexpConfigSettings.swift in Sources */,
 				46CDFB461C30A8AD0001A004 /* KexpController.swift in Sources */,
+				C93FDFC71E44209A00263E8B /* Shows.swift in Sources */,
 				46CDFB201C30A7170001A004 /* AppDelegate.swift in Sources */,
 				46CDFB401C30A7630001A004 /* KexpNowPlayingVC.swift in Sources */,
+				C93FDFCA1E44215A00263E8B /* Show.swift in Sources */,
 				46CDFB4B1C30D8AC0001A004 /* CurrentDj.swift in Sources */,
 				46CDFB451C30A8AD0001A004 /* KexpAudioManager.swift in Sources */,
 				C9EDD0B21C8E195600562A9C /* KexpPlaylistCell.swift in Sources */,
 				46CDFB251C30A7170001A004 /* KexpTVStream.xcdatamodeld in Sources */,
 				46CDFB491C30B0F30001A004 /* KexpStyle.swift in Sources */,
 				C9B2B2B01E4057AE008F13D8 /* Comment.swift in Sources */,
+				C93FDFCD1E44241C00263E8B /* Host.swift in Sources */,
 				46CDFB471C30A8AD0001A004 /* NowPlaying.swift in Sources */,
-				C9B2B2AC1E405365008F13D8 /* CurrentlyPlaying.swift in Sources */,
+				C9B2B2AC1E405365008F13D8 /* Play.swift in Sources */,
 				C91709301C3E073000E010A6 /* InternetReachability.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -523,10 +532,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C90881881C4C77BA004C2F76 /* KexpCurrentDJTest.swift in Sources */,
+				C93FDFCB1E44215A00263E8B /* Show.swift in Sources */,
+				C90881881C4C77BA004C2F76 /* KexpShowResponseTest.swift in Sources */,
+				C93FDFCE1E44241C00263E8B /* Host.swift in Sources */,
 				C9B164601C4C4C0700AFC7F6 /* KexpTestUtilities.swift in Sources */,
 				C9B1645E1C4C4AA300AFC7F6 /* KexpConfigResponseTest.swift in Sources */,
-				C90881811C4C743B004C2F76 /* KexpNowPlayingTest.swift in Sources */,
+				C93FDFC81E44209A00263E8B /* Shows.swift in Sources */,
+				C90881811C4C743B004C2F76 /* KexpPlayResponseTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

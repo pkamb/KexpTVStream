@@ -28,30 +28,30 @@ public struct Song {
     let labelName: String?
     let comments: [Comment]?
 
-    public init(currentSong: JSON) {
-        playId = currentSong["playid"].intValue
-        playTypeId = currentSong["playtype"]["playtypeid"].intValue
-        playTypeName = currentSong["playtype"]["name"].stringValue
-        airdate = currentSong["airdate"].stringValue
-        artistId = currentSong["artist"]["artistid"].int
-        artistName = currentSong["artist"]["name"].string
-        isLocal = currentSong["artist"]["islocal"].bool
-        releaseId = currentSong["release"]["releaseid"].int
-        releaseName = currentSong["release"]["name"].string
-        largeImageUrl = currentSong["release"]["largeimageuri"].url
-        smallImageUrl = currentSong["release"]["smallimageuri"].url
-        trackId = currentSong["track"]["trackid"].int
-        trackName = currentSong["track"]["name"].string
-        releaseEventId = currentSong["releaseevent"]["releaseeventid"].int
-        releaseEventYear = currentSong["releaseevent"]["year"].int
-        labelId = currentSong["label"]["labelid"].int
-        labelName = currentSong["label"]["name"].string
+    public init(_ song: JSON) {
+        playId = song["playid"].intValue
+        playTypeId = song["playtype"]["playtypeid"].intValue
+        playTypeName = song["playtype"]["name"].stringValue
+        airdate = song["airdate"].stringValue
+        artistId = song["artist"]["artistid"].int
+        artistName = song["artist"]["name"].string
+        isLocal = song["artist"]["islocal"].bool
+        releaseId = song["release"]["releaseid"].int
+        releaseName = song["release"]["name"].string
+        largeImageUrl = song["release"]["largeimageuri"].url
+        smallImageUrl = song["release"]["smallimageuri"].url
+        trackId = song["track"]["trackid"].int
+        trackName = song["track"]["name"].string
+        releaseEventId = song["releaseevent"]["releaseeventid"].int
+        releaseEventYear = song["releaseevent"]["year"].int
+        labelId = song["label"]["labelid"].int
+        labelName = song["label"]["name"].string
 
-        if let songComments = currentSong["comments"].array {
+        if let songComments = song["comments"].array {
             var theComments = [Comment]()
             
             for comment in songComments {
-                theComments.append(Comment(comment: comment))
+                theComments.append(Comment(comment))
             }
             
             comments = theComments

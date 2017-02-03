@@ -12,7 +12,7 @@ public struct Comment {
     let commentid: Int?
     let commentText: String?
     
-    public init(comment: JSON) {
+    public init(_ comment: JSON) {
         commentid = comment["commentid"].int
         commentText = comment["text"].string
     }

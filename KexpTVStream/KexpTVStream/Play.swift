@@ -8,23 +8,22 @@
 
 import SwiftyJSON
 
-public struct CurrentlyPlaying {
+public struct Play {
     let count: Int
     let next: URL?
     let previous: URL?
     let songs: [Song]?
     
-    public init(currentlyPlaying: JSON) {
-        count = currentlyPlaying["count"].intValue
-        next = currentlyPlaying["next"].url
-        previous = currentlyPlaying["previous"].url
+    public init(_ play: JSON) {
+        count = play["count"].intValue
+        next = play["next"].url
+        previous = play["previous"].url
         
-        
-        if let resultSongs = currentlyPlaying["results"].array {
+        if let resultSongs = play["results"].array {
             var theSongs = [Song]()
             
             for song in resultSongs {
-                 theSongs.append(Song(currentSong: song))
+                 theSongs.append(Song(song))
             }
             
             songs = theSongs
