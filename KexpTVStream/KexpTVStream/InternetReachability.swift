@@ -32,5 +32,3 @@ open class InternetReachability {
         return (isReachable && !needsConnection)
     }
 }
-
-
