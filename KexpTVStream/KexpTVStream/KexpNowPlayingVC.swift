@@ -80,7 +80,7 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
     
     func kexpAudioPlayerDidStopPlaying(_ hardStop: Bool) {
         UIApplication.shared.isIdleTimerDisabled = false
-        setPlayMode(hardStop)
+        setPlayMode(hardStop: hardStop)
     }
     
     func kexpAudioPlayerFailedToPlay() {
@@ -149,20 +149,26 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
             showAlert("Unable to connect to the Internet")
         }
         else {
-            setPlayMode(false)
+            setPlayMode(hardStop: false)
             playPauseButton.isSelected = KexpAudioManager.sharedInstance.isPlaying()
         }
     }
     
     fileprivate func showAlert(_ alertMessage: String) {
         let alert = UIAlertController(title: "Whoops!", message: alertMessage, preferredStyle: .alert)
-        let alertAction = UIAlertAction(title: "OK", style: .default, handler:nil)
+
+        let alertAction = UIAlertAction.init(title: "OK", style: .default) { [weak self] action in
+            guard let strongSelf = self else { return }
+            
+            strongSelf.setPlayMode(hardStop: true)
+            strongSelf.playPauseButton.isSelected = false
+        }
         
         alert.addAction(alertAction)
         present(alert, animated: true, completion: nil)
     }
     
-    fileprivate func setPlayMode(_ hardStop: Bool) {
+    fileprivate func setPlayMode(hardStop: Bool) {
         if (!KexpAudioManager.sharedInstance.isPlaying() && !hardStop) {
             playPauseButton.setImage(UIImage(named: "pauseButton"), for: UIControlState())
             KexpAudioManager.sharedInstance.play()
