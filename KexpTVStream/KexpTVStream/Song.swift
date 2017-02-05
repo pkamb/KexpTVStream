@@ -12,7 +12,7 @@ public struct Song {
     let playId: Int
     let playTypeId: Int
     let playTypeName: String
-    let airdate: String
+    let airdate: Date
     let artistId: Int?
     let artistName: String?
     let isLocal: Bool?
@@ -32,7 +32,7 @@ public struct Song {
         playId = song["playid"].intValue
         playTypeId = song["playtype"]["playtypeid"].intValue
         playTypeName = song["playtype"]["name"].stringValue
-        airdate = song["airdate"].stringValue
+        airdate = song["airdate"].date ?? Date()
         artistId = song["artist"]["artistid"].int
         artistName = song["artist"]["name"].string
         isLocal = song["artist"]["islocal"].bool

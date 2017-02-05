@@ -13,7 +13,7 @@ public struct Show {
     let programId: Int?
     let showName: String?
     let showDescription: String?
-    let airdate: String
+    let airdate: Date
     let tagline: String?
     let hosts: [Host]?
     
@@ -22,7 +22,7 @@ public struct Show {
         programId = theShow["program"]["programid"].int
         showName = theShow["program"]["name"].string
         showDescription = theShow["program"]["description"].string
-        airdate = theShow["airdate"].stringValue
+        airdate = theShow["airdate"].date ?? Date()
         tagline = theShow["tagline"].string
         
         if let hostsResponse = theShow["hosts"].array {

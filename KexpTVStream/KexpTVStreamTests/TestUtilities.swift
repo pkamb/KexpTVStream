@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class KexpTestUtilities {
+class TestUtilities {
     
     class func getJSONFromTestFile(_ testFileName: String)  -> JSON? {
         let filePath = Bundle.main.path(forResource: testFileName, ofType: "json")

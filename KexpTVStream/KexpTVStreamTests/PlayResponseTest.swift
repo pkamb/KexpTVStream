@@ -9,7 +9,7 @@
 import XCTest
 @testable import KexpTVStream
 
-class KexpNowPlayingTest: XCTestCase {
+class PlayResponseTest: XCTestCase {
     lazy var playResponse: Play = self.getPlaySampleResponse()!
     
     override func setUp() {
@@ -35,7 +35,7 @@ class KexpNowPlayingTest: XCTestCase {
         XCTAssertTrue(song?.playId == 2308325)
         XCTAssertTrue(song?.playTypeId == 1)
         XCTAssertTrue(song?.playTypeName == "Media play")
-        XCTAssertTrue(song?.airdate == "2017-02-02T04:26:56Z")
+        XCTAssertTrue(song?.airdate != nil)
         XCTAssertTrue(song?.artistId == 8206)
         XCTAssertTrue(song?.artistName == "Jackie DeShannon")
         XCTAssertTrue(song?.isLocal == false)
@@ -73,7 +73,7 @@ class KexpNowPlayingTest: XCTestCase {
     }
     
     func getPlaySampleResponse() -> Play? {
-        let JSONData = KexpTestUtilities.getJSONFromTestFile("PlaySampleResponse")
+        let JSONData = TestUtilities.getJSONFromTestFile("PlaySampleResponse")
         
         if let JSONData = JSONData {
             let currentlyPlayingResponse = Play(JSONData)

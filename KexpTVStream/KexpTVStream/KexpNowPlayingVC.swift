@@ -28,14 +28,14 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
     @IBOutlet var albumArtworkView: UIImageView!
     @IBOutlet var tableView: UITableView!
     
-    var playlistArray = NSMutableArray()
+    var playlistArray = [Song]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         addStyleToView()
 
-        KexpController.getKEXPConfig { [weak self] (kexpConfig) -> Void in
+        KexpController.getConfig { [weak self] (kexpConfig) -> Void in
             guard let strongSelf = self else { return }
 
             KexpAudioManager.sharedInstance.kexpConfig = kexpConfig
@@ -62,9 +62,8 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
         Timer.scheduledTimer(timeInterval: currentDJTimeInterval, target: self, selector: #selector(KexpNowPlayingVC.getCurrentDjInfo), userInfo: nil, repeats: true)
     }
 
-    func updateAlbumArtWork(_ albumArtUrl: String?) {
-        guard let albumUrlString = albumArtUrl else { albumArtworkView.image = UIImage(named: "vinylPlaceHolder"); return }
-        guard let albumArtUrl = URL(string: albumUrlString) else { albumArtworkView.image = UIImage(named: "vinylPlaceHolder"); return }
+    func updateAlbumArtWork(_ albumArtUrl: URL?) {
+        guard let albumArtUrl = albumArtUrl else { albumArtworkView.image = UIImage(named: "vinylPlaceHolder"); return }
         
         albumArtworkView.af_setImage(
             withURL: albumArtUrl,
@@ -90,11 +89,11 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
     
     // MARK: - Networking methods
     func getNowPlayingInfo() {
-        KexpController.getNowPlayingInfo({ [weak self] nowPlaying -> Void in
+        KexpController.getSong({ [weak self] song -> Void in
             guard let strongSelf = self else { return }
-            guard let nowPlaying = nowPlaying else { return }
+            guard let song = song else { return }
 
-            if nowPlaying.airBreak {
+            if song.playTypeId == 4 {
                 strongSelf.artistLabel.isHidden = true
                 strongSelf.trackLabel.text = "Air Break..."
                 strongSelf.albumLabel.isHidden = true
@@ -112,20 +111,20 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
                 strongSelf.trackNameLabel.isHidden = false
                 strongSelf.albumNameLabel.isHidden = false
                 
-                strongSelf.artistNameLabel.text = nowPlaying.artist
-                strongSelf.trackNameLabel.text = nowPlaying.songTitle
-                strongSelf.albumNameLabel.text = nowPlaying.album
+                strongSelf.artistNameLabel.text = song.artistName
+                strongSelf.trackNameLabel.text = song.trackName
+                strongSelf.albumNameLabel.text = song.releaseName
                 
-                strongSelf.updateAlbumArtWork(nowPlaying.albumArtWork)
+                strongSelf.updateAlbumArtWork(song.largeImageUrl)
                 
                 if (strongSelf.playlistArray.count == 0) {
-                    strongSelf.playlistArray.add(nowPlaying)
+                    strongSelf.playlistArray.append(song)
 
                     strongSelf.tableView.reloadData()
                 }
-                else if let lastItemAdded = strongSelf.playlistArray.firstObject as? NowPlaying {
-                    if nowPlaying.playId != lastItemAdded.playId {
-                        strongSelf.playlistArray.insert(nowPlaying, at: 0)
+                else if let lastItemAdded = strongSelf.playlistArray.first {
+                    if song.playId != lastItemAdded.playId, song.playTypeId != 4 {
+                        strongSelf.playlistArray.insert(song, at: 0)
                         strongSelf.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
                     }
                 }
@@ -134,11 +133,11 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
     }
     
     func getCurrentDjInfo() {
-        KexpController.getDjInfo { [weak self] currentDjInfo -> Void in
+        KexpController.getShow { [weak self] show -> Void in
             guard let strongSelf = self else { return }
-            guard let currentDjInfo = currentDjInfo else { return }
-            guard let showTitle = currentDjInfo.showTitle else { strongSelf.djInfoLabel.text = "ON NOW: Unknown"; return }
-            guard let djName = currentDjInfo.djName else { strongSelf.djInfoLabel.text = "ON NOW: \(showTitle)"; return }
+            guard let show = show else { return }
+            guard let showTitle = show.showName else { strongSelf.djInfoLabel.text = "ON NOW: Unknown"; return }
+            guard let djName = show.hosts?.first?.hostName else { strongSelf.djInfoLabel.text = "ON NOW: \(showTitle)"; return }
     
             strongSelf.djInfoLabel.text = "ON NOW: " + showTitle + " with " + djName
         }
@@ -206,10 +205,9 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NowPLayingCell", for: indexPath) as! KexpPlaylistCell
         
-        if let songNowPlaying = playlistArray[(indexPath as NSIndexPath).row] as? NowPlaying {
-            cell.configureNowPlayingCell(songNowPlaying)
-        }
-
+        let song = playlistArray[indexPath.row]
+        cell.configureNowPlayingCell(song)
+        
         return cell
     }
     

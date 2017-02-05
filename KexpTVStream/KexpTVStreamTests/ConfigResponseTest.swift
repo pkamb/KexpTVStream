@@ -10,7 +10,7 @@ import XCTest
 import SwiftyJSON
 @testable import KexpTVStream
 
-class KexpConfigResponseTest: XCTestCase {
+class ConfigResponseTest: XCTestCase {
 
     lazy var configSettings: KexpConfigSettings = self.getKexpSettings()
 
@@ -37,7 +37,7 @@ class KexpConfigResponseTest: XCTestCase {
     }
     
     func getKexpSettings() -> KexpConfigSettings {
-        let JSONData = KexpTestUtilities.getJSONFromTestFile("KexpConfigResponse")
+        let JSONData = TestUtilities.getJSONFromTestFile("ConfigureSampleResponse")
         
         if let JSONData = JSONData {
             let kexpConfigResponse =  KexpConfigSettings(configSettingJSON: JSONData)

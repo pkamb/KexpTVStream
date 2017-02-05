@@ -26,7 +26,6 @@ class KexpPlaylistCell: UITableViewCell {
         let artistLabel = UILabel()
         artistLabel.translatesAutoresizingMaskIntoConstraints = false
         artistLabel.font = UIFont.boldSystemFont(ofSize: FontSizes.xsmall)
-        artistLabel.numberOfLines = 1
         return artistLabel
     }()
     
@@ -34,7 +33,6 @@ class KexpPlaylistCell: UITableViewCell {
         let trackLabel = UILabel()
         trackLabel.translatesAutoresizingMaskIntoConstraints = false
         trackLabel.font = UIFont.italicSystemFont(ofSize: FontSizes.xsmall)
-        trackLabel.numberOfLines = 1
         return trackLabel
     }()
     
@@ -42,7 +40,6 @@ class KexpPlaylistCell: UITableViewCell {
         let albumLabel = UILabel()
         albumLabel.translatesAutoresizingMaskIntoConstraints = false
         albumLabel.font = UIFont.systemFont(ofSize: FontSizes.xsmall)
-        albumLabel.numberOfLines = 1
         albumLabel.textColor = UIColor.gray
         return albumLabel
     }()
@@ -51,7 +48,6 @@ class KexpPlaylistCell: UITableViewCell {
         let timePlayedLabel = UILabel()
         timePlayedLabel.translatesAutoresizingMaskIntoConstraints = false
         timePlayedLabel.font = UIFont.systemFont(ofSize: FontSizes.xxsmall)
-        timePlayedLabel.numberOfLines = 1
         return timePlayedLabel
     }()
     
@@ -118,17 +114,18 @@ class KexpPlaylistCell: UITableViewCell {
         assertionFailure("Not implemented!")
     }
     
-    func configureNowPlayingCell(_ song: NowPlaying) {
-        artistLabel.text = song.artist
-        trackLabel.text = song.songTitle
-        albumLabel.text = song.album
-        timePlayedLabel.text = dateFormatter.string(from: song.timePlayed as Date)
+    func configureNowPlayingCell(_ song: Song) {
+        artistLabel.text = song.artistName
+        trackLabel.text = song.trackName
+        albumLabel.text = song.labelName
+
+        let playTimeStampStr = dateFormatter.string(from: song.airdate)
+        timePlayedLabel.text = playTimeStampStr
+
         albumArtImageView.image = UIImage(named: "vinylPlaceHolder")
-    
-        if let albumURLString = song.albumArtWork as String? {
-            if let albumURL = URL(string: albumURLString) {
-                albumArtImageView.af_setImage(withURL: albumURL, placeholderImage: nil, filter: nil)
-            }
+
+        if let albumURL = song.largeImageUrl {
+            albumArtImageView.af_setImage(withURL: albumURL, placeholderImage: nil, filter: nil)
         }
     }
 }

@@ -9,7 +9,7 @@
 import XCTest
 @testable import KexpTVStream
 
-class KexpShowResponseTest: XCTestCase {
+class ShowResponseTest: XCTestCase {
 
     lazy var shows: Shows = self.getShowSampleResponse()!
     
@@ -40,7 +40,7 @@ class KexpShowResponseTest: XCTestCase {
         XCTAssertTrue(aShow?.programId == 4)
         XCTAssertTrue(aShow?.showName == "Roadhouse")
         XCTAssertTrue((aShow?.showDescription?.characters.count)! > 10)
-        XCTAssertTrue(aShow?.airdate == "2017-02-02T02:00:00Z")
+        XCTAssertTrue(aShow?.airdate != nil)
         XCTAssertTrue(aShow?.tagline == "")
     }
     
@@ -58,7 +58,7 @@ class KexpShowResponseTest: XCTestCase {
     }
 
     func getShowSampleResponse() -> Shows? {
-        let JSONData = KexpTestUtilities.getJSONFromTestFile("ShowSampleResponse")
+        let JSONData = TestUtilities.getJSONFromTestFile("ShowSampleResponse")
         
         if let JSONData = JSONData {
             let showsResponse =  Shows(JSONData)
