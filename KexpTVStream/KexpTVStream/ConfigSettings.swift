@@ -12,13 +12,13 @@ import SwiftyJSON
 private let kexpStreamUrl = "http://live-aacplus-64.kexp.org/kexp64.aac"
 private let kexpBackupStreamUrl = "http://live-mp3-128.kexp.org:8000/listen.pls"
 
-class KexpConfigSettings {
+class ConfigSettings {
     let streamUrl: String?
     let backupStreamUrl: String?
     let nowPlayingLogo: String?
     let updated: Int?
     
-    init(configSettingJSON: JSON?) {
+    init(_ configSettingJSON: JSON?) {
         if let configSettingJSON = configSettingJSON {
             streamUrl = configSettingJSON["kexpStreamUrl"].string
             backupStreamUrl = configSettingJSON["kexpBackupStreamUrl"].string

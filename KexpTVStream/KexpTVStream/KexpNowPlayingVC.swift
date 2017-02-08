@@ -78,9 +78,9 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
         getNowPlayingInfo()
     }
     
-    func kexpAudioPlayerDidStopPlaying(_ hardStop: Bool) {
+    func kexpAudioPlayerDidStopPlaying(_ hardStop: Bool, backUpStream: Bool) {
         UIApplication.shared.isIdleTimerDisabled = false
-        setPlayMode(hardStop: hardStop)
+        setPlayMode(hardStop: hardStop, isBackUpStream: backUpStream)
     }
     
     func kexpAudioPlayerFailedToPlay() {
@@ -168,8 +168,8 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
         present(alert, animated: true, completion: nil)
     }
     
-    fileprivate func setPlayMode(hardStop: Bool) {
-        if (!KexpAudioManager.sharedInstance.isPlaying() && !hardStop) {
+    fileprivate func setPlayMode(hardStop: Bool, isBackUpStream:Bool = false) {
+        if (!KexpAudioManager.sharedInstance.isPlaying() && !hardStop && !isBackUpStream) {
             playPauseButton.setImage(UIImage(named: "pauseButton"), for: UIControlState())
             KexpAudioManager.sharedInstance.play()
         }

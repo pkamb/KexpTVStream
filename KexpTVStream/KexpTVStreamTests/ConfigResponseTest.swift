@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class ConfigResponseTest: XCTestCase {
 
-    lazy var configSettings: KexpConfigSettings = self.getKexpSettings()
+    lazy var configSettings: ConfigSettings = self.getKexpSettings()
 
     func testConfigResponse() {
         XCTAssertNotNil(configSettings)
@@ -36,15 +36,15 @@ class ConfigResponseTest: XCTestCase {
         
     }
     
-    func getKexpSettings() -> KexpConfigSettings {
+    func getKexpSettings() -> ConfigSettings {
         let JSONData = TestUtilities.getJSONFromTestFile("ConfigureSampleResponse")
         
         if let JSONData = JSONData {
-            let kexpConfigResponse =  KexpConfigSettings(configSettingJSON: JSONData)
+            let configResponse = ConfigSettings(JSONData)
             
-            return kexpConfigResponse
+            return configResponse
         }
         
-       return KexpConfigSettings(configSettingJSON: nil)  
+       return ConfigSettings(nil)
     }
 }

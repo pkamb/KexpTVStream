@@ -12,7 +12,7 @@ import SwiftyJSON
 
 typealias SongChangeBlock = (_ song: Song?) -> Void
 typealias ShowChangeBlock = (_ show: Show?) -> Void
-typealias ConfigurationSettingsBlock = (_ kexpConfig: KexpConfigSettings) -> Void
+typealias ConfigurationSettingsBlock = (_ kexpConfig: ConfigSettings) -> Void
 
 private let songEndpoint = "http://legacy-api.kexp.org/play/?limit=1"
 private let showEndpoint = "http://legacy-api.kexp.org/show/?limit=1"
@@ -45,13 +45,13 @@ class KexpController {
     class func getConfig(_ configurationSetup: ConfigurationSettingsBlock) {
         guard let url = URL(string: configEndpoint) else { return }
         guard let kexpConfigData = try? Data(contentsOf: url) else {
-            let configSetting = KexpConfigSettings(configSettingJSON: nil)
+            let configSetting = ConfigSettings(nil)
             configurationSetup(configSetting)
             return
         }
 
         let configJSON = JSON(data: kexpConfigData)
-        let configSetting = KexpConfigSettings(configSettingJSON: configJSON)
+        let configSetting = ConfigSettings(configJSON)
         configurationSetup(configSetting)
     }
 }
