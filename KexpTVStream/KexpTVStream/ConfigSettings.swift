@@ -9,8 +9,8 @@
 import UIKit
 import SwiftyJSON
 
-private let kexpStreamUrl = "http://live-aacplus-64.kexp.org/kexp64.aac"
-private let kexpBackupStreamUrl = "http://live-mp3-128.kexp.org:8000/listen.pls"
+private let kexpStreamUrl = "https://kexp-mp3-128.streamguys1.com/kexp128.mp3"
+private let kexpBackupStreamUrl = "https://live-aacplus-64.streamguys1.com/kexp64.aac"
 
 class ConfigSettings {
     let streamUrl: String?
