@@ -59,6 +59,5 @@ public struct Song {
         else {
             comments = nil
         }
-
     }
 }
