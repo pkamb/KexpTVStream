@@ -74,12 +74,10 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
     
     // MARK: - KexpAudioManagerDelegate Methods
     func kexpAudioPlayerDidStartPlaying() {
-        UIApplication.shared.isIdleTimerDisabled = true
         getNowPlayingInfo()
     }
     
     func kexpAudioPlayerDidStopPlaying(_ hardStop: Bool, backUpStream: Bool) {
-        UIApplication.shared.isIdleTimerDisabled = false
         setPlayMode(hardStop: hardStop, isBackUpStream: backUpStream)
     }
     
