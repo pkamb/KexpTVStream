@@ -34,6 +34,7 @@
 		C93FDFD51E46B50D00263E8B /* ConfigureSampleResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C93FDFD31E46B50D00263E8B /* ConfigureSampleResponse.json */; };
 		C98EC40A1E419BAB006FBF56 /* PlaySampleResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C98EC4091E419BAB006FBF56 /* PlaySampleResponse.json */; };
 		C98EC40B1E419F8E006FBF56 /* PlaySampleResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C98EC4091E419BAB006FBF56 /* PlaySampleResponse.json */; };
+		C9B01C971F5F93EC00183199 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B01C961F5F93EC00183199 /* AVKit.framework */; };
 		C9B1645E1C4C4AA300AFC7F6 /* ConfigResponseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B1645D1C4C4AA300AFC7F6 /* ConfigResponseTest.swift */; };
 		C9B164601C4C4C0700AFC7F6 /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B1645F1C4C4C0700AFC7F6 /* TestUtilities.swift */; };
 		C9B164621C4C522D00AFC7F6 /* ConfigSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B164611C4C522D00AFC7F6 /* ConfigSettings.swift */; };
@@ -41,7 +42,6 @@
 		C9B2B2AE1E4054FD008F13D8 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B2B2AD1E4054FD008F13D8 /* Song.swift */; };
 		C9B2B2B01E4057AE008F13D8 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B2B2AF1E4057AE008F13D8 /* Comment.swift */; };
 		C9EDD0B21C8E195600562A9C /* KexpPlaylistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EDD0B11C8E195600562A9C /* KexpPlaylistCell.swift */; };
-		C9FACB391C869C6C004E2AA7 /* libFlurrytvOS_1.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9FACB381C869C6C004E2AA7 /* libFlurrytvOS_1.0.0.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +85,7 @@
 		C93FDFD31E46B50D00263E8B /* ConfigureSampleResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = ConfigureSampleResponse.json; path = KexpTVStream/ConfigureSampleResponse.json; sourceTree = SOURCE_ROOT; };
 		C98EC4091E419BAB006FBF56 /* PlaySampleResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = PlaySampleResponse.json; path = KexpTVStream/PlaySampleResponse.json; sourceTree = SOURCE_ROOT; };
 		C99515E21DFC8E5400794780 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/KexpTVStream-eexlbuvhsdmjawgkglvdwjemjoey/Build/Products/Debug-appletvsimulator/SwiftyJSON/SwiftyJSON.framework"; sourceTree = "<group>"; };
+		C9B01C961F5F93EC00183199 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		C9B1645C1C4C4AA200AFC7F6 /* KexpTVStreamTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "KexpTVStreamTests-Bridging-Header.h"; path = "KexpTVStreamTests/KexpTVStreamTests-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		C9B1645D1C4C4AA300AFC7F6 /* ConfigResponseTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigResponseTest.swift; sourceTree = "<group>"; };
 		C9B1645F1C4C4C0700AFC7F6 /* TestUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtilities.swift; sourceTree = "<group>"; };
@@ -93,8 +94,6 @@
 		C9B2B2AD1E4054FD008F13D8 /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		C9B2B2AF1E4057AE008F13D8 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		C9EDD0B11C8E195600562A9C /* KexpPlaylistCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpPlaylistCell.swift; sourceTree = "<group>"; };
-		C9FACB371C869C6C004E2AA7 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
-		C9FACB381C869C6C004E2AA7 /* libFlurrytvOS_1.0.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurrytvOS_1.0.0.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C9FACB391C869C6C004E2AA7 /* libFlurrytvOS_1.0.0.a in Frameworks */,
+				C9B01C971F5F93EC00183199 /* AVKit.framework in Frameworks */,
 				ACB85C390EF5C43F0B11AF88 /* Pods_KexpTVStream.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,7 +142,6 @@
 			children = (
 				C93FDFCF1E465E9200263E8B /* Extenstions */,
 				C9EDD0B31C8E408D00562A9C /* Style */,
-				C9FACB361C869C42004E2AA7 /* Flurry */,
 				C917092E1C3E049F00E010A6 /* Audio */,
 				C917092D1C3E049700E010A6 /* API */,
 				C917092C1C3E048400E010A6 /* UI */,
@@ -265,18 +263,10 @@
 			name = Style;
 			sourceTree = "<group>";
 		};
-		C9FACB361C869C42004E2AA7 /* Flurry */ = {
-			isa = PBXGroup;
-			children = (
-				C9FACB371C869C6C004E2AA7 /* Flurry.h */,
-				C9FACB381C869C6C004E2AA7 /* libFlurrytvOS_1.0.0.a */,
-			);
-			name = Flurry;
-			sourceTree = "<group>";
-		};
 		D5E8CBEBBEA5CF3DFE8F27F9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C9B01C961F5F93EC00183199 /* AVKit.framework */,
 				C99515E21DFC8E5400794780 /* SwiftyJSON.framework */,
 				A6623FCBF1F274641DABA19F /* Pods_KexpTVStream.framework */,
 				2F0CAA22E221BBEB7D01447E /* Pods_KexpTVStreamTests.framework */,
@@ -443,7 +433,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		707C37B848FDA2B08FE8D7B5 /* [CP] Check Pods Manifest.lock */ = {
@@ -458,7 +448,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		9B2714819342B923E455D8DE /* [CP] Copy Pods Resources */ = {
@@ -679,6 +669,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "KexpTVStream-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Debug;
 		};
@@ -701,6 +692,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "KexpTVStream-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Release;
 		};

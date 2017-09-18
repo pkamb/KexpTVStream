@@ -5,6 +5,7 @@ target 'KexpTVStream' do
 
 pod 'Alamofire'
 pod 'AlamofireImage'
+pod 'Flurry-iOS-SDK/FlurryTVOS'
 pod 'SwiftyJSON'
 pod 'HockeySDK-tvOS', :podspec => 'https://download.hockeyapp.net/preseason/sdk/tvos/HockeySDK-tvOS.podspec'
 
