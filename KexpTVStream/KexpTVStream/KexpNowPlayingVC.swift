@@ -12,8 +12,7 @@ import AlamofireImage
 private let nowPlayingTimeInterval:TimeInterval = 15.0
 private let currentDJTimeInterval:TimeInterval = 60.0
 
-class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewDataSource, UITableViewDelegate {
-
+class KexpNowPlayingVC: UIViewController {
     @IBOutlet var playPauseButton: UIButton!
     @IBOutlet var kexpLogo: UIImageView!
 
@@ -28,7 +27,7 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
     @IBOutlet var albumArtworkView: UIImageView!
     @IBOutlet var tableView: UITableView!
     
-    var playlistArray = [Song]()
+    fileprivate var playlistArray = [Song]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +53,7 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.backgroundColor = UIColor.clear
         tableView.register(KexpPlaylistCell.self, forCellReuseIdentifier: "NowPLayingCell")
-        
+
         getNowPlayingInfo()
         getCurrentDjInfo()
 
@@ -62,7 +61,7 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
         Timer.scheduledTimer(timeInterval: currentDJTimeInterval, target: self, selector: #selector(KexpNowPlayingVC.getCurrentDjInfo), userInfo: nil, repeats: true)
     }
 
-    func updateAlbumArtWork(_ albumArtUrl: URL?) {
+    private func updateAlbumArtWork(_ albumArtUrl: URL?) {
         guard let albumArtUrl = albumArtUrl else { albumArtworkView.image = UIImage(named: "vinylPlaceHolder"); return }
         
         albumArtworkView.af_setImage(
@@ -71,25 +70,14 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
             filter: nil
         )
     }
-    
-    // MARK: - KexpAudioManagerDelegate Methods
-    func kexpAudioPlayerDidStartPlaying() {
-        getNowPlayingInfo()
-    }
-    
-    func kexpAudioPlayerDidStopPlaying(_ hardStop: Bool, backUpStream: Bool) {
-        setPlayMode(hardStop: hardStop, isBackUpStream: backUpStream)
-    }
-    
-    func kexpAudioPlayerFailedToPlay() {
-        showAlert("The KEXP stream is down, please contact KEXP if the issue persists.")
-    }
-    
+
     // MARK: - Networking methods
     func getNowPlayingInfo() {
         KexpController.getSong({ [weak self] song -> Void in
             guard let strongSelf = self else { return }
             guard let song = song else { return }
+            
+           // KexpAudioManager.sharedInstance.updateNowPlaying(song: song)
 
             if song.playTypeId == 4 {
                 strongSelf.artistLabel.isHidden = true
@@ -122,6 +110,7 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
                 }
                 else if let lastItemAdded = strongSelf.playlistArray.first {
                     if song.playId != lastItemAdded.playId, song.playTypeId != 4 {
+                        
                         strongSelf.playlistArray.insert(song, at: 0)
                         strongSelf.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
                     }
@@ -200,12 +189,27 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
         albumNameLabel.text = "-"
         trackNameLabel.text = "-"
     }
+}
+
+extension KexpNowPlayingVC: KexpAudioManagerDelegate {
+    func kexpAudioPlayerDidStartPlaying() {
+        getNowPlayingInfo()
+    }
     
-    // MARK: - UITableView Datasource/Delegate
+    func kexpAudioPlayerDidStopPlaying(_ hardStop: Bool, backUpStream: Bool) {
+        setPlayMode(hardStop: hardStop, isBackUpStream: backUpStream)
+    }
+    
+    func kexpAudioPlayerFailedToPlay() {
+        showAlert("The KEXP stream is down, please contact KEXP if the issue persists.")
+    }
+}
+
+extension KexpNowPlayingVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return playlistArray.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NowPLayingCell", for: indexPath) as! KexpPlaylistCell
         
@@ -216,7 +220,6 @@ class KexpNowPlayingVC: UIViewController, KexpAudioManagerDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, didUpdateFocusIn context: UITableViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-        
         if let previouslyFocusedIndexPath = context.previouslyFocusedIndexPath {
             let previousFocusCell = tableView.cellForRow(at: previouslyFocusedIndexPath)
             previousFocusCell?.contentView.backgroundColor = UIColor.white.withAlphaComponent(0.2)
