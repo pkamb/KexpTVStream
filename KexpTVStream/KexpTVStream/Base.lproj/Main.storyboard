@@ -119,12 +119,9 @@
                                     <constraint firstAttribute="width" constant="800" id="fgl-9c-tMG"/>
                                 </constraints>
                             </stackView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="40" sectionFooterHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="11T-ze-rdW">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="40" sectionFooterHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="11T-ze-rdW">
                                 <rect key="frame" x="1439" y="284" width="450" height="728"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="450" id="iPf-fa-cRE"/>
-                                </constraints>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" red="0.2138288944" green="0.74026088800000001" blue="0.1741954748" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <sections/>
@@ -145,11 +142,11 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="rwy-EJ-qug" firstAttribute="centerY" secondItem="miB-S0-IEX" secondAttribute="centerY" id="1oM-wB-URd"/>
-                            <constraint firstItem="11T-ze-rdW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rwy-EJ-qug" secondAttribute="trailing" symbolic="YES" id="1pM-g6-78i"/>
                             <constraint firstItem="11T-ze-rdW" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="224" id="3ru-or-b04"/>
                             <constraint firstItem="2tg-70-mMt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="50" id="3xy-s8-5HS"/>
                             <constraint firstItem="miB-S0-IEX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="50" id="9QK-da-EPb"/>
                             <constraint firstItem="YEu-mZ-qzA" firstAttribute="trailing" secondItem="rwy-EJ-qug" secondAttribute="trailing" id="FdA-MB-1lt"/>
+                            <constraint firstItem="11T-ze-rdW" firstAttribute="leading" secondItem="rwy-EJ-qug" secondAttribute="trailing" constant="43" id="Kse-vo-Ilk"/>
                             <constraint firstItem="YEu-mZ-qzA" firstAttribute="leading" secondItem="3at-sW-Odd" secondAttribute="trailing" constant="30" id="Omq-1J-dis"/>
                             <constraint firstItem="11T-ze-rdW" firstAttribute="top" secondItem="COJ-WO-eIn" secondAttribute="bottom" constant="50" id="Pq5-wP-4BW"/>
                             <constraint firstAttribute="trailing" secondItem="11T-ze-rdW" secondAttribute="trailing" constant="31" id="RxC-Ww-6sl"/>
