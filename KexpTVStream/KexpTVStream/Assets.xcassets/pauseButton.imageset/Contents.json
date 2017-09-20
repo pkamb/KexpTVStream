@@ -16,6 +16,10 @@
       "idiom" : "tv",
       "filename" : "pauseButton.png",
       "scale" : "1x"
+    },
+    {
+      "idiom" : "tv",
+      "scale" : "2x"
     }
   ],
   "info" : {
