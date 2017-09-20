@@ -16,6 +16,10 @@
       "idiom" : "tv",
       "filename" : "kexp-logo-white.jpg",
       "scale" : "1x"
+    },
+    {
+      "idiom" : "tv",
+      "scale" : "2x"
     }
   ],
   "info" : {

@@ -4,6 +4,10 @@
       "idiom" : "tv",
       "filename" : "LargeIcon_Back-1280x768.png",
       "scale" : "1x"
+    },
+    {
+      "idiom" : "tv",
+      "scale" : "2x"
     }
   ],
   "info" : {
