@@ -13,7 +13,6 @@ private let nowPlayingTimeInterval:TimeInterval = 15.0
 private let currentDJTimeInterval:TimeInterval = 60.0
 
 class KexpNowPlayingVC: UIViewController {
-    @IBOutlet var playPauseButton: UIButton!
     @IBOutlet var kexpLogo: UIImageView!
 
     @IBOutlet var artistLabel: UILabel!
@@ -26,12 +25,14 @@ class KexpNowPlayingVC: UIViewController {
     @IBOutlet var albumNameLabel: UILabel!
     @IBOutlet var albumArtworkView: UIImageView!
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var albumArtworkButton: ArtworkPlayButton!
     
     fileprivate var playlistArray = [Song]()
+    private var currentSong: Song?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         addStyleToView()
 
         KexpController.getConfig { [weak self] (kexpConfig) -> Void in
@@ -42,7 +43,7 @@ class KexpNowPlayingVC: UIViewController {
             KexpAudioManager.sharedInstance.setupRemoteCommandCenter()
 
             strongSelf.loadKexpLogo(kexpConfig.nowPlayingLogo)
-            strongSelf.playPauseButton.isEnabled = true
+            strongSelf.albumArtworkButton.isEnabled = true
         }
         
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(KexpNowPlayingVC.playKexpAction(_:)))
@@ -70,6 +71,13 @@ class KexpNowPlayingVC: UIViewController {
             filter: nil
         )
     }
+    
+    private func updateAlbumArtWorkButton(with albumArtUrl: URL?) {
+        guard let albumArtUrl = albumArtUrl else { albumArtworkButton.setBackgroundImage(UIImage(named: "vinylPlaceHolder"), for: .normal); albumArtworkButton.showingDefaultImage = true; return }
+        
+        albumArtworkButton.af_setBackgroundImage(for: .normal, url: albumArtUrl)
+        albumArtworkButton.showingDefaultImage = false
+    }
 
     // MARK: - Networking methods
     func getNowPlayingInfo() {
@@ -86,7 +94,15 @@ class KexpNowPlayingVC: UIViewController {
                 strongSelf.artistNameLabel.isHidden = true
                 strongSelf.trackNameLabel.isHidden = true
                 strongSelf.albumNameLabel.isHidden = true
-                strongSelf.albumArtworkView.image = UIImage(named: "vinylPlaceHolder")
+                strongSelf.albumArtworkButton.setBackgroundImage(UIImage(named: "vinylPlaceHolder"), for: .normal)
+                strongSelf.albumArtworkButton.showingDefaultImage = true
+               
+                // Add last song played to playlist.
+                if let lastSongPlayed = strongSelf.currentSong {
+                    strongSelf.playlistArray.insert(lastSongPlayed, at: 0)
+                    strongSelf.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+                    strongSelf.currentSong = nil
+                }
             }
             else {
                 strongSelf.trackLabel.text = "Track:"
@@ -101,20 +117,14 @@ class KexpNowPlayingVC: UIViewController {
                 strongSelf.trackNameLabel.text = song.trackName
                 strongSelf.albumNameLabel.text = song.releaseName
                 
-                strongSelf.updateAlbumArtWork(song.largeImageUrl)
+                strongSelf.updateAlbumArtWorkButton(with: song.largeImageUrl)
                 
-                if (strongSelf.playlistArray.count == 0) {
-                    strongSelf.playlistArray.append(song)
-
-                    strongSelf.tableView.reloadData()
+                if let lastSongPlayed = strongSelf.currentSong, lastSongPlayed.playId != song.playId {
+                    strongSelf.playlistArray.insert(lastSongPlayed, at: 0)
+                    strongSelf.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
                 }
-                else if let lastItemAdded = strongSelf.playlistArray.first {
-                    if song.playId != lastItemAdded.playId, song.playTypeId != 4 {
-                        
-                        strongSelf.playlistArray.insert(song, at: 0)
-                        strongSelf.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
-                    }
-                }
+ 
+                strongSelf.currentSong = song
             }
         })
     }
@@ -132,15 +142,15 @@ class KexpNowPlayingVC: UIViewController {
     
     // MARK: - @IBAction
     @IBAction func playKexpAction(_ sender: AnyObject) {
-        if playPauseButton.isSelected && !InternetReachability.isConnectedToNetwork() {
+        if albumArtworkButton.isSelected && !InternetReachability.isConnectedToNetwork() {
             showAlert("Unable to connect to the Internet")
         }
         else {
             setPlayMode(hardStop: false)
-            playPauseButton.isSelected = KexpAudioManager.sharedInstance.isPlaying()
+            albumArtworkButton.isSelected = KexpAudioManager.sharedInstance.isPlaying()
         }
     }
-    
+
     fileprivate func showAlert(_ alertMessage: String) {
         let alert = UIAlertController(title: "Whoops!", message: alertMessage, preferredStyle: .alert)
 
@@ -148,7 +158,7 @@ class KexpNowPlayingVC: UIViewController {
             guard let strongSelf = self else { return }
             
             strongSelf.setPlayMode(hardStop: true)
-            strongSelf.playPauseButton.isSelected = false
+            strongSelf.albumArtworkButton.isSelected = false
         }
         
         alert.addAction(alertAction)
@@ -157,11 +167,10 @@ class KexpNowPlayingVC: UIViewController {
     
     fileprivate func setPlayMode(hardStop: Bool, isBackUpStream:Bool = false) {
         if (!KexpAudioManager.sharedInstance.isPlaying() && !hardStop && !isBackUpStream) {
-            playPauseButton.setImage(UIImage(named: "pauseButton"), for: UIControlState())
             KexpAudioManager.sharedInstance.play()
         }
         else {
-            playPauseButton.setImage(UIImage(named: "playButton"), for: UIControlState())
+            albumArtworkButton.isSelected = false
             KexpAudioManager.sharedInstance.pause()
         }
     }
@@ -174,6 +183,7 @@ class KexpNowPlayingVC: UIViewController {
     }
     
     // MARK: - VC Styling
+    
     fileprivate func addStyleToView() {
         let backgroundLayer = KexpStyle.kexpBackgroundGradient()
         backgroundLayer.frame = view.frame
@@ -182,12 +192,16 @@ class KexpNowPlayingVC: UIViewController {
         kexpLogo.layer.cornerRadius = 30.0
         kexpLogo.clipsToBounds = true
         
-        albumArtworkView.layer.cornerRadius = 30.0
-        albumArtworkView.clipsToBounds = true
-        
         artistNameLabel.text = "-"
         albumNameLabel.text = "-"
         trackNameLabel.text = "-"
+        
+        let focusGuide = UIFocusGuide()
+        view.addLayoutGuide(focusGuide)
+        focusGuide.topAnchor.constraint(equalTo: kexpLogo.topAnchor).isActive =  true
+        focusGuide.heightAnchor.constraint(equalTo: tableView.heightAnchor).isActive =  true
+        focusGuide.widthAnchor.constraint(equalTo: tableView.widthAnchor).isActive = true
+        focusGuide.preferredFocusEnvironments = [albumArtworkButton]
     }
 }
 

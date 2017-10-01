@@ -42,6 +42,8 @@
 		C9B2B2AE1E4054FD008F13D8 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B2B2AD1E4054FD008F13D8 /* Song.swift */; };
 		C9B2B2B01E4057AE008F13D8 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B2B2AF1E4057AE008F13D8 /* Comment.swift */; };
 		C9EDD0B21C8E195600562A9C /* KexpPlaylistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EDD0B11C8E195600562A9C /* KexpPlaylistCell.swift */; };
+		C9FACB711F76C1320098F214 /* FocusGuideRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FACB701F76C1320098F214 /* FocusGuideRepresentation.swift */; };
+		C9FACB731F76F39D0098F214 /* ArtworkPlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FACB721F76F39D0098F214 /* ArtworkPlayButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +96,8 @@
 		C9B2B2AD1E4054FD008F13D8 /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		C9B2B2AF1E4057AE008F13D8 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		C9EDD0B11C8E195600562A9C /* KexpPlaylistCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpPlaylistCell.swift; sourceTree = "<group>"; };
+		C9FACB701F76C1320098F214 /* FocusGuideRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusGuideRepresentation.swift; sourceTree = "<group>"; };
+		C9FACB721F76F39D0098F214 /* ArtworkPlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkPlayButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +144,7 @@
 		46CDFB1E1C30A7170001A004 /* KexpTVStream */ = {
 			isa = PBXGroup;
 			children = (
+				C9FACB6F1F76C1120098F214 /* Helpers */,
 				C93FDFCF1E465E9200263E8B /* Extenstions */,
 				C9EDD0B31C8E408D00562A9C /* Style */,
 				C917092E1C3E049F00E010A6 /* Audio */,
@@ -220,6 +225,7 @@
 			children = (
 				C9EDD0B01C8E18B600562A9C /* Playlist */,
 				46CDFB3F1C30A7630001A004 /* KexpNowPlayingVC.swift */,
+				C9FACB721F76F39D0098F214 /* ArtworkPlayButton.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -261,6 +267,14 @@
 			children = (
 			);
 			name = Style;
+			sourceTree = "<group>";
+		};
+		C9FACB6F1F76C1120098F214 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				C9FACB701F76C1320098F214 /* FocusGuideRepresentation.swift */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 		D5E8CBEBBEA5CF3DFE8F27F9 /* Frameworks */ = {
@@ -502,6 +516,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9FACB711F76C1320098F214 /* FocusGuideRepresentation.swift in Sources */,
 				C9B2B2AE1E4054FD008F13D8 /* Song.swift in Sources */,
 				C93FDFD11E465EC200263E8B /* SwiftyJSON+Date.swift in Sources */,
 				C9B164621C4C522D00AFC7F6 /* ConfigSettings.swift in Sources */,
@@ -509,6 +524,7 @@
 				C93FDFC71E44209A00263E8B /* Shows.swift in Sources */,
 				46CDFB201C30A7170001A004 /* AppDelegate.swift in Sources */,
 				46CDFB401C30A7630001A004 /* KexpNowPlayingVC.swift in Sources */,
+				C9FACB731F76F39D0098F214 /* ArtworkPlayButton.swift in Sources */,
 				C93FDFCA1E44215A00263E8B /* Show.swift in Sources */,
 				46CDFB451C30A8AD0001A004 /* KexpAudioManager.swift in Sources */,
 				C9EDD0B21C8E195600562A9C /* KexpPlaylistCell.swift in Sources */,
