@@ -13,7 +13,6 @@ private let albumArtSize:CGFloat = 100.0
 private let bottomBorderHeight:CGFloat = 1.0
 
 class KexpPlaylistCell: UITableViewCell {
-    
     fileprivate var nowPlayingStackView: UIStackView = {
         let nowPlayingStackView = UIStackView()
         nowPlayingStackView.axis = .vertical
