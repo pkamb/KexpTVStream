@@ -84,9 +84,10 @@ class KexpNowPlayingVC: UIViewController {
         KexpController.getSong({ [weak self] song -> Void in
             guard let strongSelf = self else { return }
             guard let song = song else { return }
-            
-           // KexpAudioManager.sharedInstance.updateNowPlaying(song: song)
 
+            KexpAudioManager.sharedInstance.updateNowPlaying(song: song)
+
+            //If song is an "Air Break" (playTypeId == 4)
             if song.playTypeId == 4 {
                 strongSelf.artistLabel.isHidden = true
                 strongSelf.trackLabel.text = "Air Break..."
@@ -141,6 +142,7 @@ class KexpNowPlayingVC: UIViewController {
     }
     
     // MARK: - @IBAction
+    
     @IBAction func playKexpAction(_ sender: AnyObject) {
         if albumArtworkButton.isSelected && !InternetReachability.isConnectedToNetwork() {
             showAlert("Unable to connect to the Internet")
