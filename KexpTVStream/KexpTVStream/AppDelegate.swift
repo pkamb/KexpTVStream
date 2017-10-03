@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import HockeySDK
+import Flurry_iOS_SDK
 
 private let kexpFlurryKey = "4DYG4DMSNS3S4XCYTCG6"
 private let kexpHockeyAppKey = "3a42808beb664c7d9642e1fab0c07839"
