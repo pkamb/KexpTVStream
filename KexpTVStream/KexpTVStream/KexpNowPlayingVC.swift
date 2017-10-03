@@ -8,6 +8,7 @@
 
 import UIKit
 import AlamofireImage
+import Flurry_iOS_SDK
 
 private let nowPlayingTimeInterval:TimeInterval = 15.0
 private let currentDJTimeInterval:TimeInterval = 60.0
@@ -49,6 +50,9 @@ class KexpNowPlayingVC: UIViewController {
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(KexpNowPlayingVC.playKexpAction(_:)))
         tapRecognizer.allowedPressTypes = [NSNumber(value: UIPressType.playPause.rawValue as Int)];
         self.view.addGestureRecognizer(tapRecognizer)
+        
+        let panGesture  = UIPanGestureRecognizer(target: self, action: #selector(KexpNowPlayingVC.panGestureAction(_:)))
+        view.addGestureRecognizer(panGesture)
         
         tableView.estimatedRowHeight = 130.0
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -130,7 +134,7 @@ class KexpNowPlayingVC: UIViewController {
         })
     }
     
-    func getCurrentDjInfo() {
+    @objc private func getCurrentDjInfo() {
         KexpController.getShow { [weak self] show -> Void in
             guard let strongSelf = self else { return }
             guard let show = show else { return }
@@ -151,6 +155,12 @@ class KexpNowPlayingVC: UIViewController {
             setPlayMode(hardStop: false)
             albumArtworkButton.isSelected = KexpAudioManager.sharedInstance.isPlaying()
         }
+    }
+    
+    // Only Show playbutton action image when playlist is not present
+    @objc private func panGestureAction(_ sender:UIPanGestureRecognizer) {
+        guard playlistArray.count == 0 else { return }
+        albumArtworkButton.showPlayButtonActionImage()
     }
 
     fileprivate func showAlert(_ alertMessage: String) {
