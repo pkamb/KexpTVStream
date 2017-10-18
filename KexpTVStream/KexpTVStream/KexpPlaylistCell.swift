@@ -116,7 +116,7 @@ class KexpPlaylistCell: UITableViewCell {
     func configureNowPlayingCell(_ song: Song) {
         artistLabel.text = song.artistName
         trackLabel.text = song.trackName
-        albumLabel.text = song.labelName
+        albumLabel.text = song.releaseName
 
         let playTimeStampStr = dateFormatter.string(from: song.airdate)
         timePlayedLabel.text = playTimeStampStr
