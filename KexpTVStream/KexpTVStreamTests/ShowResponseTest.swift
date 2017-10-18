@@ -12,16 +12,7 @@ import XCTest
 class ShowResponseTest: XCTestCase {
 
     lazy var shows: Shows = self.getShowSampleResponse()!
-    
-    override func setUp() {
-        super.setUp()
-    }
-    
-    override func tearDown() {
-        super.tearDown()
-    }
-    
-    
+
     func testShowResponse() {
         XCTAssertNotNil(shows)
         
