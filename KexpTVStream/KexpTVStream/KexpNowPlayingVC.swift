@@ -8,6 +8,7 @@
 
 import UIKit
 import AlamofireImage
+import Alamofire
 import Flurry_iOS_SDK
 
 private let nowPlayingTimeInterval:TimeInterval = 15.0
@@ -148,13 +149,15 @@ class KexpNowPlayingVC: UIViewController {
     // MARK: - @IBAction
     
     @IBAction func playKexpAction(_ sender: AnyObject) {
-        if albumArtworkButton.isSelected && !InternetReachability.isConnectedToNetwork() {
-            showAlert("Unable to connect to the Internet")
+        guard let networkReachabilityManager = NetworkReachabilityManager(), networkReachabilityManager.isReachable
+            else {
+                showAlert("Unable to connect to the Internet")
+                setPlayMode(hardStop: true)
+                return
         }
-        else {
-            setPlayMode(hardStop: false)
-            albumArtworkButton.isSelected = KexpAudioManager.sharedInstance.isPlaying()
-        }
+        
+        setPlayMode(hardStop: false)
+        albumArtworkButton.isSelected = KexpAudioManager.sharedInstance.isPlaying()
     }
     
     // Only Show playbutton action image when playlist is not present
