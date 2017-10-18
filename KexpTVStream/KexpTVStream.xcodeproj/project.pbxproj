@@ -19,7 +19,6 @@
 		ACB85C390EF5C43F0B11AF88 /* Pods_KexpTVStream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6623FCBF1F274641DABA19F /* Pods_KexpTVStream.framework */; };
 		C90881811C4C743B004C2F76 /* PlayResponseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90881801C4C743B004C2F76 /* PlayResponseTest.swift */; };
 		C90881881C4C77BA004C2F76 /* ShowResponseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90881871C4C77BA004C2F76 /* ShowResponseTest.swift */; };
-		C91709301C3E073000E010A6 /* InternetReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = C917092F1C3E073000E010A6 /* InternetReachability.swift */; };
 		C93FDFC11E441BED00263E8B /* ShowSampleResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C93FDFC01E441BED00263E8B /* ShowSampleResponse.json */; };
 		C93FDFC21E441BED00263E8B /* ShowSampleResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C93FDFC01E441BED00263E8B /* ShowSampleResponse.json */; };
 		C93FDFC71E44209A00263E8B /* Shows.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93FDFC61E44209A00263E8B /* Shows.swift */; };
@@ -77,7 +76,6 @@
 		A6623FCBF1F274641DABA19F /* Pods_KexpTVStream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KexpTVStream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C90881801C4C743B004C2F76 /* PlayResponseTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayResponseTest.swift; sourceTree = "<group>"; };
 		C90881871C4C77BA004C2F76 /* ShowResponseTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowResponseTest.swift; sourceTree = "<group>"; };
-		C917092F1C3E073000E010A6 /* InternetReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternetReachability.swift; sourceTree = "<group>"; };
 		C92F93AF1C8BEB7200FD469E /* KexpTVStream-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KexpTVStream-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		C93FDFC01E441BED00263E8B /* ShowSampleResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = ShowSampleResponse.json; path = KexpTVStream/ShowSampleResponse.json; sourceTree = SOURCE_ROOT; };
 		C93FDFC61E44209A00263E8B /* Shows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shows.swift; sourceTree = "<group>"; };
@@ -152,7 +150,6 @@
 				C917092C1C3E048400E010A6 /* UI */,
 				C917092B1C3E047300E010A6 /* Models */,
 				46CDFB1F1C30A7170001A004 /* AppDelegate.swift */,
-				C917092F1C3E073000E010A6 /* InternetReachability.swift */,
 				46CDFB481C30B0F30001A004 /* KexpStyle.swift */,
 				46CDFB411C30A7730001A004 /* Supporting files */,
 			);
@@ -533,7 +530,6 @@
 				C9B2B2B01E4057AE008F13D8 /* Comment.swift in Sources */,
 				C93FDFCD1E44241C00263E8B /* Host.swift in Sources */,
 				C9B2B2AC1E405365008F13D8 /* Play.swift in Sources */,
-				C91709301C3E073000E010A6 /* InternetReachability.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
