@@ -25,7 +25,7 @@ class ArtworkPlayButton: UIButton {
     
     override var isSelected: Bool {
         didSet {
-            setImage(isSelected ? UIImage(named: "pauseButton") : UIImage(named: "playButton"), for: UIControlState())
+//            setImage(isSelected ? UIImage(named: "pauseButton") : UIImage(named: "playButton"), for: UIControlState())
             overlayView.alpha = showingDefaultImage ? 0.0 : 1.0
             
             DispatchQueue.main.async { self.hidePlayButtonActionImage() }
@@ -44,7 +44,7 @@ class ArtworkPlayButton: UIButton {
         setImage(UIImage(named: "playButton"), for: .normal)
         
         if let imageView = imageView {
-            bringSubview(toFront: imageView)
+            bringSubviewToFront(imageView)
         }
     }
 

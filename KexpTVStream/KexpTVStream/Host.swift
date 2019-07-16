@@ -6,16 +6,16 @@
 //  Copyright © 2017 Dustin Bergman. All rights reserved.
 //
 
-import SwiftyJSON
-
-public struct Host {
-    let hostId: Int?
-    let hostName: String?
-    let hostImageUrl: URL?
-    
-    public init(_ host: JSON) {
-        hostId = host["hostid"].int
-        hostName = host["name"].string
-        hostImageUrl = host["imageuri"].url
-    }
-}
+//import SwiftyJSON
+//
+//public struct Host {
+//    let hostId: Int?
+//    let hostName: String?
+//    let hostImageUrl: URL?
+//    
+//    public init(_ host: JSON) {
+//        hostId = host["hostid"].int
+//        hostName = host["name"].string
+//        hostImageUrl = host["imageuri"].url
+//    }
+//}

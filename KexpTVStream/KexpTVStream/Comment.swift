@@ -6,14 +6,14 @@
 //  Copyright © 2017 Dustin Bergman. All rights reserved.
 //
 
-import SwiftyJSON
-
-public struct Comment {
-    let commentid: Int?
-    let commentText: String?
-    
-    public init(_ comment: JSON) {
-        commentid = comment["commentid"].int
-        commentText = comment["text"].string
-    }
-}
+//import SwiftyJSON
+//
+//public struct Comment {
+//    let commentid: Int?
+//    let commentText: String?
+//    
+//    public init(_ comment: JSON) {
+//        commentid = comment["commentid"].int
+//        commentText = comment["text"].string
+//    }
+//}

@@ -6,6 +6,7 @@
 //  Copyright © 2017 Dustin Bergman. All rights reserved.
 //
 
+/*
 import SwiftyJSON
 
 public struct Shows {
@@ -33,3 +34,5 @@ public struct Shows {
         }
     }
 }
+
+*/

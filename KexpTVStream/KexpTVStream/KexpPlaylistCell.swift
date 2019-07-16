@@ -59,7 +59,7 @@ class KexpPlaylistCell: UITableViewCell {
 
     fileprivate let albumArtImageView = UIImageView()
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         selectionStyle = .none
@@ -113,18 +113,18 @@ class KexpPlaylistCell: UITableViewCell {
         assertionFailure("Not implemented!")
     }
     
-    func configureNowPlayingCell(_ song: Song) {
-        artistLabel.text = song.artistName
-        trackLabel.text = song.trackName
-        albumLabel.text = song.releaseName
-
-        let playTimeStampStr = dateFormatter.string(from: song.airdate)
-        timePlayedLabel.text = playTimeStampStr
-
-        albumArtImageView.image = UIImage(named: "vinylPlaceHolder")
-
-        if let albumURL = song.largeImageUrl {
-            albumArtImageView.af_setImage(withURL: albumURL, placeholderImage: nil, filter: nil)
-        }
+    func configureNowPlayingCell(_ song: Any) {
+//        artistLabel.text = song.artistName
+//        trackLabel.text = song.trackName
+//        albumLabel.text = song.releaseName
+//
+//        let playTimeStampStr = dateFormatter.string(from: song.airdate)
+//        timePlayedLabel.text = playTimeStampStr
+//
+//        albumArtImageView.image = UIImage(named: "vinylPlaceHolder")
+//
+//        if let albumURL = song.largeImageUrl {
+//            albumArtImageView.af_setImage(withURL: albumURL, placeholderImage: nil, filter: nil)
+//        }
     }
 }

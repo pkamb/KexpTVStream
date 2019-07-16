@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 import MediaPlayer
 import AVKit
-import AlamofireImage
+//import AlamofireImage
 
 protocol KexpAudioManagerDelegate {
     func kexpAudioPlayerDidStartPlaying()
@@ -25,7 +25,7 @@ class KexpAudioManager: NSObject {
 
     var kexpConfig: ConfigSettings? {
         didSet {
-            currentKexpUrlString = kexpConfig?.streamUrl
+           // currentKexpUrlString = kexpConfig?.streamUrl
         }
     }
     
@@ -34,7 +34,7 @@ class KexpAudioManager: NSObject {
     
     var currentKexpUrlString: String?
     
-	let downloader = ImageDownloader()
+//	let downloader = ImageDownloader()
     
     var delegate: KexpAudioManagerDelegate?
 
@@ -47,7 +47,7 @@ class KexpAudioManager: NSObject {
         guard let currentKexpUrlString = currentKexpUrlString else { return }
         guard let streamURL = URL(string: currentKexpUrlString) else { return }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(KexpAudioManager.handleInterruption(_:)), name: NSNotification.Name.AVAudioSessionInterruption, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(KexpAudioManager.handleInterruption(_:)), name: NSNotification.Name.AVAudioSession.interruptionNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(KexpAudioManager.handleInterruption(_:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: nil)
         
         if audioPlayerItem != nil {
@@ -64,7 +64,7 @@ class KexpAudioManager: NSObject {
             audioPlayer = AVPlayer(playerItem: audioPlayerItem)
             
             _ = try? AVAudioSession.sharedInstance().setActive(true)
-            _ = try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: [])
+//            _ = try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: [])
         }
     }
     
@@ -99,20 +99,20 @@ class KexpAudioManager: NSObject {
         guard let kexpConfig = kexpConfig else { return }
 
         if keyPath == "status" {
-            if playerItem.status == .readyToPlay {
-                delegate.kexpAudioPlayerDidStartPlaying()
-                currentKexpUrlString = kexpConfig.streamUrl
-            }
-            else if playerItem.status == .failed {
-                deInitStream()
-                delegate.kexpAudioPlayerDidStopPlaying(false, backUpStream: currentKexpUrlString == kexpConfig.backupStreamUrl)
-                
-                if currentKexpUrlString == kexpConfig.backupStreamUrl {
-                    delegate.kexpAudioPlayerFailedToPlay()
-                } else {
-                    currentKexpUrlString = kexpConfig.backupStreamUrl
-                }
-            }
+//            if playerItem.status == .readyToPlay {
+//                delegate.kexpAudioPlayerDidStartPlaying()
+//                currentKexpUrlString = kexpConfig.streamUrl
+//            }
+//            else if playerItem.status == .failed {
+//                deInitStream()
+//                delegate.kexpAudioPlayerDidStopPlaying(false, backUpStream: currentKexpUrlString == kexpConfig.backupStreamUrl)
+//
+//                if currentKexpUrlString == kexpConfig.backupStreamUrl {
+//                    delegate.kexpAudioPlayerFailedToPlay()
+//                } else {
+//                    currentKexpUrlString = kexpConfig.backupStreamUrl
+//                }
+//            }
         }
     }
     
@@ -123,17 +123,17 @@ class KexpAudioManager: NSObject {
         remoteCommandCenter.pauseCommand.addTarget(self, action: #selector(KexpAudioManager.pauseEvent))
     }
     
-    func pauseEvent() {
+    @objc func pauseEvent() {
         delegate?.kexpAudioPlayerDidStopPlaying(false, backUpStream: false)
         pause()
     }
     
     // MARK: - NSNotification
     // This is called when audio is taken from another app. Sending a HardStop when an AVAudioSessionInterruptionType is fired
-    func handleInterruption(_ notification: Notification) {
+    @objc func handleInterruption(_ notification: Notification) {
         guard let interruptionTypeUInt = (notification as NSNotification).userInfo?[AVAudioSessionInterruptionTypeKey] as? UInt else { return }
 
-        if let interruptionType = AVAudioSessionInterruptionType(rawValue: interruptionTypeUInt) {
+        if let interruptionType = AVAudioSession.InterruptionType(rawValue: interruptionTypeUInt) {
             if interruptionType == .began || interruptionType == .ended {
                 pause()
                 delegate?.kexpAudioPlayerDidStopPlaying(true, backUpStream: false)
@@ -141,67 +141,67 @@ class KexpAudioManager: NSObject {
         }
     }
     
-    func updateNowPlaying(song: Song) {
-        let trackName = song.trackName ?? ""
-        let artistName = song.artistName ?? ""
-        let albumName = song.releaseName ?? ""
-        
-        let trackItem = AVMutableMetadataItem()
-        trackItem.identifier = AVMetadataCommonIdentifierTitle
-        trackItem.locale = NSLocale.current
-        trackItem.value = trackName as NSString
-        trackItem.keySpace = AVMetadataKeySpaceCommon
-        
-        let albumNameItem = AVMutableMetadataItem()
-        albumNameItem.identifier = AVMetadataCommonIdentifierAlbumName
-        albumNameItem.locale = NSLocale.current
-        albumNameItem.value = albumName as NSString
-        albumNameItem.keySpace = AVMetadataKeySpaceCommon
-        
-        let artistNameItem = AVMutableMetadataItem()
-        artistNameItem.identifier = AVMetadataCommonIdentifierArtist
-        artistNameItem.locale = NSLocale.current
-        artistNameItem.value = artistName as NSString
-        artistNameItem.keySpace = AVMetadataKeySpaceCommon
-        
-        let artworkMetadataItem = AVMutableMetadataItem()
-        artworkMetadataItem.locale = Locale.current
-        artworkMetadataItem.identifier = AVMetadataCommonIdentifierArtwork
-        
-        if let albumArtUrl = song.largeImageUrl {
-            let urlRequest = URLRequest(url: albumArtUrl)
-
-            downloader.download(urlRequest) { response in
-                guard let albumArtImage = response.result.value else { return }
-
-                artworkMetadataItem.value = albumArtImage as? NSCopying & NSObjectProtocol
-                self.audioPlayerItem?.externalMetadata.append(artistNameItem)
-                self.audioPlayerItem?.externalMetadata.append(trackItem)
-                self.audioPlayerItem?.externalMetadata.append(albumNameItem)
-                self.audioPlayerItem?.externalMetadata.append(artworkMetadataItem)
-
-                let artWork = MPMediaItemArtwork(boundsSize: albumArtImage.size, requestHandler: { _ in
-                    return albumArtImage
-                })
-                
-                let nowPlayingInfo = [MPMediaItemPropertyArtist : artistName, MPMediaItemPropertyTitle : trackName, MPMediaItemPropertyArtwork : artWork] as [String : Any]
-                MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
-            }
-        } else {
-            guard let placeHolderAlbumArt = UIImage(named: "vinylPlaceHolder") else { return }
-            
-            artworkMetadataItem.value = placeHolderAlbumArt as? NSCopying & NSObjectProtocol
-            self.audioPlayerItem?.externalMetadata.append(artistNameItem)
-            self.audioPlayerItem?.externalMetadata.append(trackItem)
-            self.audioPlayerItem?.externalMetadata.append(albumNameItem)
-            self.audioPlayerItem?.externalMetadata.append(artworkMetadataItem)
-
-            let artWork = MPMediaItemArtwork(boundsSize: placeHolderAlbumArt.size, requestHandler: { _ in
-                return placeHolderAlbumArt
-            })
-            
-            let nowPlayingInfo = [MPMediaItemPropertyArtist : artistName, MPMediaItemPropertyTitle : trackName, MPMediaItemPropertyArtwork : artWork] as [String : Any]
-            MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
-        }
+    func updateNowPlaying(song: Any) {
+//        let trackName = song.trackName ?? ""
+//        let artistName = song.artistName ?? ""
+//        let albumName = song.releaseName ?? ""
+//
+//        let trackItem = AVMutableMetadataItem()
+//        trackItem.identifier = AVMetadataCommonIdentifierTitle
+//        trackItem.locale = NSLocale.current
+//        trackItem.value = trackName as NSString
+//        trackItem.keySpace = AVMetadataKeySpaceCommon
+//
+//        let albumNameItem = AVMutableMetadataItem()
+//        albumNameItem.identifier = AVMetadataCommonIdentifierAlbumName
+//        albumNameItem.locale = NSLocale.current
+//        albumNameItem.value = albumName as NSString
+//        albumNameItem.keySpace = AVMetadataKeySpaceCommon
+//
+//        let artistNameItem = AVMutableMetadataItem()
+//        artistNameItem.identifier = AVMetadataCommonIdentifierArtist
+//        artistNameItem.locale = NSLocale.current
+//        artistNameItem.value = artistName as NSString
+//        artistNameItem.keySpace = AVMetadataKeySpaceCommon
+//
+//        let artworkMetadataItem = AVMutableMetadataItem()
+//        artworkMetadataItem.locale = Locale.current
+//        artworkMetadataItem.identifier = AVMetadataCommonIdentifierArtwork
+//
+//        if let albumArtUrl = song.largeImageUrl {
+//            let urlRequest = URLRequest(url: albumArtUrl)
+//
+//            downloader.download(urlRequest) { response in
+//                guard let albumArtImage = response.result.value else { return }
+//
+//                artworkMetadataItem.value = albumArtImage as? NSCopying & NSObjectProtocol
+//                self.audioPlayerItem?.externalMetadata.append(artistNameItem)
+//                self.audioPlayerItem?.externalMetadata.append(trackItem)
+//                self.audioPlayerItem?.externalMetadata.append(albumNameItem)
+//                self.audioPlayerItem?.externalMetadata.append(artworkMetadataItem)
+//
+//                let artWork = MPMediaItemArtwork(boundsSize: albumArtImage.size, requestHandler: { _ in
+//                    return albumArtImage
+//                })
+//
+//                let nowPlayingInfo = [MPMediaItemPropertyArtist : artistName, MPMediaItemPropertyTitle : trackName, MPMediaItemPropertyArtwork : artWork] as [String : Any]
+//                MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+//            }
+//        } else {
+//            guard let placeHolderAlbumArt = UIImage(named: "vinylPlaceHolder") else { return }
+//
+//            artworkMetadataItem.value = placeHolderAlbumArt as? NSCopying & NSObjectProtocol
+//            self.audioPlayerItem?.externalMetadata.append(artistNameItem)
+//            self.audioPlayerItem?.externalMetadata.append(trackItem)
+//            self.audioPlayerItem?.externalMetadata.append(albumNameItem)
+//            self.audioPlayerItem?.externalMetadata.append(artworkMetadataItem)
+//
+//            let artWork = MPMediaItemArtwork(boundsSize: placeHolderAlbumArt.size, requestHandler: { _ in
+//                return placeHolderAlbumArt
+//            })
+//
+//            let nowPlayingInfo = [MPMediaItemPropertyArtist : artistName, MPMediaItemPropertyTitle : trackName, MPMediaItemPropertyArtwork : artWork] as [String : Any]
+//            MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+//        }
     }
 }

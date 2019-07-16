@@ -7,11 +7,11 @@
 //
 
 import UIKit
-import Alamofire
-import SwiftyJSON
+//import Alamofire
+//import SwiftyJSON
 
-typealias SongChangeBlock = (_ song: Song?) -> Void
-typealias ShowChangeBlock = (_ show: Show?) -> Void
+typealias SongChangeBlock = (_ song: Any?) -> Void
+typealias ShowChangeBlock = (_ show: Any?) -> Void
 typealias ConfigurationSettingsBlock = (_ kexpConfig: ConfigSettings) -> Void
 
 private let songEndpoint = "http://legacy-api.kexp.org/play/?limit=1"
@@ -21,37 +21,37 @@ private let configEndpoint = "http://www.kexp.org/content/applications/AppleTV/c
 class KexpController {
 
    class func getSong(_ currentTrackUpdate: @escaping SongChangeBlock) {
-        Alamofire.request(songEndpoint)
-            .responseJSON { response in
-                guard let jsonResponse = response.result.value else { currentTrackUpdate(nil); return }
-                
-                let playResponse = JSON(jsonResponse)
-                let play = Play(playResponse)
-                currentTrackUpdate(play.songs?.first)
-        }
+//        Alamofire.request(songEndpoint)
+//            .responseJSON { response in
+//                guard let jsonResponse = response.result.value else { currentTrackUpdate(nil); return }
+//
+//                let playResponse = JSON(jsonResponse)
+//                let play = Play(playResponse)
+//                currentTrackUpdate(play.songs?.first)
+//        }
     }
     
     class func getShow(_ currentDjUpdate: @escaping ShowChangeBlock) {
-        Alamofire.request(showEndpoint)
-            .responseJSON { response in
-                guard let jsonResponse = response.result.value else { currentDjUpdate(nil); return }
-                
-                let showsResponse = JSON(jsonResponse)
-                let shows = Shows(showsResponse)
-                currentDjUpdate(shows.theShows?.last)
-        }
+//        Alamofire.request(showEndpoint)
+//            .responseJSON { response in
+//                guard let jsonResponse = response.result.value else { currentDjUpdate(nil); return }
+//
+//                let showsResponse = JSON(jsonResponse)
+//                let shows = Shows(showsResponse)
+//                currentDjUpdate(shows.theShows?.last)
+//        }
     }
     
     class func getConfig(_ configurationSetup: ConfigurationSettingsBlock) {
-        guard let url = URL(string: configEndpoint) else { return }
-        guard let kexpConfigData = try? Data(contentsOf: url) else {
-            let configSetting = ConfigSettings(nil)
-            configurationSetup(configSetting)
-            return
-        }
-
-        let configJSON = JSON(data: kexpConfigData)
-        let configSetting = ConfigSettings(configJSON)
-        configurationSetup(configSetting)
+//        guard let url = URL(string: configEndpoint) else { return }
+//        guard let kexpConfigData = try? Data(contentsOf: url) else {
+//            let configSetting = ConfigSettings(nil)
+//            configurationSetup(configSetting)
+//            return
+//        }
+//
+//        let configJSON = JSON(data: kexpConfigData)
+//        let configSetting = ConfigSettings(configJSON)
+//        configurationSetup(configSetting)
     }
 }

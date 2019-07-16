@@ -6,6 +6,7 @@
 //  Copyright © 2017 Dustin Bergman. All rights reserved.
 //
 
+/*
 import SwiftyJSON
 
 extension JSON {
@@ -25,3 +26,4 @@ extension JSON {
         return dateFormatter
     }()
 }
+*/
