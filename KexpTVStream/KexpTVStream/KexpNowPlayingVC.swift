@@ -30,24 +30,26 @@ class KexpNowPlayingVC: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var albumArtworkButton: ArtworkPlayButton!
     
+    private let placeholderImage = UIImage(named: "vinylPlaceHolder")
+    
     private let networkManager = NetworkManager()
     
-    fileprivate var playlistArray = [Any]()
+    private var playlistArray = [Play]()
     private var currentSong: Play?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         addStyleToView()
-
-        KexpController.getConfig { [weak self] (kexpConfig) -> Void in
+        
+        networkManager.getConfiguration { [weak self] result, configuration in
             guard let strongSelf = self else { return }
 
-            KexpAudioManager.sharedInstance.kexpConfig = kexpConfig
-            KexpAudioManager.sharedInstance.delegate = self
-            KexpAudioManager.sharedInstance.setupRemoteCommandCenter()
+            AudioManager.sharedInstance.configuration = configuration
+            AudioManager.sharedInstance.delegate = self
+            AudioManager.sharedInstance.setupRemoteCommandCenter()
 
-            //strongSelf.loadKexpLogo(kexpConfig.nowPlayingLogo)
+            strongSelf.loadKexpLogo(configuration?.kexpNowPlayingLogo)
             strongSelf.albumArtworkButton.isEnabled = true
         }
         
@@ -70,31 +72,39 @@ class KexpNowPlayingVC: UIViewController {
         Timer.scheduledTimer(timeInterval: currentDJTimeInterval, target: self, selector: #selector(KexpNowPlayingVC.getCurrentDjInfo), userInfo: nil, repeats: true)
     }
 
-    private func updateAlbumArtWork(_ albumArtUrl: URL?) {
-        guard let albumArtUrl = albumArtUrl else { albumArtworkView.image = UIImage(named: "vinylPlaceHolder"); return }
-        
-//        albumArtworkView.af_setImage(
-//            withURL: albumArtUrl,
-//            placeholderImage: UIImage(named: "vinylPlaceHolder"),
-//            filter: nil
-//        )
-    }
-    
     private func updateAlbumArtWorkButton(with albumArtUrl: URL?) {
-        guard let albumArtUrl = albumArtUrl else { albumArtworkButton.setBackgroundImage(UIImage(named: "vinylPlaceHolder"), for: .normal); albumArtworkButton.showingDefaultImage = true; return }
+        let fff = URL(string: "https://images-na.ssl-images-amazon.com/images/I/51ENH2DV8TL.jpg")
+        self.albumArtworkButton.imageView?.backgroundColor = .blue
+        albumArtworkButton.imageView?.fromURL(fff, placeHolder: placeholderImage, completion: { image in
+            self.albumArtworkButton.imageView?.image = image
+        })
         
-       // albumArtworkButton.af_setBackgroundImage(for: .normal, url: albumArtUrl)
-        albumArtworkButton.showingDefaultImage = false
+        albumArtworkButton.imageView?.alpha = 1.0
+
+//        guard
+//            let albumArtUrl = albumArtUrl
+//        else {
+//            albumArtworkButton.setBackgroundImage(placeholderImage, for: .normal)
+//            albumArtworkButton.showingDefaultImage = true
+//            return
+//        }
+//
+//        albumArtworkButton.imageView?.fromURL(albumArtUrl, placeHolder: placeholderImage, completion: { image in
+//            self.albumArtworkButton.imageView?.image = image
+//        })
+//
+//        albumArtworkButton.showingDefaultImage = false
     }
 
     // MARK: - Networking methods
+    
     @objc private func getNowPlayingInfo() {
         networkManager.getPlay(limit: 1) { [weak self] result, playResult in
             guard
-                case .success = result,
                 let strongSelf = self,
                 let playResult = playResult,
-                let song = playResult.playlist?.first
+                let song = playResult.playlist?.first,
+                case .success = result
             else {
                 return
             }
@@ -108,13 +118,13 @@ class KexpNowPlayingVC: UIViewController {
                 strongSelf.artistNameLabel.isHidden = isAirBreak
                 strongSelf.trackNameLabel.isHidden = isAirBreak
                 strongSelf.albumNameLabel.isHidden = isAirBreak
-                strongSelf.albumArtworkButton.setBackgroundImage(UIImage(named: "vinylPlaceHolder"), for: .normal)
+                strongSelf.albumArtworkButton.setBackgroundImage(strongSelf.placeholderImage, for: .normal)
                 strongSelf.albumArtworkButton.showingDefaultImage = isAirBreak
 
                 if
-                    !isAirBreak,
                     let lastSongPlayed = strongSelf.currentSong,
-                    lastSongPlayed.playId != song.playId
+                    lastSongPlayed.playId != song.playId,
+                    !isAirBreak
                 {
                     strongSelf.playlistArray.insert(lastSongPlayed, at: 0)
                     strongSelf.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
@@ -126,44 +136,55 @@ class KexpNowPlayingVC: UIViewController {
                     strongSelf.albumNameLabel.text = song.release?.name
                     strongSelf.updateAlbumArtWorkButton(with: song.release?.largeImageURL)
                 }
+                
+                strongSelf.currentSong = isAirBreak ? nil : song
             }
-            
-            strongSelf.currentSong = isAirBreak ? nil : song
         }
     }
     
     @objc private func getCurrentDjInfo() {
-        KexpController.getShow { [weak self] show -> Void in
-            guard let strongSelf = self else { return }
-            guard let show = show else { return }
-//            guard let showTitle = show.showName else { strongSelf.djInfoLabel.text = "ON NOW: Unknown"; return }
-//            guard let djName = show.hosts?.first?.hostName else { strongSelf.djInfoLabel.text = "ON NOW: \(showTitle)"; return }
-//
-//            strongSelf.djInfoLabel.text = "ON NOW: " + showTitle + " with " + djName
+        networkManager.getShow(limit: 1) { [weak self] result, showResult in
+            guard
+                let strongSelf = self,
+                let showResult = showResult,
+                let show = showResult.showlist?.first,
+                case .success = result
+            else {
+                    return
+            }
+            
+            guard let showTitle = show.program?.name else { strongSelf.djInfoLabel.text = "ON NOW: Unknown"; return }
+            guard let djName = show.hosts?.first?.name else { strongSelf.djInfoLabel.text = "ON NOW: \(showTitle)"; return }
+
+            DispatchQueue.main.async {
+                strongSelf.djInfoLabel.text = "ON NOW: " + showTitle + " with " + djName
+            }
         }
     }
     
     // MARK: - @IBAction
     
     @IBAction func playKexpAction(_ sender: AnyObject) {
-//        guard let networkReachabilityManager = NetworkReachabilityManager(), networkReachabilityManager.isReachable
-//            else {
-//                showAlert("Unable to connect to the Internet")
-//                setPlayMode(hardStop: true)
-//                return
-//        }
-//        
-//        setPlayMode(hardStop: false)
-//        albumArtworkButton.isSelected = KexpAudioManager.sharedInstance.isPlaying()
+        guard
+            networkManager.isReachability
+        else {
+            showAlert("Unable to connect to the Internet")
+            setPlayMode(hardStop: true)
+            return
+        }
+
+        setPlayMode(hardStop: false)
+        albumArtworkButton.isSelected = AudioManager.sharedInstance.isPlaying()
     }
     
     // Only Show playbutton action image when playlist is not present
     @objc private func panGestureAction(_ sender:UIPanGestureRecognizer) {
         guard playlistArray.count == 0 else { return }
+        
         albumArtworkButton.showPlayButtonActionImage()
     }
 
-    fileprivate func showAlert(_ alertMessage: String) {
+    private func showAlert(_ alertMessage: String) {
         let alert = UIAlertController(title: "Whoops!", message: alertMessage, preferredStyle: .alert)
 
         let alertAction = UIAlertAction.init(title: "OK", style: .default) { [weak self] action in
@@ -177,26 +198,23 @@ class KexpNowPlayingVC: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    fileprivate func setPlayMode(hardStop: Bool, isBackUpStream:Bool = false) {
-        if (!KexpAudioManager.sharedInstance.isPlaying() && !hardStop && !isBackUpStream) {
-            KexpAudioManager.sharedInstance.play()
+    private func setPlayMode(hardStop: Bool, isBackUpStream: Bool = false) {
+        if (!AudioManager.sharedInstance.isPlaying() && !hardStop && !isBackUpStream) {
+            AudioManager.sharedInstance.play()
         }
         else {
             albumArtworkButton.isSelected = false
-            KexpAudioManager.sharedInstance.pause()
+            AudioManager.sharedInstance.pause()
         }
     }
     
-    fileprivate func loadKexpLogo(_ logoUrl: String?) {
-        guard let imageUrlString = logoUrl as String? else { kexpLogo.image = UIImage(named: "kexp"); return }
-        guard let imageUrl = URL(string: imageUrlString) else { kexpLogo.image = UIImage(named: "kexp"); return }
-
-       // kexpLogo.af_setImage(withURL: imageUrl, placeholderImage: UIImage(named: "kexp"), filter: nil)
+    private func loadKexpLogo(_ logoUrl: URL?) {
+        kexpLogo.fromURL(KEXPPower.nowPlayingLogo, placeHolder: placeholderImage)
     }
     
     // MARK: - VC Styling
     
-    fileprivate func addStyleToView() {
+    private func addStyleToView() {
         let backgroundLayer = KexpStyle.kexpBackgroundGradient()
         backgroundLayer.frame = view.frame
         view.layer.insertSublayer(backgroundLayer, at: 0)
@@ -217,16 +235,16 @@ class KexpNowPlayingVC: UIViewController {
     }
 }
 
-extension KexpNowPlayingVC: KexpAudioManagerDelegate {
-    func kexpAudioPlayerDidStartPlaying() {
+extension KexpNowPlayingVC: AudioManagerDelegate {
+    func audioPlayerDidStartPlaying() {
         getNowPlayingInfo()
     }
     
-    func kexpAudioPlayerDidStopPlaying(_ hardStop: Bool, backUpStream: Bool) {
+    func audioPlayerDidStopPlaying(_ hardStop: Bool, backUpStream: Bool) {
         setPlayMode(hardStop: hardStop, isBackUpStream: backUpStream)
     }
     
-    func kexpAudioPlayerFailedToPlay() {
+    func audioPlayerFailedToPlay() {
         showAlert("The KEXP stream is down, please contact KEXP if the issue persists.")
     }
 }

@@ -12,35 +12,12 @@
 		46CDFB281C30A7170001A004 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46CDFB261C30A7170001A004 /* Main.storyboard */; };
 		46CDFB2A1C30A7180001A004 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46CDFB291C30A7180001A004 /* Assets.xcassets */; };
 		46CDFB401C30A7630001A004 /* KexpNowPlayingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB3F1C30A7630001A004 /* KexpNowPlayingVC.swift */; };
-		46CDFB451C30A8AD0001A004 /* KexpAudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB421C30A8AD0001A004 /* KexpAudioManager.swift */; };
-		46CDFB461C30A8AD0001A004 /* KexpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB431C30A8AD0001A004 /* KexpController.swift */; };
+		46CDFB451C30A8AD0001A004 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB421C30A8AD0001A004 /* AudioManager.swift */; };
 		46CDFB491C30B0F30001A004 /* KexpStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB481C30B0F30001A004 /* KexpStyle.swift */; };
 		8BFFED0C22DC3FFA00E3378C /* podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8BFFED0B22DC3FFA00E3378C /* podfile */; };
 		962A140DF48B6B2932FE9465 /* Pods_KexpTVStreamTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0CAA22E221BBEB7D01447E /* Pods_KexpTVStreamTests.framework */; };
 		ACB85C390EF5C43F0B11AF88 /* Pods_KexpTVStream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6623FCBF1F274641DABA19F /* Pods_KexpTVStream.framework */; };
-		C90881811C4C743B004C2F76 /* PlayResponseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90881801C4C743B004C2F76 /* PlayResponseTest.swift */; };
-		C90881881C4C77BA004C2F76 /* ShowResponseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90881871C4C77BA004C2F76 /* ShowResponseTest.swift */; };
-		C93FDFC11E441BED00263E8B /* ShowSampleResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C93FDFC01E441BED00263E8B /* ShowSampleResponse.json */; };
-		C93FDFC21E441BED00263E8B /* ShowSampleResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C93FDFC01E441BED00263E8B /* ShowSampleResponse.json */; };
-		C93FDFC71E44209A00263E8B /* Shows.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93FDFC61E44209A00263E8B /* Shows.swift */; };
-		C93FDFC81E44209A00263E8B /* Shows.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93FDFC61E44209A00263E8B /* Shows.swift */; };
-		C93FDFCA1E44215A00263E8B /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93FDFC91E44215A00263E8B /* Show.swift */; };
-		C93FDFCB1E44215A00263E8B /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93FDFC91E44215A00263E8B /* Show.swift */; };
-		C93FDFCD1E44241C00263E8B /* Host.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93FDFCC1E44241C00263E8B /* Host.swift */; };
-		C93FDFCE1E44241C00263E8B /* Host.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93FDFCC1E44241C00263E8B /* Host.swift */; };
-		C93FDFD11E465EC200263E8B /* SwiftyJSON+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93FDFD01E465EC200263E8B /* SwiftyJSON+Date.swift */; };
-		C93FDFD21E465EC200263E8B /* SwiftyJSON+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93FDFD01E465EC200263E8B /* SwiftyJSON+Date.swift */; };
-		C93FDFD41E46B50D00263E8B /* ConfigureSampleResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C93FDFD31E46B50D00263E8B /* ConfigureSampleResponse.json */; };
-		C93FDFD51E46B50D00263E8B /* ConfigureSampleResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C93FDFD31E46B50D00263E8B /* ConfigureSampleResponse.json */; };
-		C98EC40A1E419BAB006FBF56 /* PlaySampleResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C98EC4091E419BAB006FBF56 /* PlaySampleResponse.json */; };
-		C98EC40B1E419F8E006FBF56 /* PlaySampleResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C98EC4091E419BAB006FBF56 /* PlaySampleResponse.json */; };
 		C9B01C971F5F93EC00183199 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B01C961F5F93EC00183199 /* AVKit.framework */; };
-		C9B1645E1C4C4AA300AFC7F6 /* ConfigResponseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B1645D1C4C4AA300AFC7F6 /* ConfigResponseTest.swift */; };
-		C9B164601C4C4C0700AFC7F6 /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B1645F1C4C4C0700AFC7F6 /* TestUtilities.swift */; };
-		C9B164621C4C522D00AFC7F6 /* ConfigSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B164611C4C522D00AFC7F6 /* ConfigSettings.swift */; };
-		C9B2B2AC1E405365008F13D8 /* Play.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B2B2AB1E405365008F13D8 /* Play.swift */; };
-		C9B2B2AE1E4054FD008F13D8 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B2B2AD1E4054FD008F13D8 /* Song.swift */; };
-		C9B2B2B01E4057AE008F13D8 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B2B2AF1E4057AE008F13D8 /* Comment.swift */; };
 		C9EDD0B21C8E195600562A9C /* KexpPlaylistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EDD0B11C8E195600562A9C /* KexpPlaylistCell.swift */; };
 		C9FACB711F76C1320098F214 /* FocusGuideRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FACB701F76C1320098F214 /* FocusGuideRepresentation.swift */; };
 		C9FACB731F76F39D0098F214 /* ArtworkPlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FACB721F76F39D0098F214 /* ArtworkPlayButton.swift */; };
@@ -68,33 +45,17 @@
 		46CDFB301C30A7180001A004 /* KexpTVStreamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KexpTVStreamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		46CDFB361C30A7180001A004 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		46CDFB3F1C30A7630001A004 /* KexpNowPlayingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpNowPlayingVC.swift; sourceTree = "<group>"; };
-		46CDFB421C30A8AD0001A004 /* KexpAudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpAudioManager.swift; sourceTree = "<group>"; };
-		46CDFB431C30A8AD0001A004 /* KexpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpController.swift; sourceTree = "<group>"; };
+		46CDFB421C30A8AD0001A004 /* AudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		46CDFB481C30B0F30001A004 /* KexpStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpStyle.swift; sourceTree = "<group>"; };
 		4A88670E65745188983D52A4 /* Pods-KexpTVStreamTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KexpTVStreamTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KexpTVStreamTests/Pods-KexpTVStreamTests.release.xcconfig"; sourceTree = "<group>"; };
 		4C57EEF456081D1CB64BCCF9 /* Pods-KexpTVStream.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KexpTVStream.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KexpTVStream/Pods-KexpTVStream.debug.xcconfig"; sourceTree = "<group>"; };
 		78E3AB477D2FF07E1439780E /* Pods-KexpTVStreamTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KexpTVStreamTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KexpTVStreamTests/Pods-KexpTVStreamTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8BFFED0B22DC3FFA00E3378C /* podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = podfile; sourceTree = "<group>"; };
 		A6623FCBF1F274641DABA19F /* Pods_KexpTVStream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KexpTVStream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C90881801C4C743B004C2F76 /* PlayResponseTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayResponseTest.swift; sourceTree = "<group>"; };
-		C90881871C4C77BA004C2F76 /* ShowResponseTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowResponseTest.swift; sourceTree = "<group>"; };
 		C92F93AF1C8BEB7200FD469E /* KexpTVStream-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KexpTVStream-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
-		C93FDFC01E441BED00263E8B /* ShowSampleResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = ShowSampleResponse.json; path = KexpTVStream/ShowSampleResponse.json; sourceTree = SOURCE_ROOT; };
-		C93FDFC61E44209A00263E8B /* Shows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shows.swift; sourceTree = "<group>"; };
-		C93FDFC91E44215A00263E8B /* Show.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
-		C93FDFCC1E44241C00263E8B /* Host.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Host.swift; sourceTree = "<group>"; };
-		C93FDFD01E465EC200263E8B /* SwiftyJSON+Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftyJSON+Date.swift"; sourceTree = "<group>"; };
-		C93FDFD31E46B50D00263E8B /* ConfigureSampleResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = ConfigureSampleResponse.json; path = KexpTVStream/ConfigureSampleResponse.json; sourceTree = SOURCE_ROOT; };
-		C98EC4091E419BAB006FBF56 /* PlaySampleResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = PlaySampleResponse.json; path = KexpTVStream/PlaySampleResponse.json; sourceTree = SOURCE_ROOT; };
 		C99515E21DFC8E5400794780 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/KexpTVStream-eexlbuvhsdmjawgkglvdwjemjoey/Build/Products/Debug-appletvsimulator/SwiftyJSON/SwiftyJSON.framework"; sourceTree = "<group>"; };
 		C9B01C961F5F93EC00183199 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		C9B1645C1C4C4AA200AFC7F6 /* KexpTVStreamTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "KexpTVStreamTests-Bridging-Header.h"; path = "KexpTVStreamTests/KexpTVStreamTests-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
-		C9B1645D1C4C4AA300AFC7F6 /* ConfigResponseTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigResponseTest.swift; sourceTree = "<group>"; };
-		C9B1645F1C4C4C0700AFC7F6 /* TestUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtilities.swift; sourceTree = "<group>"; };
-		C9B164611C4C522D00AFC7F6 /* ConfigSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigSettings.swift; sourceTree = "<group>"; };
-		C9B2B2AB1E405365008F13D8 /* Play.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Play.swift; sourceTree = "<group>"; };
-		C9B2B2AD1E4054FD008F13D8 /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
-		C9B2B2AF1E4057AE008F13D8 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		C9EDD0B11C8E195600562A9C /* KexpPlaylistCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpPlaylistCell.swift; sourceTree = "<group>"; };
 		C9FACB701F76C1320098F214 /* FocusGuideRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusGuideRepresentation.swift; sourceTree = "<group>"; };
 		C9FACB721F76F39D0098F214 /* ArtworkPlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkPlayButton.swift; sourceTree = "<group>"; };
@@ -146,14 +107,10 @@
 			isa = PBXGroup;
 			children = (
 				C9FACB6F1F76C1120098F214 /* Helpers */,
-				C93FDFCF1E465E9200263E8B /* Extenstions */,
 				C9EDD0B31C8E408D00562A9C /* Style */,
 				C917092E1C3E049F00E010A6 /* Audio */,
-				C917092D1C3E049700E010A6 /* API */,
 				C917092C1C3E048400E010A6 /* UI */,
-				C917092B1C3E047300E010A6 /* Models */,
 				46CDFB1F1C30A7170001A004 /* AppDelegate.swift */,
-				46CDFB481C30B0F30001A004 /* KexpStyle.swift */,
 				46CDFB411C30A7730001A004 /* Supporting files */,
 			);
 			path = KexpTVStream;
@@ -162,11 +119,6 @@
 		46CDFB331C30A7180001A004 /* KexpTVStreamTests */ = {
 			isa = PBXGroup;
 			children = (
-				C9B1645D1C4C4AA300AFC7F6 /* ConfigResponseTest.swift */,
-				C90881801C4C743B004C2F76 /* PlayResponseTest.swift */,
-				C90881871C4C77BA004C2F76 /* ShowResponseTest.swift */,
-				C9B1645F1C4C4C0700AFC7F6 /* TestUtilities.swift */,
-				C9063B841C4BDDD300B1B1C6 /* Test Responses */,
 				46CDFB361C30A7180001A004 /* Info.plist */,
 			);
 			path = KexpTVStreamTests;
@@ -196,30 +148,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		C9063B841C4BDDD300B1B1C6 /* Test Responses */ = {
-			isa = PBXGroup;
-			children = (
-				C93FDFD31E46B50D00263E8B /* ConfigureSampleResponse.json */,
-				C93FDFC01E441BED00263E8B /* ShowSampleResponse.json */,
-				C98EC4091E419BAB006FBF56 /* PlaySampleResponse.json */,
-			);
-			name = "Test Responses";
-			sourceTree = "<group>";
-		};
-		C917092B1C3E047300E010A6 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				C9B164611C4C522D00AFC7F6 /* ConfigSettings.swift */,
-				C93FDFC61E44209A00263E8B /* Shows.swift */,
-				C93FDFC91E44215A00263E8B /* Show.swift */,
-				C93FDFCC1E44241C00263E8B /* Host.swift */,
-				C9B2B2AB1E405365008F13D8 /* Play.swift */,
-				C9B2B2AD1E4054FD008F13D8 /* Song.swift */,
-				C9B2B2AF1E4057AE008F13D8 /* Comment.swift */,
-			);
-			name = Models;
-			sourceTree = "<group>";
-		};
 		C917092C1C3E048400E010A6 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,28 +158,12 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
-		C917092D1C3E049700E010A6 /* API */ = {
-			isa = PBXGroup;
-			children = (
-				46CDFB431C30A8AD0001A004 /* KexpController.swift */,
-			);
-			name = API;
-			sourceTree = "<group>";
-		};
 		C917092E1C3E049F00E010A6 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
-				46CDFB421C30A8AD0001A004 /* KexpAudioManager.swift */,
+				46CDFB421C30A8AD0001A004 /* AudioManager.swift */,
 			);
 			name = Audio;
-			sourceTree = "<group>";
-		};
-		C93FDFCF1E465E9200263E8B /* Extenstions */ = {
-			isa = PBXGroup;
-			children = (
-				C93FDFD01E465EC200263E8B /* SwiftyJSON+Date.swift */,
-			);
-			name = Extenstions;
 			sourceTree = "<group>";
 		};
 		C9EDD0B01C8E18B600562A9C /* Playlist */ = {
@@ -265,6 +177,7 @@
 		C9EDD0B31C8E408D00562A9C /* Style */ = {
 			isa = PBXGroup;
 			children = (
+				46CDFB481C30B0F30001A004 /* KexpStyle.swift */,
 			);
 			name = Style;
 			sourceTree = "<group>";
@@ -386,11 +299,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BFFED0C22DC3FFA00E3378C /* podfile in Resources */,
-				C93FDFD41E46B50D00263E8B /* ConfigureSampleResponse.json in Resources */,
 				46CDFB2A1C30A7180001A004 /* Assets.xcassets in Resources */,
 				46CDFB281C30A7170001A004 /* Main.storyboard in Resources */,
-				C98EC40B1E419F8E006FBF56 /* PlaySampleResponse.json in Resources */,
-				C93FDFC11E441BED00263E8B /* ShowSampleResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,9 +308,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C98EC40A1E419BAB006FBF56 /* PlaySampleResponse.json in Resources */,
-				C93FDFC21E441BED00263E8B /* ShowSampleResponse.json in Resources */,
-				C93FDFD51E46B50D00263E8B /* ConfigureSampleResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,22 +446,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9FACB711F76C1320098F214 /* FocusGuideRepresentation.swift in Sources */,
-				C9B2B2AE1E4054FD008F13D8 /* Song.swift in Sources */,
-				C93FDFD11E465EC200263E8B /* SwiftyJSON+Date.swift in Sources */,
-				C9B164621C4C522D00AFC7F6 /* ConfigSettings.swift in Sources */,
-				46CDFB461C30A8AD0001A004 /* KexpController.swift in Sources */,
-				C93FDFC71E44209A00263E8B /* Shows.swift in Sources */,
 				46CDFB201C30A7170001A004 /* AppDelegate.swift in Sources */,
 				46CDFB401C30A7630001A004 /* KexpNowPlayingVC.swift in Sources */,
 				C9FACB731F76F39D0098F214 /* ArtworkPlayButton.swift in Sources */,
-				C93FDFCA1E44215A00263E8B /* Show.swift in Sources */,
-				46CDFB451C30A8AD0001A004 /* KexpAudioManager.swift in Sources */,
+				46CDFB451C30A8AD0001A004 /* AudioManager.swift in Sources */,
 				C9EDD0B21C8E195600562A9C /* KexpPlaylistCell.swift in Sources */,
 				46CDFB251C30A7170001A004 /* KexpTVStream.xcdatamodeld in Sources */,
 				46CDFB491C30B0F30001A004 /* KexpStyle.swift in Sources */,
-				C9B2B2B01E4057AE008F13D8 /* Comment.swift in Sources */,
-				C93FDFCD1E44241C00263E8B /* Host.swift in Sources */,
-				C9B2B2AC1E405365008F13D8 /* Play.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -562,14 +460,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C93FDFCB1E44215A00263E8B /* Show.swift in Sources */,
-				C93FDFD21E465EC200263E8B /* SwiftyJSON+Date.swift in Sources */,
-				C90881881C4C77BA004C2F76 /* ShowResponseTest.swift in Sources */,
-				C93FDFCE1E44241C00263E8B /* Host.swift in Sources */,
-				C9B164601C4C4C0700AFC7F6 /* TestUtilities.swift in Sources */,
-				C9B1645E1C4C4AA300AFC7F6 /* ConfigResponseTest.swift in Sources */,
-				C93FDFC81E44209A00263E8B /* Shows.swift in Sources */,
-				C90881811C4C743B004C2F76 /* PlayResponseTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,14 +6,14 @@
 //  Copyright © 2016 Dustin Bergman. All rights reserved.
 //
 
-import Foundation
+import KEXPPower
 import UIKit
 
 private let albumArtSize:CGFloat = 100.0
 private let bottomBorderHeight:CGFloat = 1.0
 
 class KexpPlaylistCell: UITableViewCell {
-    fileprivate var nowPlayingStackView: UIStackView = {
+    private var nowPlayingStackView: UIStackView = {
         let nowPlayingStackView = UIStackView()
         nowPlayingStackView.axis = .vertical
         nowPlayingStackView.distribution = .fillEqually
@@ -21,21 +21,21 @@ class KexpPlaylistCell: UITableViewCell {
         return nowPlayingStackView
     }()
     
-    fileprivate var artistLabel: UILabel = {
+    private var artistLabel: UILabel = {
         let artistLabel = UILabel()
         artistLabel.translatesAutoresizingMaskIntoConstraints = false
         artistLabel.font = UIFont.boldSystemFont(ofSize: FontSizes.xsmall)
         return artistLabel
     }()
     
-    fileprivate var trackLabel: UILabel = {
+    private var trackLabel: UILabel = {
         let trackLabel = UILabel()
         trackLabel.translatesAutoresizingMaskIntoConstraints = false
         trackLabel.font = UIFont.italicSystemFont(ofSize: FontSizes.xsmall)
         return trackLabel
     }()
     
-    fileprivate var albumLabel: UILabel = {
+    private var albumLabel: UILabel = {
         let albumLabel = UILabel()
         albumLabel.translatesAutoresizingMaskIntoConstraints = false
         albumLabel.font = UIFont.systemFont(ofSize: FontSizes.xsmall)
@@ -43,21 +43,21 @@ class KexpPlaylistCell: UITableViewCell {
         return albumLabel
     }()
     
-    fileprivate var timePlayedLabel: UILabel = {
+    private var timePlayedLabel: UILabel = {
         let timePlayedLabel = UILabel()
         timePlayedLabel.translatesAutoresizingMaskIntoConstraints = false
         timePlayedLabel.font = UIFont.systemFont(ofSize: FontSizes.xxsmall)
         return timePlayedLabel
     }()
     
-    fileprivate let dateFormatter: DateFormatter = {
+    private let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "hh:mma MM/dd/YYYY"
         dateFormatter.timeZone = TimeZone.autoupdatingCurrent
         return dateFormatter
     }()
 
-    fileprivate let albumArtImageView = UIImageView()
+    private let albumArtImageView = UIImageView()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -113,18 +113,12 @@ class KexpPlaylistCell: UITableViewCell {
         assertionFailure("Not implemented!")
     }
     
-    func configureNowPlayingCell(_ song: Any) {
-//        artistLabel.text = song.artistName
-//        trackLabel.text = song.trackName
-//        albumLabel.text = song.releaseName
-//
-//        let playTimeStampStr = dateFormatter.string(from: song.airdate)
-//        timePlayedLabel.text = playTimeStampStr
-//
-//        albumArtImageView.image = UIImage(named: "vinylPlaceHolder")
-//
-//        if let albumURL = song.largeImageUrl {
-//            albumArtImageView.af_setImage(withURL: albumURL, placeholderImage: nil, filter: nil)
-//        }
+    func configureNowPlayingCell(_ song: Play) {
+        artistLabel.text = song.artist?.name
+        trackLabel.text = song.track?.name
+        albumLabel.text = song.release?.name
+        timePlayedLabel.text = dateFormatter.string(from: song.airDate)
+        
+        albumArtImageView.fromURL(song.release?.largeImageURL, placeHolder: UIImage(named: "vinylPlaceHolder"))
     }
 }
