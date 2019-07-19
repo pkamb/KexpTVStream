@@ -39,7 +39,7 @@ class ArtworkPlayButton: UIButton {
         
         addSubview(overlayView)
 
-        //imageView?.alpha = 0.0
+        imageView?.alpha = 0.0
         tintColor = .white
         setImage(UIImage(named: "playButton"), for: .normal)
         
@@ -65,7 +65,7 @@ class ArtworkPlayButton: UIButton {
     private func hidePlayButtonActionImage() {
         UIView.animate(withDuration: 0.3, delay: 2.0, options: .layoutSubviews, animations: {
             self.overlayView.alpha = 0.0
-            //self.imageView?.alpha = 0.0
+            self.imageView?.alpha = 0.0
             self.actionButtonIsDisplaying = false
         })
     }
@@ -78,7 +78,7 @@ class ArtworkPlayButton: UIButton {
         coordinator.addCoordinatedAnimations({ [weak self] in
             guard let strongSelf = self, strongSelf.isFocused else { DispatchQueue.main.async { self?.hidePlayButtonActionImage() }; return }
             
-         //   strongSelf.imageView?.alpha = 0.0
+            strongSelf.imageView?.alpha = 0.0
             strongSelf.actionButtonIsDisplaying = false
             
             UIView.animate(withDuration: 0.2, animations: {

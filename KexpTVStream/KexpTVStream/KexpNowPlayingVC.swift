@@ -73,27 +73,20 @@ class KexpNowPlayingVC: UIViewController {
     }
 
     private func updateAlbumArtWorkButton(with albumArtUrl: URL?) {
-        let fff = URL(string: "https://images-na.ssl-images-amazon.com/images/I/51ENH2DV8TL.jpg")
-        self.albumArtworkButton.imageView?.backgroundColor = .blue
-        albumArtworkButton.imageView?.fromURL(fff, placeHolder: placeholderImage, completion: { image in
-            self.albumArtworkButton.imageView?.image = image
-        })
+        guard
+            let albumArtUrl = albumArtUrl
+        else {
+            albumArtworkButton.setBackgroundImage(placeholderImage, for: .normal)
+            albumArtworkButton.showingDefaultImage = true
+            return
+        }
         
-        albumArtworkButton.imageView?.alpha = 1.0
+        let albumArtImageView = UIImageView()
+        albumArtImageView.fromURL(albumArtUrl, placeHolder: placeholderImage) { albumArtImage in
+            self.albumArtworkButton.setBackgroundImage(albumArtImage, for: .normal)
+        }
 
-//        guard
-//            let albumArtUrl = albumArtUrl
-//        else {
-//            albumArtworkButton.setBackgroundImage(placeholderImage, for: .normal)
-//            albumArtworkButton.showingDefaultImage = true
-//            return
-//        }
-//
-//        albumArtworkButton.imageView?.fromURL(albumArtUrl, placeHolder: placeholderImage, completion: { image in
-//            self.albumArtworkButton.imageView?.image = image
-//        })
-//
-//        albumArtworkButton.showingDefaultImage = false
+        albumArtworkButton.showingDefaultImage = false
     }
 
     // MARK: - Networking methods
