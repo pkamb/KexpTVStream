@@ -201,8 +201,8 @@ class KexpNowPlayingVC: UIViewController {
         }
     }
     
-    private func loadKexpLogo(_ logoUrl: URL?) {
-        kexpLogo.fromURL(KEXPPower.nowPlayingLogo, placeHolder: placeholderImage)
+    private func loadKexpLogo(_ logoURL: URL?) {
+        kexpLogo.fromURL(logoURL, placeHolder: UIImage(named: "kexp"))
     }
     
     // MARK: - VC Styling
