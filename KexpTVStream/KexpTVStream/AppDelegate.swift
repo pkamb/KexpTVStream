@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         [UIApplication.LaunchOptionsKey: Any]?
         ) -> Bool
     {
-        KEXPPower.setUp(
+        KEXPPower.setup(
             legacyBaseURL: legacyBaseURL,
             configurationURL: configurationURL,
             availableStreams: retrieveAvailableStreams(),
@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             BITHockeyManager.shared().start()
         #endif
 
-        UIApplication.shared.beginReceivingRemoteControlEvents();
+        UIApplication.shared.beginReceivingRemoteControlEvents()
         
         return true
     }
