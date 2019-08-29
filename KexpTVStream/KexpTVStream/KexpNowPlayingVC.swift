@@ -54,12 +54,9 @@ class KexpNowPlayingVC: UIViewController {
         }
         
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(KexpNowPlayingVC.playKexpAction(_:)))
-        tapRecognizer.allowedPressTypes = [NSNumber(value: UIPress.PressType.playPause.rawValue as Int)];
+        tapRecognizer.allowedPressTypes = [NSNumber(value: UIPress.PressType.playPause.rawValue as Int)]
         self.view.addGestureRecognizer(tapRecognizer)
-        
-        let panGesture  = UIPanGestureRecognizer(target: self, action: #selector(KexpNowPlayingVC.panGestureAction(_:)))
-        view.addGestureRecognizer(panGesture)
-        
+
         tableView.estimatedRowHeight = 130.0
         tableView.rowHeight = UITableView.automaticDimension
         tableView.backgroundColor = UIColor.clear
@@ -77,7 +74,6 @@ class KexpNowPlayingVC: UIViewController {
             let albumArtUrl = albumArtUrl
         else {
             albumArtworkButton.setBackgroundImage(placeholderImage, for: .normal)
-            albumArtworkButton.showingDefaultImage = true
             return
         }
         
@@ -85,8 +81,6 @@ class KexpNowPlayingVC: UIViewController {
         albumArtImageView.fromURL(albumArtUrl, placeHolder: placeholderImage) { albumArtImage in
             self.albumArtworkButton.setBackgroundImage(albumArtImage, for: .normal)
         }
-
-        albumArtworkButton.showingDefaultImage = false
     }
 
     // MARK: - Networking methods
@@ -112,7 +106,6 @@ class KexpNowPlayingVC: UIViewController {
                 strongSelf.trackNameLabel.isHidden = isAirBreak
                 strongSelf.albumNameLabel.isHidden = isAirBreak
                 strongSelf.albumArtworkButton.setBackgroundImage(strongSelf.placeholderImage, for: .normal)
-                strongSelf.albumArtworkButton.showingDefaultImage = isAirBreak
 
                 if
                     let lastSongPlayed = strongSelf.currentSong,
@@ -146,11 +139,13 @@ class KexpNowPlayingVC: UIViewController {
                     return
             }
             
-            guard let showTitle = show.program?.name else { strongSelf.djInfoLabel.text = "ON NOW: Unknown"; return }
-            guard let djName = show.hosts?.first?.name else { strongSelf.djInfoLabel.text = "ON NOW: \(showTitle)"; return }
+            let onAir = "ON AIR:"
+            
+            guard let showTitle = show.program?.name else { strongSelf.djInfoLabel.text = "\(onAir) Unknown"; return }
+            guard let djName = show.hosts?.first?.name else { strongSelf.djInfoLabel.text = "\(onAir) \(showTitle)"; return }
 
             DispatchQueue.main.async {
-                strongSelf.djInfoLabel.text = "ON NOW: " + showTitle + " with " + djName
+                strongSelf.djInfoLabel.text = "\(onAir) " + showTitle + " with " + djName
             }
         }
     }
@@ -168,13 +163,6 @@ class KexpNowPlayingVC: UIViewController {
 
         setPlayMode(hardStop: false)
         albumArtworkButton.isSelected = AudioManager.sharedInstance.isPlaying()
-    }
-    
-    // Only Show playbutton action image when playlist is not present
-    @objc private func panGestureAction(_ sender:UIPanGestureRecognizer) {
-        guard playlistArray.count == 0 else { return }
-        
-        albumArtworkButton.showPlayButtonActionImage()
     }
 
     private func showAlert(_ alertMessage: String) {
@@ -194,10 +182,11 @@ class KexpNowPlayingVC: UIViewController {
     private func setPlayMode(hardStop: Bool, isBackUpStream: Bool = false) {
         if (!AudioManager.sharedInstance.isPlaying() && !hardStop && !isBackUpStream) {
             AudioManager.sharedInstance.play()
+            albumArtworkButton.updateState(pause: false)
         }
         else {
-            albumArtworkButton.isSelected = false
             AudioManager.sharedInstance.pause()
+            albumArtworkButton.updateState(pause: true)
         }
     }
     
