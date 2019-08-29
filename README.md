@@ -6,7 +6,7 @@ This project has the following dependencies:
 - Cocoapods
 
 #Important!!
-This project needs to run with cocoapods 1.1.1 or higher
+This project needs to run with cocoapods 1.6.1 or higher
 ```
 sudo sudo gem uninstall cocoapods
 sudo gem install cocoapods -v 1.6.1
