@@ -1,5 +1,5 @@
 # KexpTVStream
-Unofficial Kexp tvOS Streaming App
+Official Kexp tvOS Streaming App
 
 #Environment Dependencies
 This project has the following dependencies:
@@ -9,7 +9,7 @@ This project has the following dependencies:
 This project needs to run with cocoapods 1.1.1 or higher
 ```
 sudo sudo gem uninstall cocoapods
-sudo gem install cocoapods -v 1.1.1
+sudo gem install cocoapods -v 1.6.1
 ```
 xCode 8+
 
