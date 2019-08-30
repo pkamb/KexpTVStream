@@ -35,7 +35,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
         
         #if RELEASE
-            Flurry.startSession(kexpFlurryKey)
+        
+            // Flurry was complaining about not running on mainThread, will need to replace this analyticsSDK.
+            DispatchQueue.main.async {
+                Flurry.startSession(kexpFlurryKey)
+            }
+        
             BITHockeyManager.shared().configure(withIdentifier: kexpHockeyAppKey)
             BITHockeyManager.shared().crashManager.crashManagerStatus = .autoSend
             BITHockeyManager.shared().start()
