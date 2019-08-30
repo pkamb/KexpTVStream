@@ -1,26 +1,27 @@
 PODS:
-  - Alamofire (4.3.0)
-  - AlamofireImage (3.2.0):
-    - Alamofire (~> 4.1)
+  - Flurry-iOS-SDK/FlurryTVOS (8.0.2)
   - HockeySDK-tvOS (4.1.0-beta.1)
-  - SwiftyJSON (3.1.4)
+  - KEXPPower (0.1.0)
 
 DEPENDENCIES:
-  - Alamofire
-  - AlamofireImage
+  - Flurry-iOS-SDK/FlurryTVOS
   - HockeySDK-tvOS (from `https://download.hockeyapp.net/preseason/sdk/tvos/HockeySDK-tvOS.podspec`)
-  - SwiftyJSON
+  - KEXPPower
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Flurry-iOS-SDK
+    - KEXPPower
 
 EXTERNAL SOURCES:
   HockeySDK-tvOS:
     :podspec: https://download.hockeyapp.net/preseason/sdk/tvos/HockeySDK-tvOS.podspec
 
 SPEC CHECKSUMS:
-  Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
-  AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
+  Flurry-iOS-SDK: 6d47c244428d2cab3f25c97bdba9b2f4d4a5935f
   HockeySDK-tvOS: ee43955ab5eb2d72fc3faca460364a20c4e38f97
-  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  KEXPPower: d7660d9c26a8d909aceed4a1b5889acf0b9643c5
 
-PODFILE CHECKSUM: d197281d9260278fa6ef4a6285cd6671d36ebfe3
+PODFILE CHECKSUM: ffcc0dc244ad743a81acf9f956d84977b8762b22
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.6.1

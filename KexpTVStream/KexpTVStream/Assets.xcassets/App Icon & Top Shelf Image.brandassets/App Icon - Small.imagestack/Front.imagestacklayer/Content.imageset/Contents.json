@@ -4,6 +4,11 @@
       "idiom" : "tv",
       "filename" : "SmallIcon_Front-400x240.png",
       "scale" : "1x"
+    },
+    {
+      "idiom" : "tv",
+      "filename" : "Webp.net-resizeimage-5.png",
+      "scale" : "2x"
     }
   ],
   "info" : {

@@ -1,18 +1,14 @@
-platform :tvos, '9.0'
+platform :tvos, '12.0'
 use_frameworks!
 
 target 'KexpTVStream' do
-
-pod 'Alamofire'
-pod 'AlamofireImage'
-pod 'SwiftyJSON'
+pod 'Flurry-iOS-SDK/FlurryTVOS'
+pod 'KEXPPower'
 pod 'HockeySDK-tvOS', :podspec => 'https://download.hockeyapp.net/preseason/sdk/tvos/HockeySDK-tvOS.podspec'
 
 end
 
 target 'KexpTVStreamTests' do
-pod 'Alamofire'
-pod 'AlamofireImage'
-pod 'SwiftyJSON'
+pod 'KEXPPower'
 pod 'HockeySDK-tvOS', :podspec => 'https://download.hockeyapp.net/preseason/sdk/tvos/HockeySDK-tvOS.podspec'
 end
