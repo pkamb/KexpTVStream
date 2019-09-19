@@ -90,13 +90,13 @@ class KexpNowPlayingVC: UIViewController {
             guard
                 let strongSelf = self,
                 let playResult = playResult,
-                let song = playResult.playlist?.first,
+                let currentSong = playResult.playlist?.first,
                 case .success = result
             else {
                 return
             }
             
-            let isAirBreak = song.playType.playTypeId == 4
+            let isAirBreak = currentSong.playType.playTypeId == 4
 
             DispatchQueue.main.async {
                 strongSelf.artistLabel.isHidden = isAirBreak
@@ -109,21 +109,21 @@ class KexpNowPlayingVC: UIViewController {
 
                 if
                     let lastSongPlayed = strongSelf.currentSong,
-                    lastSongPlayed.playId != song.playId,
-                    !isAirBreak
+                    lastSongPlayed.playId != currentSong.playId,
+                    lastSongPlayed.playType.playTypeId != 4 // Air Break
                 {
                     strongSelf.playlistArray.insert(lastSongPlayed, at: 0)
                     strongSelf.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
                 }
                 
                 if !isAirBreak {
-                    strongSelf.artistNameLabel.text = song.artist?.name
-                    strongSelf.trackNameLabel.text = song.track?.name
-                    strongSelf.albumNameLabel.text = song.release?.name
-                    strongSelf.updateAlbumArtWorkButton(with: song.release?.largeImageURL)
+                    strongSelf.artistNameLabel.text = currentSong.artist?.name
+                    strongSelf.trackNameLabel.text = currentSong.track?.name
+                    strongSelf.albumNameLabel.text = currentSong.release?.name
+                    strongSelf.updateAlbumArtWorkButton(with: currentSong.release?.largeImageURL)
                 }
                 
-                strongSelf.currentSong = isAirBreak ? nil : song
+                strongSelf.currentSong = isAirBreak ? nil : currentSong
             }
         }
     }
