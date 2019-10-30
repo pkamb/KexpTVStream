@@ -1,7 +1,7 @@
 PODS:
   - Flurry-iOS-SDK/FlurryTVOS (10.0.0)
   - HockeySDK-tvOS (4.1.0-beta.1)
-  - KEXPPower (0.1.1)
+  - KEXPPower (0.2)
 
 DEPENDENCIES:
   - Flurry-iOS-SDK/FlurryTVOS
@@ -21,7 +21,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Flurry-iOS-SDK: 8e3d258a4b8660050ceed56953db411fca34a911
   HockeySDK-tvOS: ee43955ab5eb2d72fc3faca460364a20c4e38f97
-  KEXPPower: 7dc3f6b998a8ed82525787ed6f48b373ad487c6e
+  KEXPPower: 2b0b65d7b5a3e7488c19550073d0fe8afee7aed5
 
 PODFILE CHECKSUM: 34ee7721c6105a832d5c06ceb74b188844ede2e9
 
