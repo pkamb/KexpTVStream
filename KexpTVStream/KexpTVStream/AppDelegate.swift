@@ -26,10 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         [UIApplication.LaunchOptionsKey: Any]?
         ) -> Bool
     {
-        KEXPPower.setup(
+        KEXPPower.sharedInstance.setup(
             legacyBaseURL: legacyBaseURL,
             configurationURL: configurationURL,
             availableStreams: retrieveAvailableStreams(),
+            selectedArchiveBitRate: ArchiveBitRate.oneTwentyEight,
             defaultStreamIndex: 0,
             backupStreamIndex: 1
         )

@@ -219,14 +219,17 @@ class KexpNowPlayingVC: UIViewController {
 
 extension KexpNowPlayingVC: AudioManagerDelegate {
     func audioPlayerDidStartPlaying() {
+        UIApplication.shared.isIdleTimerDisabled = true
         getNowPlayingInfo()
     }
     
     func audioPlayerDidStopPlaying(_ hardStop: Bool, backUpStream: Bool) {
+        UIApplication.shared.isIdleTimerDisabled = false
         setPlayMode(hardStop: hardStop, isBackUpStream: backUpStream)
     }
     
     func audioPlayerFailedToPlay() {
+        UIApplication.shared.isIdleTimerDisabled = false
         showAlert("The KEXP stream is down, please contact KEXP if the issue persists.")
     }
 }

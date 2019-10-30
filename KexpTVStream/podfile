@@ -4,11 +4,13 @@ use_frameworks!
 target 'KexpTVStream' do
 pod 'Flurry-iOS-SDK/FlurryTVOS'
 pod 'KEXPPower'
+#pod 'KEXPPower', :path => '/Users/dustinbergman/Documents/development/KEXPPower'
 pod 'HockeySDK-tvOS', :podspec => 'https://download.hockeyapp.net/preseason/sdk/tvos/HockeySDK-tvOS.podspec'
 
 end
 
 target 'KexpTVStreamTests' do
 pod 'KEXPPower'
+#pod 'KEXPPower', :path => '/Users/dustinbergman/Documents/development/KEXPPower'
 pod 'HockeySDK-tvOS', :podspec => 'https://download.hockeyapp.net/preseason/sdk/tvos/HockeySDK-tvOS.podspec'
 end

@@ -9,8 +9,9 @@ DEPENDENCIES:
   - KEXPPower
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Flurry-iOS-SDK
+  trunk:
     - KEXPPower
 
 EXTERNAL SOURCES:
@@ -22,6 +23,6 @@ SPEC CHECKSUMS:
   HockeySDK-tvOS: ee43955ab5eb2d72fc3faca460364a20c4e38f97
   KEXPPower: 7dc3f6b998a8ed82525787ed6f48b373ad487c6e
 
-PODFILE CHECKSUM: ffcc0dc244ad743a81acf9f956d84977b8762b22
+PODFILE CHECKSUM: 34ee7721c6105a832d5c06ceb74b188844ede2e9
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.8.4
