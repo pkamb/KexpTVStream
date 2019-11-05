@@ -610,7 +610,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/KexpTVStream",
 				);
-				MARKETING_VERSION = 1.6.0;
+				MARKETING_VERSION = 1.6.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dus.KexpTVStream;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "KexpTVStream-Bridging-Header.h";
@@ -635,7 +635,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/KexpTVStream",
 				);
-				MARKETING_VERSION = 1.6.0;
+				MARKETING_VERSION = 1.6.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dus.KexpTVStream;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "KexpTVStream-Bridging-Header.h";
