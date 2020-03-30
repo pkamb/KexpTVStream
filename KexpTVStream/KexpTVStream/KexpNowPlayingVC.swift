@@ -42,8 +42,13 @@ class KexpNowPlayingVC: UIViewController {
 
         addStyleToView()
         
-        networkManager.getConfiguration { [weak self] result, configuration in
-            guard let strongSelf = self else { return }
+        networkManager.getConfiguration { [weak self] result in
+            guard
+                let strongSelf = self,
+                case let .success(configuration) = result
+            else {
+                return
+            }
 
             AudioManager.sharedInstance.configuration = configuration
             AudioManager.sharedInstance.delegate = self
@@ -69,34 +74,34 @@ class KexpNowPlayingVC: UIViewController {
         Timer.scheduledTimer(timeInterval: currentDJTimeInterval, target: self, selector: #selector(KexpNowPlayingVC.getCurrentDjInfo), userInfo: nil, repeats: true)
     }
 
-    private func updateAlbumArtWorkButton(with albumArtUrl: URL?) {
+    private func updateAlbumArtWorkButton(with albumArtUrlString: String?) {
         guard
-            let albumArtUrl = albumArtUrl
+            let albumArtUrlString = albumArtUrlString
         else {
             albumArtworkButton.setBackgroundImage(placeholderImage, for: .normal)
             return
         }
         
         let albumArtImageView = UIImageView()
-        albumArtImageView.fromURL(albumArtUrl, placeHolder: placeholderImage) { albumArtImage in
+        albumArtImageView.fromURLSting(albumArtUrlString, placeHolder: placeholderImage) { albumArtImage in
             self.albumArtworkButton.setBackgroundImage(albumArtImage, for: .normal)
         }
     }
 
     // MARK: - Networking methods
     
-    @objc private func getNowPlayingInfo() {
-        networkManager.getPlay(limit: 1) { [weak self] result, playResult in
+    @objc
+    private func getNowPlayingInfo() {
+        networkManager.getPlay(limit: 1) { [weak self] result in
             guard
                 let strongSelf = self,
-                let playResult = playResult,
-                let currentSong = playResult.playlist?.first,
-                case .success = result
+                case let .success(playResult) = result,
+                let currentSong = playResult?.plays?.first
             else {
                 return
             }
             
-            let isAirBreak = currentSong.playType.playTypeId == 4
+            let isAirBreak = currentSong.playType == .airbreak
 
             DispatchQueue.main.async {
                 strongSelf.artistLabel.isHidden = isAirBreak
@@ -109,18 +114,18 @@ class KexpNowPlayingVC: UIViewController {
 
                 if
                     let lastSongPlayed = strongSelf.currentSong,
-                    lastSongPlayed.playId != currentSong.playId,
-                    lastSongPlayed.playType.playTypeId != 4 // Air Break
+                    lastSongPlayed.song != currentSong.song,
+                    lastSongPlayed.playType != .airbreak
                 {
                     strongSelf.playlistArray.insert(lastSongPlayed, at: 0)
                     strongSelf.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
                 }
                 
                 if !isAirBreak {
-                    strongSelf.artistNameLabel.text = currentSong.artist?.name
-                    strongSelf.trackNameLabel.text = currentSong.track?.name
-                    strongSelf.albumNameLabel.text = currentSong.release?.name
-                    strongSelf.updateAlbumArtWorkButton(with: currentSong.release?.largeImageURL)
+                    strongSelf.artistNameLabel.text = currentSong.artist
+                    strongSelf.trackNameLabel.text = currentSong.song
+                    strongSelf.albumNameLabel.text = currentSong.album
+                    strongSelf.updateAlbumArtWorkButton(with: currentSong.imageURI)
                 }
                 
                 strongSelf.currentSong = isAirBreak ? nil : currentSong
@@ -128,12 +133,13 @@ class KexpNowPlayingVC: UIViewController {
         }
     }
     
-    @objc private func getCurrentDjInfo() {
-        networkManager.getShow(limit: 1) { [weak self] result, showResult in
+    @objc
+    private func getCurrentDjInfo() {
+        networkManager.getShow(limit: 1) { [weak self] result in
             guard
                 let strongSelf = self,
-                let showResult = showResult,
-                let show = showResult.showlist?.first,
+                case let .success(showResult) = result,
+                let show = showResult?.shows?.first,
                 case .success = result
             else {
                     return
@@ -141,8 +147,8 @@ class KexpNowPlayingVC: UIViewController {
             
             let onAir = "ON AIR:"
             
-            guard let showTitle = show.program?.name else { strongSelf.djInfoLabel.text = "\(onAir) Unknown"; return }
-            guard let djName = show.hosts?.first?.name else { strongSelf.djInfoLabel.text = "\(onAir) \(showTitle)"; return }
+            guard let showTitle = show.programName else { strongSelf.djInfoLabel.text = "\(onAir) Unknown"; return }
+            guard let djName = show.hostNames?.first else { strongSelf.djInfoLabel.text = "\(onAir) \(showTitle)"; return }
 
             DispatchQueue.main.async {
                 strongSelf.djInfoLabel.text = "\(onAir) " + showTitle + " with " + djName

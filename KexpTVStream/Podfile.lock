@@ -1,11 +1,9 @@
 PODS:
   - Flurry-iOS-SDK/FlurryTVOS (10.0.0)
-  - HockeySDK-tvOS (4.1.0-beta.1)
-  - KEXPPower (0.2)
+  - KEXPPower (0.6)
 
 DEPENDENCIES:
   - Flurry-iOS-SDK/FlurryTVOS
-  - HockeySDK-tvOS (from `https://download.hockeyapp.net/preseason/sdk/tvos/HockeySDK-tvOS.podspec`)
   - KEXPPower
 
 SPEC REPOS:
@@ -14,15 +12,10 @@ SPEC REPOS:
   trunk:
     - KEXPPower
 
-EXTERNAL SOURCES:
-  HockeySDK-tvOS:
-    :podspec: https://download.hockeyapp.net/preseason/sdk/tvos/HockeySDK-tvOS.podspec
-
 SPEC CHECKSUMS:
   Flurry-iOS-SDK: 8e3d258a4b8660050ceed56953db411fca34a911
-  HockeySDK-tvOS: ee43955ab5eb2d72fc3faca460364a20c4e38f97
-  KEXPPower: 2b0b65d7b5a3e7488c19550073d0fe8afee7aed5
+  KEXPPower: 5ce9502ef6709ce7f4fb0a7c6e00fdec455860b9
 
-PODFILE CHECKSUM: 34ee7721c6105a832d5c06ceb74b188844ede2e9
+PODFILE CHECKSUM: 4526ea88a0ae6217d9c4762cc9dca6001aabdd8a
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.1

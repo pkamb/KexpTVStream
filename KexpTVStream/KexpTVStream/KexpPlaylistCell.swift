@@ -114,11 +114,14 @@ class KexpPlaylistCell: UITableViewCell {
     }
     
     func configureNowPlayingCell(_ song: Play) {
-        artistLabel.text = song.artist?.name
-        trackLabel.text = song.track?.name
-        albumLabel.text = song.release?.name
-        timePlayedLabel.text = dateFormatter.string(from: song.airDate)
+        artistLabel.text = song.artist
+        trackLabel.text = song.song
+        albumLabel.text = song.album
         
-        albumArtImageView.fromURL(song.release?.largeImageURL, placeHolder: UIImage(named: "vinylPlaceHolder"))
+        if let airdate = song.airdate {
+            timePlayedLabel.text = dateFormatter.string(from: airdate)
+        }
+        
+        albumArtImageView.fromURLSting(song.imageURI, placeHolder: UIImage(named: "vinylPlaceHolder"))
     }
 }

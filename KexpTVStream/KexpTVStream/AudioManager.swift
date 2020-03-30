@@ -125,14 +125,16 @@ class AudioManager: NSObject {
         remoteCommandCenter.pauseCommand.addTarget(self, action: #selector(AudioManager.pauseEvent))
     }
     
-    @objc func pauseEvent() {
+    @objc
+    func pauseEvent() {
         delegate?.audioPlayerDidStopPlaying(false, backUpStream: false)
         pause()
     }
     
     // MARK: - NSNotification
     // This is called when audio is taken from another app. Sending a HardStop when an AVAudioSessionInterruptionType is fired
-    @objc func handleInterruption(_ notification: Notification) {
+    @objc
+    func handleInterruption(_ notification: Notification) {
         guard let interruptionTypeUInt = (notification as NSNotification).userInfo?[AVAudioSessionInterruptionTypeKey] as? UInt else { return }
 
         if let interruptionType = AVAudioSession.InterruptionType(rawValue: interruptionTypeUInt) {
@@ -144,9 +146,9 @@ class AudioManager: NSObject {
     }
     
     func updateNowPlaying(play: Play) {
-        let trackName = play.track?.name
-        let artistName = play.artist?.name
-        let albumName = play.release?.name
+        let trackName = play.song
+        let artistName = play.artist
+        let albumName = play.album
 
         if let artistName = artistName {
             let artistNameItem = AVMutableMetadataItem()
@@ -182,10 +184,11 @@ class AudioManager: NSObject {
         artworkMetadataItem.locale = .current
         artworkMetadataItem.identifier = .commonIdentifierArtwork
 
-        if let albumArtUrl = play.release?.largeImageURL {
+        if let albumArtUrlString = play.imageURI {
             let albumArtImageView = UIImageView()
+       
             
-            albumArtImageView.fromURL(albumArtUrl) { albumArtImage in
+            albumArtImageView.fromURLSting(albumArtUrlString) { albumArtImage in
                 guard let albumArtImage = albumArtImage else { return }
                 
                 artworkMetadataItem.value = albumArtImage as? NSCopying & NSObjectProtocol

@@ -7,12 +7,10 @@
 //
 
 import KEXPPower
-import HockeySDK
 import Flurry_iOS_SDK
 
 private let kexpFlurryKey = "4DYG4DMSNS3S4XCYTCG6"
-private let kexpHockeyAppKey = "3a42808beb664c7d9642e1fab0c07839"
-private let legacyBaseURL = "https://legacy-api.kexp.org"
+private let kexpBaseURL = "https://api.kexp.org"
 private let configurationURL = URL(string:"http://www.kexp.org/content/applications/AppleTV/config/KexpConfigResponse.json")
 
 @UIApplicationMain
@@ -27,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ) -> Bool
     {
         KEXPPower.sharedInstance.setup(
-            legacyBaseURL: legacyBaseURL,
+            kexpBaseURL: kexpBaseURL,
             configurationURL: configurationURL,
             availableStreams: retrieveAvailableStreams(),
             selectedArchiveBitRate: ArchiveBitRate.oneTwentyEight,
@@ -37,9 +35,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         #if RELEASE
             Flurry.startSession(kexpFlurryKey)
-            BITHockeyManager.shared().configure(withIdentifier: kexpHockeyAppKey)
-            BITHockeyManager.shared().crashManager.crashManagerStatus = .autoSend
-            BITHockeyManager.shared().start()
         #endif
 
         UIApplication.shared.beginReceivingRemoteControlEvents()
