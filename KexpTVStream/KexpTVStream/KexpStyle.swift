@@ -25,7 +25,7 @@ class KexpStyle {
         return colorWithHexString(KexpOrangeColorHex)
     }
     
-    class func kexpBackgroundGradient () -> CAGradientLayer {
+    class func kexpBackgroundGradient() -> CAGradientLayer {
         let colorTop = KexpStyle.kexpOrange().cgColor
         let colorBottom = UIColor.white.cgColor
         
@@ -36,7 +36,7 @@ class KexpStyle {
         return gl
     }
     
-    class func colorWithHexString (_ hex:String) -> UIColor {
+    class func colorWithHexString(_ hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: CharacterSet.whitespaces).uppercased()
         
         if (cString.hasPrefix("#")) {

@@ -1,5 +1,5 @@
 PODS:
-  - Flurry-iOS-SDK/FlurryTVOS (10.0.0)
+  - Flurry-iOS-SDK/FlurryTVOS (10.2.0)
   - KEXPPower (0.6)
 
 DEPENDENCIES:
@@ -7,13 +7,12 @@ DEPENDENCIES:
   - KEXPPower
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
-    - Flurry-iOS-SDK
   trunk:
+    - Flurry-iOS-SDK
     - KEXPPower
 
 SPEC CHECKSUMS:
-  Flurry-iOS-SDK: 8e3d258a4b8660050ceed56953db411fca34a911
+  Flurry-iOS-SDK: ca3540dd9607a05a8a13a7dd36dfffdd5e0fd0ef
   KEXPPower: 5ce9502ef6709ce7f4fb0a7c6e00fdec455860b9
 
 PODFILE CHECKSUM: 4526ea88a0ae6217d9c4762cc9dca6001aabdd8a

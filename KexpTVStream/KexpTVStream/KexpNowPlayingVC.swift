@@ -6,9 +6,6 @@
 //  Copyright © 2015 Dustin Bergman. All rights reserved.
 //
 
-import UIKit
-//import AlamofireImage
-//import Alamofire
 import KEXPPower
 import Flurry_iOS_SDK
 
@@ -23,6 +20,7 @@ class KexpNowPlayingVC: UIViewController {
     @IBOutlet var albumLabel: UILabel!
     @IBOutlet var djInfoLabel: UILabel!
     
+    @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet var artistNameLabel: UILabel!
     @IBOutlet var trackNameLabel: UILabel!
     @IBOutlet var albumNameLabel: UILabel!
@@ -41,6 +39,8 @@ class KexpNowPlayingVC: UIViewController {
         super.viewDidLoad()
 
         addStyleToView()
+        
+        UIApplication.shared.isIdleTimerDisabled = UserSettingsManager.disableTimer
         
         networkManager.getConfiguration { [weak self] result in
             guard
@@ -104,6 +104,10 @@ class KexpNowPlayingVC: UIViewController {
             let isAirBreak = currentSong.playType == .airbreak
 
             DispatchQueue.main.async {
+//                strongSelf.playlistArray.insert(currentSong, at: 0)
+//                strongSelf.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+//
+//
                 strongSelf.artistLabel.isHidden = isAirBreak
                 strongSelf.trackLabel.text = isAirBreak ? "Air Break..." : "Track:"
                 strongSelf.albumLabel.isHidden = isAirBreak
@@ -225,17 +229,14 @@ class KexpNowPlayingVC: UIViewController {
 
 extension KexpNowPlayingVC: AudioManagerDelegate {
     func audioPlayerDidStartPlaying() {
-        UIApplication.shared.isIdleTimerDisabled = true
         getNowPlayingInfo()
     }
     
     func audioPlayerDidStopPlaying(_ hardStop: Bool, backUpStream: Bool) {
-        UIApplication.shared.isIdleTimerDisabled = false
         setPlayMode(hardStop: hardStop, isBackUpStream: backUpStream)
     }
     
     func audioPlayerFailedToPlay() {
-        UIApplication.shared.isIdleTimerDisabled = false
         showAlert("The KEXP stream is down, please contact KEXP if the issue persists.")
     }
 }
