@@ -8,6 +8,7 @@
 
 import KEXPPower
 import Flurry_iOS_SDK
+import Sentry
 
 private let kexpFlurryKey = "4DYG4DMSNS3S4XCYTCG6"
 private let kexpBaseURL = "https://api.kexp.org"
@@ -32,10 +33,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             defaultStreamIndex: 0,
             backupStreamIndex: 1
         )
-        
-        #if RELEASE
-            Flurry.startSession(kexpFlurryKey)
-        #endif
+
+        Flurry.startSession(kexpFlurryKey)
+
+        _ = SentrySDK(options: [
+            "dsn": "https://940beb7c22424063b3689c77b16b6d31@sentry.io/5189841",
+            "debug": true
+        ])
 
         UIApplication.shared.beginReceivingRemoteControlEvents()
         

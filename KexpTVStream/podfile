@@ -3,6 +3,7 @@ use_frameworks!
 
 target 'KexpTVStream' do
 pod 'Flurry-iOS-SDK/FlurryTVOS'
+pod 'Sentry', :git => 'https://github.com/getsentry/sentry-cocoa.git', :tag => '5.0.0-beta.0'
 pod 'KEXPPower'
 #pod 'KEXPPower', :path => '/Users/dustinbergman/Documents/development/KEXPPower'
 end

@@ -237,6 +237,7 @@
 				46CDFB1A1C30A7170001A004 /* Resources */,
 				C9BC2DA21D45AEE600B05DF7 /* Build Number */,
 				3CEF08B0622092F1E739AEC3 /* [CP] Embed Pods Frameworks */,
+				8B89CFAE243AF69B004B258E /* Upload dSYMs */,
 			);
 			buildRules = (
 			);
@@ -361,11 +362,13 @@
 				"${PODS_ROOT}/Target Support Files/Pods-KexpTVStream/Pods-KexpTVStream-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Flurry-iOS-SDK/Flurry_iOS_SDK.framework",
 				"${BUILT_PRODUCTS_DIR}/KEXPPower/KEXPPower.framework",
+				"${BUILT_PRODUCTS_DIR}/Sentry/Sentry.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Flurry_iOS_SDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KEXPPower.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sentry.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -407,6 +410,25 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		8B89CFAE243AF69B004B258E /* Upload dSYMs */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+			);
+			name = "Upload dSYMs";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which sentry-cli >/dev/null; then\nexport SENTRY_ORG=dus\nexport SENTRY_PROJECT=kexp-tv-stream\nexport SENTRY_LOG_LEVEL=[info|debug]\nexport SENTRY_AUTH_TOKEN=c8ffc82b4cc04a7abff7813737bed314b53e7b7e57294b8eb6e6221f99f7a837\nERROR=$(sentry-cli upload-dif \"$DWARF_DSYM_FOLDER_PATH\" 2>&1 >/dev/null)\nif [ ! $? -eq 0 ]; then\necho \"warning: sentry-cli - $ERROR\"\nfi\nelse\necho \"warning: sentry-cli not installed, download from https://github.com/getsentry/sentry-cli/releases\"\nfi\n";
 		};
 		C9BC2DA21D45AEE600B05DF7 /* Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -502,7 +524,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -598,7 +620,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/KexpTVStream",
 				);
-				MARKETING_VERSION = 1.6.1;
+				MARKETING_VERSION = 1.7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dus.KexpTVStream;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "KexpTVStream-Bridging-Header.h";
@@ -623,7 +645,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/KexpTVStream",
 				);
-				MARKETING_VERSION = 1.6.1;
+				MARKETING_VERSION = 1.7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dus.KexpTVStream;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "KexpTVStream-Bridging-Header.h";
