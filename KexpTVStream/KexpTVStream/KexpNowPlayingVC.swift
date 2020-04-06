@@ -24,7 +24,6 @@ class KexpNowPlayingVC: UIViewController {
     @IBOutlet var artistNameLabel: UILabel!
     @IBOutlet var trackNameLabel: UILabel!
     @IBOutlet var albumNameLabel: UILabel!
-    @IBOutlet var albumArtworkView: UIImageView!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var albumArtworkButton: ArtworkPlayButton!
     
@@ -34,13 +33,19 @@ class KexpNowPlayingVC: UIViewController {
     
     private var playlistArray = [Play]()
     private var currentSong: Play?
+    private var focusView: UIView? //Used for setting focus between settings and play/pause
+    
+    override var preferredFocusEnvironments: [UIFocusEnvironment] {
+        return focusView != nil ? [focusView!] : [albumArtworkButton]
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        addStyleToView()
-        
         UIApplication.shared.isIdleTimerDisabled = UserSettingsManager.disableTimer
+        
+        addStyleToView()
+        setupWipes()
         
         networkManager.getConfiguration { [weak self] result in
             guard
@@ -104,10 +109,6 @@ class KexpNowPlayingVC: UIViewController {
             let isAirBreak = currentSong.playType == .airbreak
 
             DispatchQueue.main.async {
-//                strongSelf.playlistArray.insert(currentSong, at: 0)
-//                strongSelf.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
-//
-//
                 strongSelf.artistLabel.isHidden = isAirBreak
                 strongSelf.trackLabel.text = isAirBreak ? "Air Break..." : "Track:"
                 strongSelf.albumLabel.isHidden = isAirBreak
@@ -159,7 +160,7 @@ class KexpNowPlayingVC: UIViewController {
             }
         }
     }
-    
+
     // MARK: - @IBAction
     
     @IBAction func playKexpAction(_ sender: AnyObject) {
@@ -225,6 +226,31 @@ class KexpNowPlayingVC: UIViewController {
         focusGuide.widthAnchor.constraint(equalTo: tableView.widthAnchor).isActive = true
         focusGuide.preferredFocusEnvironments = [albumArtworkButton]
     }
+    
+    private func setupWipes() {
+        let swiftRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swiftRight.direction = .right
+        view.addGestureRecognizer(swiftRight)
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeLeft.direction = .left
+        view.addGestureRecognizer(swipeLeft)
+    }
+    
+    @objc private func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        guard let swipeGesture = gesture as? UISwipeGestureRecognizer, playlistArray.isEmpty else { return }
+        
+        switch swipeGesture.direction {
+        case .left: if settingsButton.isFocused { focusView = albumArtworkButton }
+        case .right: if albumArtworkButton.isFocused { focusView = settingsButton }
+        default: break
+        }
+        
+        setNeedsFocusUpdate()
+        updateFocusIfNeeded()
+        view.layoutIfNeeded()
+    }
+    
 }
 
 extension KexpNowPlayingVC: AudioManagerDelegate {
