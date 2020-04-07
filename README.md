@@ -1,17 +1,17 @@
 # KexpTVStream
-Official Kexp tvOS Streaming App
+Official KEXP tvOS Streaming App
 
-#Environment Dependencies
+# Environment Dependencies
 This project has the following dependencies:
 - Cocoapods
 
-#Important!!
+# Important!!
 This project needs to run with cocoapods 1.6.1 or higher
 ```
 sudo sudo gem uninstall cocoapods
 sudo gem install cocoapods -v 1.6.1
 ```
-xCode 8+
+Xcode 8+
 
 # Installation
 To make it easy to configure your environment, a script is included in the repository that will install the above dependencies and git hooks. To run this script, do the following:  
@@ -21,7 +21,7 @@ To make it easy to configure your environment, a script is included in the repos
 3. run "pod install" 
 5. Done!  
 
-#KEXP Endpoints
-- Kexp Audio Stream `http://live-aacplus-64.kexp.org/kexp64.aac`
-- Kexp Now Playing `http://www.kexp.org/s/s.aspx?x=3`
-- Kexp Current DJ/Show Info `http://www.kexp.org/s/s.aspx?x=5`
+# KEXP Endpoints
+- KEXP Audio Stream `http://live-aacplus-64.kexp.org/kexp64.aac`
+- KEXP Now Playing `http://www.kexp.org/s/s.aspx?x=3`
+- KEXP Current DJ/Show Info `http://www.kexp.org/s/s.aspx?x=5`
