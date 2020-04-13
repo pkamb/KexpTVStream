@@ -14,8 +14,9 @@
 		46CDFB401C30A7630001A004 /* KexpNowPlayingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB3F1C30A7630001A004 /* KexpNowPlayingVC.swift */; };
 		46CDFB451C30A8AD0001A004 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB421C30A8AD0001A004 /* AudioManager.swift */; };
 		46CDFB491C30B0F30001A004 /* KexpStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB481C30B0F30001A004 /* KexpStyle.swift */; };
+		8B4C3EBB2443962500269ADF /* ArchiveDetailCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4C3EBA2443962500269ADF /* ArchiveDetailCollectionView.swift */; };
 		8B5BBC3E243EC18400FAE988 /* ArchiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BBC3D243EC18400FAE988 /* ArchiveViewController.swift */; };
-		8B5BBC40243ECF3C00FAE988 /* CalendarCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BBC3F243ECF3C00FAE988 /* CalendarCollectionView.swift */; };
+		8B5BBC40243ECF3C00FAE988 /* ArchiveCalendarCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BBC3F243ECF3C00FAE988 /* ArchiveCalendarCollectionView.swift */; };
 		8BBBD02B2439501800953C59 /* UserSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBBD02A2439501800953C59 /* UserSettingsManager.swift */; };
 		8BE8A2402436B7D5000B905D /* SettingsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE8A23F2436B7D5000B905D /* SettingsButton.swift */; };
 		8BE8A242243911FE000B905D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE8A241243911FE000B905D /* SettingsViewController.swift */; };
@@ -56,8 +57,9 @@
 		4A88670E65745188983D52A4 /* Pods-KexpTVStreamTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KexpTVStreamTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KexpTVStreamTests/Pods-KexpTVStreamTests.release.xcconfig"; sourceTree = "<group>"; };
 		4C57EEF456081D1CB64BCCF9 /* Pods-KexpTVStream.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KexpTVStream.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KexpTVStream/Pods-KexpTVStream.debug.xcconfig"; sourceTree = "<group>"; };
 		78E3AB477D2FF07E1439780E /* Pods-KexpTVStreamTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KexpTVStreamTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KexpTVStreamTests/Pods-KexpTVStreamTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8B4C3EBA2443962500269ADF /* ArchiveDetailCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveDetailCollectionView.swift; sourceTree = "<group>"; };
 		8B5BBC3D243EC18400FAE988 /* ArchiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveViewController.swift; sourceTree = "<group>"; };
-		8B5BBC3F243ECF3C00FAE988 /* CalendarCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionView.swift; sourceTree = "<group>"; };
+		8B5BBC3F243ECF3C00FAE988 /* ArchiveCalendarCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveCalendarCollectionView.swift; sourceTree = "<group>"; };
 		8BBBD02A2439501800953C59 /* UserSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsManager.swift; sourceTree = "<group>"; };
 		8BE8A23F2436B7D5000B905D /* SettingsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsButton.swift; sourceTree = "<group>"; };
 		8BE8A241243911FE000B905D /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -199,7 +201,8 @@
 		8BF86E8E243D972B0010DA15 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				8B5BBC3F243ECF3C00FAE988 /* CalendarCollectionView.swift */,
+				8B5BBC3F243ECF3C00FAE988 /* ArchiveCalendarCollectionView.swift */,
+				8B4C3EBA2443962500269ADF /* ArchiveDetailCollectionView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -466,7 +469,7 @@
 				8BE8A2402436B7D5000B905D /* SettingsButton.swift in Sources */,
 				46CDFB201C30A7170001A004 /* AppDelegate.swift in Sources */,
 				8BE8A242243911FE000B905D /* SettingsViewController.swift in Sources */,
-				8B5BBC40243ECF3C00FAE988 /* CalendarCollectionView.swift in Sources */,
+				8B5BBC40243ECF3C00FAE988 /* ArchiveCalendarCollectionView.swift in Sources */,
 				46CDFB401C30A7630001A004 /* KexpNowPlayingVC.swift in Sources */,
 				8BF3209B243D93DC0028B852 /* ListenLiveViewController.swift in Sources */,
 				C9FACB731F76F39D0098F214 /* ArtworkPlayButton.swift in Sources */,
@@ -476,6 +479,7 @@
 				8BBBD02B2439501800953C59 /* UserSettingsManager.swift in Sources */,
 				46CDFB491C30B0F30001A004 /* KexpStyle.swift in Sources */,
 				8B5BBC3E243EC18400FAE988 /* ArchiveViewController.swift in Sources */,
+				8B4C3EBB2443962500269ADF /* ArchiveDetailCollectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,17 @@ import UIKit
 
 class ArchiveViewController: UIViewController {
     private let archiveManager = ArchiveManager()
-    private let calendarCollectionView = CalendarCollectionView()
+    private let calendarCollectionView = ArchiveCalendarCollectionView()
+    private let hostArchieveCollectionView = ArchiveDetailCollectionView(with: .host)
+    private let showArchieveCollectionView = ArchiveDetailCollectionView(with: .show)
+    private let genreArchieveCollectionView = ArchiveDetailCollectionView(with: .genre)
+    
+    private lazy var archieveCollectionViews: [UICollectionView] = {
+        return [calendarCollectionView,
+                hostArchieveCollectionView,
+                showArchieveCollectionView,
+                genreArchieveCollectionView]
+    } ()
     
     private let containerView: UIView = {
         let view = UIView()
@@ -23,8 +33,10 @@ class ArchiveViewController: UIViewController {
         let segmentedControl = UISegmentedControl()
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.insertSegment(withTitle: "Date", at: 0, animated: true)
-        segmentedControl.insertSegment(withTitle: "Host", at: 0, animated: true)
-        segmentedControl.insertSegment(withTitle: "Show", at: 0, animated: true)
+        segmentedControl.insertSegment(withTitle: "Host", at: 1, animated: true)
+        segmentedControl.insertSegment(withTitle: "Show", at: 2, animated: true)
+        segmentedControl.insertSegment(withTitle: "Genre", at: 3, animated: true)
+        segmentedControl.selectedSegmentIndex = 0
         segmentedControl.addTarget(self, action: #selector(handleUpdate(sender:)), for: .valueChanged)
         return segmentedControl
     }()
@@ -34,26 +46,31 @@ class ArchiveViewController: UIViewController {
         
         constructSubviews()
         constructConstraints()
+        _ = archieveCollectionViews.map { $0.isHidden = true }
+        
+        view.backgroundColor = .white
         
         archiveManager.retrieveArchieveShows { [weak self] showsByDate, showsByShowName, showsByHostName, showsGenre in
-   
+            guard let strongSelf = self else { return }
+            
             DispatchQueue.main.async {
-                self?.calendarCollectionView.configureCalendar(with: showsByDate)
+                strongSelf.calendarCollectionView.isHidden = false
+                
+                strongSelf.calendarCollectionView.configure(with: showsByDate)
+                strongSelf.hostArchieveCollectionView.configure(with: showsByHostName)
+                strongSelf.showArchieveCollectionView.configure(with: showsByShowName)
+                strongSelf.genreArchieveCollectionView.configure(with: showsGenre)
             }
         }
-            
-//            _ archiveShowsByDate: [[Date: [ArchiveShow]]],
-//            _ archiveShowsByShowName: [[String: [ArchiveShow]]],
-//            _ archiveShowsByHostName: [[String: [ArchiveShow]]],
-//            _ archiveShowsGenre: [[String: [ArchiveShow]]]
-        
-
     }
     
     func constructSubviews() {
         view.addSubview(segmentedControl)
         view.addSubview(containerView)
         containerView.addSubview(calendarCollectionView)
+        containerView.addSubview(hostArchieveCollectionView)
+        containerView.addSubview(showArchieveCollectionView)
+        containerView.addSubview(genreArchieveCollectionView)
     }
     
     func constructConstraints() {
@@ -69,15 +86,29 @@ class ArchiveViewController: UIViewController {
              containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
             ])
         
-        NSLayoutConstraint.activate(
-            [calendarCollectionView.topAnchor.constraint(equalTo: containerView.topAnchor),
-             calendarCollectionView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-             calendarCollectionView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-             calendarCollectionView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
-            ])
+        archieveCollectionViews.forEach { cv in
+            NSLayoutConstraint.activate(
+                [cv.topAnchor.constraint(equalTo: self.containerView.topAnchor),
+                 cv.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor),
+                 cv.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor),
+                 cv.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor)
+                ])
+        }
     }
     
-   @objc private func handleUpdate(sender: UISegmentedControl){
+   @objc private func handleUpdate(sender: UISegmentedControl) {
         let selectedIndex = sender.selectedSegmentIndex
+    
+        _ = archieveCollectionViews.map { $0.isHidden = true }
+    
+        if selectedIndex == 0  {
+            calendarCollectionView.isHidden = false
+        } else if selectedIndex == 1 {
+            hostArchieveCollectionView.isHidden = false
+        } else if selectedIndex == 2 {
+            showArchieveCollectionView.isHidden = false
+        } else if selectedIndex == 3 {
+            genreArchieveCollectionView.isHidden = false
+        }
     }
 }

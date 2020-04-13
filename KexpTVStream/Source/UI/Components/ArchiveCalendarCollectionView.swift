@@ -9,7 +9,7 @@
 import UIKit
 import KEXPPower
 
-class CalendarCollectionView: UICollectionView {
+class ArchiveCalendarCollectionView: UICollectionView {
     private let layout = UICollectionViewFlowLayout()
     private var showsByDate: [[Date: [ArchiveShow]]]?
 
@@ -26,7 +26,7 @@ class CalendarCollectionView: UICollectionView {
         delegate = self
     }
     
-    func configureCalendar(with showsByDate: [[Date: [ArchiveShow]]]) {
+    func configure(with showsByDate: [[Date: [ArchiveShow]]]) {
         self.showsByDate = showsByDate
         reloadData()
     }
@@ -34,7 +34,7 @@ class CalendarCollectionView: UICollectionView {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
 
-extension CalendarCollectionView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension ArchiveCalendarCollectionView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return showsByDate?.count ?? 0
     }
@@ -56,6 +56,18 @@ extension CalendarCollectionView: UICollectionViewDataSource, UICollectionViewDe
 
         let cellWidth = containerWidth/7.0
         return CGSize(width: cellWidth, height: cellWidth)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        if let previouslyFocusedIndexPath = context.previouslyFocusedIndexPath {
+            let previousFocusCell = collectionView.cellForItem(at: previouslyFocusedIndexPath)
+            previousFocusCell?.contentView.backgroundColor = UIColor.white.withAlphaComponent(0.2)
+        }
+
+        if let nextFocusedIndexPath = context.nextFocusedIndexPath {
+            let nextFocusCell = collectionView.cellForItem(at: nextFocusedIndexPath)
+            nextFocusCell?.contentView.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        }
     }
 }
 
@@ -90,12 +102,16 @@ private class DayCollectionCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame:frame)
-        
-        layer.borderColor = UIColor.black.cgColor
-        layer.borderWidth = 5
-        
+
+        setupSubviews()
         constructSubviews()
         constructConstraints()
+    }
+    
+    func setupSubviews() {
+        contentView.layer.borderColor = UIColor.black.cgColor
+        contentView.layer.borderWidth = 1.0
+        contentView.backgroundColor = .white
     }
     
     func configure(with date: Date) {
