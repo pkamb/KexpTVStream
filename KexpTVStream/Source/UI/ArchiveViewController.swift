@@ -11,16 +11,16 @@ import UIKit
 
 class ArchiveViewController: UIViewController {
     private let archiveManager = ArchiveManager()
-    private let calendarCollectionView = ArchiveCalendarCollectionView()
-    private let hostArchieveCollectionView = ArchiveDetailCollectionView(with: .host)
-    private let showArchieveCollectionView = ArchiveDetailCollectionView(with: .show)
-    private let genreArchieveCollectionView = ArchiveDetailCollectionView(with: .genre)
+    private let calendarCollectionVC = ArchiveCalendarCollectionVC()
+    private let hostArchieveCollectionVC = ArchiveDetailCollectionVC(with: .host)
+    private let showArchieveCollectionVC = ArchiveDetailCollectionVC(with: .show)
+    private let genreArchieveCollectionVC = ArchiveDetailCollectionVC(with: .genre)
     
-    private lazy var archieveCollectionViews: [UICollectionView] = {
-        return [calendarCollectionView,
-                hostArchieveCollectionView,
-                showArchieveCollectionView,
-                genreArchieveCollectionView]
+    private lazy var archieveCollectionViews: [UIViewController] = {
+        return [calendarCollectionVC,
+                hostArchieveCollectionVC,
+                showArchieveCollectionVC,
+                genreArchieveCollectionVC]
     } ()
     
     private let containerView: UIView = {
@@ -46,9 +46,8 @@ class ArchiveViewController: UIViewController {
         
         constructSubviews()
         constructConstraints()
-        _ = archieveCollectionViews.map { $0.isHidden = true }
     
-        calendarCollectionView.archiveCalendarDelegate = self
+        calendarCollectionVC.archiveCalendarDelegate = self
         
         view.backgroundColor = .white
         
@@ -56,12 +55,12 @@ class ArchiveViewController: UIViewController {
             guard let strongSelf = self else { return }
             
             DispatchQueue.main.async {
-                strongSelf.hostArchieveCollectionView.isHidden = false
+                strongSelf.calendarCollectionVC.view.isHidden = false
                 
-                strongSelf.calendarCollectionView.configure(with: showsByDate)
-                strongSelf.hostArchieveCollectionView.configure(with: showsByHostName)
-                strongSelf.showArchieveCollectionView.configure(with: showsByShowName)
-                strongSelf.genreArchieveCollectionView.configure(with: showsGenre)
+                strongSelf.calendarCollectionVC.configure(with: showsByDate)
+                strongSelf.showArchieveCollectionVC.configure(with: showsByShowName)
+                strongSelf.hostArchieveCollectionVC.configure(with: showsByHostName)
+                strongSelf.genreArchieveCollectionVC.configure(with: showsGenre)
             }
         }
     }
@@ -69,10 +68,14 @@ class ArchiveViewController: UIViewController {
     func constructSubviews() {
         view.addSubview(segmentedControl)
         view.addSubview(containerView)
-        containerView.addSubview(calendarCollectionView)
-        containerView.addSubview(hostArchieveCollectionView)
-        containerView.addSubview(showArchieveCollectionView)
-        containerView.addSubview(genreArchieveCollectionView)
+        
+        archieveCollectionViews.forEach { cv in
+            cv.view.translatesAutoresizingMaskIntoConstraints = false
+            containerView.addSubview(cv.view)
+            addChild(cv)
+            cv.didMove(toParent: self)
+            cv.view.isHidden = true
+        }
     }
     
     func constructConstraints() {
@@ -90,34 +93,41 @@ class ArchiveViewController: UIViewController {
         
         archieveCollectionViews.forEach { cv in
             NSLayoutConstraint.activate(
-                [cv.topAnchor.constraint(equalTo: self.containerView.topAnchor),
-                 cv.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor),
-                 cv.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor),
-                 cv.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor)
+                [cv.view.topAnchor.constraint(equalTo: self.containerView.topAnchor),
+                 cv.view.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor),
+                 cv.view.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor),
+                 cv.view.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor)
                 ])
         }
+
     }
     
    @objc private func handleUpdate(sender: UISegmentedControl) {
         let selectedIndex = sender.selectedSegmentIndex
     
-        _ = archieveCollectionViews.map { $0.isHidden = true }
+        _ = archieveCollectionViews.map { $0.view.isHidden = true }
     
         if selectedIndex == 0  {
-            calendarCollectionView.isHidden = false
+            calendarCollectionVC.view.isHidden = false
         } else if selectedIndex == 1 {
-            hostArchieveCollectionView.isHidden = false
+            hostArchieveCollectionVC.view.isHidden = false
         } else if selectedIndex == 2 {
-            showArchieveCollectionView.isHidden = false
+            showArchieveCollectionVC.view.isHidden = false
         } else if selectedIndex == 3 {
-            genreArchieveCollectionView.isHidden = false
+            genreArchieveCollectionVC.view.isHidden = false
         }
     }
 }
 
 extension ArchiveViewController: ArchiveCalendarDelegate {
-    func didSectionArchieveDate(archiveShow: [ArchiveShow]) {
-        let navigationController = UINavigationController(rootViewController: UIViewController())
+    func didSectionArchieveDate(archiveShows: [ArchiveShow]) {
+      
+        let showsVC = ArchiveDetailCollectionVC(with: .day)
+        showsVC.configure(with: [["" : archiveShows]])
+        let navigationController = UINavigationController(rootViewController: showsVC)
+        showsVC.title = "Day of show"
+        
+        show(navigationController, sender: self)
         
     }
 }

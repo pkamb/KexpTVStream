@@ -1,5 +1,5 @@
 //
-//  CalendarCollectionView.swift
+//  ArchiveCalendarCollectionVC.swift
 //  KexpTVStream
 //
 //  Created by Dustin Bergman on 4/8/20.
@@ -10,10 +10,10 @@ import UIKit
 import KEXPPower
 
 protocol ArchiveCalendarDelegate: class {
-    func didSectionArchieveDate(archiveShow: [ArchiveShow])
+    func didSectionArchieveDate(archiveShows: [ArchiveShow])
 }
 
-class ArchiveCalendarCollectionView: UICollectionView {
+class ArchiveCalendarCollectionVC: UICollectionViewController {
     private let layout = UICollectionViewFlowLayout()
     private var showsByDate: [[Date: [ArchiveShow]]]?
     
@@ -22,30 +22,30 @@ class ArchiveCalendarCollectionView: UICollectionView {
     init() {
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
-        super.init(frame: CGRect.zero, collectionViewLayout: layout)
+        super.init(collectionViewLayout: layout)
 
-        isScrollEnabled = false
-        translatesAutoresizingMaskIntoConstraints = false
-        register(DayCollectionCell.self, forCellWithReuseIdentifier: DayCollectionCell.reuseIdentifier)
+        collectionView.isScrollEnabled = false
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(DayCollectionCell.self, forCellWithReuseIdentifier: DayCollectionCell.reuseIdentifier)
         
-        dataSource = self
-        delegate = self
+        collectionView.dataSource = self
+        collectionView.delegate = self
     }
     
     func configure(with showsByDate: [[Date: [ArchiveShow]]]) {
         self.showsByDate = showsByDate
-        reloadData()
+        collectionView.reloadData()
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
 
-extension ArchiveCalendarCollectionView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+extension ArchiveCalendarCollectionVC: UICollectionViewDelegateFlowLayout {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return showsByDate?.count ?? 0
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayCollectionCell.reuseIdentifier, for: indexPath as IndexPath) as! DayCollectionCell
         
         let showByDate = showsByDate?[indexPath.row]
@@ -53,24 +53,22 @@ extension ArchiveCalendarCollectionView: UICollectionViewDataSource, UICollectio
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("You selected cell #\(indexPath.item)!")
-        
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let showByDate = showsByDate?[indexPath.row]
         
         if let archiveShow = showByDate?.values.first {
-             archiveCalendarDelegate?.didSectionArchieveDate(archiveShow: archiveShow)
+             archiveCalendarDelegate?.didSectionArchieveDate(archiveShows: archiveShow)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let containerWidth = superview?.frame.width else { return CGSize.zero }
+        guard let containerWidth = view.superview?.frame.width else { return CGSize.zero }
 
         let cellWidth = containerWidth/7.0
         return CGSize(width: cellWidth, height: cellWidth)
     }
     
-    func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+    override func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         if let previouslyFocusedIndexPath = context.previouslyFocusedIndexPath {
             let previousFocusCell = collectionView.cellForItem(at: previouslyFocusedIndexPath)
             previousFocusCell?.contentView.backgroundColor = .gray

@@ -1,5 +1,5 @@
 //
-//  ArchiveDetailCollectionView.swift
+//  ArchiveDetailCollectionVC.swift
 //  KexpTVStream
 //
 //  Created by Dustin Bergman on 4/12/20.
@@ -9,15 +9,17 @@
 import KEXPPower
 import UIKit
 
-class ArchiveDetailCollectionView: UICollectionView {
+class ArchiveDetailCollectionVC: UICollectionViewController {
     fileprivate enum Layout {
         static let hostCellHeight: CGFloat = 200
         static let showCellHeight: CGFloat = 200
+        static let dayCellHeight: CGFloat = 200
         static let genreCellHeight: CGFloat = 100
         static let imageSize: CGFloat = 150
     }
     
     enum ArchiveType {
+        case day
         case host
         case show
         case genre
@@ -31,46 +33,65 @@ class ArchiveDetailCollectionView: UICollectionView {
         self.archiveType = archiveType
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
-        super.init(frame: CGRect.zero, collectionViewLayout: layout)
+        super.init(collectionViewLayout: layout)
 
-        translatesAutoresizingMaskIntoConstraints = false
-        register(ArchiveDetailCollectionCell.self, forCellWithReuseIdentifier: ArchiveDetailCollectionCell.reuseIdentifier)
+        collectionView.register(ArchiveDetailCollectionCell.self, forCellWithReuseIdentifier: ArchiveDetailCollectionCell.reuseIdentifier)
         
-        dataSource = self
-        delegate = self
+        collectionView.dataSource = self
+        collectionView.delegate = self
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        backgroundColor = .white
+        collectionView.backgroundColor = .white
+        
+        if archiveType == .day {
+            collectionView.contentInset = UIEdgeInsets(top: 0, left: 100, bottom: 0, right: 100)
+        }
     }
     
     func configure(with archieveShows: [[String: [ArchiveShow]]]) {
         self.archieveShows = archieveShows
-        reloadData()
+        collectionView.reloadData()
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
 
-extension ArchiveDetailCollectionView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+extension ArchiveDetailCollectionVC: UICollectionViewDelegateFlowLayout {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if case .day = archiveType {
+            return archieveShows?.first?.values.first?.count ?? 0
+        }
+        
         return archieveShows?.count ?? 0
+        
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArchiveDetailCollectionCell.reuseIdentifier, for: indexPath as IndexPath) as! ArchiveDetailCollectionCell
         
-        let archiveDictionary = archieveShows?[indexPath.row]
-        cell.configure(type: archiveType, archiveDictionary: archiveDictionary)
+        if archiveType == .day {
+            let archieveShow = archieveShows?.first?.values.first?[indexPath.row]
+            cell.configureForDay(with : archieveShow)
+        } else {
+            let archiveDictionary = archieveShows?[indexPath.row]
+            cell.configure(type: archiveType, archiveDictionary: archiveDictionary)
+        }
+
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("You selected cell #\(indexPath.item)!")
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let containerWidth = superview?.frame.width else { return CGSize.zero }
+        guard var containerWidth = view?.frame.width else { return CGSize.zero }
 
-        let cellWidth = containerWidth/3.0
+        containerWidth = containerWidth - collectionView.contentInset.left - collectionView.contentInset.right
+        let cellWidth = containerWidth / 3.0
     
         return CGSize(width: cellWidth, height: getCellHeight())
     }
@@ -80,10 +101,11 @@ extension ArchiveDetailCollectionView: UICollectionViewDataSource, UICollectionV
         case .genre: return Layout.genreCellHeight
         case .host: return Layout.hostCellHeight
         case .show: return Layout.showCellHeight
+        case .day: return Layout.dayCellHeight
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+    override func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         if let previouslyFocusedIndexPath = context.previouslyFocusedIndexPath {
             let previousFocusCell = collectionView.cellForItem(at: previouslyFocusedIndexPath)
             previousFocusCell?.contentView.backgroundColor = .gray
@@ -139,7 +161,7 @@ private class ArchiveDetailCollectionCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .yellow
-        imageView.layer.cornerRadius = ArchiveDetailCollectionView.Layout.imageSize / 2
+        imageView.layer.cornerRadius = ArchiveDetailCollectionVC.Layout.imageSize / 2
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -158,7 +180,14 @@ private class ArchiveDetailCollectionCell: UICollectionViewCell {
         contentView.backgroundColor = .gray
     }
     
-    func configure(type: ArchiveDetailCollectionView.ArchiveType, archiveDictionary: [String: [ArchiveShow]]?) {
+    func configureForDay(with archiveShow: ArchiveShow?) {
+        archiveImageView.fromURLSting(archiveShow?.show.imageURI)
+        topLabel.text = archiveShow?.show.programName
+        middleLabel.text = archiveShow?.show.hostNames?.first
+        bottomLabel.text = archiveShow?.show.programTags
+    }
+    
+    func configure(type: ArchiveDetailCollectionVC.ArchiveType, archiveDictionary: [String: [ArchiveShow]]?) {
         let archiveShow = archiveDictionary?.values.first?.first?.show
         
         switch type {
@@ -168,7 +197,7 @@ private class ArchiveDetailCollectionCell: UICollectionViewCell {
             middleLabel.text = archiveShow?.programName
             bottomLabel.text = archiveShow?.programTags
             
-        case .show:
+        case .show, .day:
             archiveImageView.fromURLSting(archiveShow?.imageURI)
             topLabel.text = archiveShow?.programName
             middleLabel.text = archiveShow?.hostNames?.first
@@ -199,8 +228,8 @@ private class ArchiveDetailCollectionCell: UICollectionViewCell {
             ])
         
         NSLayoutConstraint.activate([
-            archiveImageView.heightAnchor.constraint(equalToConstant: ArchiveDetailCollectionView.Layout.imageSize),
-            archiveImageView.widthAnchor.constraint(equalToConstant: ArchiveDetailCollectionView.Layout.imageSize)
+            archiveImageView.heightAnchor.constraint(equalToConstant: ArchiveDetailCollectionVC.Layout.imageSize),
+            archiveImageView.widthAnchor.constraint(equalToConstant: ArchiveDetailCollectionVC.Layout.imageSize)
         ])
     }
     
