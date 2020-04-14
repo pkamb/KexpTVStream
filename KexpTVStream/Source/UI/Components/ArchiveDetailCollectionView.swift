@@ -10,6 +10,13 @@ import KEXPPower
 import UIKit
 
 class ArchiveDetailCollectionView: UICollectionView {
+    fileprivate enum Layout {
+        static let hostCellHeight: CGFloat = 200
+        static let showCellHeight: CGFloat = 200
+        static let genreCellHeight: CGFloat = 100
+        static let imageSize: CGFloat = 150
+    }
+    
     enum ArchiveType {
         case host
         case show
@@ -64,18 +71,27 @@ extension ArchiveDetailCollectionView: UICollectionViewDataSource, UICollectionV
         guard let containerWidth = superview?.frame.width else { return CGSize.zero }
 
         let cellWidth = containerWidth/3.0
-        return CGSize(width: cellWidth, height: 200)
+    
+        return CGSize(width: cellWidth, height: getCellHeight())
+    }
+    
+    private func getCellHeight() -> CGFloat {
+        switch archiveType {
+        case .genre: return Layout.genreCellHeight
+        case .host: return Layout.hostCellHeight
+        case .show: return Layout.showCellHeight
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         if let previouslyFocusedIndexPath = context.previouslyFocusedIndexPath {
             let previousFocusCell = collectionView.cellForItem(at: previouslyFocusedIndexPath)
-            previousFocusCell?.contentView.backgroundColor = UIColor.white.withAlphaComponent(0.2)
+            previousFocusCell?.contentView.backgroundColor = .gray
         }
 
         if let nextFocusedIndexPath = context.nextFocusedIndexPath {
             let nextFocusCell = collectionView.cellForItem(at: nextFocusedIndexPath)
-            nextFocusCell?.contentView.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+            nextFocusCell?.contentView.backgroundColor = UIColor.white
         }
     }
 }
@@ -88,6 +104,7 @@ private class ArchiveDetailCollectionCell: UICollectionViewCell {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
         stackView.distribution = .fill
+        stackView.alignment = .center
         return stackView
     }()
     
@@ -117,6 +134,16 @@ private class ArchiveDetailCollectionCell: UICollectionViewCell {
         return label
     }()
     
+    private let archiveImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = .yellow
+        imageView.layer.cornerRadius = ArchiveDetailCollectionView.Layout.imageSize / 2
+        imageView.clipsToBounds = true
+        return imageView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame:frame)
         
@@ -128,29 +155,36 @@ private class ArchiveDetailCollectionCell: UICollectionViewCell {
     func setupSubviews() {
         contentView.layer.borderColor = UIColor.black.cgColor
         contentView.layer.borderWidth = 1.0
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = .gray
     }
     
     func configure(type: ArchiveDetailCollectionView.ArchiveType, archiveDictionary: [String: [ArchiveShow]]?) {
-        let archiveShow = archiveDictionary?.values.first?.first
+        let archiveShow = archiveDictionary?.values.first?.first?.show
         
         switch type {
         case .host:
-            topLabel.text = archiveShow?.show.hostNames?.first
-            middleLabel.text = archiveShow?.show.programName
-            bottomLabel.text = archiveShow?.show.programTags
+            archiveImageView.fromURLSting(archiveShow?.imageURI)
+            topLabel.text = archiveShow?.hostNames?.first
+            middleLabel.text = archiveShow?.programName
+            bottomLabel.text = archiveShow?.programTags
+            
         case .show:
-            topLabel.text = archiveShow?.show.programName
-            middleLabel.text = archiveShow?.show.hostNames?.first
-            bottomLabel.text = archiveShow?.show.programTags
+            archiveImageView.fromURLSting(archiveShow?.imageURI)
+            topLabel.text = archiveShow?.programName
+            middleLabel.text = archiveShow?.hostNames?.first
+            bottomLabel.text = archiveShow?.programTags
+            
         case .genre:
-            topLabel.text = archiveShow?.show.programTags
+            topLabel.text = archiveShow?.programTags
+            archiveImageView.removeFromSuperview()
         }
     }
     
     private func constructSubviews() {
         contentView.addSubview(contentStackView)
+        contentStackView.addArrangedSubview(archiveImageView)
         contentStackView.addArrangedSubview(labelStackView)
+        
         labelStackView.addArrangedSubview(topLabel)
         labelStackView.addArrangedSubview(middleLabel)
         labelStackView.addArrangedSubview(bottomLabel)
@@ -160,9 +194,14 @@ private class ArchiveDetailCollectionCell: UICollectionViewCell {
         NSLayoutConstraint.activate(
             [contentStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
              contentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-             contentStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+             contentStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20.0),
              contentStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
             ])
+        
+        NSLayoutConstraint.activate([
+            archiveImageView.heightAnchor.constraint(equalToConstant: ArchiveDetailCollectionView.Layout.imageSize),
+            archiveImageView.widthAnchor.constraint(equalToConstant: ArchiveDetailCollectionView.Layout.imageSize)
+        ])
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }

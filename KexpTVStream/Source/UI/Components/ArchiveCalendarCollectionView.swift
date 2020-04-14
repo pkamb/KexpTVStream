@@ -9,9 +9,15 @@
 import UIKit
 import KEXPPower
 
+protocol ArchiveCalendarDelegate: class {
+    func didSectionArchieveDate(archiveShow: [ArchiveShow])
+}
+
 class ArchiveCalendarCollectionView: UICollectionView {
     private let layout = UICollectionViewFlowLayout()
     private var showsByDate: [[Date: [ArchiveShow]]]?
+    
+    weak var archiveCalendarDelegate: ArchiveCalendarDelegate?
 
     init() {
         layout.minimumLineSpacing = 0
@@ -49,6 +55,12 @@ extension ArchiveCalendarCollectionView: UICollectionViewDataSource, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("You selected cell #\(indexPath.item)!")
+        
+        let showByDate = showsByDate?[indexPath.row]
+        
+        if let archiveShow = showByDate?.values.first {
+             archiveCalendarDelegate?.didSectionArchieveDate(archiveShow: archiveShow)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -61,12 +73,12 @@ extension ArchiveCalendarCollectionView: UICollectionViewDataSource, UICollectio
     func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         if let previouslyFocusedIndexPath = context.previouslyFocusedIndexPath {
             let previousFocusCell = collectionView.cellForItem(at: previouslyFocusedIndexPath)
-            previousFocusCell?.contentView.backgroundColor = UIColor.white.withAlphaComponent(0.2)
+            previousFocusCell?.contentView.backgroundColor = .gray
         }
 
         if let nextFocusedIndexPath = context.nextFocusedIndexPath {
             let nextFocusCell = collectionView.cellForItem(at: nextFocusedIndexPath)
-            nextFocusCell?.contentView.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+            nextFocusCell?.contentView.backgroundColor = .white
         }
     }
 }
@@ -111,7 +123,7 @@ private class DayCollectionCell: UICollectionViewCell {
     func setupSubviews() {
         contentView.layer.borderColor = UIColor.black.cgColor
         contentView.layer.borderWidth = 1.0
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = .gray
     }
     
     func configure(with date: Date) {

@@ -47,6 +47,8 @@ class ArchiveViewController: UIViewController {
         constructSubviews()
         constructConstraints()
         _ = archieveCollectionViews.map { $0.isHidden = true }
+    
+        calendarCollectionView.archiveCalendarDelegate = self
         
         view.backgroundColor = .white
         
@@ -54,7 +56,7 @@ class ArchiveViewController: UIViewController {
             guard let strongSelf = self else { return }
             
             DispatchQueue.main.async {
-                strongSelf.calendarCollectionView.isHidden = false
+                strongSelf.hostArchieveCollectionView.isHidden = false
                 
                 strongSelf.calendarCollectionView.configure(with: showsByDate)
                 strongSelf.hostArchieveCollectionView.configure(with: showsByHostName)
@@ -110,5 +112,12 @@ class ArchiveViewController: UIViewController {
         } else if selectedIndex == 3 {
             genreArchieveCollectionView.isHidden = false
         }
+    }
+}
+
+extension ArchiveViewController: ArchiveCalendarDelegate {
+    func didSectionArchieveDate(archiveShow: [ArchiveShow]) {
+        let navigationController = UINavigationController(rootViewController: UIViewController())
+        
     }
 }
