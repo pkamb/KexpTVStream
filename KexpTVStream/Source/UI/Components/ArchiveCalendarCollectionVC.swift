@@ -14,12 +14,20 @@ protocol ArchiveCalendarDelegate: class {
 }
 
 class ArchiveCalendarCollectionVC: UICollectionViewController {
+    enum DisplayType {
+        case full
+        case detail
+    }
+    
     private let layout = UICollectionViewFlowLayout()
     private var showsByDate: [[Date: [ArchiveShow]]]?
+    private let displayType: DisplayType
     
     weak var archiveCalendarDelegate: ArchiveCalendarDelegate?
 
-    init() {
+    init(displayType: DisplayType) {
+        self.displayType = displayType
+        
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         super.init(collectionViewLayout: layout)
@@ -32,6 +40,16 @@ class ArchiveCalendarCollectionVC: UICollectionViewController {
         collectionView.delegate = self
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        collectionView.backgroundColor = .white
+        
+        if displayType == .detail {
+            collectionView.contentInset = UIEdgeInsets(top: 0, left: 100, bottom: 0, right: 100)
+        }
+    }
+    
     func configure(with showsByDate: [[Date: [ArchiveShow]]]) {
         self.showsByDate = showsByDate
         collectionView.reloadData()
@@ -42,27 +60,39 @@ class ArchiveCalendarCollectionVC: UICollectionViewController {
 
 extension ArchiveCalendarCollectionVC: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if displayType == .detail {
+            return showsByDate?.first?.first?.value.count ?? 0
+        }
+        
         return showsByDate?.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayCollectionCell.reuseIdentifier, for: indexPath as IndexPath) as! DayCollectionCell
         
-        let showByDate = showsByDate?[indexPath.row]
-        cell.configure(with: showByDate?.keys.first ?? Date())
+        if displayType == .full {
+            let showByDate = showsByDate?[indexPath.row]
+            cell.configure(with: showByDate?.keys.first ?? Date())
+        } else {
+            let showByDate = showsByDate?.first?.first?.value[indexPath.row]
+            cell.configure(with: showByDate?.show.startTime ?? Date())
+        }
+        
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let showByDate = showsByDate?[indexPath.row]
-        
+
         if let archiveShow = showByDate?.values.first {
              archiveCalendarDelegate?.didSectionArchieveDate(archiveShows: archiveShow)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let containerWidth = view.superview?.frame.width else { return CGSize.zero }
+        guard var containerWidth = view.superview?.frame.width else { return CGSize.zero }
+        
+        containerWidth = containerWidth - collectionView.contentInset.left - collectionView.contentInset.right
 
         let cellWidth = containerWidth/7.0
         return CGSize(width: cellWidth, height: cellWidth)
@@ -147,27 +177,4 @@ private class DayCollectionCell: UICollectionViewCell {
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-}
-
-extension DateFormatter {
-    public static let monthFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM"
-        formatter.timeZone = TimeZone.current
-        return formatter
-    }()
-
-    public static let dayFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "d"
-        formatter.timeZone = TimeZone.current
-        return formatter
-    }()
-
-    public static let dayOfWeekFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "eeee"
-        formatter.timeZone = TimeZone.current
-        return formatter
-    }()
 }

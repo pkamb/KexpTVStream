@@ -7,7 +7,10 @@
 //
 
 import KEXPPower
-import UIKit
+
+protocol ArchiveDetailDelegate: class {
+    func didSectionArchieve(archiveShows: [ArchiveShow], type: ArchiveDetailCollectionVC.ArchiveType)
+}
 
 class ArchiveDetailCollectionVC: UICollectionViewController {
     fileprivate enum Layout {
@@ -28,6 +31,8 @@ class ArchiveDetailCollectionVC: UICollectionViewController {
     private let layout = UICollectionViewFlowLayout()
     private var archiveType: ArchiveType
     private var archieveShows: [[String: [ArchiveShow]]]?
+    
+    weak var archiveDetailDelegate: ArchiveDetailDelegate?
 
     init(with archiveType: ArchiveType) {
         self.archiveType = archiveType
@@ -84,14 +89,16 @@ extension ArchiveDetailCollectionVC: UICollectionViewDelegateFlowLayout {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("You selected cell #\(indexPath.item)!")
+        guard let archieveShows = archieveShows?[indexPath.row].first?.value else { return }
+
+        archiveDetailDelegate?.didSectionArchieve(archiveShows: archieveShows, type: archiveType)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard var containerWidth = view?.frame.width else { return CGSize.zero }
 
         containerWidth = containerWidth - collectionView.contentInset.left - collectionView.contentInset.right
-        let cellWidth = containerWidth / 3.0
+        let cellWidth = containerWidth / 2.0
     
         return CGSize(width: cellWidth, height: getCellHeight())
     }
@@ -125,7 +132,7 @@ private class ArchiveDetailCollectionCell: UICollectionViewCell {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
-        stackView.distribution = .fill
+        stackView.distribution = .equalSpacing
         stackView.alignment = .center
         return stackView
     }()
@@ -156,11 +163,16 @@ private class ArchiveDetailCollectionCell: UICollectionViewCell {
         return label
     }()
     
+    private let infoLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .right
+        return label
+    }()
+    
     private let archiveImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .yellow
+        imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = ArchiveDetailCollectionVC.Layout.imageSize / 2
         imageView.clipsToBounds = true
         return imageView
@@ -180,39 +192,11 @@ private class ArchiveDetailCollectionCell: UICollectionViewCell {
         contentView.backgroundColor = .gray
     }
     
-    func configureForDay(with archiveShow: ArchiveShow?) {
-        archiveImageView.fromURLSting(archiveShow?.show.imageURI)
-        topLabel.text = archiveShow?.show.programName
-        middleLabel.text = archiveShow?.show.hostNames?.first
-        bottomLabel.text = archiveShow?.show.programTags
-    }
-    
-    func configure(type: ArchiveDetailCollectionVC.ArchiveType, archiveDictionary: [String: [ArchiveShow]]?) {
-        let archiveShow = archiveDictionary?.values.first?.first?.show
-        
-        switch type {
-        case .host:
-            archiveImageView.fromURLSting(archiveShow?.imageURI)
-            topLabel.text = archiveShow?.hostNames?.first
-            middleLabel.text = archiveShow?.programName
-            bottomLabel.text = archiveShow?.programTags
-            
-        case .show, .day:
-            archiveImageView.fromURLSting(archiveShow?.imageURI)
-            topLabel.text = archiveShow?.programName
-            middleLabel.text = archiveShow?.hostNames?.first
-            bottomLabel.text = archiveShow?.programTags
-            
-        case .genre:
-            topLabel.text = archiveShow?.programTags
-            archiveImageView.removeFromSuperview()
-        }
-    }
-    
     private func constructSubviews() {
         contentView.addSubview(contentStackView)
         contentStackView.addArrangedSubview(archiveImageView)
         contentStackView.addArrangedSubview(labelStackView)
+        contentStackView.addArrangedSubview(infoLabel)
         
         labelStackView.addArrangedSubview(topLabel)
         labelStackView.addArrangedSubview(middleLabel)
@@ -222,7 +206,7 @@ private class ArchiveDetailCollectionCell: UICollectionViewCell {
     private func constructConstraints() {
         NSLayoutConstraint.activate(
             [contentStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
-             contentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+             contentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20.0),
              contentStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20.0),
              contentStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
             ])
@@ -231,6 +215,53 @@ private class ArchiveDetailCollectionCell: UICollectionViewCell {
             archiveImageView.heightAnchor.constraint(equalToConstant: ArchiveDetailCollectionVC.Layout.imageSize),
             archiveImageView.widthAnchor.constraint(equalToConstant: ArchiveDetailCollectionVC.Layout.imageSize)
         ])
+    }
+    
+    func configureForDay(with archiveShow: ArchiveShow?) {
+        archiveImageView.fromURLSting(archiveShow?.show.imageURI)
+        topLabel.text = archiveShow?.show.programName
+        middleLabel.text = archiveShow?.show.hostNames?.first
+        bottomLabel.text = archiveShow?.show.programTags
+        
+        if let startTime = archiveShow?.show.startTime {
+            infoLabel.text = DateFormatter.displayFormatter.string(from: startTime)
+        }
+    }
+    
+    func configure(type: ArchiveDetailCollectionVC.ArchiveType, archiveDictionary: [String: [ArchiveShow]]?) {
+        let archiveShow = archiveDictionary?.values.first?.first?.show
+        let showCount = archiveDictionary?.values.first?.count
+        
+        let infoText: String
+        
+        if showCount == 1 {
+            infoText = "1 SHOW"
+        } else if let showCount = showCount {
+            infoText = "\(showCount) SHOWS"
+        } else {
+            infoText = ""
+        }
+        
+        switch type {
+        case .host:
+            archiveImageView.fromURLSting(archiveShow?.imageURI)
+            topLabel.text = archiveShow?.hostNames?.first
+            middleLabel.text = archiveShow?.programName
+            bottomLabel.text = archiveShow?.programTags
+            infoLabel.text = infoText
+            
+        case .show, .day:
+            archiveImageView.fromURLSting(archiveShow?.imageURI)
+            topLabel.text = archiveShow?.programName
+            middleLabel.text = archiveShow?.hostNames?.first
+            bottomLabel.text = archiveShow?.programTags
+            infoLabel.text = infoText
+            
+        case .genre:
+            topLabel.text = archiveShow?.programTags
+            infoLabel.text = infoText
+            archiveImageView.removeFromSuperview()
+        }
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }

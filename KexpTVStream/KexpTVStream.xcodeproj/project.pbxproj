@@ -14,6 +14,7 @@
 		46CDFB401C30A7630001A004 /* KexpNowPlayingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB3F1C30A7630001A004 /* KexpNowPlayingVC.swift */; };
 		46CDFB451C30A8AD0001A004 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB421C30A8AD0001A004 /* AudioManager.swift */; };
 		46CDFB491C30B0F30001A004 /* KexpStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB481C30B0F30001A004 /* KexpStyle.swift */; };
+		8B3962692446D58200CD60F5 /* DisplayFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3962682446D58200CD60F5 /* DisplayFormatters.swift */; };
 		8B4C3EBB2443962500269ADF /* ArchiveDetailCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4C3EBA2443962500269ADF /* ArchiveDetailCollectionVC.swift */; };
 		8B5BBC3E243EC18400FAE988 /* ArchiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BBC3D243EC18400FAE988 /* ArchiveViewController.swift */; };
 		8B5BBC40243ECF3C00FAE988 /* ArchiveCalendarCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BBC3F243ECF3C00FAE988 /* ArchiveCalendarCollectionVC.swift */; };
@@ -43,7 +44,7 @@
 /* Begin PBXFileReference section */
 		26F19CA66E8D2DCA47312557 /* Pods-KexpTVStream.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KexpTVStream.release.xcconfig"; path = "Pods/Target Support Files/Pods-KexpTVStream/Pods-KexpTVStream.release.xcconfig"; sourceTree = "<group>"; };
 		2F0CAA22E221BBEB7D01447E /* Pods_KexpTVStreamTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KexpTVStreamTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		46CDFB1C1C30A7170001A004 /* KexpTVStream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KexpTVStream.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		46CDFB1C1C30A7170001A004 /* KexpTVStreamXXX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KexpTVStreamXXX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46CDFB1F1C30A7170001A004 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		46CDFB241C30A7170001A004 /* KexpTVStream.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KexpTVStream.xcdatamodel; sourceTree = "<group>"; };
 		46CDFB271C30A7170001A004 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -57,6 +58,7 @@
 		4A88670E65745188983D52A4 /* Pods-KexpTVStreamTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KexpTVStreamTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KexpTVStreamTests/Pods-KexpTVStreamTests.release.xcconfig"; sourceTree = "<group>"; };
 		4C57EEF456081D1CB64BCCF9 /* Pods-KexpTVStream.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KexpTVStream.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KexpTVStream/Pods-KexpTVStream.debug.xcconfig"; sourceTree = "<group>"; };
 		78E3AB477D2FF07E1439780E /* Pods-KexpTVStreamTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KexpTVStreamTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KexpTVStreamTests/Pods-KexpTVStreamTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8B3962682446D58200CD60F5 /* DisplayFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayFormatters.swift; sourceTree = "<group>"; };
 		8B4C3EBA2443962500269ADF /* ArchiveDetailCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveDetailCollectionVC.swift; sourceTree = "<group>"; };
 		8B5BBC3D243EC18400FAE988 /* ArchiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveViewController.swift; sourceTree = "<group>"; };
 		8B5BBC3F243ECF3C00FAE988 /* ArchiveCalendarCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveCalendarCollectionVC.swift; sourceTree = "<group>"; };
@@ -111,7 +113,7 @@
 		46CDFB1D1C30A7170001A004 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				46CDFB1C1C30A7170001A004 /* KexpTVStream.app */,
+				46CDFB1C1C30A7170001A004 /* KexpTVStreamXXX.app */,
 				46CDFB301C30A7180001A004 /* KexpTVStreamTests.xctest */,
 			);
 			name = Products;
@@ -161,6 +163,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		8B3962672446D53500CD60F5 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				8B3962682446D58200CD60F5 /* DisplayFormatters.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		8BBBD0252439157C00953C59 /* VCs */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,6 +192,7 @@
 		8BF32098243D93890028B852 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				8B3962672446D53500CD60F5 /* Helpers */,
 				8BF32099243D939B0028B852 /* UI */,
 				46CDFB1F1C30A7170001A004 /* AppDelegate.swift */,
 			);
@@ -280,7 +291,7 @@
 			);
 			name = KexpTVStream;
 			productName = KexpTVStream;
-			productReference = 46CDFB1C1C30A7170001A004 /* KexpTVStream.app */;
+			productReference = 46CDFB1C1C30A7170001A004 /* KexpTVStreamXXX.app */;
 			productType = "com.apple.product-type.application";
 		};
 		46CDFB2F1C30A7180001A004 /* KexpTVStreamTests */ = {
@@ -480,6 +491,7 @@
 				46CDFB491C30B0F30001A004 /* KexpStyle.swift in Sources */,
 				8B5BBC3E243EC18400FAE988 /* ArchiveViewController.swift in Sources */,
 				8B4C3EBB2443962500269ADF /* ArchiveDetailCollectionVC.swift in Sources */,
+				8B3962692446D58200CD60F5 /* DisplayFormatters.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -639,8 +651,8 @@
 					"$(PROJECT_DIR)/KexpTVStream",
 				);
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dus.KexpTVStream;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dus.KexpTVStreamXXX;
+				PRODUCT_NAME = KexpTVStreamXXX;
 				SWIFT_OBJC_BRIDGING_HEADER = "KexpTVStream-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -664,8 +676,8 @@
 					"$(PROJECT_DIR)/KexpTVStream",
 				);
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dus.KexpTVStream;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dus.KexpTVStreamXXX;
+				PRODUCT_NAME = KexpTVStreamXXX;
 				SWIFT_OBJC_BRIDGING_HEADER = "KexpTVStream-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TVOS_DEPLOYMENT_TARGET = 11.0;
