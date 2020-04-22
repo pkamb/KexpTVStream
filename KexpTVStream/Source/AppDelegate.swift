@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let settingsTabBarItem = UITabBarItem()
         settingsTabBarItem.title = "Settings"
-        let settingsVC = UIViewController()
+        let settingsVC = SettingsViewController()
         settingsVC.tabBarItem = settingsTabBarItem
         
         let nowPlayingTabBarItem = UITabBarItem()
@@ -56,8 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         nowPlayingVC.tabBarItem = nowPlayingTabBarItem
         
         tabBarController.viewControllers = [listenLiveVC, archiveVC, settingsVC, nowPlayingVC]
-        tabBarController.selectedIndex = 1
-        
+         
         return tabBarController
     }
     
