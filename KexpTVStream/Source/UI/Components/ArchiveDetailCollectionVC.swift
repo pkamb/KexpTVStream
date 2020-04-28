@@ -13,6 +13,11 @@ protocol ArchiveDetailDelegate: class {
 }
 
 class ArchiveDetailCollectionVC: UICollectionViewController {
+    struct ArchiveContent {
+        let contentName: String
+        let shows: [ArchiveShow]
+    }
+    
     fileprivate enum Layout {
         static let hostCellHeight: CGFloat = 200
         static let showCellHeight: CGFloat = 200
@@ -30,7 +35,7 @@ class ArchiveDetailCollectionVC: UICollectionViewController {
     
     private let layout = UICollectionViewFlowLayout()
     private var archiveType: ArchiveType
-    private var archieveShows: [[String: [ArchiveShow]]]?
+    private var archieveShows: [ArchiveContent]?
     
     weak var archiveDetailDelegate: ArchiveDetailDelegate?
 
@@ -56,7 +61,7 @@ class ArchiveDetailCollectionVC: UICollectionViewController {
         }
     }
     
-    func configure(with archieveShows: [[String: [ArchiveShow]]]) {
+    func configure(with archieveShows: [ArchiveContent]) {
         self.archieveShows = archieveShows
         collectionView.reloadData()
     }
@@ -67,7 +72,7 @@ class ArchiveDetailCollectionVC: UICollectionViewController {
 extension ArchiveDetailCollectionVC: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if case .day = archiveType {
-            return archieveShows?.first?.values.first?.count ?? 0
+            return archieveShows?.count ?? 0
         }
         
         return archieveShows?.count ?? 0
@@ -78,20 +83,20 @@ extension ArchiveDetailCollectionVC: UICollectionViewDelegateFlowLayout {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArchiveDetailCollectionCell.reuseIdentifier, for: indexPath as IndexPath) as! ArchiveDetailCollectionCell
         
         if archiveType == .day {
-            let archieveShow = archieveShows?.first?.values.first?[indexPath.row]
-            cell.configureForDay(with : archieveShow)
+            let archieveShow = archieveShows?[indexPath.row]
+            cell.configureForDay(with : archieveShow?.shows.first)
         } else {
-            let archiveDictionary = archieveShows?[indexPath.row]
-            cell.configure(type: archiveType, archiveDictionary: archiveDictionary)
+            let archieveShow = archieveShows?[indexPath.row]
+            cell.configure(type: archiveType, archiveShows: archieveShow?.shows)
         }
 
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let archieveShows = archieveShows?[indexPath.row].first?.value else { return }
+        guard let archieveShows = archieveShows?[indexPath.row] else { return }
 
-        archiveDetailDelegate?.didSectionArchieve(archiveShows: archieveShows, type: archiveType)
+        archiveDetailDelegate?.didSectionArchieve(archiveShows: archieveShows.shows, type: archiveType)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -228,9 +233,9 @@ private class ArchiveDetailCollectionCell: UICollectionViewCell {
         }
     }
     
-    func configure(type: ArchiveDetailCollectionVC.ArchiveType, archiveDictionary: [String: [ArchiveShow]]?) {
-        let archiveShow = archiveDictionary?.values.first?.first?.show
-        let showCount = archiveDictionary?.values.first?.count
+    func configure(type: ArchiveDetailCollectionVC.ArchiveType, archiveShows: [ArchiveShow]?) {
+        let archiveShow = archiveShows?.first?.show
+        let showCount = archiveShows?.count
         
         let infoText: String
         
@@ -265,4 +270,32 @@ private class ArchiveDetailCollectionCell: UICollectionViewCell {
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+}
+
+extension ArchiveDetailCollectionVC.ArchiveContent {
+    init(_ showName: ShowNameShows) {
+        contentName = showName.showName
+        shows = showName.shows
+    }
+    
+    init(_ hostName: HostNameShows) {
+        contentName = hostName.hostName
+        shows = hostName.shows
+    }
+    
+    init(_ genre: GenreShows) {
+        contentName = genre.genre
+        shows = genre.shows
+    }
+    
+    init?(_ type: ArchiveDetailCollectionVC.ArchiveType, archiveShow: ArchiveShow) {
+        switch type {
+        case .day:
+            contentName = archiveShow.show.programName ?? ""
+            shows = [archiveShow]
+
+        default:
+            return nil
+        }
+    }
 }

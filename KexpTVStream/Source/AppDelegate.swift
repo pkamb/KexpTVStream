@@ -35,10 +35,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func buildUITabBarController() -> UITabBarController {
         let tabBarController = UITabBarController()
         
-        let listenLiveTabBarItem = UITabBarItem()
-        listenLiveTabBarItem.title = "Listen Live"
-        let listenLiveVC = ListenLiveViewController()
-        listenLiveVC.tabBarItem = listenLiveTabBarItem
+        let currentlyPlayingTabBarItem = UITabBarItem()
+        currentlyPlayingTabBarItem.title = "Currently Playing"
+        let listenLiveVC = CurrentlyPlayingViewController()
+        listenLiveVC.tabBarItem = currentlyPlayingTabBarItem
         
         let archiveTabBarItem = UITabBarItem()
         archiveTabBarItem.title = "Archive"
@@ -49,13 +49,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         settingsTabBarItem.title = "Settings"
         let settingsVC = SettingsViewController()
         settingsVC.tabBarItem = settingsTabBarItem
+
         
-        let nowPlayingTabBarItem = UITabBarItem()
-        nowPlayingTabBarItem.title = "Now Playing"
-        let nowPlayingVC = UIViewController()
-        nowPlayingVC.tabBarItem = nowPlayingTabBarItem
-        
-        tabBarController.viewControllers = [listenLiveVC, archiveVC, settingsVC, nowPlayingVC]
+        tabBarController.viewControllers = [listenLiveVC, archiveVC, settingsVC]
          
         return tabBarController
     }

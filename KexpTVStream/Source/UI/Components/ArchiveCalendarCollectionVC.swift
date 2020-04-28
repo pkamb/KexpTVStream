@@ -20,7 +20,7 @@ class ArchiveCalendarCollectionVC: UICollectionViewController {
     }
     
     private let layout = UICollectionViewFlowLayout()
-    private var showsByDate: [[Date: [ArchiveShow]]]?
+    private var showsByDate: [DateShows]?
     private let displayType: DisplayType
     
     weak var archiveCalendarDelegate: ArchiveCalendarDelegate?
@@ -50,7 +50,7 @@ class ArchiveCalendarCollectionVC: UICollectionViewController {
         }
     }
     
-    func configure(with showsByDate: [[Date: [ArchiveShow]]]) {
+    func configure(with showsByDate: [DateShows]) {
         self.showsByDate = showsByDate
         collectionView.reloadData()
     }
@@ -61,7 +61,7 @@ class ArchiveCalendarCollectionVC: UICollectionViewController {
 extension ArchiveCalendarCollectionVC: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if displayType == .detail {
-            return showsByDate?.first?.first?.value.count ?? 0
+            return showsByDate?.count ?? 0
         }
         
         return showsByDate?.count ?? 0
@@ -70,22 +70,21 @@ extension ArchiveCalendarCollectionVC: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayCollectionCell.reuseIdentifier, for: indexPath as IndexPath) as! DayCollectionCell
         
-        if displayType == .full {
+        if
+            displayType == .full,
             let showByDate = showsByDate?[indexPath.row]
-            cell.configure(with: showByDate?.keys.first ?? Date())
-        } else {
-            let showByDate = showsByDate?.first?.first?.value[indexPath.row]
-            cell.configure(with: showByDate?.show.startTime ?? Date())
+        {
+            cell.configure(with: showByDate.date)
+        } else if let showByDate = showsByDate?[indexPath.row] {
+            cell.configure(with: showByDate.date)
         }
         
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let showByDate = showsByDate?[indexPath.row]
-
-        if let archiveShow = showByDate?.values.first {
-             archiveCalendarDelegate?.didSectionArchieveDate(archiveShows: archiveShow)
+        if let showByDate = showsByDate?[indexPath.row] {
+            archiveCalendarDelegate?.didSectionArchieveDate(archiveShows: showByDate.shows)
         }
     }
     

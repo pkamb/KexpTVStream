@@ -75,7 +75,6 @@ class DJViewController: UIViewController {
     }
     
     func setupSubviews() {
-        
     }
     
     func constructSubviews() {
@@ -91,10 +90,11 @@ class DJViewController: UIViewController {
             hostArtImageView.heightAnchor.constraint(equalToConstant: 200),
             hostArtImageView.widthAnchor.constraint(equalToConstant: 200)
         ])
+        
+        contentStackView.setCustomSpacing(50, after: hostArtImageView)
     }
     
     func populateShowDetail(show: Show?) {
-        contentStackView.setCustomSpacing(200, after: hostArtImageView)
         hostArtImageView.fromURLSting(show?.imageURI)
         showDetailsLabel.text = "\(show?.programName ?? "") with \(show?.hostNames?.first ?? "")"
     }

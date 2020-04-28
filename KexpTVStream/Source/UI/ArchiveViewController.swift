@@ -69,9 +69,15 @@ class ArchiveViewController: UIViewController {
                 strongSelf.archiveSelectionLabel.text = "Select a Date"
                 
                 strongSelf.calendarCollectionVC.configure(with: showsByDate)
-                strongSelf.showArchieveCollectionVC.configure(with: showsByShowName)
-                strongSelf.hostArchieveCollectionVC.configure(with: showsByHostName)
-                strongSelf.genreArchieveCollectionVC.configure(with: showsGenre)
+                
+                let showContent = showsByShowName.map { ArchiveDetailCollectionVC.ArchiveContent($0) }
+                strongSelf.showArchieveCollectionVC.configure(with: showContent)
+                
+                let hostContent = showsByHostName.map { ArchiveDetailCollectionVC.ArchiveContent($0) }
+                strongSelf.hostArchieveCollectionVC.configure(with: hostContent)
+                
+                let genreContent = showsGenre.map { ArchiveDetailCollectionVC.ArchiveContent($0) }
+                strongSelf.genreArchieveCollectionVC.configure(with: genreContent)
             }
         }
     }
@@ -143,19 +149,22 @@ class ArchiveViewController: UIViewController {
 extension ArchiveViewController: ArchiveCalendarDelegate {
     func didSectionArchieveDate(archiveShows: [ArchiveShow]) {
         let showsVC = ArchiveDetailCollectionVC(with: .day)
-        showsVC.configure(with: [["" : archiveShows]])
+        let archiveContent = archiveShows.map { ArchiveDetailCollectionVC.ArchiveContent(.day, archiveShow: $0) }.compactMap { $0 }
+        
+        showsVC.configure(with: archiveContent)
         let navigationController = UINavigationController(rootViewController: showsVC)
         showsVC.title = "Select a Show"
-        
+
         show(navigationController, sender: self)
     }
 }
 
 extension ArchiveViewController: ArchiveDetailDelegate {
     func didSectionArchieve(archiveShows: [ArchiveShow], type: ArchiveDetailCollectionVC.ArchiveType) {
-        
         let archiveCalendarVC = ArchiveCalendarCollectionVC(displayType: .detail)
-        archiveCalendarVC.configure(with: [[Date(): archiveShows]])
+        
+        let dateShows = archiveShows.map { DateShows(date: $0.showEndTime ?? Date(), shows: [$0]) }
+        archiveCalendarVC.configure(with: dateShows)
         let navigationController = UINavigationController(rootViewController: archiveCalendarVC)
         
         let vcTitle: String
