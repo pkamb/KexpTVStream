@@ -21,6 +21,7 @@ class PlaylistTableVC: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44.0
         tableView.register(PlaylistCell.self, forCellReuseIdentifier: PlaylistCell.reuseIdentifier)
+        tableView.register(PlaylistLoadingCell.self, forCellReuseIdentifier: PlaylistLoadingCell.reuseIdentifier)
         
         getPlays()
     }
@@ -29,18 +30,21 @@ class PlaylistTableVC: UITableViewController {
         guard !isFetching else { return }
         
         isFetching = true
-        networkManager.getPlay(limit: 20, offset: offset) { result in
-            self.isFetching = false
+        networkManager.getPlay(limit: 5, offset: offset) { result in
             switch result {
             case .success(let playResult):
-                DispatchQueue.main.async {
+                
+                let deadlineTime = DispatchTime.now() + .seconds(2)
+                DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
+                    self.isFetching = false
+
                     if let plays = playResult?.plays {
                         self.plays.append(contentsOf: plays)
                         
                         self.tableView.reloadData()
                     }
                     
-                    self.offset += 20
+                    self.offset += 5
                 }
             case .failure:
                 break
@@ -49,24 +53,32 @@ class PlaylistTableVC: UITableViewController {
     }
 
     // MARK: - Table view data source
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return plays.count
+        section == 0 ? plays.count : 1
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: PlaylistCell.reuseIdentifier, for: indexPath) as! PlaylistCell
-        cell.configure(with: plays[indexPath.row])
-    
-        return cell
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: PlaylistCell.reuseIdentifier, for: indexPath) as! PlaylistCell
+            cell.configure(with: plays[indexPath.row])
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: PlaylistLoadingCell.reuseIdentifier, for: indexPath) as! PlaylistLoadingCell
+            return cell
+        }
     }
     
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == plays.count - 1 {
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+
+        if (offsetY > contentHeight - scrollView.frame.height * 4) && !isFetching {
             getPlays()
-            
-            print("getting more")
         }
     }
 }
@@ -183,7 +195,6 @@ private class PlaylistCell: UITableViewCell {
             [albumArtImageView.widthAnchor.constraint(equalToConstant: 250),
             albumArtImageView.heightAnchor.constraint(equalToConstant: 250)]
         )
-        
     }
     
     func configure(with play: Play?) {
@@ -198,6 +209,40 @@ private class PlaylistCell: UITableViewCell {
         albumLabel.text = play?.album
         releaseInfoLabel.text = play?.releaseDate
         djCommentsLabel.text = play?.comment
+    }
+    
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+}
+
+private class PlaylistLoadingCell: UITableViewCell {
+    static let reuseIdentifier = "PlaylistLoadCell"
+
+    private let activityIndicator = CustomActivityIndicator()
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        selectionStyle = .none
+        
+        setupSubviews()
+        constructSubviews()
+        constructConstraints()
+    }
+    
+    func setupSubviews() {
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.showActivityLoading()
+    }
+    
+    func constructSubviews() {
+        contentView.addSubview(activityIndicator)
+    }
+    
+    func constructConstraints() {
+        NSLayoutConstraint.activate(
+            [activityIndicator.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+             activityIndicator.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)]
+        )
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }

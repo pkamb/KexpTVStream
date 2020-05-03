@@ -25,6 +25,8 @@ class CurrentlyPlayingViewController: UIViewController {
         setupViews()
         constructSubviews()
         constructConstraints()
+        
+    //    showLoadingIndicator()
     }
     
     func setupViews() {

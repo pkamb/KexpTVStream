@@ -16,6 +16,9 @@
 		46CDFB491C30B0F30001A004 /* KexpStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB481C30B0F30001A004 /* KexpStyle.swift */; };
 		8B0C3D2C244A8C2800ABAE9C /* PlaylistCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0C3D2B244A8C2800ABAE9C /* PlaylistCollectionVC.swift */; };
 		8B0C3D2E244B8E4A00ABAE9C /* DJViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0C3D2D244B8E4A00ABAE9C /* DJViewController.swift */; };
+		8B20EEA3245DE865007F418A /* CustomActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20EEA2245DE865007F418A /* CustomActivityIndicator.swift */; };
+		8B20EEA5245E35DA007F418A /* UIViewController+ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20EEA4245E35DA007F418A /* UIViewController+ActivityIndicator.swift */; };
+		8B20EEA8245E6A59007F418A /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20EEA7245E6A59007F418A /* Player.swift */; };
 		8B3962692446D58200CD60F5 /* DisplayFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3962682446D58200CD60F5 /* DisplayFormatters.swift */; };
 		8B39626B2447DEDD00CD60F5 /* PlaylistTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B39626A2447DEDD00CD60F5 /* PlaylistTableVC.swift */; };
 		8B39626D2447EA7100CD60F5 /* UIView+NSLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B39626C2447EA7100CD60F5 /* UIView+NSLayoutConstraint.swift */; };
@@ -64,6 +67,9 @@
 		78E3AB477D2FF07E1439780E /* Pods-KexpTVStreamTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KexpTVStreamTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KexpTVStreamTests/Pods-KexpTVStreamTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8B0C3D2B244A8C2800ABAE9C /* PlaylistCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistCollectionVC.swift; sourceTree = "<group>"; };
 		8B0C3D2D244B8E4A00ABAE9C /* DJViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJViewController.swift; sourceTree = "<group>"; };
+		8B20EEA2245DE865007F418A /* CustomActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomActivityIndicator.swift; sourceTree = "<group>"; };
+		8B20EEA4245E35DA007F418A /* UIViewController+ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ActivityIndicator.swift"; sourceTree = "<group>"; };
+		8B20EEA7245E6A59007F418A /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		8B3962682446D58200CD60F5 /* DisplayFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayFormatters.swift; sourceTree = "<group>"; };
 		8B39626A2447DEDD00CD60F5 /* PlaylistTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistTableVC.swift; sourceTree = "<group>"; };
 		8B39626C2447EA7100CD60F5 /* UIView+NSLayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+NSLayoutConstraint.swift"; sourceTree = "<group>"; };
@@ -171,11 +177,20 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		8B20EEA6245E6A4B007F418A /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				8B20EEA7245E6A59007F418A /* Player.swift */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
 		8B3962672446D53500CD60F5 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				8B3962682446D58200CD60F5 /* DisplayFormatters.swift */,
 				8B39626C2447EA7100CD60F5 /* UIView+NSLayoutConstraint.swift */,
+				8B20EEA4245E35DA007F418A /* UIViewController+ActivityIndicator.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -200,6 +215,7 @@
 		8BF32098243D93890028B852 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				8B20EEA6245E6A4B007F418A /* Audio */,
 				8B3962672446D53500CD60F5 /* Helpers */,
 				8BF32099243D939B0028B852 /* UI */,
 				46CDFB1F1C30A7170001A004 /* AppDelegate.swift */,
@@ -221,6 +237,7 @@
 		8BF86E8E243D972B0010DA15 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				8B20EEA2245DE865007F418A /* CustomActivityIndicator.swift */,
 				8B5BBC3F243ECF3C00FAE988 /* ArchiveCalendarCollectionVC.swift */,
 				8B4C3EBA2443962500269ADF /* ArchiveDetailCollectionVC.swift */,
 				8B39626A2447DEDD00CD60F5 /* PlaylistTableVC.swift */,
@@ -492,11 +509,13 @@
 				8BE8A2402436B7D5000B905D /* SettingsButton.swift in Sources */,
 				46CDFB201C30A7170001A004 /* AppDelegate.swift in Sources */,
 				8BE8A242243911FE000B905D /* SettingsViewController.swift in Sources */,
+				8B20EEA8245E6A59007F418A /* Player.swift in Sources */,
 				8B0C3D2C244A8C2800ABAE9C /* PlaylistCollectionVC.swift in Sources */,
 				8B5BBC40243ECF3C00FAE988 /* ArchiveCalendarCollectionVC.swift in Sources */,
 				46CDFB401C30A7630001A004 /* KexpNowPlayingVC.swift in Sources */,
 				8BF3209B243D93DC0028B852 /* CurrentlyPlayingViewController.swift in Sources */,
 				C9FACB731F76F39D0098F214 /* ArtworkPlayButton.swift in Sources */,
+				8B20EEA5245E35DA007F418A /* UIViewController+ActivityIndicator.swift in Sources */,
 				46CDFB451C30A8AD0001A004 /* AudioManager.swift in Sources */,
 				C9EDD0B21C8E195600562A9C /* KexpPlaylistCell.swift in Sources */,
 				46CDFB251C30A7170001A004 /* KexpTVStream.xcdatamodeld in Sources */,
@@ -508,6 +527,7 @@
 				8B39626B2447DEDD00CD60F5 /* PlaylistTableVC.swift in Sources */,
 				8B0C3D2E244B8E4A00ABAE9C /* DJViewController.swift in Sources */,
 				8B3962692446D58200CD60F5 /* DisplayFormatters.swift in Sources */,
+				8B20EEA3245DE865007F418A /* CustomActivityIndicator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
