@@ -7,11 +7,31 @@
 //
 
 import AVFoundation
+import KEXPPower
 
 class Player {
     static let sharedInstance = Player()
     private init(){}
+
+    var isPlaying = false
     
-    var player = AVPlayer()
+    private var player = AVPlayer()
     private var playerItem: AVPlayerItem?
+    private var currentStreamURL: URL?
+    
+    func play(with playUrl: URL?) {
+        guard let playUrl = playUrl else { return }
+        
+        player.cancelPendingPrerolls()
+        playerItem = AVPlayerItem(url: playUrl)
+        player.replaceCurrentItem(with: playerItem)
+        isPlaying = true
+
+        player.play()
+    }
+    
+    func pause() {
+        isPlaying = false
+        player.pause()
+    }
 }

@@ -149,6 +149,7 @@ class ArchiveViewController: UIViewController {
 extension ArchiveViewController: ArchiveCalendarDelegate {
     func didSectionArchieveDate(archiveShows: [ArchiveShow]) {
         let showsVC = ArchiveDetailCollectionVC(with: .day)
+        showsVC.archiveDetailDelegate = self
         let archiveContent = archiveShows.map { ArchiveDetailCollectionVC.ArchiveContent(.day, archiveShow: $0) }.compactMap { $0 }
         
         showsVC.configure(with: archiveContent)
@@ -161,22 +162,26 @@ extension ArchiveViewController: ArchiveCalendarDelegate {
 
 extension ArchiveViewController: ArchiveDetailDelegate {
     func didSectionArchieve(archiveShows: [ArchiveShow], type: ArchiveDetailCollectionVC.ArchiveType) {
-        let archiveCalendarVC = ArchiveCalendarCollectionVC(displayType: .detail)
-        
-        let dateShows = archiveShows.map { DateShows(date: $0.showEndTime ?? Date(), shows: [$0]) }
-        archiveCalendarVC.configure(with: dateShows)
-        let navigationController = UINavigationController(rootViewController: archiveCalendarVC)
-        
-        let vcTitle: String
-        
-        switch type {
-        case .show: vcTitle = "\(archiveShows.first?.show.programName ?? "")"
-        case .host: vcTitle = "\(archiveShows.first?.show.hostNames?.first ?? "")"
-        case .genre: vcTitle = "\(archiveShows.first?.show.programTags ?? "")"
-        default: vcTitle = ""
+        if type == .day {
+            
+        } else {
+            let archiveCalendarVC = ArchiveCalendarCollectionVC(displayType: .detail)
+            
+            let dateShows = archiveShows.map { DateShows(date: $0.showEndTime ?? Date(), shows: [$0]) }
+            archiveCalendarVC.configure(with: dateShows)
+            let navigationController = UINavigationController(rootViewController: archiveCalendarVC)
+            
+            let vcTitle: String
+            
+            switch type {
+            case .show: vcTitle = "\(archiveShows.first?.show.programName ?? "")"
+            case .host: vcTitle = "\(archiveShows.first?.show.hostNames?.first ?? "")"
+            case .genre: vcTitle = "\(archiveShows.first?.show.programTags ?? "")"
+            default: vcTitle = ""
+            }
+            
+            archiveCalendarVC.title = vcTitle
+            show(navigationController, sender: self)
         }
-        
-        archiveCalendarVC.title = vcTitle
-        show(navigationController, sender: self)
     }
 }

@@ -11,7 +11,7 @@ import Flurry_iOS_SDK
 
 private let kexpFlurryKey = "4DYG4DMSNS3S4XCYTCG6"
 private let kexpBaseURL = "https://api.kexp.org"
-private let configurationURL = URL(string:"http://www.kexp.org/content/applications/AppleTV/config/KexpConfigResponse.json")
+private let configurationURL = URL(string: "http://www.kexp.org/content/applications/AppleTV/config/KexpConfigResponse.json")
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

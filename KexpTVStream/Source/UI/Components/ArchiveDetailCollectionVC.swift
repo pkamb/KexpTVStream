@@ -97,6 +97,14 @@ extension ArchiveDetailCollectionVC: UICollectionViewDelegateFlowLayout {
         guard let archieveShows = archieveShows?[indexPath.row] else { return }
 
         archiveDetailDelegate?.didSectionArchieve(archiveShows: archieveShows.shows, type: archiveType)
+
+        if
+            archiveType == .day,
+            let tabBarController = self.presentingViewController as? UITabBarController
+        {
+            tabBarController.selectedIndex = 0
+            dismiss(animated: true, completion: nil)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
