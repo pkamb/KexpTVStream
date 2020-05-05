@@ -9,7 +9,12 @@
 import KEXPPower
 import UIKit
 
+protocol ArchiveDelegate: class {
+    func didSectionShow(archiveShow: ArchiveShow)
+}
+
 class ArchiveViewController: UIViewController {
+    weak var delegate: ArchiveDelegate?
     private let archiveManager = ArchiveManager()
     private let calendarCollectionVC = ArchiveCalendarCollectionVC(displayType: .full)
     private let hostArchieveCollectionVC = ArchiveDetailCollectionVC(with: .host)
@@ -162,8 +167,11 @@ extension ArchiveViewController: ArchiveCalendarDelegate {
 
 extension ArchiveViewController: ArchiveDetailDelegate {
     func didSectionArchieve(archiveShows: [ArchiveShow], type: ArchiveDetailCollectionVC.ArchiveType) {
-        if type == .day {
-            
+        if
+            let selectedShow = archiveShows.first,
+            type == .day
+        {
+            delegate?.didSectionShow(archiveShow: selectedShow)
         } else {
             let archiveCalendarVC = ArchiveCalendarCollectionVC(displayType: .detail)
             

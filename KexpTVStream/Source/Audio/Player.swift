@@ -18,10 +18,12 @@ class Player {
     private var player = AVPlayer()
     private var playerItem: AVPlayerItem?
     private var currentStreamURL: URL?
+    private var archiveStreamURLs = [URL]()
     
     func play(with playUrl: URL?) {
         guard let playUrl = playUrl else { return }
         
+        archiveStreamURLs.removeAll()
         player.cancelPendingPrerolls()
         playerItem = AVPlayerItem(url: playUrl)
         player.replaceCurrentItem(with: playerItem)
@@ -30,8 +32,32 @@ class Player {
         player.play()
     }
     
+    func playArchive(with playUrls: [URL], offset: Double) {
+        archiveStreamURLs.removeAll()
+        archiveStreamURLs = playUrls
+        
+        player.pause()
+
+        if let startUrl = playUrls.first {
+            playerItem = AVPlayerItem(url: startUrl)
+            player.replaceCurrentItem(with: playerItem)
+            archiveStreamURLs.remove(at: 0)
+        }
+
+        player.seek(to: CMTime(seconds: offset, preferredTimescale: 1))
+        isPlaying = true
+
+        player.play()
+    }
+    
+    
     func pause() {
         isPlaying = false
         player.pause()
+    }
+    
+    func resume() {
+        isPlaying = true
+        player.play()
     }
 }

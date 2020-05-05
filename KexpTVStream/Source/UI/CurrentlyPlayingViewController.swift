@@ -13,6 +13,8 @@ class CurrentlyPlayingViewController: UIViewController {
     private let playlistVC = PlaylistTableVC()
     private let djVC = DJViewController()
     private let networkManager = NetworkManager()
+    private let archiveManager = ArchiveManager()
+    private var playingArhieve = false
     
     private let buttonStackView: UIStackView = {
         let stackView = UIStackView()
@@ -100,6 +102,7 @@ class CurrentlyPlayingViewController: UIViewController {
     private func playLiveStreamAction(_ sender: UIButton) {
         playPauseButton.setTitle("Pause", for: .normal)
         Player.sharedInstance.play(with: retrieveLiveStream())
+        playingArhieve = false
     }
     
     @objc
@@ -108,12 +111,25 @@ class CurrentlyPlayingViewController: UIViewController {
             Player.sharedInstance.pause()
             playPauseButton.setTitle("Play", for: .normal)
         } else {
-            Player.sharedInstance.play(with: retrieveLiveStream())
+            Player.sharedInstance.resume()
             playPauseButton.setTitle("Pause", for: .normal)
         }
     }
     
     private func retrieveLiveStream() -> URL? {
         return KEXPPower.availableStreams?.first?.streamURL
+    }
+}
+
+extension CurrentlyPlayingViewController: ArchiveDelegate {
+    func didSectionShow(archiveShow: ArchiveShow) {
+        archiveManager.getStreamURLs(for: archiveShow) { [weak self] streamURLs, offset in
+            Player.sharedInstance.playArchive(with: streamURLs, offset: offset)
+            self?.playingArhieve = true
+            
+            DispatchQueue.main.async {
+                self?.playPauseButton.setTitle("Pause", for: .normal)
+            }
+        }
     }
 }

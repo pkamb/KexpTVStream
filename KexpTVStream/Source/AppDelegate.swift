@@ -9,13 +9,13 @@
 import KEXPPower
 import Flurry_iOS_SDK
 
-private let kexpFlurryKey = "4DYG4DMSNS3S4XCYTCG6"
-private let kexpBaseURL = "https://api.kexp.org"
-private let configurationURL = URL(string: "http://www.kexp.org/content/applications/AppleTV/config/KexpConfigResponse.json")
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
+    
+    private let kexpFlurryKey = "4DYG4DMSNS3S4XCYTCG6"
+    private let kexpBaseURL = "https://api.kexp.org"
+    private let configurationURL = URL(string: "http://www.kexp.org/content/applications/AppleTV/config/KexpConfigResponse.json")
 
     func application(
         _ application: UIApplication,
@@ -43,13 +43,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let archiveTabBarItem = UITabBarItem()
         archiveTabBarItem.title = "Archive"
         let archiveVC = ArchiveViewController()
+        archiveVC.delegate = listenLiveVC
         archiveVC.tabBarItem = archiveTabBarItem
         
         let settingsTabBarItem = UITabBarItem()
         settingsTabBarItem.title = "Settings"
         let settingsVC = SettingsViewController()
         settingsVC.tabBarItem = settingsTabBarItem
-
         
         tabBarController.viewControllers = [listenLiveVC, archiveVC, settingsVC]
          
