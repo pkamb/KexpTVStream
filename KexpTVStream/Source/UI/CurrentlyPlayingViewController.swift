@@ -56,6 +56,7 @@ class CurrentlyPlayingViewController: UIViewController {
     func setupViews() {
         playPauseButton.addTarget(self, action: #selector(playPauseAction), for: .primaryActionTriggered)
         listenLiveButton.addTarget(self, action: #selector(playLiveStreamAction), for: .primaryActionTriggered)
+        jumpToTimeButton.addTarget(self, action: #selector(archiveStartTimes), for: .primaryActionTriggered)
         
         addChild(playlistVC)
         playlistVC.didMove(toParent: self)
@@ -119,14 +120,23 @@ class CurrentlyPlayingViewController: UIViewController {
         }
     }
     
+    @objc
+    private func archiveStartTimes(_ sender: UIButton) {
+        guard let archiveShow = djVC.currentlyPlayingArchiveShow else { return }
+        
+        let startTimesVC = StartTimesCollectionViewController(archiveShow: archiveShow)
+        startTimesVC.startTimesDelegate = self
+        startTimesVC.title = "\(archiveShow.show.programName ?? "") with \(archiveShow.show.hostNames?.first ?? "")"
+        let navigationController = UINavigationController(rootViewController: startTimesVC)
+        show(navigationController, sender: self)
+    }
+    
     private func retrieveLiveStream() -> URL? {
         return KEXPPower.availableStreams?.first?.streamURL
     }
-}
-
-extension CurrentlyPlayingViewController: ArchiveDelegate {
-    func playShow(archiveShow: ArchiveShow) {
-        archiveManager.getStreamURLs(for: archiveShow) { [weak self] streamURLs, offset in
+    
+    private func playArchiveShow(archiveShow: ArchiveShow, startTimeDate: Date? = nil) {
+        archiveManager.getStreamURLs(for: archiveShow, playbackStartDate: startTimeDate) { [weak self] streamURLs, offset in
             Player.sharedInstance.playArchive(with: streamURLs, offset: offset)
             self?.playingArhieve = true
             
@@ -136,5 +146,18 @@ extension CurrentlyPlayingViewController: ArchiveDelegate {
                 self?.playPauseButton.setTitle("Pause", for: .normal)
             }
         }
+    }
+}
+
+extension CurrentlyPlayingViewController: ArchiveDelegate {
+    func playShow(archiveShow: ArchiveShow) {
+        playArchiveShow(archiveShow: archiveShow)
+    }
+}
+
+extension CurrentlyPlayingViewController: StartTimesDelegate {
+    func playShow(archiveShow: ArchiveShow, archiveShowStart: ArchiveShowStart) {
+        
+        playArchiveShow(archiveShow: archiveShow, startTimeDate: archiveShowStart.startTimeDate)
     }
 }

@@ -85,7 +85,7 @@ class DJViewController: UIViewController {
 
             case .failure:
                 DispatchQueue.main.async {
-                        strongSelf.showNotFound()
+                    strongSelf.showNotFound()
                 }
             }
         }
@@ -103,7 +103,7 @@ class DJViewController: UIViewController {
 
             case .failure:
                 DispatchQueue.main.async {
-                        strongSelf.showNotFound()
+                    strongSelf.showNotFound()
                 }
             }
         }
