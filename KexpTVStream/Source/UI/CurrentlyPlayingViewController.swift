@@ -102,6 +102,9 @@ class CurrentlyPlayingViewController: UIViewController {
     private func playLiveStreamAction(_ sender: UIButton) {
         playPauseButton.setTitle("Pause", for: .normal)
         Player.sharedInstance.play(with: retrieveLiveStream())
+        
+        djVC.currentlyPlayingArchiveShow = nil
+        djVC.updateShowDetails()
         playingArhieve = false
     }
     
@@ -128,6 +131,8 @@ extension CurrentlyPlayingViewController: ArchiveDelegate {
             self?.playingArhieve = true
             
             DispatchQueue.main.async {
+                self?.djVC.currentlyPlayingArchiveShow = archiveShow
+                self?.djVC.updateShowDetails()
                 self?.playPauseButton.setTitle("Pause", for: .normal)
             }
         }
