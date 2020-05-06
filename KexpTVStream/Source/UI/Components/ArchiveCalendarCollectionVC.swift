@@ -10,7 +10,8 @@ import UIKit
 import KEXPPower
 
 protocol ArchiveCalendarDelegate: class {
-    func didSectionArchieveDate(archiveShows: [ArchiveShow])
+    func didSelectArchieveDate(archiveShows: [ArchiveShow])
+    func didSelectArchieveShow(archiveShow: ArchiveShow)
 }
 
 class ArchiveCalendarCollectionVC: UICollectionViewController {
@@ -83,8 +84,17 @@ extension ArchiveCalendarCollectionVC: UICollectionViewDelegateFlowLayout {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let showByDate = showsByDate?[indexPath.row] {
-            archiveCalendarDelegate?.didSectionArchieveDate(archiveShows: showByDate.shows)
+        if
+            displayType == .detail,
+            showsByDate?[indexPath.row].shows.count == 1,
+            let archiveShow = showsByDate?[indexPath.row].shows.first,
+            let tabBarController = self.presentingViewController as? UITabBarController
+        {
+            archiveCalendarDelegate?.didSelectArchieveShow(archiveShow: archiveShow)
+            tabBarController.selectedIndex = 0
+            dismiss(animated: true, completion: nil)
+        } else if let showByDate = showsByDate?[indexPath.row] {
+            archiveCalendarDelegate?.didSelectArchieveDate(archiveShows: showByDate.shows)
         }
     }
     

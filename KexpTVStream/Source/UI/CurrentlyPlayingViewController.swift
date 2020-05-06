@@ -55,7 +55,7 @@ class CurrentlyPlayingViewController: UIViewController {
     
     func setupViews() {
         playPauseButton.addTarget(self, action: #selector(playPauseAction), for: .primaryActionTriggered)
-        listenLiveButton.addTarget(self, action: #selector(playPauseAction), for: .primaryActionTriggered)
+        listenLiveButton.addTarget(self, action: #selector(playLiveStreamAction), for: .primaryActionTriggered)
         
         addChild(playlistVC)
         playlistVC.didMove(toParent: self)
@@ -122,7 +122,7 @@ class CurrentlyPlayingViewController: UIViewController {
 }
 
 extension CurrentlyPlayingViewController: ArchiveDelegate {
-    func didSectionShow(archiveShow: ArchiveShow) {
+    func playShow(archiveShow: ArchiveShow) {
         archiveManager.getStreamURLs(for: archiveShow) { [weak self] streamURLs, offset in
             Player.sharedInstance.playArchive(with: streamURLs, offset: offset)
             self?.playingArhieve = true

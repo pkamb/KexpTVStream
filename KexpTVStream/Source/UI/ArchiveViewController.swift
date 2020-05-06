@@ -10,7 +10,7 @@ import KEXPPower
 import UIKit
 
 protocol ArchiveDelegate: class {
-    func didSectionShow(archiveShow: ArchiveShow)
+    func playShow(archiveShow: ArchiveShow)
 }
 
 class ArchiveViewController: UIViewController {
@@ -152,7 +152,11 @@ class ArchiveViewController: UIViewController {
 }
 
 extension ArchiveViewController: ArchiveCalendarDelegate {
-    func didSectionArchieveDate(archiveShows: [ArchiveShow]) {
+    func didSelectArchieveShow(archiveShow: ArchiveShow) {
+        delegate?.playShow(archiveShow: archiveShow)
+    }
+    
+    func didSelectArchieveDate(archiveShows: [ArchiveShow]) {
         let showsVC = ArchiveDetailCollectionVC(with: .day)
         showsVC.archiveDetailDelegate = self
         let archiveContent = archiveShows.map { ArchiveDetailCollectionVC.ArchiveContent(.day, archiveShow: $0) }.compactMap { $0 }
@@ -166,14 +170,15 @@ extension ArchiveViewController: ArchiveCalendarDelegate {
 }
 
 extension ArchiveViewController: ArchiveDetailDelegate {
-    func didSectionArchieve(archiveShows: [ArchiveShow], type: ArchiveDetailCollectionVC.ArchiveType) {
+    func didSelectArchieve(archiveShows: [ArchiveShow], type: ArchiveDetailCollectionVC.ArchiveType) {
         if
             let selectedShow = archiveShows.first,
             type == .day
         {
-            delegate?.didSectionShow(archiveShow: selectedShow)
+            delegate?.playShow(archiveShow: selectedShow)
         } else {
             let archiveCalendarVC = ArchiveCalendarCollectionVC(displayType: .detail)
+            archiveCalendarVC.archiveCalendarDelegate = self
             
             let dateShows = archiveShows.map { DateShows(date: $0.showEndTime ?? Date(), shows: [$0]) }
             archiveCalendarVC.configure(with: dateShows)

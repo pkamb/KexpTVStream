@@ -9,7 +9,7 @@
 import KEXPPower
 
 protocol ArchiveDetailDelegate: class {
-    func didSectionArchieve(archiveShows: [ArchiveShow], type: ArchiveDetailCollectionVC.ArchiveType)
+    func didSelectArchieve(archiveShows: [ArchiveShow], type: ArchiveDetailCollectionVC.ArchiveType)
 }
 
 class ArchiveDetailCollectionVC: UICollectionViewController {
@@ -96,7 +96,7 @@ extension ArchiveDetailCollectionVC: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let archieveShows = archieveShows?[indexPath.row] else { return }
 
-        archiveDetailDelegate?.didSectionArchieve(archiveShows: archieveShows.shows, type: archiveType)
+        archiveDetailDelegate?.didSelectArchieve(archiveShows: archieveShows.shows, type: archiveType)
 
         if
             archiveType == .day,
