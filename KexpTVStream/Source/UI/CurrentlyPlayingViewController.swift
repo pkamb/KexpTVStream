@@ -10,7 +10,7 @@ import KEXPPower
 import UIKit
 
 class CurrentlyPlayingViewController: UIViewController {
-    private let playlistVC = PlaylistTableVC()
+    private let playlistVC = PlaylistCollectionVC()
     private let djVC = DJViewController()
     private let networkManager = NetworkManager()
     private let archiveManager = ArchiveManager()

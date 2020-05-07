@@ -16,6 +16,7 @@ class PlaylistCollectionVC: UICollectionViewController {
     
     init() {
         layout.scrollDirection = .horizontal
+        layout.footerReferenceSize = CGSize(width: 300, height: 300)
         super.init(collectionViewLayout: layout)
     }
     
@@ -25,28 +26,38 @@ class PlaylistCollectionVC: UICollectionViewController {
         super.viewDidLoad()
 
         collectionView.register(PlaylistCell.self, forCellWithReuseIdentifier: PlaylistCell.reuseIdentifier)
+        collectionView.register(PlaylistCell.self, forCellWithReuseIdentifier: PlaylistCell.reuseIdentifier)
+        collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "Footer")
+
         
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        getPlays()
+//        Timer.scheduledTimer(withTimeInterval: 15, repeats: true, block: { [weak self] _ in
+//            self?.getPlays(paging: false)
+//        })
+        
+        getPlays(paging: true)
     }
     
-    func getPlays() {
-        networkManager.getPlay(limit: 20, offset: offset) { result in
-            switch result {
-            case .success(let playResult):
-                DispatchQueue.main.async {
-                    if let plays = playResult?.plays {
-                        self.plays.append(contentsOf: plays)
+    func getPlays(paging: Bool) {
+        let deadline = paging ? DispatchTime.now() + 2.0 : DispatchTime.now()
+        DispatchQueue.main.asyncAfter(deadline: deadline) {
+            self.networkManager.getPlay(limit: paging ? 5 : 1, offset: paging ? self.offset : 0) { result in
+                switch result {
+                case .success(let playResult):
+                    DispatchQueue.main.async {
+                        if let plays = playResult?.plays {
+                            self.plays.append(contentsOf: plays)
+                            
+                            self.collectionView.reloadData()
+                        }
                         
-                        self.collectionView.reloadData()
+                        self.offset += 5
                     }
-                    
-                    self.offset += 20
+                case .failure:
+                    break
                 }
-            case .failure:
-                break
             }
         }
     }
@@ -72,12 +83,36 @@ extension PlaylistCollectionVC: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         if let previouslyFocusedIndexPath = context.previouslyFocusedIndexPath {
             let previousFocusCell = collectionView.cellForItem(at: previouslyFocusedIndexPath)
-            previousFocusCell?.contentView.backgroundColor = .gray
+            previousFocusCell?.transform = .identity
         }
 
         if let nextFocusedIndexPath = context.nextFocusedIndexPath {
             let nextFocusCell = collectionView.cellForItem(at: nextFocusedIndexPath)
-            nextFocusCell?.contentView.backgroundColor = UIColor.white
+            nextFocusCell?.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row + 1 == plays.count {
+            getPlays(paging: true)
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionView.elementKindSectionFooter:
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Footer", for: indexPath)
+            let activityIndicator = UIActivityIndicatorView()
+            activityIndicator.startAnimating()
+            activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+
+            footerView.addSubview(activityIndicator)
+            activityIndicator.centerXAnchor.constraint(equalTo: footerView.centerXAnchor).isActive = true
+            activityIndicator.centerYAnchor.constraint(equalTo: footerView.centerYAnchor).isActive = true
+            
+            return footerView
+
+        default: assert(false, "Unexpected element kind")
         }
     }
 }
@@ -177,16 +212,16 @@ private class PlaylistCell: UICollectionViewCell {
         contentView.addPinnedSubview(contentStackView)
         contentStackView.addArrangedSubview(albumArtImageView)
         
-//        contentStackView.addArrangedSubview(trackDetailStackView)
-//        trackDetailStackView.addArrangedSubview(timestampLabel)
-//        trackDetailStackView.addArrangedSubview(songNameLabel)
-//        trackDetailStackView.addArrangedSubview(artistLabel)
-//        trackDetailStackView.addArrangedSubview(albumLabel)
-//        trackDetailStackView.addArrangedSubview(releaseInfoLabel)
+        contentStackView.addArrangedSubview(trackDetailStackView)
+        trackDetailStackView.addArrangedSubview(timestampLabel)
+        trackDetailStackView.addArrangedSubview(songNameLabel)
+        trackDetailStackView.addArrangedSubview(artistLabel)
+        trackDetailStackView.addArrangedSubview(albumLabel)
+        trackDetailStackView.addArrangedSubview(releaseInfoLabel)
         
-//        contentStackView.addArrangedSubview(djCommentsStackView)
-//        djCommentsStackView.addArrangedSubview(djCommentsTitleLabel)
-//        djCommentsStackView.addArrangedSubview(djCommentsLabel)
+        contentStackView.addArrangedSubview(djCommentsStackView)
+        djCommentsStackView.addArrangedSubview(djCommentsTitleLabel)
+        djCommentsStackView.addArrangedSubview(djCommentsLabel)
     }
     
     func constructConstraints() {
