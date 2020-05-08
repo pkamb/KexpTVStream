@@ -14,7 +14,6 @@ class CurrentlyPlayingViewController: UIViewController {
     private let djVC = DJViewController()
     private let networkManager = NetworkManager()
     private let archiveManager = ArchiveManager()
-    private var playingArhieve = false
     
     private let buttonStackView: UIStackView = {
         let stackView = UIStackView()
@@ -58,6 +57,8 @@ class CurrentlyPlayingViewController: UIViewController {
         listenLiveButton.addTarget(self, action: #selector(playLiveStreamAction), for: .primaryActionTriggered)
         jumpToTimeButton.addTarget(self, action: #selector(archiveStartTimes), for: .primaryActionTriggered)
         
+        jumpToTimeButton.isHidden = true
+        
         addChild(playlistVC)
         playlistVC.didMove(toParent: self)
         playlistVC.view.translatesAutoresizingMaskIntoConstraints = false
@@ -65,6 +66,8 @@ class CurrentlyPlayingViewController: UIViewController {
         addChild(djVC)
         djVC.didMove(toParent: self)
         djVC.view.translatesAutoresizingMaskIntoConstraints = false
+        djVC.view.layer.borderColor = UIColor.black.cgColor
+        djVC.view.layer.borderWidth = 1.0
     }
     
     func constructSubviews() {
@@ -80,7 +83,7 @@ class CurrentlyPlayingViewController: UIViewController {
     func constructConstraints() {
         NSLayoutConstraint.activate(
             [djVC.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-             djVC.view.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+             djVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 120)
             ]
         )
         
@@ -106,7 +109,8 @@ class CurrentlyPlayingViewController: UIViewController {
         
         djVC.currentlyPlayingArchiveShow = nil
         djVC.updateShowDetails()
-        playingArhieve = false
+        playlistVC.archivePlaylistShow = nil
+        jumpToTimeButton.isHidden = true
     }
     
     @objc
@@ -138,9 +142,10 @@ class CurrentlyPlayingViewController: UIViewController {
     private func playArchiveShow(archiveShow: ArchiveShow, startTimeDate: Date? = nil) {
         archiveManager.getStreamURLs(for: archiveShow, playbackStartDate: startTimeDate) { [weak self] streamURLs, offset in
             Player.sharedInstance.playArchive(with: streamURLs, offset: offset)
-            self?.playingArhieve = true
             
             DispatchQueue.main.async {
+                self?.jumpToTimeButton.isHidden = false
+                self?.playlistVC.archivePlaylistShow = archiveShow
                 self?.djVC.currentlyPlayingArchiveShow = archiveShow
                 self?.djVC.updateShowDetails()
                 self?.playPauseButton.setTitle("Pause", for: .normal)
@@ -157,7 +162,6 @@ extension CurrentlyPlayingViewController: ArchiveDelegate {
 
 extension CurrentlyPlayingViewController: StartTimesDelegate {
     func playShow(archiveShow: ArchiveShow, archiveShowStart: ArchiveShowStart) {
-        
         playArchiveShow(archiveShow: archiveShow, startTimeDate: archiveShowStart.startTimeDate)
     }
 }

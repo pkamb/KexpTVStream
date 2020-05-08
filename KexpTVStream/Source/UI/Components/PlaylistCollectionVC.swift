@@ -13,6 +13,15 @@ class PlaylistCollectionVC: UICollectionViewController {
     private let networkManager = NetworkManager()
     private var plays = [Play]()
     private var offset = 0
+    private var archiveShowTime: Date?
+
+    var archivePlaylistShow: ArchiveShow? {
+        didSet {
+            plays.removeAll()
+            self.collectionView.reloadData()
+            archiveShowTime = archivePlaylistShow?.show.startTime
+        }
+    }
     
     init() {
         layout.scrollDirection = .horizontal
@@ -28,37 +37,65 @@ class PlaylistCollectionVC: UICollectionViewController {
         collectionView.register(PlaylistCell.self, forCellWithReuseIdentifier: PlaylistCell.reuseIdentifier)
         collectionView.register(PlaylistCell.self, forCellWithReuseIdentifier: PlaylistCell.reuseIdentifier)
         collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "Footer")
-
         
         collectionView.dataSource = self
         collectionView.delegate = self
         
-//        Timer.scheduledTimer(withTimeInterval: 15, repeats: true, block: { [weak self] _ in
-//            self?.getPlays(paging: false)
-//        })
+        Timer.scheduledTimer(withTimeInterval: 15, repeats: true, block: { [weak self] _ in
+            if self?.archiveShowTime == nil {
+                self?.getPlays(paging: false)
+            } else {
+                self?.getArchivePlayItem()
+            }
+        })
         
         getPlays(paging: true)
     }
     
-    func getPlays(paging: Bool) {
+    private func getPlays(paging: Bool) {
+        if paging, offset > 100 { return }
+                
         let deadline = paging ? DispatchTime.now() + 2.0 : DispatchTime.now()
         DispatchQueue.main.asyncAfter(deadline: deadline) {
-            self.networkManager.getPlay(limit: paging ? 5 : 1, offset: paging ? self.offset : 0) { result in
-                switch result {
-                case .success(let playResult):
-                    DispatchQueue.main.async {
-                        if let plays = playResult?.plays {
-                            self.plays.append(contentsOf: plays)
-                            
-                            self.collectionView.reloadData()
-                        }
-                        
-                        self.offset += 5
+            self.networkManager.getPlay(limit: paging ? 5 : 1, offset: paging ? self.offset : 0) { [weak self] result in
+                guard case let .success(playResult) = result else { return }
+ 
+                DispatchQueue.main.async {
+                    guard let plays = playResult?.plays else { return }
+                    
+                    if paging {
+                       self?.plays.append(contentsOf: plays)
+                       self?.collectionView.reloadData()
+                       self?.offset += 5
+                    } else {
+                        self?.addCurrentlyPlayingTrack(play: plays.first)
                     }
-                case .failure:
-                    break
                 }
             }
+        }
+    }
+    
+    private func getArchivePlayItem() {
+        guard var playlistTime = archiveShowTime else { return }
+        
+        defer { self.archiveShowTime = playlistTime.addingTimeInterval(30) }
+        
+        networkManager.getPlay(airdateBefore: DateFormatter.requestFormatter.string(from: playlistTime)) { [weak self] result in
+            guard case let .success(playResult) = result else { return }
+            
+            DispatchQueue.main.async {
+                guard let plays = playResult?.plays else { return }
+                self?.addCurrentlyPlayingTrack(play: plays.first)
+           }
+        }
+    }
+    
+    private func addCurrentlyPlayingTrack(play: Play?) {
+        guard let recentlyReceivedPlay = play else { return }
+        
+        if plays.first?.id != recentlyReceivedPlay.id {
+            plays.insert(recentlyReceivedPlay, at: 0)
+            collectionView.insertItems(at: [IndexPath(row: 0, section: 0)])
         }
     }
 }
@@ -77,7 +114,7 @@ extension PlaylistCollectionVC: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 300, height: 300)
+        return CGSize(width: 300, height: 400)
     }
     
     override func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
@@ -93,27 +130,33 @@ extension PlaylistCollectionVC: UICollectionViewDelegateFlowLayout {
     }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard archivePlaylistShow == nil else { return }
+        
         if indexPath.row + 1 == plays.count {
             getPlays(paging: true)
         }
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        switch kind {
-        case UICollectionView.elementKindSectionFooter:
-            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Footer", for: indexPath)
-            let activityIndicator = UIActivityIndicatorView()
-            activityIndicator.startAnimating()
-            activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-
-            footerView.addSubview(activityIndicator)
-            activityIndicator.centerXAnchor.constraint(equalTo: footerView.centerXAnchor).isActive = true
-            activityIndicator.centerYAnchor.constraint(equalTo: footerView.centerYAnchor).isActive = true
+        let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Footer", for: indexPath)
+        
+        guard archivePlaylistShow == nil, footerView.subviews.isEmpty else {
+            if offset >= 100 || archivePlaylistShow != nil  {
+                footerView.subviews.forEach { $0.removeFromSuperview() }
+            }
             
             return footerView
-
-        default: assert(false, "Unexpected element kind")
         }
+        
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.startAnimating()
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+
+        footerView.addSubview(activityIndicator)
+        activityIndicator.centerXAnchor.constraint(equalTo: footerView.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: footerView.centerYAnchor).isActive = true
+         
+        return footerView
     }
 }
 
@@ -206,6 +249,16 @@ private class PlaylistCell: UICollectionViewCell {
         constructConstraints()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        songNameLabel.text = nil
+        artistLabel.text = nil
+        albumLabel.text = nil
+        releaseInfoLabel.text = nil
+        djCommentsLabel.text = nil
+    }
+    
     func setupSubviews() {}
     
     func constructSubviews() {
@@ -237,12 +290,16 @@ private class PlaylistCell: UICollectionViewCell {
         if let startTime = play?.airdate {
             timestampLabel.text = DateFormatter.displayFormatter.string(from: startTime)
         }
-
-        songNameLabel.text = play?.song
-        artistLabel.text = play?.artist
-        albumLabel.text = play?.album
-        releaseInfoLabel.text = play?.releaseDate
-        djCommentsLabel.text = play?.comment
+        
+        if play?.playType == .airbreak {
+            songNameLabel.text = "Air Break"
+        } else {
+            songNameLabel.text = play?.song
+            artistLabel.text = play?.artist
+            albumLabel.text = play?.album
+            releaseInfoLabel.text = play?.releaseDate
+            djCommentsLabel.text = play?.comment
+        }
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
