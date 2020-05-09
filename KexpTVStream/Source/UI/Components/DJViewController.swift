@@ -110,7 +110,8 @@ class DJViewController: UIViewController {
     }
     
     func constructSubviews() {
-        view.addPinnedSubview(contentStackView)
+        view.addPinnedSubview(contentStackView, insets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+        
         contentStackView.addArrangedSubview(hostArtImageView)
         contentStackView.addArrangedSubview(onAirStackView)
         onAirStackView.addArrangedSubview(onAirLabel)

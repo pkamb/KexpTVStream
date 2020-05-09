@@ -15,17 +15,9 @@ class PlaylistCollectionVC: UICollectionViewController {
     private var offset = 0
     private var archiveShowTime: Date?
 
-    var archivePlaylistShow: ArchiveShow? {
-        didSet {
-            plays.removeAll()
-            self.collectionView.reloadData()
-            archiveShowTime = archivePlaylistShow?.show.startTime
-        }
-    }
-    
     init() {
         layout.scrollDirection = .horizontal
-        layout.footerReferenceSize = CGSize(width: 300, height: 300)
+        layout.footerReferenceSize = CGSize(width: 300, height: 450)
         super.init(collectionViewLayout: layout)
     }
     
@@ -49,6 +41,19 @@ class PlaylistCollectionVC: UICollectionViewController {
             }
         })
         
+        getPlays(paging: true)
+    }
+
+    func updateArchievePlaylistShowTime(startTime: Date?) {
+        archiveShowTime = startTime
+        plays.removeAll()
+        collectionView.reloadData()
+        getArchivePlayItem()
+    }
+    
+    func livePlaylistShowTime() {
+        archiveShowTime = nil
+        plays.removeAll()
         getPlays(paging: true)
     }
     
@@ -114,7 +119,7 @@ extension PlaylistCollectionVC: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 300, height: 400)
+        return CGSize(width: 300, height: 450)
     }
     
     override func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
@@ -130,7 +135,7 @@ extension PlaylistCollectionVC: UICollectionViewDelegateFlowLayout {
     }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard archivePlaylistShow == nil else { return }
+        guard archiveShowTime == nil else { return }
         
         if indexPath.row + 1 == plays.count {
             getPlays(paging: true)
@@ -140,8 +145,8 @@ extension PlaylistCollectionVC: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Footer", for: indexPath)
         
-        guard archivePlaylistShow == nil, footerView.subviews.isEmpty else {
-            if offset >= 100 || archivePlaylistShow != nil  {
+        guard archiveShowTime == nil, footerView.subviews.isEmpty else {
+            if offset >= 100 || archiveShowTime != nil  {
                 footerView.subviews.forEach { $0.removeFromSuperview() }
             }
             
