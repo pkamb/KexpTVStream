@@ -298,6 +298,7 @@ private class PlaylistCell: UICollectionViewCell {
         
         if play?.playType == .airbreak {
             songNameLabel.text = "Air Break"
+            albumArtImageView.image = UIImage(named: "vinylPlaceHolder")
         } else {
             songNameLabel.text = play?.song
             artistLabel.text = play?.artist

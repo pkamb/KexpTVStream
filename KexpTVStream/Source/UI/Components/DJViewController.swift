@@ -9,6 +9,8 @@
 import KEXPPower
 
 class DJViewController: UIViewController {
+    typealias Completion = () -> Void
+    
     var currentlyPlayingArchiveShow: ArchiveShow?
     
     private let networkManager = NetworkManager()
@@ -62,18 +64,17 @@ class DJViewController: UIViewController {
         
         constructSubviews()
         constructConstraints()
-        updateShowDetails()
     }
     
-    func updateShowDetails() {
+    func updateShowDetails(completion: Completion? = nil) {
         if let showId = currentlyPlayingArchiveShow?.show.id {
-            updateArchiveShowDetails(with: String(showId))
+            updateArchiveShowDetails(with: String(showId), completion: completion)
         } else {
-            updateLiveShowDetails()
+            updateLiveShowDetails(completion: completion)
         }
     }
     
-    private func updateLiveShowDetails() {
+    private func updateLiveShowDetails(completion: Completion? = nil) {
         networkManager.getShow { [weak self] result in
             guard let strongSelf = self else { return }
             
@@ -88,10 +89,12 @@ class DJViewController: UIViewController {
                     strongSelf.showNotFound()
                 }
             }
+            
+            completion?()
         }
     }
     
-    private func updateArchiveShowDetails(with showId: String) {
+    private func updateArchiveShowDetails(with showId: String, completion: Completion? = nil) {
         networkManager.getShowDetails(with: showId) { [weak self] result in
             guard let strongSelf = self else { return }
             
@@ -106,6 +109,8 @@ class DJViewController: UIViewController {
                     strongSelf.showNotFound()
                 }
             }
+            
+            completion?()
         }
     }
     

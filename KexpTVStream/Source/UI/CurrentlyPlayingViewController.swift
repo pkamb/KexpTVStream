@@ -68,8 +68,6 @@ class CurrentlyPlayingViewController: UIViewController {
         setupViews()
         constructSubviews()
         constructConstraints()
-        
-    //    showLoadingIndicator()
     }
     
     func setupViews() {
@@ -86,6 +84,13 @@ class CurrentlyPlayingViewController: UIViewController {
         djVC.view.translatesAutoresizingMaskIntoConstraints = false
         djVC.view.layer.borderColor = UIColor.black.cgColor
         djVC.view.layer.borderWidth = 1.0
+        
+        showLoadingIndicator()
+        djVC.updateShowDetails {
+            DispatchQueue.main.async {
+                self.removeLoadingIndicator()
+            }
+        }
     }
     
     func constructSubviews() {
@@ -123,7 +128,13 @@ class CurrentlyPlayingViewController: UIViewController {
         Player.sharedInstance.play(with: retrieveLiveStream())
         
         djVC.currentlyPlayingArchiveShow = nil
-        djVC.updateShowDetails()
+        
+        djVC.updateShowDetails {
+            DispatchQueue.main.async {
+                self.removeLoadingIndicator()
+            }
+        }
+        
         playlistVC.livePlaylistShowTime()
         jumpToTimeButton.isHidden = true
         listenLiveButton.isHidden = true
@@ -160,11 +171,18 @@ class CurrentlyPlayingViewController: UIViewController {
             Player.sharedInstance.playArchive(with: streamURLs, offset: offset)
             
             DispatchQueue.main.async {
+                self?.showLoadingIndicator()
                 self?.jumpToTimeButton.isHidden = false
                 self?.listenLiveButton.isHidden = false
                 self?.playlistVC.updateArchievePlaylistShowTime(startTime: startTimeDate ?? archiveShow.show.startTime)
                 self?.djVC.currentlyPlayingArchiveShow = archiveShow
-                self?.djVC.updateShowDetails()
+
+                self?.djVC.updateShowDetails {
+                    DispatchQueue.main.async {
+                        self?.removeLoadingIndicator()
+                    }
+                }
+                
                 self?.playPauseButton.setImage(UIImage(named: "pauseButton"), for: .normal)
             }
         }
