@@ -50,7 +50,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         settingsTabBarItem.title = "Settings"
         let settingsVC = SettingsViewController()
         settingsVC.tabBarItem = settingsTabBarItem
-        
+
+        let imageView = UIImageView(image: UIImage(named: "kexp"))
+        imageView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+        tabBarController.tabBar.leadingAccessoryView.addSubview(imageView)
         tabBarController.viewControllers = [listenLiveVC, archiveVC, settingsVC]
          
         return tabBarController

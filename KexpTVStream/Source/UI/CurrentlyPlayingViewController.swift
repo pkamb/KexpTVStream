@@ -97,6 +97,7 @@ class CurrentlyPlayingViewController: UIViewController {
     func constructSubviews() {
         view.addSubview(mainStackView)
         view.addSubview(playlistVC.view)
+        view.addSubview(djVC.view)
         
         buttonStackView.addArrangedSubview(listenLiveButton)
         buttonStackView.addArrangedSubview(jumpToTimeButton)
@@ -104,10 +105,15 @@ class CurrentlyPlayingViewController: UIViewController {
         mainStackView.addArrangedSubview(currentlyPlayingStackView)
 
         currentlyPlayingStackView.addArrangedSubview(playPauseButton)
-        currentlyPlayingStackView.addArrangedSubview(djVC.view)
     }
     
     func constructConstraints() {
+        NSLayoutConstraint.activate(
+            [djVC.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+             djVC.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+            ]
+        )
+        
         NSLayoutConstraint.activate(
             [mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
              mainStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor)

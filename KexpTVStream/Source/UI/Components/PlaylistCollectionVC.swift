@@ -15,7 +15,7 @@ protocol PlaylistDelegate: class {
 class PlaylistCollectionVC: UICollectionViewController {
     fileprivate enum Style {
         static let cellWidth = CGFloat(300)
-        static let cellHeight = CGFloat(550)
+        static let cellHeight = CGFloat(450)
         static let albumArtSize = Style.cellWidth
     }
     
@@ -73,10 +73,12 @@ class PlaylistCollectionVC: UICollectionViewController {
     
     private func getPlays(paging: Bool) {
         if paging, offset > 100 { return }
+        
+        let liveLimitSize = 10
                 
         let deadline = paging ? DispatchTime.now() + 2.0 : DispatchTime.now()
         DispatchQueue.main.asyncAfter(deadline: deadline) {
-            self.networkManager.getPlay(limit: paging ? 5 : 1, offset: paging ? self.offset : 0) { [weak self] result in
+            self.networkManager.getPlay(limit: paging ? liveLimitSize : 1, offset: paging ? self.offset : 0) { [weak self] result in
                 guard case let .success(playResult) = result else { return }
  
                 DispatchQueue.main.async {
@@ -85,7 +87,7 @@ class PlaylistCollectionVC: UICollectionViewController {
                     if paging {
                        self?.plays.append(contentsOf: plays)
                        self?.collectionView.reloadData()
-                       self?.offset += 5
+                       self?.offset += liveLimitSize
                     } else {
                         self?.addCurrentlyPlayingTrack(play: plays.first)
                     }
@@ -317,8 +319,13 @@ private class PlaylistCell: UICollectionViewCell {
                 let releaseDateString = play?.releaseDate,
                 let releaseDate = DateFormatter.releaseFormatter.date(from: releaseDateString)
             {
-                let releaseInfo = "\(DateFormatter.yearFormatter.string(from: releaseDate)) - \(play?.labels?.first ?? "")"
-                releaseInfoLabel.text = releaseInfo
+                let releaseInfo = "\(DateFormatter.yearFormatter.string(from: releaseDate))"
+
+                if let label = play?.labels?.first {
+                    releaseInfoLabel.text = releaseInfo + " - \(label)"
+                } else {
+                    releaseInfoLabel.text = releaseInfo
+                }
             }
         }
     }

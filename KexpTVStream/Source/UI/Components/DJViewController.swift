@@ -19,7 +19,8 @@ class DJViewController: UIViewController {
     private let contentStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
+        stackView.axis = .vertical
+        stackView.alignment = .center
         stackView.distribution = .fill
         return stackView
     }()
@@ -33,25 +34,11 @@ class DJViewController: UIViewController {
         imageView.layer.cornerRadius = 75
         return imageView
     }()
-    
-    private let onAirStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.distribution = .fillEqually
-        return stackView
-    }()
-
-    private let onAirLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.text = "ON AIR"
-        return label
-    }()
 
     private let showDetailsLabel: UILabel = {
         let label = UILabel()
-        label.textAlignment = .left
+        label.textAlignment = .center
+        label.numberOfLines = 2
         return label
     }()
     
@@ -118,9 +105,7 @@ class DJViewController: UIViewController {
         view.addPinnedSubview(contentStackView, insets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         
         contentStackView.addArrangedSubview(hostArtImageView)
-        contentStackView.addArrangedSubview(onAirStackView)
-        onAirStackView.addArrangedSubview(onAirLabel)
-        onAirStackView.addArrangedSubview(showDetailsLabel)
+        contentStackView.addArrangedSubview(showDetailsLabel)
     }
     
     func constructConstraints() {
@@ -128,13 +113,17 @@ class DJViewController: UIViewController {
             hostArtImageView.heightAnchor.constraint(equalToConstant: 150),
             hostArtImageView.widthAnchor.constraint(equalToConstant: 150)
         ])
-        
-        contentStackView.setCustomSpacing(50, after: hostArtImageView)
     }
     
     func populateShowDetail(show: Show?) {
         hostArtImageView.fromURLSting(show?.imageURI)
-        showDetailsLabel.text = "\(show?.programName ?? "") with \(show?.hostNames?.first ?? "")"
+        
+        if let programName = show?.programName {
+            let showDetails = programName + "\n with \(show?.hostNames?.joined(separator: ", ") ?? "")"
+            showDetailsLabel.text = showDetails
+        } else {
+            showDetailsLabel.text = "Unknown"
+        }
     }
     
     private func showNotFound() {
