@@ -29,4 +29,18 @@ extension DateFormatter {
         formatter.timeZone = TimeZone.current
         return formatter
     }()
+    
+    public static let yearFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy"
+        formatter.timeZone = TimeZone.current
+        return formatter
+    }()
+    
+    public static let releaseFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.timeZone = TimeZone.current
+        return formatter
+    }()
 }

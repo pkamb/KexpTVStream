@@ -20,6 +20,7 @@
 		8B20EEA5245E35DA007F418A /* UIViewController+ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20EEA4245E35DA007F418A /* UIViewController+ActivityIndicator.swift */; };
 		8B20EEA8245E6A59007F418A /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20EEA7245E6A59007F418A /* Player.swift */; };
 		8B20EEAA246292CD007F418A /* StartTimesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20EEA9246292CD007F418A /* StartTimesCollectionViewController.swift */; };
+		8B2E49B7246CEEED000A793A /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2E49B6246CEEED000A793A /* ThemeManager.swift */; };
 		8B3962692446D58200CD60F5 /* DisplayFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3962682446D58200CD60F5 /* DisplayFormatters.swift */; };
 		8B39626D2447EA7100CD60F5 /* UIView+NSLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B39626C2447EA7100CD60F5 /* UIView+NSLayoutConstraint.swift */; };
 		8B4C3EBB2443962500269ADF /* ArchiveDetailCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4C3EBA2443962500269ADF /* ArchiveDetailCollectionVC.swift */; };
@@ -71,6 +72,7 @@
 		8B20EEA4245E35DA007F418A /* UIViewController+ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ActivityIndicator.swift"; sourceTree = "<group>"; };
 		8B20EEA7245E6A59007F418A /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		8B20EEA9246292CD007F418A /* StartTimesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTimesCollectionViewController.swift; sourceTree = "<group>"; };
+		8B2E49B6246CEEED000A793A /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		8B3962682446D58200CD60F5 /* DisplayFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayFormatters.swift; sourceTree = "<group>"; };
 		8B39626C2447EA7100CD60F5 /* UIView+NSLayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+NSLayoutConstraint.swift"; sourceTree = "<group>"; };
 		8B4C3EBA2443962500269ADF /* ArchiveDetailCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveDetailCollectionVC.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				8B3962682446D58200CD60F5 /* DisplayFormatters.swift */,
 				8B39626C2447EA7100CD60F5 /* UIView+NSLayoutConstraint.swift */,
 				8B20EEA4245E35DA007F418A /* UIViewController+ActivityIndicator.swift */,
+				8B2E49B6246CEEED000A793A /* ThemeManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -516,6 +519,7 @@
 				8BF3209B243D93DC0028B852 /* CurrentlyPlayingViewController.swift in Sources */,
 				C9FACB731F76F39D0098F214 /* ArtworkPlayButton.swift in Sources */,
 				8B20EEA5245E35DA007F418A /* UIViewController+ActivityIndicator.swift in Sources */,
+				8B2E49B7246CEEED000A793A /* ThemeManager.swift in Sources */,
 				46CDFB451C30A8AD0001A004 /* AudioManager.swift in Sources */,
 				C9EDD0B21C8E195600562A9C /* KexpPlaylistCell.swift in Sources */,
 				46CDFB251C30A7170001A004 /* KexpTVStream.xcdatamodeld in Sources */,

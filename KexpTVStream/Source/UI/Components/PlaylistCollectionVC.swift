@@ -8,16 +8,30 @@
 
 import KEXPPower
 
+protocol PlaylistDelegate: class {
+    func didSelectPlay(play: Play)
+}
+
 class PlaylistCollectionVC: UICollectionViewController {
+    fileprivate enum Style {
+        static let cellWidth = CGFloat(300)
+        static let cellHeight = CGFloat(550)
+        static let albumArtSize = Style.cellWidth
+    }
+    
     private let layout = UICollectionViewFlowLayout()
     private let networkManager = NetworkManager()
     private var plays = [Play]()
     private var offset = 0
     private var archiveShowTime: Date?
+    
+    weak var playlistDelegate: PlaylistDelegate?
 
     init() {
+        layout.minimumLineSpacing = 50
+        layout.minimumInteritemSpacing = 0
         layout.scrollDirection = .horizontal
-        layout.footerReferenceSize = CGSize(width: 300, height: 450)
+        layout.footerReferenceSize = CGSize(width: Style.cellWidth, height: Style.cellHeight)
         super.init(collectionViewLayout: layout)
     }
     
@@ -119,7 +133,7 @@ extension PlaylistCollectionVC: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 300, height: 450)
+        return CGSize(width: Style.cellWidth, height: Style.cellHeight)
     }
     
     override func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
@@ -163,6 +177,11 @@ extension PlaylistCollectionVC: UICollectionViewDelegateFlowLayout {
          
         return footerView
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let play = plays[indexPath.row]
+        playlistDelegate?.didSelectPlay(play: play)
+    }
 }
 
 private class PlaylistCell: UICollectionViewCell {
@@ -186,16 +205,7 @@ private class PlaylistCell: UICollectionViewCell {
         return stackView
     }()
     
-    private let djCommentsStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.distribution = .fill
-        stackView.alignment = .center
-        return stackView
-    }()
-    
-    private let albumArtImageView: UIImageView = {
+    let albumArtImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
@@ -205,24 +215,33 @@ private class PlaylistCell: UICollectionViewCell {
     
     private let timestampLabel: UILabel = {
         let label = UILabel()
+        label.font = ThemeManager.TimeStamp.font
+        label.textColor = ThemeManager.TimeStamp.textColor
         label.textAlignment = .left
         return label
     }()
 
     private let songNameLabel: UILabel = {
         let label = UILabel()
+        label.font = ThemeManager.Track.font
+        label.textColor = ThemeManager.Track.textColor
         label.textAlignment = .left
+        label.numberOfLines = 2
         return label
     }()
 
     private let artistLabel: UILabel = {
         let label = UILabel()
+        label.font = ThemeManager.Artist.font
+        label.textColor = ThemeManager.Artist.textColor
         label.textAlignment = .left
         return label
     }()
     
     private let albumLabel: UILabel = {
         let label = UILabel()
+        label.font = ThemeManager.Album.font
+        label.textColor = ThemeManager.Album.textColor
         label.textAlignment = .left
         return label
     }()
@@ -230,19 +249,8 @@ private class PlaylistCell: UICollectionViewCell {
     private let releaseInfoLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        return label
-    }()
-    
-    private let djCommentsTitleLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .right
-        label.text = "DJ COMMENTS"
-        return label
-    }()
-    
-    private let djCommentsLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .right
+        label.font = ThemeManager.Release.font
+        label.textColor = ThemeManager.Release.textColor
         return label
     }()
     
@@ -261,13 +269,12 @@ private class PlaylistCell: UICollectionViewCell {
         artistLabel.text = nil
         albumLabel.text = nil
         releaseInfoLabel.text = nil
-        djCommentsLabel.text = nil
     }
     
     func setupSubviews() {}
     
     func constructSubviews() {
-        contentView.addPinnedSubview(contentStackView)
+        contentView.addSubview(contentStackView)
         contentStackView.addArrangedSubview(albumArtImageView)
         
         contentStackView.addArrangedSubview(trackDetailStackView)
@@ -276,16 +283,18 @@ private class PlaylistCell: UICollectionViewCell {
         trackDetailStackView.addArrangedSubview(artistLabel)
         trackDetailStackView.addArrangedSubview(albumLabel)
         trackDetailStackView.addArrangedSubview(releaseInfoLabel)
-        
-        contentStackView.addArrangedSubview(djCommentsStackView)
-        djCommentsStackView.addArrangedSubview(djCommentsTitleLabel)
-        djCommentsStackView.addArrangedSubview(djCommentsLabel)
     }
     
     func constructConstraints() {
+        NSLayoutConstraint.activate([
+            contentStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            contentStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            contentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+        ])
+        
         NSLayoutConstraint.activate(
-            [albumArtImageView.widthAnchor.constraint(equalToConstant: 300),
-            albumArtImageView.heightAnchor.constraint(equalToConstant: 300)]
+            [albumArtImageView.widthAnchor.constraint(equalToConstant: PlaylistCollectionVC.Style.albumArtSize),
+            albumArtImageView.heightAnchor.constraint(equalToConstant: PlaylistCollectionVC.Style.albumArtSize)]
         )
     }
     
@@ -303,8 +312,14 @@ private class PlaylistCell: UICollectionViewCell {
             songNameLabel.text = play?.song
             artistLabel.text = play?.artist
             albumLabel.text = play?.album
-            releaseInfoLabel.text = play?.releaseDate
-            djCommentsLabel.text = play?.comment
+            
+            if
+                let releaseDateString = play?.releaseDate,
+                let releaseDate = DateFormatter.releaseFormatter.date(from: releaseDateString)
+            {
+                let releaseInfo = "\(DateFormatter.yearFormatter.string(from: releaseDate)) - \(play?.labels?.first ?? "")"
+                releaseInfoLabel.text = releaseInfo
+            }
         }
     }
     

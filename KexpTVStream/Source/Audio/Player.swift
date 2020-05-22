@@ -13,7 +13,8 @@ class Player {
     static let sharedInstance = Player()
     private init(){}
 
-    var isPlaying = false
+    //`nil` means nothing has been played
+    var isPlaying: Bool?
     
     private var player = AVPlayer()
     private var playerItem: AVPlayerItem?
@@ -57,6 +58,10 @@ class Player {
     }
     
     func resume() {
+        if currentStreamURL == nil {
+                print("asdf")
+        }
+        
         isPlaying = true
         player.play()
     }

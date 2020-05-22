@@ -30,7 +30,7 @@ class DJViewController: UIViewController {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 100
+        imageView.layer.cornerRadius = 75
         return imageView
     }()
     
@@ -125,8 +125,8 @@ class DJViewController: UIViewController {
     
     func constructConstraints() {
         NSLayoutConstraint.activate([
-            hostArtImageView.heightAnchor.constraint(equalToConstant: 200),
-            hostArtImageView.widthAnchor.constraint(equalToConstant: 200)
+            hostArtImageView.heightAnchor.constraint(equalToConstant: 150),
+            hostArtImageView.widthAnchor.constraint(equalToConstant: 150)
         ])
         
         contentStackView.setCustomSpacing(50, after: hostArtImageView)

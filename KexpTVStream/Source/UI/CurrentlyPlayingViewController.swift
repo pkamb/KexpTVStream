@@ -14,7 +14,7 @@ class CurrentlyPlayingViewController: UIViewController {
     private let djVC = DJViewController()
     private let networkManager = NetworkManager()
     private let archiveManager = ArchiveManager()
-    
+
     private let mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -77,6 +77,7 @@ class CurrentlyPlayingViewController: UIViewController {
         
         addChild(playlistVC)
         playlistVC.didMove(toParent: self)
+        playlistVC.playlistDelegate = self
         playlistVC.view.translatesAutoresizingMaskIntoConstraints = false
         
         addChild(djVC)
@@ -142,12 +143,14 @@ class CurrentlyPlayingViewController: UIViewController {
     
     @objc
     private func playPauseAction(_ sender: UIButton) {
-        if Player.sharedInstance.isPlaying {
+        if Player.sharedInstance.isPlaying == true {
             Player.sharedInstance.pause()
             playPauseButton.setImage(UIImage(named: "playButton"), for: .normal)
-        } else {
+        } else if Player.sharedInstance.isPlaying == false {
             Player.sharedInstance.resume()
             playPauseButton.setImage(UIImage(named: "pauseButton"), for: .normal)
+        } else {
+            playLiveStreamAction(sender)
         }
     }
     
@@ -186,6 +189,12 @@ class CurrentlyPlayingViewController: UIViewController {
                 self?.playPauseButton.setImage(UIImage(named: "pauseButton"), for: .normal)
             }
         }
+    }
+}
+
+extension CurrentlyPlayingViewController: PlaylistDelegate {
+    func didSelectPlay(play: Play) {
+        print("asdfasdf")
     }
 }
 
