@@ -9,7 +9,7 @@
 import KEXPPower
 import UIKit
 
-class CurrentlyPlayingViewController: UIViewController {
+class CurrentlyPlayingViewController: BaseViewController {
     private let playlistVC = PlaylistCollectionVC()
     private let djVC = DJViewController()
     private let networkManager = NetworkManager()
@@ -20,19 +20,10 @@ class CurrentlyPlayingViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.distribution = .fill
-        stackView.spacing = 30
+        stackView.spacing = 20
         return stackView
     }()
-    
-    private let currentlyPlayingStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.distribution = .fill
-        stackView.spacing = 30
-        return stackView
-    }()
-    
+
     private let buttonStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -57,7 +48,7 @@ class CurrentlyPlayingViewController: UIViewController {
     
     private let jumpToTimeButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Jump to Time", for: .normal)
+        button.setImage(UIImage(named: "clock"), for: .normal)
         button.isHidden = true
         return button
     }()
@@ -65,12 +56,15 @@ class CurrentlyPlayingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupViews()
-        constructSubviews()
-        constructConstraints()
+        showLoadingIndicator()
+        djVC.updateShowDetails {
+            DispatchQueue.main.async {
+                self.removeLoadingIndicator()
+            }
+        }
     }
     
-    func setupViews() {
+    override func setupViews() {
         playPauseButton.addTarget(self, action: #selector(playPauseAction), for: .primaryActionTriggered)
         listenLiveButton.addTarget(self, action: #selector(playLiveStreamAction), for: .primaryActionTriggered)
         jumpToTimeButton.addTarget(self, action: #selector(archiveStartTimes), for: .primaryActionTriggered)
@@ -85,35 +79,27 @@ class CurrentlyPlayingViewController: UIViewController {
         djVC.view.translatesAutoresizingMaskIntoConstraints = false
         djVC.view.layer.borderColor = UIColor.black.cgColor
         djVC.view.layer.borderWidth = 1.0
-        
-        showLoadingIndicator()
-        djVC.updateShowDetails {
-            DispatchQueue.main.async {
-                self.removeLoadingIndicator()
-            }
-        }
     }
     
-    func constructSubviews() {
+    override func constructSubviews() {
         view.addSubview(mainStackView)
         view.addSubview(playlistVC.view)
         view.addSubview(djVC.view)
         
-        buttonStackView.addArrangedSubview(listenLiveButton)
+        buttonStackView.addArrangedSubview(playPauseButton)
         buttonStackView.addArrangedSubview(jumpToTimeButton)
+    
         mainStackView.addArrangedSubview(buttonStackView)
-        mainStackView.addArrangedSubview(currentlyPlayingStackView)
-
-        currentlyPlayingStackView.addArrangedSubview(playPauseButton)
+        mainStackView.addArrangedSubview(listenLiveButton)
     }
     
-    func constructConstraints() {
+    override func constructConstraints() {
         NSLayoutConstraint.activate(
             [djVC.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
              djVC.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
             ]
         )
-        
+
         NSLayoutConstraint.activate(
             [mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
              mainStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor)

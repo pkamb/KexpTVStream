@@ -39,6 +39,8 @@ class DJViewController: UIViewController {
         let label = UILabel()
         label.textAlignment = .center
         label.numberOfLines = 2
+        label.font = ThemeManager.ShowDetails.font
+        label.textColor = ThemeManager.ShowDetails.textColor
         return label
     }()
     
@@ -116,10 +118,15 @@ class DJViewController: UIViewController {
     }
     
     func populateShowDetail(show: Show?) {
-        hostArtImageView.fromURLSting(show?.imageURI)
+        hostArtImageView.fromURLSting(show?.imageURI, completion: { [weak self] image in
+            self?.view.backgroundColor = .white
+        })
         
-        if let programName = show?.programName {
-            let showDetails = programName + "\n with \(show?.hostNames?.joined(separator: ", ") ?? "")"
+        if
+            let programName = show?.programName,
+            let hostNames = show?.hostNames?.joined(separator: ", ")
+        {
+            let showDetails = programName + " with \(hostNames)"
             showDetailsLabel.text = showDetails
         } else {
             showDetailsLabel.text = "Unknown"

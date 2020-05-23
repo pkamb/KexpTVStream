@@ -13,7 +13,7 @@ protocol ArchiveDelegate: class {
     func playShow(archiveShow: ArchiveShow)
 }
 
-class ArchiveViewController: UIViewController {
+class ArchiveViewController: BaseViewController {
     weak var delegate: ArchiveDelegate?
     private let archiveManager = ArchiveManager()
     private let calendarCollectionVC = ArchiveCalendarCollectionVC(displayType: .full)
@@ -56,16 +56,6 @@ class ArchiveViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        constructSubviews()
-        constructConstraints()
-    
-        calendarCollectionVC.archiveCalendarDelegate = self
-        hostArchieveCollectionVC.archiveDetailDelegate = self
-        showArchieveCollectionVC.archiveDetailDelegate = self
-        genreArchieveCollectionVC.archiveDetailDelegate = self
-        
-        view.backgroundColor = .white
-        
         archiveManager.retrieveArchieveShows { [weak self] showsByDate, showsByShowName, showsByHostName, showsGenre in
             guard let strongSelf = self else { return }
             
@@ -87,7 +77,16 @@ class ArchiveViewController: UIViewController {
         }
     }
     
-    func constructSubviews() {
+    override func setupViews() {
+        view.backgroundColor = .white
+    
+        calendarCollectionVC.archiveCalendarDelegate = self
+        hostArchieveCollectionVC.archiveDetailDelegate = self
+        showArchieveCollectionVC.archiveDetailDelegate = self
+        genreArchieveCollectionVC.archiveDetailDelegate = self
+    }
+    
+    override func constructSubviews() {
         view.addSubview(segmentedControl)
         view.addSubview(archiveSelectionLabel)
         view.addSubview(containerView)
@@ -101,7 +100,7 @@ class ArchiveViewController: UIViewController {
         }
     }
     
-    func constructConstraints() {
+    override func constructConstraints() {
         NSLayoutConstraint.activate(
             [segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
              segmentedControl.centerXAnchor.constraint(equalTo: view.centerXAnchor)
@@ -127,7 +126,6 @@ class ArchiveViewController: UIViewController {
                  cv.view.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor)
                 ])
         }
-
     }
     
    @objc private func handleUpdate(sender: UISegmentedControl) {

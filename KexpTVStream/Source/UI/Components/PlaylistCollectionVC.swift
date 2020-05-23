@@ -15,7 +15,7 @@ protocol PlaylistDelegate: class {
 class PlaylistCollectionVC: UICollectionViewController {
     fileprivate enum Style {
         static let cellWidth = CGFloat(300)
-        static let cellHeight = CGFloat(450)
+        static let cellHeight = CGFloat(550)
         static let albumArtSize = Style.cellWidth
     }
     
@@ -24,7 +24,7 @@ class PlaylistCollectionVC: UICollectionViewController {
     private var plays = [Play]()
     private var offset = 0
     private var archiveShowTime: Date?
-    
+
     weak var playlistDelegate: PlaylistDelegate?
 
     init() {
@@ -146,7 +146,7 @@ extension PlaylistCollectionVC: UICollectionViewDelegateFlowLayout {
 
         if let nextFocusedIndexPath = context.nextFocusedIndexPath {
             let nextFocusCell = collectionView.cellForItem(at: nextFocusedIndexPath)
-            nextFocusCell?.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+            nextFocusCell?.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
         }
     }
     
@@ -217,16 +217,16 @@ private class PlaylistCell: UICollectionViewCell {
     
     private let timestampLabel: UILabel = {
         let label = UILabel()
-        label.font = ThemeManager.TimeStamp.font
-        label.textColor = ThemeManager.TimeStamp.textColor
+        label.font = ThemeManager.NowPlaying.TimeStamp.font
+        label.textColor = ThemeManager.NowPlaying.TimeStamp.textColor
         label.textAlignment = .left
         return label
     }()
 
     private let songNameLabel: UILabel = {
         let label = UILabel()
-        label.font = ThemeManager.Track.font
-        label.textColor = ThemeManager.Track.textColor
+        label.font = ThemeManager.NowPlaying.Track.font
+        label.textColor = ThemeManager.NowPlaying.Track.textColor
         label.textAlignment = .left
         label.numberOfLines = 2
         return label
@@ -234,16 +234,16 @@ private class PlaylistCell: UICollectionViewCell {
 
     private let artistLabel: UILabel = {
         let label = UILabel()
-        label.font = ThemeManager.Artist.font
-        label.textColor = ThemeManager.Artist.textColor
+        label.font = ThemeManager.NowPlaying.Artist.font
+        label.textColor = ThemeManager.NowPlaying.Artist.textColor
         label.textAlignment = .left
         return label
     }()
     
     private let albumLabel: UILabel = {
         let label = UILabel()
-        label.font = ThemeManager.Album.font
-        label.textColor = ThemeManager.Album.textColor
+        label.font = ThemeManager.NowPlaying.Album.font
+        label.textColor = ThemeManager.NowPlaying.Album.textColor
         label.textAlignment = .left
         return label
     }()
@@ -251,9 +251,15 @@ private class PlaylistCell: UICollectionViewCell {
     private let releaseInfoLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = ThemeManager.Release.font
-        label.textColor = ThemeManager.Release.textColor
+        label.font = ThemeManager.NowPlaying.Release.font
+        label.textColor = ThemeManager.NowPlaying.Release.textColor
         return label
+    }()
+    
+    private let overlayView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white.withAlphaComponent(0.3)
+        return view
     }()
     
     override init(frame: CGRect) {
@@ -276,22 +282,28 @@ private class PlaylistCell: UICollectionViewCell {
     func setupSubviews() {}
     
     func constructSubviews() {
+        contentView.addPinnedSubview(overlayView)
         contentView.addSubview(contentStackView)
+     
         contentStackView.addArrangedSubview(albumArtImageView)
         
         contentStackView.addArrangedSubview(trackDetailStackView)
+        
+
         trackDetailStackView.addArrangedSubview(timestampLabel)
         trackDetailStackView.addArrangedSubview(songNameLabel)
         trackDetailStackView.addArrangedSubview(artistLabel)
         trackDetailStackView.addArrangedSubview(albumLabel)
         trackDetailStackView.addArrangedSubview(releaseInfoLabel)
+        trackDetailStackView.addArrangedSubview(UIView())
     }
     
     func constructConstraints() {
         NSLayoutConstraint.activate([
             contentStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
             contentStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            contentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+            contentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            contentStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
         
         NSLayoutConstraint.activate(
@@ -301,8 +313,6 @@ private class PlaylistCell: UICollectionViewCell {
     }
     
     func configure(with play: Play?) {
-        albumArtImageView.fromURLSting(play?.imageURI, placeHolder: UIImage(named: "vinylPlaceHolder"))
-        
         if let startTime = play?.airdate {
             timestampLabel.text = DateFormatter.displayFormatter.string(from: startTime)
         }
@@ -310,7 +320,20 @@ private class PlaylistCell: UICollectionViewCell {
         if play?.playType == .airbreak {
             songNameLabel.text = "Air Break"
             albumArtImageView.image = UIImage(named: "vinylPlaceHolder")
+            contentView.backgroundColor = .clear
         } else {
+            if let imageURLString = play?.imageURI {
+                albumArtImageView.fromURLSting(imageURLString, placeHolder:  UIImage(named: "vinylPlaceHolder")) { [weak self] image in
+                    if imageURLString.isEmpty {
+                        self?.contentView.backgroundColor = .clear
+                    } else {
+                        self?.contentView.backgroundColor = image?.averageColor
+                    }
+                }
+            } else {
+                contentView.backgroundColor = .clear
+            }
+            
             songNameLabel.text = play?.song
             artistLabel.text = play?.artist
             albumLabel.text = play?.album

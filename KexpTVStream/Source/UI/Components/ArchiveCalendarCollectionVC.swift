@@ -44,7 +44,7 @@ class ArchiveCalendarCollectionVC: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .clear
         
         if displayType == .detail {
             collectionView.contentInset = UIEdgeInsets(top: 0, left: 100, bottom: 0, right: 100)

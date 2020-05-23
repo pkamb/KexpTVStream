@@ -33,6 +33,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func buildUITabBarController() -> UITabBarController {
+        UITabBarItem.appearance().setTitleTextAttributes(
+            [NSAttributedString.Key.font: ThemeManager.TabBar.font as Any], for: .normal
+        )
+
         let tabBarController = UITabBarController()
         
         let currentlyPlayingTabBarItem = UITabBarItem()
@@ -54,6 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let imageView = UIImageView(image: UIImage(named: "kexp"))
         imageView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
         tabBarController.tabBar.leadingAccessoryView.addSubview(imageView)
+
         tabBarController.viewControllers = [listenLiveVC, archiveVC, settingsVC]
          
         return tabBarController
