@@ -43,4 +43,13 @@ extension DateFormatter {
         formatter.timeZone = TimeZone.current
         return formatter
     }()
+    
+    public static let nowPlayingFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE, MMM d, yyyy"
+        formatter.timeZone = TimeZone.current
+        return formatter
+    }()
+    
+    
 }

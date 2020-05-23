@@ -9,11 +9,11 @@
 import UIKit
 
 class BaseViewController: UIViewController {
-
+    private let backgroundLayer = ThemeManager.kexpBackgroundGradient()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let backgroundLayer = ThemeManager.kexpBackgroundGradient()
         backgroundLayer.frame = view.frame
         view.layer.insertSublayer(backgroundLayer, at: 0)
 
@@ -25,4 +25,8 @@ class BaseViewController: UIViewController {
     func setupViews() {}
     func constructSubviews() {}
     func constructConstraints() {}
+    
+    func removeBackgroundGradient() {
+        backgroundLayer.removeFromSuperlayer()
+    }
 }

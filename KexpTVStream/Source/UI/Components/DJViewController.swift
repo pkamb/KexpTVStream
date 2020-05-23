@@ -8,10 +8,18 @@
 
 import KEXPPower
 
-class DJViewController: UIViewController {
+class DJViewController: BaseViewController {
     typealias Completion = () -> Void
     
-    var currentlyPlayingArchiveShow: ArchiveShow?
+    var currentlyPlayingArchiveShow: ArchiveShow? {
+        didSet {
+            if currentlyPlayingArchiveShow != nil {
+                archiveDateLabel.isHidden = false
+            } else {
+                archiveDateLabel.isHidden = true
+            }
+        }
+    }
     
     private let networkManager = NetworkManager()
     private var currentShow: Show?
@@ -39,20 +47,47 @@ class DJViewController: UIViewController {
         let label = UILabel()
         label.textAlignment = .center
         label.numberOfLines = 2
-        label.font = ThemeManager.ShowDetails.font
-        label.textColor = ThemeManager.ShowDetails.textColor
+        label.font = ThemeManager.ShowDetails.ShowTitle.font
+        label.textColor = ThemeManager.ShowDetails.ShowTitle.textColor
+        return label
+    }()
+    
+    private let archiveDateLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = ThemeManager.ShowDetails.ArchiveDate.font
+        label.textColor = ThemeManager.ShowDetails.ArchiveDate.textColor
+        label.isHidden = true
         return label
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        super.removeBackgroundGradient()
+        
         Timer.scheduledTimer(withTimeInterval: 30, repeats: true, block: { [weak self] _ in
             self?.updateShowDetails()
         })
+    }
+    
+    override func setupViews() {
+        view.backgroundColor = .white
+    }
+    
+    override func constructSubviews() {
+        view.addPinnedSubview(contentStackView, insets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         
-        constructSubviews()
-        constructConstraints()
+        contentStackView.addArrangedSubview(hostArtImageView)
+        contentStackView.addArrangedSubview(showDetailsLabel)
+        contentStackView.addArrangedSubview(archiveDateLabel)
+    }
+    
+    override func constructConstraints() {
+        NSLayoutConstraint.activate([
+            hostArtImageView.heightAnchor.constraint(equalToConstant: 150),
+            hostArtImageView.widthAnchor.constraint(equalToConstant: 150)
+        ])
     }
     
     func updateShowDetails(completion: Completion? = nil) {
@@ -103,24 +138,8 @@ class DJViewController: UIViewController {
         }
     }
     
-    func constructSubviews() {
-        view.addPinnedSubview(contentStackView, insets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-        
-        contentStackView.addArrangedSubview(hostArtImageView)
-        contentStackView.addArrangedSubview(showDetailsLabel)
-    }
-    
-    func constructConstraints() {
-        NSLayoutConstraint.activate([
-            hostArtImageView.heightAnchor.constraint(equalToConstant: 150),
-            hostArtImageView.widthAnchor.constraint(equalToConstant: 150)
-        ])
-    }
-    
     func populateShowDetail(show: Show?) {
-        hostArtImageView.fromURLSting(show?.imageURI, completion: { [weak self] image in
-            self?.view.backgroundColor = .white
-        })
+        hostArtImageView.fromURLSting(show?.imageURI)
         
         if
             let programName = show?.programName,
@@ -130,6 +149,10 @@ class DJViewController: UIViewController {
             showDetailsLabel.text = showDetails
         } else {
             showDetailsLabel.text = "Unknown"
+        }
+        
+        if let showDate = show?.startTime {
+            archiveDateLabel.text =  DateFormatter.nowPlayingFormatter.string(from: showDate)
         }
     }
     

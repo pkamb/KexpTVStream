@@ -29,12 +29,31 @@ struct ThemeManager {
         static let textColor = UIColor.black
     }
     
-    enum ShowDetails {
-        static let font = UIFont(name: "KohinoorTelugu-Medium", size: 28)
-        static let textColor = UIColor.black
+    struct Archive {
+        enum Menu {
+            static let font = UIFont(name: "KohinoorTelugu-Medium", size: 32)
+            static let textColor = UIColor.black
+        }
+    }
+    
+    struct ShowDetails {
+        enum ShowTitle {
+            static let font = UIFont(name: "KohinoorTelugu-Medium", size: 28)
+            static let textColor = UIColor.black
+        }
+        
+        enum ArchiveDate {
+            static let font = UIFont(name: "KohinoorTelugu-Light", size: 22)
+            static let textColor = UIColor.darkGray()
+        }
     }
     
     struct NowPlaying {
+        enum ListenLive {
+            static let font = UIFont(name: "KohinoorTelugu-Medium", size: 30)
+            static let textColor = UIColor.black
+        }
+        
         enum Track {
             static let font = UIFont(name: "KohinoorTelugu-Medium", size: 30)
             static let textColor = UIColor.black

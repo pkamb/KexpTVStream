@@ -44,6 +44,8 @@ class ArchiveViewController: BaseViewController {
     private lazy var segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl()
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        let font: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font: ThemeManager.Archive.Menu.font as Any]
+        segmentedControl.setTitleTextAttributes(font, for: .normal)
         segmentedControl.insertSegment(withTitle: "Date", at: 0, animated: true)
         segmentedControl.insertSegment(withTitle: "Host", at: 1, animated: true)
         segmentedControl.insertSegment(withTitle: "Show", at: 2, animated: true)

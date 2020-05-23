@@ -36,6 +36,7 @@ class CurrentlyPlayingViewController: BaseViewController {
     private let listenLiveButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Listen Live", for: .normal)
+        button.titleLabel?.font = ThemeManager.NowPlaying.ListenLive.font
         button.isHidden = true
         return button
     }()
@@ -62,6 +63,12 @@ class CurrentlyPlayingViewController: BaseViewController {
                 self.removeLoadingIndicator()
             }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        playlistVC.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .left, animated: true)
     }
     
     override func setupViews() {
@@ -94,6 +101,8 @@ class CurrentlyPlayingViewController: BaseViewController {
     }
     
     override func constructConstraints() {
+        listenLiveButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
         NSLayoutConstraint.activate(
             [djVC.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
              djVC.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
@@ -107,7 +116,7 @@ class CurrentlyPlayingViewController: BaseViewController {
         )
 
         NSLayoutConstraint.activate(
-            [playlistVC.view.topAnchor.constraint(equalTo: mainStackView.bottomAnchor, constant: 20),
+            [playlistVC.view.topAnchor.constraint(equalTo: mainStackView.bottomAnchor, constant: 10),
              playlistVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
              playlistVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
              playlistVC.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
