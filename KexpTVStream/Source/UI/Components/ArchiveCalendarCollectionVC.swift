@@ -14,13 +14,25 @@ protocol ArchiveCalendarDelegate: class {
     func didSelectArchieveShow(archiveShow: ArchiveShow)
 }
 
-class ArchiveCalendarCollectionVC: UICollectionViewController {
+class ArchiveCalendarCollectionVC: BaseViewController, UICollectionViewDataSource {
     enum DisplayType {
         case full
         case detail
     }
     
-    private let layout = UICollectionViewFlowLayout()
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        let collectionView = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: layout)
+        collectionView.isScrollEnabled = false
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(DayCollectionCell.self, forCellWithReuseIdentifier: DayCollectionCell.reuseIdentifier)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        return collectionView
+    } ()
+
     private var showsByDate: [DateShows]?
     private let displayType: DisplayType
     
@@ -28,29 +40,23 @@ class ArchiveCalendarCollectionVC: UICollectionViewController {
 
     init(displayType: DisplayType) {
         self.displayType = displayType
-        
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
-        super.init(collectionViewLayout: layout)
-
-        collectionView.isScrollEnabled = false
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(DayCollectionCell.self, forCellWithReuseIdentifier: DayCollectionCell.reuseIdentifier)
-        
-        collectionView.dataSource = self
-        collectionView.delegate = self
+        super.init(nibName: nil, bundle: nil)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    override func setupViews() {
         collectionView.backgroundColor = .clear
         
         if displayType == .detail {
             collectionView.contentInset = UIEdgeInsets(top: 0, left: 100, bottom: 0, right: 100)
+        } else {
+            removeBackgroundGradient()
         }
     }
     
+    override func constructSubviews() {
+        view.addPinnedSubview(collectionView)
+    }
+
     func configure(with showsByDate: [DateShows]) {
         self.showsByDate = showsByDate
         collectionView.reloadData()
@@ -60,7 +66,7 @@ class ArchiveCalendarCollectionVC: UICollectionViewController {
 }
 
 extension ArchiveCalendarCollectionVC: UICollectionViewDelegateFlowLayout {
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if displayType == .detail {
             return showsByDate?.count ?? 0
         }
@@ -68,7 +74,7 @@ extension ArchiveCalendarCollectionVC: UICollectionViewDelegateFlowLayout {
         return showsByDate?.count ?? 0
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayCollectionCell.reuseIdentifier, for: indexPath as IndexPath) as! DayCollectionCell
         
         if
@@ -83,7 +89,7 @@ extension ArchiveCalendarCollectionVC: UICollectionViewDelegateFlowLayout {
         return cell
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if
             displayType == .detail,
             showsByDate?[indexPath.row].shows.count == 1,
@@ -107,7 +113,7 @@ extension ArchiveCalendarCollectionVC: UICollectionViewDelegateFlowLayout {
         return CGSize(width: cellWidth, height: cellWidth)
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+    func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         if let previouslyFocusedIndexPath = context.previouslyFocusedIndexPath {
             let previousFocusCell = collectionView.cellForItem(at: previouslyFocusedIndexPath)
             previousFocusCell?.contentView.backgroundColor = .white

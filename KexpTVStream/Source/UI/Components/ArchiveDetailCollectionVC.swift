@@ -9,7 +9,7 @@
 import KEXPPower
 
 protocol ArchiveDetailDelegate: class {
-    func didSelectArchieve(archiveShows: [ArchiveShow], type: ArchiveDetailCollectionVC.ArchiveType)
+    func didSelectArchive(archiveShows: [ArchiveShow], type: ArchiveDetailCollectionVC.ArchiveType)
 }
 
 class ArchiveDetailCollectionVC: UICollectionViewController {
@@ -96,7 +96,7 @@ extension ArchiveDetailCollectionVC: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let archieveShows = archieveShows?[indexPath.row] else { return }
 
-        archiveDetailDelegate?.didSelectArchieve(archiveShows: archieveShows.shows, type: archiveType)
+        archiveDetailDelegate?.didSelectArchive(archiveShows: archieveShows.shows, type: archiveType)
 
         if
             archiveType == .day,
@@ -128,12 +128,12 @@ extension ArchiveDetailCollectionVC: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         if let previouslyFocusedIndexPath = context.previouslyFocusedIndexPath {
             let previousFocusCell = collectionView.cellForItem(at: previouslyFocusedIndexPath)
-            previousFocusCell?.contentView.backgroundColor = .gray
+            previousFocusCell?.contentView.backgroundColor = .white
         }
 
         if let nextFocusedIndexPath = context.nextFocusedIndexPath {
             let nextFocusCell = collectionView.cellForItem(at: nextFocusedIndexPath)
-            nextFocusCell?.contentView.backgroundColor = UIColor.white
+            nextFocusCell?.contentView.backgroundColor = UIColor.kexpOrange().withAlphaComponent(0.8)
         }
     }
 }
@@ -161,24 +161,32 @@ private class ArchiveDetailCollectionCell: UICollectionViewCell {
     private let topLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
+        label.font = ThemeManager.Archive.Details.TopRow.font
+        label.textColor = ThemeManager.Archive.Details.TopRow.textColor
         return label
     }()
 
     private let middleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
+        label.font = ThemeManager.Archive.Details.MiddleRow.font
+        label.textColor = ThemeManager.Archive.Details.MiddleRow.textColor
         return label
     }()
 
     private let bottomLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
+        label.font = ThemeManager.Archive.Details.BottomRow.font
+        label.textColor = ThemeManager.Archive.Details.BottomRow.textColor
         return label
     }()
     
     private let infoLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .right
+        label.font = ThemeManager.Archive.Details.Info.font
+        label.textColor = ThemeManager.Archive.Details.Info.textColor
         return label
     }()
     
@@ -202,7 +210,7 @@ private class ArchiveDetailCollectionCell: UICollectionViewCell {
     func setupSubviews() {
         contentView.layer.borderColor = UIColor.black.cgColor
         contentView.layer.borderWidth = 1.0
-        contentView.backgroundColor = .gray
+        contentView.backgroundColor = .white
     }
     
     private func constructSubviews() {
@@ -233,7 +241,7 @@ private class ArchiveDetailCollectionCell: UICollectionViewCell {
     func configureForDay(with archiveShow: ArchiveShow?) {
         archiveImageView.fromURLSting(archiveShow?.show.imageURI)
         topLabel.text = archiveShow?.show.programName
-        middleLabel.text = archiveShow?.show.hostNames?.first
+        middleLabel.text = archiveShow?.show.hostNames?.first?.uppercased()
         bottomLabel.text = archiveShow?.show.programTags
         
         if let startTime = archiveShow?.show.startTime {
@@ -259,14 +267,14 @@ private class ArchiveDetailCollectionCell: UICollectionViewCell {
         case .host:
             archiveImageView.fromURLSting(archiveShow?.imageURI)
             topLabel.text = archiveShow?.hostNames?.first
-            middleLabel.text = archiveShow?.programName
+            middleLabel.text = archiveShow?.programName?.uppercased()
             bottomLabel.text = archiveShow?.programTags
             infoLabel.text = infoText
             
         case .show, .day:
             archiveImageView.fromURLSting(archiveShow?.imageURI)
             topLabel.text = archiveShow?.programName
-            middleLabel.text = archiveShow?.hostNames?.first
+            middleLabel.text = archiveShow?.hostNames?.first?.uppercased()
             bottomLabel.text = archiveShow?.programTags
             infoLabel.text = infoText
             

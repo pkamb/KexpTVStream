@@ -64,14 +64,13 @@ class DJViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        super.removeBackgroundGradient()
-        
         Timer.scheduledTimer(withTimeInterval: 30, repeats: true, block: { [weak self] _ in
             self?.updateShowDetails()
         })
     }
     
     override func setupViews() {
+        removeBackgroundGradient()
         view.backgroundColor = .white
     }
     

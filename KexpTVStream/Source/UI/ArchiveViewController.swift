@@ -172,7 +172,7 @@ extension ArchiveViewController: ArchiveCalendarDelegate {
 }
 
 extension ArchiveViewController: ArchiveDetailDelegate {
-    func didSelectArchieve(archiveShows: [ArchiveShow], type: ArchiveDetailCollectionVC.ArchiveType) {
+    func didSelectArchive(archiveShows: [ArchiveShow], type: ArchiveDetailCollectionVC.ArchiveType) {
         if
             let selectedShow = archiveShows.first,
             type == .day
