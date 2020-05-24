@@ -280,7 +280,7 @@ private class ArchiveDetailCollectionCell: UICollectionViewCell {
         case .show, .day:
             archiveImageView.fromURLSting(archiveShow?.imageURI)
             topLabel.text = archiveShow?.programName
-            middleLabel.text = archiveShow?.hostNames?.first?.uppercased()
+            middleLabel.text = archiveShow?.hostNames?.joined(separator: ", ").uppercased()
             bottomLabel.text = archiveShow?.programTags
             infoLabel.text = infoText
             

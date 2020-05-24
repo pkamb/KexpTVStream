@@ -58,6 +58,11 @@ struct ThemeManager {
         }
         
         struct Details {
+            enum Title {
+                static let font = UIFont(name: "KohinoorTelugu-Medium", size: 40)
+                static let textColor = UIColor.black
+            }
+            
             enum TopRow {
                 static let font = UIFont(name: "KohinoorTelugu-Medium", size: 30)
                 static let textColor = UIColor.black
@@ -77,6 +82,11 @@ struct ThemeManager {
                 static let font = UIFont(name: "KohinoorTelugu-Regular", size: 22)
                 static let textColor = UIColor.black
             }
+        }
+        
+        struct StartShow {
+            static let font = UIFont(name: "KohinoorTelugu-Regular", size: 28)
+            static let textColor = UIColor.black
         }
     }
     

@@ -163,6 +163,10 @@ class CurrentlyPlayingViewController: BaseViewController {
         startTimesVC.startTimesDelegate = self
         startTimesVC.title = "\(archiveShow.show.programName ?? "") with \(archiveShow.show.hostNames?.first ?? "")"
         let navigationController = UINavigationController(rootViewController: startTimesVC)
+        navigationController.navigationBar.titleTextAttributes =
+            [NSAttributedString.Key.font: ThemeManager.Archive.Details.Title.font as Any,
+             NSAttributedString.Key.foregroundColor: ThemeManager.Archive.Details.Title.textColor]
+
         show(navigationController, sender: self)
     }
     

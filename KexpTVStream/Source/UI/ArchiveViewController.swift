@@ -165,6 +165,10 @@ extension ArchiveViewController: ArchiveCalendarDelegate {
         
         showsVC.configure(with: archiveContent)
         let navigationController = UINavigationController(rootViewController: showsVC)
+        navigationController.navigationBar.titleTextAttributes =
+             [NSAttributedString.Key.font: ThemeManager.Archive.Details.Title.font as Any,
+              NSAttributedString.Key.foregroundColor: ThemeManager.Archive.Details.Title.textColor]
+
         showsVC.title = "Select a Show"
 
         show(navigationController, sender: self)
@@ -185,7 +189,10 @@ extension ArchiveViewController: ArchiveDetailDelegate {
             let dateShows = archiveShows.map { DateShows(date: $0.showEndTime ?? Date(), shows: [$0]) }
             archiveCalendarVC.configure(with: dateShows)
             let navigationController = UINavigationController(rootViewController: archiveCalendarVC)
-            
+            navigationController.navigationBar.titleTextAttributes =
+                [NSAttributedString.Key.font: ThemeManager.Archive.Details.Title.font as Any,
+                 NSAttributedString.Key.foregroundColor: ThemeManager.Archive.Details.Title.textColor]
+
             let vcTitle: String
             
             switch type {
@@ -194,6 +201,7 @@ extension ArchiveViewController: ArchiveDetailDelegate {
             case .genre: vcTitle = "\(archiveShows.first?.show.programTags ?? "")"
             default: vcTitle = ""
             }
+            
             
             archiveCalendarVC.title = vcTitle
             show(navigationController, sender: self)
