@@ -37,6 +37,8 @@ class ArchiveViewController: BaseViewController {
     private let archiveSelectionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = ThemeManager.Archive.Select.font
+        label.textColor = ThemeManager.Archive.Select.textColor
         label.textAlignment = .center
         return label
     }()
@@ -109,12 +111,12 @@ class ArchiveViewController: BaseViewController {
             ])
         
         NSLayoutConstraint.activate(
-            [archiveSelectionLabel.bottomAnchor.constraint(equalTo: containerView.topAnchor, constant: -30),
-             archiveSelectionLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor)
+            [archiveSelectionLabel.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 40),
+             archiveSelectionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
             ])
         
         NSLayoutConstraint.activate(
-            [containerView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 100),
+            [containerView.topAnchor.constraint(equalTo: archiveSelectionLabel.bottomAnchor, constant: 40),
              containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -100),
              containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 100),
              containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)

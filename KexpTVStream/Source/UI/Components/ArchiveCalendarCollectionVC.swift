@@ -110,12 +110,12 @@ extension ArchiveCalendarCollectionVC: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         if let previouslyFocusedIndexPath = context.previouslyFocusedIndexPath {
             let previousFocusCell = collectionView.cellForItem(at: previouslyFocusedIndexPath)
-            previousFocusCell?.contentView.backgroundColor = .gray
+            previousFocusCell?.contentView.backgroundColor = .white
         }
 
         if let nextFocusedIndexPath = context.nextFocusedIndexPath {
             let nextFocusCell = collectionView.cellForItem(at: nextFocusedIndexPath)
-            nextFocusCell?.contentView.backgroundColor = .white
+            nextFocusCell?.contentView.backgroundColor = UIColor.kexpOrange().withAlphaComponent(0.8)
         }
     }
 }
@@ -134,18 +134,24 @@ private class DayCollectionCell: UICollectionViewCell {
     private let monthLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
+        label.font = ThemeManager.Archive.Calander.Month.font
+        label.textColor = ThemeManager.Archive.Calander.Month.textColor
         return label
     }()
     
     private let dayLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
+        label.font = ThemeManager.Archive.Calander.Day.font
+        label.textColor = ThemeManager.Archive.Calander.Day.textColor
         return label
     }()
     
     private let dayOfWeekLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
+        label.font = ThemeManager.Archive.Calander.DayOfWeek.font
+        label.textColor = ThemeManager.Archive.Calander.DayOfWeek.textColor
         return label
     }()
     
@@ -159,8 +165,8 @@ private class DayCollectionCell: UICollectionViewCell {
     
     func setupSubviews() {
         contentView.layer.borderColor = UIColor.black.cgColor
-        contentView.layer.borderWidth = 1.0
-        contentView.backgroundColor = .gray
+        contentView.layer.borderWidth = 0.5
+        contentView.backgroundColor = .white
     }
     
     func configure(with date: Date) {
@@ -178,10 +184,10 @@ private class DayCollectionCell: UICollectionViewCell {
     
     private func constructConstraints() {
         NSLayoutConstraint.activate(
-            [stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            [stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
              stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
              stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-             stackView.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor)
+             stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
             ])
     }
     

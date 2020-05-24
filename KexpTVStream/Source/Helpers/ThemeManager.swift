@@ -34,6 +34,28 @@ struct ThemeManager {
             static let font = UIFont(name: "KohinoorTelugu-Medium", size: 32)
             static let textColor = UIColor.black
         }
+        
+        enum Select {
+            static let font = UIFont(name: "KohinoorTelugu-Medium", size: 32)
+            static let textColor = UIColor.black
+        }
+        
+        struct Calander {
+            enum Month {
+                static let font = UIFont(name: "KohinoorTelugu-Regular", size: 28)
+                static let textColor = UIColor.black
+            }
+            
+            enum Day {
+                static let font = UIFont(name: "KohinoorTelugu-Medium", size: 60)
+                static let textColor = UIColor.black
+            }
+            
+            enum DayOfWeek {
+                static let font = UIFont(name: "KohinoorTelugu-Regular", size: 28)
+                static let textColor = UIColor.black
+            }
+        }
     }
     
     struct ShowDetails {
