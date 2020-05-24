@@ -12,7 +12,7 @@ protocol ArchiveDetailDelegate: class {
     func didSelectArchive(archiveShows: [ArchiveShow], type: ArchiveDetailCollectionVC.ArchiveType)
 }
 
-class ArchiveDetailCollectionVC: UICollectionViewController {
+class ArchiveDetailCollectionVC: BaseViewController {
     struct ArchiveContent {
         let contentName: String
         let shows: [ArchiveShow]
@@ -33,7 +33,18 @@ class ArchiveDetailCollectionVC: UICollectionViewController {
         case genre
     }
     
-    private let layout = UICollectionViewFlowLayout()
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        let collectionView = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(ArchiveDetailCollectionCell.self, forCellWithReuseIdentifier: ArchiveDetailCollectionCell.reuseIdentifier)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        return collectionView
+    }()
+    
     private var archiveType: ArchiveType
     private var archieveShows: [ArchiveContent]?
     
@@ -41,24 +52,19 @@ class ArchiveDetailCollectionVC: UICollectionViewController {
 
     init(with archiveType: ArchiveType) {
         self.archiveType = archiveType
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
-        super.init(collectionViewLayout: layout)
-
-        collectionView.register(ArchiveDetailCollectionCell.self, forCellWithReuseIdentifier: ArchiveDetailCollectionCell.reuseIdentifier)
-        
-        collectionView.dataSource = self
-        collectionView.delegate = self
+        super.init(nibName: nil, bundle: nil)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        collectionView.backgroundColor = .white
+    override func setupViews() {
+        collectionView.backgroundColor = .clear
         
         if archiveType == .day {
             collectionView.contentInset = UIEdgeInsets(top: 0, left: 100, bottom: 0, right: 100)
         }
+    }
+    
+    override func constructSubviews() {
+        view.addPinnedSubview(collectionView)
     }
     
     func configure(with archieveShows: [ArchiveContent]) {
@@ -69,17 +75,16 @@ class ArchiveDetailCollectionVC: UICollectionViewController {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
 
-extension ArchiveDetailCollectionVC: UICollectionViewDelegateFlowLayout {
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+extension ArchiveDetailCollectionVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if case .day = archiveType {
             return archieveShows?.count ?? 0
         }
         
         return archieveShows?.count ?? 0
-        
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArchiveDetailCollectionCell.reuseIdentifier, for: indexPath as IndexPath) as! ArchiveDetailCollectionCell
         
         if archiveType == .day {
@@ -88,12 +93,13 @@ extension ArchiveDetailCollectionVC: UICollectionViewDelegateFlowLayout {
         } else {
             let archieveShow = archieveShows?[indexPath.row]
             cell.configure(type: archiveType, archiveShows: archieveShow?.shows)
+            removeBackgroundGradient()
         }
 
         return cell
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let archieveShows = archieveShows?[indexPath.row] else { return }
 
         archiveDetailDelegate?.didSelectArchive(archiveShows: archieveShows.shows, type: archiveType)
@@ -125,7 +131,7 @@ extension ArchiveDetailCollectionVC: UICollectionViewDelegateFlowLayout {
         }
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+    func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         if let previouslyFocusedIndexPath = context.previouslyFocusedIndexPath {
             let previousFocusCell = collectionView.cellForItem(at: previouslyFocusedIndexPath)
             previousFocusCell?.contentView.backgroundColor = .white

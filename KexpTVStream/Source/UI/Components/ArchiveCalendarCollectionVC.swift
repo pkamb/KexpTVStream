@@ -14,7 +14,7 @@ protocol ArchiveCalendarDelegate: class {
     func didSelectArchieveShow(archiveShow: ArchiveShow)
 }
 
-class ArchiveCalendarCollectionVC: BaseViewController, UICollectionViewDataSource {
+class ArchiveCalendarCollectionVC: BaseViewController {
     enum DisplayType {
         case full
         case detail
@@ -31,7 +31,7 @@ class ArchiveCalendarCollectionVC: BaseViewController, UICollectionViewDataSourc
         collectionView.dataSource = self
         collectionView.delegate = self
         return collectionView
-    } ()
+    }()
 
     private var showsByDate: [DateShows]?
     private let displayType: DisplayType
@@ -65,7 +65,7 @@ class ArchiveCalendarCollectionVC: BaseViewController, UICollectionViewDataSourc
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
 
-extension ArchiveCalendarCollectionVC: UICollectionViewDelegateFlowLayout {
+extension ArchiveCalendarCollectionVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if displayType == .detail {
             return showsByDate?.count ?? 0
