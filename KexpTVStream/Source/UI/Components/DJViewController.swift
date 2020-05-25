@@ -103,14 +103,10 @@ class DJViewController: BaseViewController {
             
             switch result {
             case .success(let shows):
-                DispatchQueue.main.async {
-                    strongSelf.populateShowDetail(show: shows?.shows?.first)
-                }
+                strongSelf.populateShowDetail(show: shows?.shows?.first)
 
             case .failure:
-                DispatchQueue.main.async {
-                    strongSelf.showNotFound()
-                }
+                strongSelf.showNotFound()
             }
             
             completion?()
@@ -123,14 +119,10 @@ class DJViewController: BaseViewController {
             
             switch result {
             case .success(let show):
-                DispatchQueue.main.async {
-                    strongSelf.populateShowDetail(show: show)
-                }
+                strongSelf.populateShowDetail(show: show)
 
             case .failure:
-                DispatchQueue.main.async {
-                    strongSelf.showNotFound()
-                }
+                strongSelf.showNotFound()
             }
             
             completion?()

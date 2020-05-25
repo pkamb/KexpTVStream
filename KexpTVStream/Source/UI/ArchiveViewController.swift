@@ -63,21 +63,19 @@ class ArchiveViewController: BaseViewController {
         archiveManager.retrieveArchieveShows { [weak self] showsByDate, showsByShowName, showsByHostName, showsGenre in
             guard let strongSelf = self else { return }
             
-            DispatchQueue.main.async {
-                strongSelf.calendarCollectionVC.view.isHidden = false
-                strongSelf.archiveSelectionLabel.text = "Select a Date"
-                
-                strongSelf.calendarCollectionVC.configure(with: showsByDate)
-                
-                let showContent = showsByShowName.map { ArchiveDetailCollectionVC.ArchiveContent($0) }
-                strongSelf.showArchieveCollectionVC.configure(with: showContent)
-                
-                let hostContent = showsByHostName.map { ArchiveDetailCollectionVC.ArchiveContent($0) }
-                strongSelf.hostArchieveCollectionVC.configure(with: hostContent)
-                
-                let genreContent = showsGenre.map { ArchiveDetailCollectionVC.ArchiveContent($0) }
-                strongSelf.genreArchieveCollectionVC.configure(with: genreContent)
-            }
+            strongSelf.calendarCollectionVC.view.isHidden = false
+            strongSelf.archiveSelectionLabel.text = "Select a Date"
+            
+            strongSelf.calendarCollectionVC.configure(with: showsByDate)
+            
+            let showContent = showsByShowName.map { ArchiveDetailCollectionVC.ArchiveContent($0) }
+            strongSelf.showArchieveCollectionVC.configure(with: showContent)
+            
+            let hostContent = showsByHostName.map { ArchiveDetailCollectionVC.ArchiveContent($0) }
+            strongSelf.hostArchieveCollectionVC.configure(with: hostContent)
+            
+            let genreContent = showsGenre.map { ArchiveDetailCollectionVC.ArchiveContent($0) }
+            strongSelf.genreArchieveCollectionVC.configure(with: genreContent)            
         }
     }
     

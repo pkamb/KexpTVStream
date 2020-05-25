@@ -79,18 +79,19 @@ class PlaylistCollectionVC: UICollectionViewController {
         let deadline = paging ? DispatchTime.now() + 2.0 : DispatchTime.now()
         DispatchQueue.main.asyncAfter(deadline: deadline) {
             self.networkManager.getPlay(limit: paging ? liveLimitSize : 1, offset: paging ? self.offset : 0) { [weak self] result in
-                guard case let .success(playResult) = result else { return }
- 
-                DispatchQueue.main.async {
-                    guard let plays = playResult?.plays else { return }
-                    
-                    if paging {
-                       self?.plays.append(contentsOf: plays)
-                       self?.collectionView.reloadData()
-                       self?.offset += liveLimitSize
-                    } else {
-                        self?.addCurrentlyPlayingTrack(play: plays.first)
-                    }
+                guard
+                    case let .success(playResult) = result,
+                    let plays = playResult?.plays
+                else {
+                    return
+                }
+                
+                if paging {
+                   self?.plays.append(contentsOf: plays)
+                   self?.collectionView.reloadData()
+                   self?.offset += liveLimitSize
+                } else {
+                    self?.addCurrentlyPlayingTrack(play: plays.first)
                 }
             }
         }
@@ -102,12 +103,14 @@ class PlaylistCollectionVC: UICollectionViewController {
         defer { self.archiveShowTime = playlistTime.addingTimeInterval(30) }
         
         networkManager.getPlay(airdateBefore: DateFormatter.requestFormatter.string(from: playlistTime)) { [weak self] result in
-            guard case let .success(playResult) = result else { return }
-            
-            DispatchQueue.main.async {
-                guard let plays = playResult?.plays else { return }
-                self?.addCurrentlyPlayingTrack(play: plays.first)
-           }
+            guard
+                case let .success(playResult) = result,
+                let plays = playResult?.plays
+            else {
+                return
+            }
+                
+            self?.addCurrentlyPlayingTrack(play: plays.first)
         }
     }
     

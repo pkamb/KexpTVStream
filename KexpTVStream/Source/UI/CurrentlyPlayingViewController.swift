@@ -132,9 +132,7 @@ class CurrentlyPlayingViewController: BaseViewController {
         djVC.currentlyPlayingArchiveShow = nil
         
         djVC.updateShowDetails {
-            DispatchQueue.main.async {
-                self.removeLoadingIndicator()
-            }
+            self.removeLoadingIndicator()
         }
         
         playlistVC.livePlaylistShowTime()
@@ -178,21 +176,17 @@ class CurrentlyPlayingViewController: BaseViewController {
         archiveManager.getStreamURLs(for: archiveShow, playbackStartDate: startTimeDate) { [weak self] streamURLs, offset in
             Player.sharedInstance.playArchive(with: streamURLs, offset: offset)
             
-            DispatchQueue.main.async {
-                self?.showLoadingIndicator()
-                self?.jumpToTimeButton.isHidden = false
-                self?.listenLiveButton.isHidden = false
-                self?.playlistVC.updateArchievePlaylistShowTime(startTime: startTimeDate ?? archiveShow.show.startTime)
-                self?.djVC.currentlyPlayingArchiveShow = archiveShow
+            self?.showLoadingIndicator()
+            self?.jumpToTimeButton.isHidden = false
+            self?.listenLiveButton.isHidden = false
+            self?.playlistVC.updateArchievePlaylistShowTime(startTime: startTimeDate ?? archiveShow.show.startTime)
+            self?.djVC.currentlyPlayingArchiveShow = archiveShow
 
-                self?.djVC.updateShowDetails {
-                    DispatchQueue.main.async {
-                        self?.removeLoadingIndicator()
-                    }
-                }
-                
-                self?.playPauseButton.setImage(UIImage(named: "pauseButton"), for: .normal)
+            self?.djVC.updateShowDetails {
+                self?.removeLoadingIndicator()
             }
+            
+            self?.playPauseButton.setImage(UIImage(named: "pauseButton"), for: .normal)
         }
     }
 }

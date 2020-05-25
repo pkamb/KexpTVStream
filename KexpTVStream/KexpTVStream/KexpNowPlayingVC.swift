@@ -108,33 +108,31 @@ class KexpNowPlayingVC: UIViewController {
             
             let isAirBreak = currentSong.playType == .airbreak
 
-            DispatchQueue.main.async {
-                strongSelf.artistLabel.isHidden = isAirBreak
-                strongSelf.trackLabel.text = isAirBreak ? "Air Break..." : "Track:"
-                strongSelf.albumLabel.isHidden = isAirBreak
-                strongSelf.artistNameLabel.isHidden = isAirBreak
-                strongSelf.trackNameLabel.isHidden = isAirBreak
-                strongSelf.albumNameLabel.isHidden = isAirBreak
-                strongSelf.albumArtworkButton.setBackgroundImage(strongSelf.placeholderImage, for: .normal)
+            strongSelf.artistLabel.isHidden = isAirBreak
+            strongSelf.trackLabel.text = isAirBreak ? "Air Break..." : "Track:"
+            strongSelf.albumLabel.isHidden = isAirBreak
+            strongSelf.artistNameLabel.isHidden = isAirBreak
+            strongSelf.trackNameLabel.isHidden = isAirBreak
+            strongSelf.albumNameLabel.isHidden = isAirBreak
+            strongSelf.albumArtworkButton.setBackgroundImage(strongSelf.placeholderImage, for: .normal)
 
-                if
-                    let lastSongPlayed = strongSelf.currentSong,
-                    lastSongPlayed.song != currentSong.song,
-                    lastSongPlayed.playType != .airbreak
-                {
-                    strongSelf.playlistArray.insert(lastSongPlayed, at: 0)
-                    strongSelf.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
-                }
-                
-                if !isAirBreak {
-                    strongSelf.artistNameLabel.text = currentSong.artist
-                    strongSelf.trackNameLabel.text = currentSong.song
-                    strongSelf.albumNameLabel.text = currentSong.album
-                    strongSelf.updateAlbumArtWorkButton(with: currentSong.imageURI)
-                }
-                
-                strongSelf.currentSong = isAirBreak ? nil : currentSong
+            if
+                let lastSongPlayed = strongSelf.currentSong,
+                lastSongPlayed.song != currentSong.song,
+                lastSongPlayed.playType != .airbreak
+            {
+                strongSelf.playlistArray.insert(lastSongPlayed, at: 0)
+                strongSelf.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
             }
+            
+            if !isAirBreak {
+                strongSelf.artistNameLabel.text = currentSong.artist
+                strongSelf.trackNameLabel.text = currentSong.song
+                strongSelf.albumNameLabel.text = currentSong.album
+                strongSelf.updateAlbumArtWorkButton(with: currentSong.imageURI)
+            }
+            
+            strongSelf.currentSong = isAirBreak ? nil : currentSong
         }
     }
     
@@ -155,9 +153,7 @@ class KexpNowPlayingVC: UIViewController {
             guard let showTitle = show.programName else { strongSelf.djInfoLabel.text = "\(onAir) Unknown"; return }
             guard let djName = show.hostNames?.first else { strongSelf.djInfoLabel.text = "\(onAir) \(showTitle)"; return }
 
-            DispatchQueue.main.async {
-                strongSelf.djInfoLabel.text = "\(onAir) " + showTitle + " with " + djName
-            }
+            strongSelf.djInfoLabel.text = "\(onAir) " + showTitle + " with " + djName
         }
     }
 
