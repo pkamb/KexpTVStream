@@ -66,6 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func setup() {
         UIApplication.shared.beginReceivingRemoteControlEvents()
+        UIApplication.shared.isIdleTimerDisabled = UserSettingsManager.disableTimer
         
         KEXPPower.sharedInstance.setup(
             kexpBaseURL: kexpBaseURL,
