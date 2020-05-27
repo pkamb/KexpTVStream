@@ -6,6 +6,7 @@
 //  Copyright © 2020 Dustin Bergman. All rights reserved.
 //
 
+import MediaPlayer
 import KEXPPower
 
 class PlaylistCollectionVC: UICollectionViewController {
@@ -15,7 +16,7 @@ class PlaylistCollectionVC: UICollectionViewController {
         static let albumArtSize = Style.cellWidth
     }
     
-    var isCurrentlyStreaming = false
+    var isCurrentlyStreaming = false //Really only for archive playback
 
     private let layout = UICollectionViewFlowLayout()
     private let networkManager = NetworkManager()
@@ -119,11 +120,61 @@ class PlaylistCollectionVC: UICollectionViewController {
     private func addCurrentlyPlayingTrack(play: Play?) {
         guard let recentlyReceivedPlay = play else { return }
         
+        updateMPMediaItem(with: recentlyReceivedPlay)
+        
         if plays.first?.id != recentlyReceivedPlay.id {
             plays.insert(recentlyReceivedPlay, at: 0)
             collectionView.insertItems(at: [IndexPath(row: 0, section: 0)])
         }
     }
+    
+    private func updateMPMediaItem(with play: Play){
+        var nowPlaying = [String: Any]()
+
+        if play.playType == .airbreak {
+            nowPlaying[MPMediaItemPropertyArtwork] = UIImage(named: "vinylPlaceHolder")!
+            nowPlaying[MPMediaItemPropertyArtist] = "Air Break"
+            MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlaying
+        } else {
+            if let track = play.song {
+                nowPlaying[MPMediaItemPropertyTitle] = track
+            }
+
+            if let artist = play.artist {
+                nowPlaying[MPMediaItemPropertyArtist] = artist
+            }
+
+            if let album = play.album {
+                nowPlaying[MPMediaItemPropertyAlbumTitle] = album
+            }
+            
+            if
+                play.imageURI?.isEmpty == false,
+                let lockScreenImageURLSting = play.imageURI,
+                let lockScreenImageURL = URL(string: lockScreenImageURLSting)
+            {
+                let lockScreenImageView = UIImageView()
+                lockScreenImageView.fromURL(lockScreenImageURL) { image in
+                    guard
+                        let image = image
+                    else {
+                        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlaying
+                        return
+                    }
+    
+                    let artwork = MPMediaItemArtwork(boundsSize: image.size, requestHandler: { _ -> UIImage in
+                        return image
+                    })
+
+                    nowPlaying[MPMediaItemPropertyArtwork] = artwork
+                    MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlaying
+                }
+            } else {
+                nowPlaying[MPMediaItemPropertyArtwork] = UIImage(named: "vinylPlaceHolder")!
+                MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlaying
+            }
+       }
+   }
 }
 
 extension PlaylistCollectionVC: UICollectionViewDelegateFlowLayout {
