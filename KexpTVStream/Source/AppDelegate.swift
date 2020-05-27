@@ -6,6 +6,7 @@
 //  Copyright © 2015 Dustin Bergman. All rights reserved.
 //
 
+import AVFoundation
 import KEXPPower
 import Flurry_iOS_SDK
 
@@ -67,6 +68,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func setup() {
         UIApplication.shared.beginReceivingRemoteControlEvents()
         UIApplication.shared.isIdleTimerDisabled = UserSettingsManager.disableTimer
+        try? AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+        try? AVAudioSession.sharedInstance().setActive(true)
         
         KEXPPower.sharedInstance.setup(
             kexpBaseURL: kexpBaseURL,

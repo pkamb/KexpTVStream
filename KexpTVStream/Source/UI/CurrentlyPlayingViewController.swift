@@ -7,6 +7,7 @@
 //
 
 import KEXPPower
+import MediaPlayer
 import UIKit
 
 class CurrentlyPlayingViewController: BaseViewController {
@@ -57,6 +58,7 @@ class CurrentlyPlayingViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupRemoteCommandCenter()
         showLoadingIndicator()
         djVC.updateShowDetails {
             DispatchQueue.main.async {
@@ -78,7 +80,6 @@ class CurrentlyPlayingViewController: BaseViewController {
         
         addChild(playlistVC)
         playlistVC.didMove(toParent: self)
-        playlistVC.playlistDelegate = self
         playlistVC.view.translatesAutoresizingMaskIntoConstraints = false
         
         addChild(djVC)
@@ -145,8 +146,10 @@ class CurrentlyPlayingViewController: BaseViewController {
         if Player.sharedInstance.isPlaying == true {
             Player.sharedInstance.pause()
             playPauseButton.setImage(UIImage(named: "playButton"), for: .normal)
+            playlistVC.isCurrentlyStreaming = false
         } else if Player.sharedInstance.isPlaying == false {
             Player.sharedInstance.resume()
+            playlistVC.isCurrentlyStreaming = true
             playPauseButton.setImage(UIImage(named: "pauseButton"), for: .normal)
         } else {
             playLiveStreamAction(sender)
@@ -167,16 +170,13 @@ class CurrentlyPlayingViewController: BaseViewController {
 
         show(navigationController, sender: self)
     }
-    
-    private func retrieveLiveStream() -> URL? {
-        return KEXPPower.availableStreams?.first?.streamURL
-    }
-    
+
     private func playArchiveShow(archiveShow: ArchiveShow, startTimeDate: Date? = nil) {
+        showLoadingIndicator()
+
         archiveManager.getStreamURLs(for: archiveShow, playbackStartDate: startTimeDate) { [weak self] streamURLs, offset in
             Player.sharedInstance.playArchive(with: streamURLs, offset: offset)
-            
-            self?.showLoadingIndicator()
+            self?.playlistVC.isCurrentlyStreaming = true
             self?.jumpToTimeButton.isHidden = false
             self?.listenLiveButton.isHidden = false
             self?.playlistVC.updateArchievePlaylistShowTime(startTime: startTimeDate ?? archiveShow.show.startTime)
@@ -189,11 +189,17 @@ class CurrentlyPlayingViewController: BaseViewController {
             self?.playPauseButton.setImage(UIImage(named: "pauseButton"), for: .normal)
         }
     }
-}
-
-extension CurrentlyPlayingViewController: PlaylistDelegate {
-    func didSelectPlay(play: Play) {
-        print("asdfasdf")
+    
+    private func retrieveLiveStream() -> URL? {
+        return KEXPPower.availableStreams?.first?.streamURL
+    }
+    
+    private func setupRemoteCommandCenter() {
+        let remoteCommandCenter = MPRemoteCommandCenter.shared()
+        
+        remoteCommandCenter.pauseCommand.isEnabled = true
+        remoteCommandCenter.playCommand.isEnabled = true
+        remoteCommandCenter.pauseCommand.addTarget(self, action: #selector(playPauseAction(_:)))
     }
 }
 
