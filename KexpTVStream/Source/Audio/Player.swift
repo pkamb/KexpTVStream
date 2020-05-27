@@ -58,10 +58,6 @@ class Player {
     }
     
     func resume() {
-        if currentStreamURL == nil {
-                print("asdf")
-        }
-        
         isPlaying = true
         player.play()
     }

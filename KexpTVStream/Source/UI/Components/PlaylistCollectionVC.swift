@@ -8,10 +8,6 @@
 
 import KEXPPower
 
-protocol PlaylistDelegate: class {
-    func didSelectPlay(play: Play)
-}
-
 class PlaylistCollectionVC: UICollectionViewController {
     fileprivate enum Style {
         static let cellWidth = CGFloat(300)
@@ -19,13 +15,13 @@ class PlaylistCollectionVC: UICollectionViewController {
         static let albumArtSize = Style.cellWidth
     }
     
+    var isCurrentlyStreaming = false
+
     private let layout = UICollectionViewFlowLayout()
     private let networkManager = NetworkManager()
     private var plays = [Play]()
     private var offset = 0
     private var archiveShowTime: Date?
-
-    weak var playlistDelegate: PlaylistDelegate?
 
     init() {
         layout.minimumLineSpacing = 50
@@ -50,7 +46,7 @@ class PlaylistCollectionVC: UICollectionViewController {
         Timer.scheduledTimer(withTimeInterval: 15, repeats: true, block: { [weak self] _ in
             if self?.archiveShowTime == nil {
                 self?.getPlays(paging: false)
-            } else {
+            } else if self?.isCurrentlyStreaming == true {
                 self?.getArchivePlayItem()
             }
         })
@@ -66,8 +62,14 @@ class PlaylistCollectionVC: UICollectionViewController {
     }
     
     func livePlaylistShowTime() {
-        archiveShowTime = nil
-        plays.removeAll()
+        if archiveShowTime != nil {
+            isCurrentlyStreaming = false
+            plays.removeAll()
+            collectionView.reloadData()
+            archiveShowTime = nil
+            offset = 0
+        }
+        
         getPlays(paging: true)
     }
     
@@ -181,11 +183,6 @@ extension PlaylistCollectionVC: UICollectionViewDelegateFlowLayout {
         activityIndicator.centerYAnchor.constraint(equalTo: footerView.centerYAnchor).isActive = true
          
         return footerView
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let play = plays[indexPath.row]
-        playlistDelegate?.didSelectPlay(play: play)
     }
 }
 
