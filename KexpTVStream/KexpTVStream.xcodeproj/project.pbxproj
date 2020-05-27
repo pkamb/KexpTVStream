@@ -55,7 +55,7 @@
 /* Begin PBXFileReference section */
 		26F19CA66E8D2DCA47312557 /* Pods-KexpTVStream.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KexpTVStream.release.xcconfig"; path = "Pods/Target Support Files/Pods-KexpTVStream/Pods-KexpTVStream.release.xcconfig"; sourceTree = "<group>"; };
 		2F0CAA22E221BBEB7D01447E /* Pods_KexpTVStreamTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KexpTVStreamTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		46CDFB1C1C30A7170001A004 /* KexpTVStreamXXX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KexpTVStreamXXX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		46CDFB1C1C30A7170001A004 /* K E X P.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "K E X P.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46CDFB1F1C30A7170001A004 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		46CDFB241C30A7170001A004 /* KexpTVStream.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KexpTVStream.xcdatamodel; sourceTree = "<group>"; };
 		46CDFB271C30A7170001A004 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -135,7 +135,7 @@
 		46CDFB1D1C30A7170001A004 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				46CDFB1C1C30A7170001A004 /* KexpTVStreamXXX.app */,
+				46CDFB1C1C30A7170001A004 /* K E X P.app */,
 				46CDFB301C30A7180001A004 /* KexpTVStreamTests.xctest */,
 			);
 			name = Products;
@@ -332,7 +332,7 @@
 			);
 			name = KexpTVStream;
 			productName = KexpTVStream;
-			productReference = 46CDFB1C1C30A7170001A004 /* KexpTVStreamXXX.app */;
+			productReference = 46CDFB1C1C30A7170001A004 /* K E X P.app */;
 			productType = "com.apple.product-type.application";
 		};
 		46CDFB2F1C30A7180001A004 /* KexpTVStreamTests */ = {
@@ -703,8 +703,8 @@
 					"$(PROJECT_DIR)/KexpTVStream",
 				);
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dus.KexpTVStreamXXX;
-				PRODUCT_NAME = KexpTVStreamXXX;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dus.KexpTVStream;
+				PRODUCT_NAME = "K E X P";
 				SWIFT_OBJC_BRIDGING_HEADER = "KexpTVStream-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -728,8 +728,8 @@
 					"$(PROJECT_DIR)/KexpTVStream",
 				);
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dus.KexpTVStreamXXX;
-				PRODUCT_NAME = KexpTVStreamXXX;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dus.KexpTVStream;
+				PRODUCT_NAME = "K E X P";
 				SWIFT_OBJC_BRIDGING_HEADER = "KexpTVStream-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TVOS_DEPLOYMENT_TARGET = 13.0;
