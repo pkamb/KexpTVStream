@@ -35,7 +35,6 @@ class DJViewController: BaseViewController {
     
     private let hostArtImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .black
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -130,7 +129,7 @@ class DJViewController: BaseViewController {
     }
     
     func populateShowDetail(show: Show?) {
-        hostArtImageView.fromURLSting(show?.imageURI)
+        hostArtImageView.fromURLSting(show?.imageURI, placeHolder: UIImage(named: "avatar"))
         
         if
             let programName = show?.programName,
