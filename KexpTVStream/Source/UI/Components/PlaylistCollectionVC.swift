@@ -130,9 +130,11 @@ class PlaylistCollectionVC: UICollectionViewController {
     
     private func updateMPMediaItem(with play: Play){
         var nowPlaying = [String: Any]()
+        let placeHolderImage = UIImage(named: "vinylPlaceHolder")!
+        let defaultArtwork = MPMediaItemArtwork(boundsSize: placeHolderImage.size, requestHandler: { _ -> UIImage in return placeHolderImage })
 
         if play.playType == .airbreak {
-            nowPlaying[MPMediaItemPropertyArtwork] = UIImage(named: "vinylPlaceHolder")!
+            nowPlaying[MPMediaItemPropertyArtwork] = defaultArtwork
             nowPlaying[MPMediaItemPropertyArtist] = "Air Break"
             MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlaying
         } else {
@@ -147,7 +149,7 @@ class PlaylistCollectionVC: UICollectionViewController {
             if let album = play.album {
                 nowPlaying[MPMediaItemPropertyAlbumTitle] = album
             }
-            
+
             if
                 play.imageURI?.isEmpty == false,
                 let lockScreenImageURLSting = play.imageURI,
@@ -161,7 +163,7 @@ class PlaylistCollectionVC: UICollectionViewController {
                         MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlaying
                         return
                     }
-    
+
                     let artwork = MPMediaItemArtwork(boundsSize: image.size, requestHandler: { _ -> UIImage in
                         return image
                     })
@@ -170,10 +172,10 @@ class PlaylistCollectionVC: UICollectionViewController {
                     MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlaying
                 }
             } else {
-                nowPlaying[MPMediaItemPropertyArtwork] = UIImage(named: "vinylPlaceHolder")!
+                nowPlaying[MPMediaItemPropertyArtwork] = defaultArtwork
                 MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlaying
             }
-       }
+        }
    }
 }
 
