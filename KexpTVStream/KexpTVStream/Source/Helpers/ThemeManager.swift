@@ -10,7 +10,7 @@ import UIKit
 
 struct ThemeManager {
     static func kexpBackgroundGradient() -> CAGradientLayer {
-        let colorTop = KexpStyle.kexpOrange().cgColor
+        let colorTop = UIColor.kexpOrange().cgColor
         let colorBottom = UIColor.white.cgColor
         
         let gradientLayer = CAGradientLayer()
