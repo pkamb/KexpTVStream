@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "46CDFB1B1C30A7170001A004"
-               BuildableName = "KexpTVStreamXXX.app"
+               BuildableName = "K E X P.app"
                BlueprintName = "KexpTVStream"
                ReferencedContainer = "container:KexpTVStream.xcodeproj">
             </BuildableReference>
@@ -32,7 +32,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "46CDFB1B1C30A7170001A004"
-            BuildableName = "KexpTVStreamXXX.app"
+            BuildableName = "K E X P.app"
             BlueprintName = "KexpTVStream"
             ReferencedContainer = "container:KexpTVStream.xcodeproj">
          </BuildableReference>
@@ -65,7 +65,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "46CDFB1B1C30A7170001A004"
-            BuildableName = "KexpTVStreamXXX.app"
+            BuildableName = "K E X P.app"
             BlueprintName = "KexpTVStream"
             ReferencedContainer = "container:KexpTVStream.xcodeproj">
          </BuildableReference>
@@ -82,7 +82,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "46CDFB1B1C30A7170001A004"
-            BuildableName = "KexpTVStreamXXX.app"
+            BuildableName = "K E X P.app"
             BlueprintName = "KexpTVStream"
             ReferencedContainer = "container:KexpTVStream.xcodeproj">
          </BuildableReference>

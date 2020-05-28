@@ -79,8 +79,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             defaultStreamIndex: 0,
             backupStreamIndex: 1
         )
-
-        Flurry.startSession(kexpFlurryKey)
+        
+        let builder = FlurrySessionBuilder()
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        builder.withAppVersion(appVersion)
+        builder.withLogLevel(FlurryLogLevelAll)
+        builder.withCrashReporting(true)
+        Flurry.startSession(kexpFlurryKey, with: builder)
     }
     
     private func retrieveAvailableStreams() -> [AvailableStream] {
