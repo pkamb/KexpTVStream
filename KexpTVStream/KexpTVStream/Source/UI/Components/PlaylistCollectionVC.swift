@@ -323,7 +323,7 @@ private class PlaylistCell: UICollectionViewCell {
     
     private let overlayView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.white.withAlphaComponent(0.3)
+        view.backgroundColor = UIColor.white.withAlphaComponent(0.5)
         return view
     }()
     

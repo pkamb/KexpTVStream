@@ -21,6 +21,7 @@ class PlayingIndicatorView: UIView {
 
     private let barContainer: UIView = {
         let view = UIView()
+        view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     } ()
@@ -69,7 +70,7 @@ class PlayingIndicatorView: UIView {
     }
 
     private func setupViews() {
-        backgroundColor = .white
+        backgroundColor = UIColor.white.withAlphaComponent(0.5)
     }
     
     private func constructSubviews() {

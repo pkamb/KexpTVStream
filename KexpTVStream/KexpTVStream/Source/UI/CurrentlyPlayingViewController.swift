@@ -78,6 +78,10 @@ class CurrentlyPlayingViewController: BaseViewController {
         listenLiveButton.addTarget(self, action: #selector(playLiveStreamAction), for: .primaryActionTriggered)
         jumpToTimeButton.addTarget(self, action: #selector(archiveStartTimes), for: .primaryActionTriggered)
         
+        let playButtonRecognizer = UITapGestureRecognizer(target: self, action: #selector(playPauseAction))
+        playButtonRecognizer.allowedPressTypes = [NSNumber(value: UIPress.PressType.playPause.rawValue as Int)]
+        view.addGestureRecognizer(playButtonRecognizer)
+        
         addChild(playlistVC)
         playlistVC.didMove(toParent: self)
         playlistVC.view.translatesAutoresizingMaskIntoConstraints = false
