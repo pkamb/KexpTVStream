@@ -16,7 +16,11 @@ class PlaylistCollectionVC: UICollectionViewController {
         static let albumArtSize = Style.cellWidth
     }
     
-    var isCurrentlyStreaming = false //Really only for archive playback
+    var isCurrentlyStreaming = false {
+        didSet {
+            collectionView.reloadItems(at: [IndexPath(row: 0, section: 0)])
+        }
+    }
 
     private let layout = UICollectionViewFlowLayout()
     private let networkManager = NetworkManager()
@@ -64,7 +68,7 @@ class PlaylistCollectionVC: UICollectionViewController {
     
     func livePlaylistShowTime() {
         if archiveShowTime != nil {
-            isCurrentlyStreaming = false
+            isCurrentlyStreaming = true
             plays.removeAll()
             collectionView.reloadData()
             archiveShowTime = nil
@@ -123,9 +127,17 @@ class PlaylistCollectionVC: UICollectionViewController {
         updateMPMediaItem(with: recentlyReceivedPlay)
         
         if plays.first?.id != recentlyReceivedPlay.id {
-            plays.insert(recentlyReceivedPlay, at: 0)
-            collectionView.insertItems(at: [IndexPath(row: 0, section: 0)])
+            updateCurrentPlaying(currentPlay: recentlyReceivedPlay)
         }
+    }
+    
+    private func updateCurrentPlaying(currentPlay: Play) {
+        if let playCell = collectionView.cellForItem(at: IndexPath(row: 0, section: 0)) as? PlaylistCell {
+            playCell.removeCurrentlyPlayingView()
+        }
+        
+        plays.insert(currentPlay, at: 0)
+        collectionView.insertItems(at: [IndexPath(row: 0, section: 0)])
     }
     
     private func updateMPMediaItem(with play: Play){
@@ -186,8 +198,8 @@ extension PlaylistCollectionVC: UICollectionViewDelegateFlowLayout {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PlaylistCell.reuseIdentifier, for: indexPath as IndexPath) as! PlaylistCell
-        
-        cell.configure(with: plays[indexPath.row])
+
+        cell.configure(with: plays[indexPath.row], isPlaying: isCurrentlyStreaming, currentTrack: indexPath.row == 0)
 
         return cell
     }
@@ -315,10 +327,15 @@ private class PlaylistCell: UICollectionViewCell {
         return view
     }()
     
+    private let playingIndicatorView: PlayingIndicatorView = {
+        let playingIndicatorView = PlayingIndicatorView(frame: .infinite)
+        playingIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        return playingIndicatorView
+    } ()
+    
     override init(frame: CGRect) {
         super.init(frame:frame)
-        
-        setupSubviews()
+
         constructSubviews()
         constructConstraints()
     }
@@ -330,28 +347,33 @@ private class PlaylistCell: UICollectionViewCell {
         artistLabel.text = nil
         albumLabel.text = nil
         releaseInfoLabel.text = nil
+        playingIndicatorView.isHidden = true
+        playingIndicatorView.stopAnimating()
     }
-    
-    func setupSubviews() {}
-    
-    func constructSubviews() {
+
+    private func constructSubviews() {
         contentView.addPinnedSubview(overlayView)
         contentView.addSubview(contentStackView)
-     
+    
         contentStackView.addArrangedSubview(albumArtImageView)
-        
         contentStackView.addArrangedSubview(trackDetailStackView)
         
-
         trackDetailStackView.addArrangedSubview(timestampLabel)
         trackDetailStackView.addArrangedSubview(songNameLabel)
         trackDetailStackView.addArrangedSubview(artistLabel)
         trackDetailStackView.addArrangedSubview(albumLabel)
         trackDetailStackView.addArrangedSubview(releaseInfoLabel)
         trackDetailStackView.addArrangedSubview(UIView())
+        
+        contentView.addSubview(playingIndicatorView)
     }
     
-    func constructConstraints() {
+    private func constructConstraints() {
+        NSLayoutConstraint.activate([
+            playingIndicatorView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            playingIndicatorView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: PlaylistCollectionVC.Style.albumArtSize - PlayingIndicatorView.BarStyle.height)
+        ])
+        
         NSLayoutConstraint.activate([
             contentStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
             contentStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -365,7 +387,10 @@ private class PlaylistCell: UICollectionViewCell {
         )
     }
     
-    func configure(with play: Play?) {
+    func configure(with play: Play?, isPlaying: Bool, currentTrack: Bool) {
+        playingIndicatorView.isHidden = !currentTrack
+        isPlaying ? playingIndicatorView.startAnimating() : playingIndicatorView.stopAnimating()
+        
         if let startTime = play?.airdate {
             timestampLabel.text = DateFormatter.displayFormatter.string(from: startTime)
         }
@@ -404,6 +429,11 @@ private class PlaylistCell: UICollectionViewCell {
                 }
             }
         }
+    }
+    
+    fileprivate func removeCurrentlyPlayingView() {
+        playingIndicatorView.isHidden = true
+        playingIndicatorView.stopAnimating()
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }

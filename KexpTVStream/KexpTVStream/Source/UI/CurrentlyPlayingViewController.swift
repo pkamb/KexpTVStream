@@ -153,6 +153,7 @@ class CurrentlyPlayingViewController: BaseViewController {
             playPauseButton.setImage(UIImage(named: "pauseButton"), for: .normal)
         } else {
             playLiveStreamAction(sender)
+            playlistVC.isCurrentlyStreaming = true
         }
     }
     

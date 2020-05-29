@@ -12,7 +12,7 @@ class PlayingIndicatorView: UIView {
     struct BarStyle {
         static let height = CGFloat(20.0)
         static let barWidth = CGFloat(5.0)
-        static let barSpace = CGFloat(5.0)
+        static let barSpace = CGFloat(3.0)
         static let firstBar = CGFloat(17.0)
         static let secondBar = CGFloat(13.0)
         static let thirdBar = CGFloat(19.0)
@@ -89,7 +89,7 @@ class PlayingIndicatorView: UIView {
 
         NSLayoutConstraint.activate([
             firstView.widthAnchor.constraint(equalToConstant: BarStyle.barWidth),
-            firstView.leadingAnchor.constraint(equalTo: barContainer.leadingAnchor),
+            firstView.leadingAnchor.constraint(equalTo: barContainer.leadingAnchor, constant: BarStyle.barSpace),
             firstView.bottomAnchor.constraint(equalTo: barContainer.bottomAnchor)
         ])
 
@@ -117,7 +117,7 @@ class PlayingIndicatorView: UIView {
         NSLayoutConstraint.activate([
             fourthView.widthAnchor.constraint(equalToConstant: BarStyle.barWidth),
             fourthView.leadingAnchor.constraint(equalTo: thirdView.trailingAnchor, constant: BarStyle.barSpace),
-            fourthView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            fourthView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -BarStyle.barSpace),
             fourthView.bottomAnchor.constraint(equalTo: barContainer.bottomAnchor)
         ])
     }
