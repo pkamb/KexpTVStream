@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		46CDFB201C30A7170001A004 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB1F1C30A7170001A004 /* AppDelegate.swift */; };
 		46CDFB251C30A7170001A004 /* KexpTVStream.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB231C30A7170001A004 /* KexpTVStream.xcdatamodeld */; };
-		46CDFB281C30A7170001A004 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46CDFB261C30A7170001A004 /* Main.storyboard */; };
 		46CDFB2A1C30A7180001A004 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46CDFB291C30A7180001A004 /* Assets.xcassets */; };
 		46CDFB451C30A8AD0001A004 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB421C30A8AD0001A004 /* AudioManager.swift */; };
 		8B0C3D2C244A8C2800ABAE9C /* PlaylistCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0C3D2B244A8C2800ABAE9C /* PlaylistCollectionVC.swift */; };
 		8B0C3D2E244B8E4A00ABAE9C /* DJViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0C3D2D244B8E4A00ABAE9C /* DJViewController.swift */; };
 		8B1FA78A2480CD22000C8287 /* PlayingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1FA7892480CD22000C8287 /* PlayingIndicatorView.swift */; };
+		8B1FA78C2481CB2F000C8287 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B1FA78B2481CB2F000C8287 /* LaunchScreen.storyboard */; };
 		8B20EEA3245DE865007F418A /* CustomActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20EEA2245DE865007F418A /* CustomActivityIndicator.swift */; };
 		8B20EEA5245E35DA007F418A /* UIViewController+ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20EEA4245E35DA007F418A /* UIViewController+ActivityIndicator.swift */; };
 		8B20EEA8245E6A59007F418A /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20EEA7245E6A59007F418A /* Player.swift */; };
@@ -53,7 +53,6 @@
 		46CDFB1C1C30A7170001A004 /* K E X P.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "K E X P.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46CDFB1F1C30A7170001A004 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		46CDFB241C30A7170001A004 /* KexpTVStream.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KexpTVStream.xcdatamodel; sourceTree = "<group>"; };
-		46CDFB271C30A7170001A004 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		46CDFB291C30A7180001A004 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		46CDFB2B1C30A7180001A004 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		46CDFB301C30A7180001A004 /* KexpTVStreamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KexpTVStreamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,6 +64,7 @@
 		8B0C3D2B244A8C2800ABAE9C /* PlaylistCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistCollectionVC.swift; sourceTree = "<group>"; };
 		8B0C3D2D244B8E4A00ABAE9C /* DJViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJViewController.swift; sourceTree = "<group>"; };
 		8B1FA7892480CD22000C8287 /* PlayingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingIndicatorView.swift; sourceTree = "<group>"; };
+		8B1FA78B2481CB2F000C8287 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B20EEA2245DE865007F418A /* CustomActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomActivityIndicator.swift; sourceTree = "<group>"; };
 		8B20EEA4245E35DA007F418A /* UIViewController+ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ActivityIndicator.swift"; sourceTree = "<group>"; };
 		8B20EEA7245E6A59007F418A /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
@@ -151,9 +151,9 @@
 		46CDFB411C30A7730001A004 /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
+				8B1FA78B2481CB2F000C8287 /* LaunchScreen.storyboard */,
 				C92F93AF1C8BEB7200FD469E /* KexpTVStream-Bridging-Header.h */,
 				C9B1645C1C4C4AA200AFC7F6 /* KexpTVStreamTests-Bridging-Header.h */,
-				46CDFB261C30A7170001A004 /* Main.storyboard */,
 				46CDFB291C30A7180001A004 /* Assets.xcassets */,
 				46CDFB2B1C30A7180001A004 /* Info.plist */,
 				46CDFB231C30A7170001A004 /* KexpTVStream.xcdatamodeld */,
@@ -343,9 +343,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B1FA78C2481CB2F000C8287 /* LaunchScreen.storyboard in Resources */,
 				8BFFED0C22DC3FFA00E3378C /* podfile in Resources */,
 				46CDFB2A1C30A7180001A004 /* Assets.xcassets in Resources */,
-				46CDFB281C30A7170001A004 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,17 +495,6 @@
 			targetProxy = 46CDFB311C30A7180001A004 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		46CDFB261C30A7170001A004 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				46CDFB271C30A7170001A004 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		46CDFB371C30A7180001A004 /* Debug */ = {
