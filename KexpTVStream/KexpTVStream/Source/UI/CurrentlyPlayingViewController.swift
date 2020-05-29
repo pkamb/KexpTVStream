@@ -103,7 +103,7 @@ class CurrentlyPlayingViewController: BaseViewController {
     
     override func constructConstraints() {
         listenLiveButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
+    
         NSLayoutConstraint.activate(
             [djVC.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
              djVC.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
