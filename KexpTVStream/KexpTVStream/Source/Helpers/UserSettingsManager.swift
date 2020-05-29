@@ -11,6 +11,7 @@ import KEXPPower
 struct UserSettingsManager {
     enum SettingKey: String {
         case disableIdleTimer
+        case archiveLastUpdated
     }
     
     static private let defaults = UserDefaults.standard
@@ -22,6 +23,20 @@ struct UserSettingsManager {
         
         get {
             return defaults.bool(forKey: SettingKey.disableIdleTimer.rawValue)
+        }
+    }
+    
+    static var archiveFetchDate: Date {
+        set {
+            defaults.set(Date(), forKey: SettingKey.archiveLastUpdated.rawValue)
+        }
+        
+        get {
+            if let date =  defaults.object(forKey: SettingKey.archiveLastUpdated.rawValue) as? Date {
+                return date
+            }
+            
+            return Date()
         }
     }
 }
