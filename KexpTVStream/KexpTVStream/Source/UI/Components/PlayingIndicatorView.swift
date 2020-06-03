@@ -10,13 +10,13 @@ import UIKit
 
 class PlayingIndicatorView: UIView {
     struct BarStyle {
-        static let height = CGFloat(20.0)
-        static let barWidth = CGFloat(5.0)
-        static let barSpace = CGFloat(3.0)
-        static let firstBar = CGFloat(17.0)
-        static let secondBar = CGFloat(13.0)
-        static let thirdBar = CGFloat(19.0)
-        static let fourthBar = CGFloat(15.0)
+        static let height = CGFloat(40.0)
+        static let barWidth = CGFloat(10.0)
+        static let barSpace = CGFloat(6.0)
+        static let firstBar = CGFloat(34.0)
+        static let secondBar = CGFloat(26.0)
+        static let thirdBar = CGFloat(38.0)
+        static let fourthBar = CGFloat(30.0)
     }
 
     private let barContainer: UIView = {

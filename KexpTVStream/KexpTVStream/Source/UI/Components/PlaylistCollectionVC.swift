@@ -371,7 +371,7 @@ private class PlaylistCell: UICollectionViewCell {
     private func constructConstraints() {
         NSLayoutConstraint.activate([
             playingIndicatorView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            playingIndicatorView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: PlaylistCollectionVC.Style.albumArtSize - PlayingIndicatorView.BarStyle.height)
+            playingIndicatorView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
         
         NSLayoutConstraint.activate([
