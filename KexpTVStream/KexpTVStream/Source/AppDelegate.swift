@@ -97,7 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let sixtyFourBit = AvailableStream(streamName: "64 Kbps", streamURL: sixtyFourBitURL)
         let oneTwentyEightBit = AvailableStream(streamName: "128 Kbps", streamURL: oneTwentyEightBitURL)
         
-        let availableStream = [thirtyTwoBit, sixtyFourBit, oneTwentyEightBit]
+        let availableStream = [oneTwentyEightBit, sixtyFourBit, thirtyTwoBit]
         
         return availableStream
     }
