@@ -64,7 +64,16 @@ class ArchiveDetailCollectionVC: BaseViewController {
     }
     
     override func constructSubviews() {
-        view.addPinnedSubview(collectionView)
+        view.addSubview(collectionView)
+    }
+    
+    override func constructConstraints() {
+        NSLayoutConstraint.activate(
+            [collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
     }
     
     func configure(with archieveShows: [ArchiveContent]) {
@@ -115,8 +124,17 @@ extension ArchiveDetailCollectionVC: UICollectionViewDelegateFlowLayout, UIColle
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard var containerWidth = view?.frame.width else { return CGSize.zero }
+        
+        let window = UIApplication.shared.windows.first { $0.isKeyWindow }
+        let leadingPadding = window?.safeAreaInsets.left ?? 0
+        let tralingPadding = window?.safeAreaInsets.right ?? 0
 
-        containerWidth = containerWidth - collectionView.contentInset.left - collectionView.contentInset.right
+        containerWidth = containerWidth -
+            collectionView.contentInset.left -
+            collectionView.contentInset.right -
+            tralingPadding -
+            leadingPadding
+        
         let cellWidth = containerWidth / 2.0
     
         return CGSize(width: cellWidth, height: getCellHeight())
@@ -245,7 +263,8 @@ private class ArchiveDetailCollectionCell: UICollectionViewCell {
     }
     
     func configureForDay(with archiveShow: ArchiveShow?) {
-        archiveImageView.fromURLSting(archiveShow?.show.imageURI)
+        archiveImageView.fromURLSting(archiveShow?.show.imageURI, placeHolder: UIImage(named: "avatar"))
+        
         topLabel.text = archiveShow?.show.programName
         middleLabel.text = archiveShow?.show.hostNames?.first?.uppercased()
         bottomLabel.text = archiveShow?.show.programTags
