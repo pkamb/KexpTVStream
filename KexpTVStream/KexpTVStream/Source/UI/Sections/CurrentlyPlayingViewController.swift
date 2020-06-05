@@ -72,7 +72,7 @@ class CurrentlyPlayingViewController: BaseViewController {
         
         setupRemoteCommandCenter()
         showLoadingIndicator()
-        djVC.updateShowDetails {
+        djVC.updateShowDetails(fireAnalytic: false) {
             DispatchQueue.main.async {
                 self.removeLoadingIndicator()
             }
@@ -153,7 +153,7 @@ class CurrentlyPlayingViewController: BaseViewController {
         djVC.currentlyPlayingArchiveShow = nil
         isPlayingArchive = true
         
-        djVC.updateShowDetails {
+        djVC.updateShowDetails(fireAnalytic: true) {
             self.removeLoadingIndicator()
         }
         
@@ -213,7 +213,7 @@ class CurrentlyPlayingViewController: BaseViewController {
             self?.playlistVC.updateArchievePlaylistShowTime(startTime: startTimeDate ?? archiveShow.show.startTime)
             self?.djVC.currentlyPlayingArchiveShow = archiveShow
 
-            self?.djVC.updateShowDetails {
+            self?.djVC.updateShowDetails(fireAnalytic: true) {
                 self?.removeLoadingIndicator()
             }
             

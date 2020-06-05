@@ -6,7 +6,39 @@
 //  Copyright © 2020 Dustin Bergman. All rights reserved.
 //
 
-import Foundation
+import Flurry_iOS_SDK
+import KEXPPower
 
 struct AnalyticsManager {
+    enum Event {
+        case startLiveStream(Show)
+        case startArchiveStream(Show)
+    }
+    
+    static func fire(_ event: Event) {
+        switch event {
+        case .startLiveStream(let liveShow):
+            Flurry.logEvent("Start_Live_Stream", withParameters: self.showDetails(with: liveShow))
+        case .startArchiveStream(let archiveShow):
+            Flurry.logEvent("Start_Archive_Stream", withParameters: self.showDetails(with: archiveShow))
+        }
+    }
+    
+    private static func showDetails(with show: Show) -> [String: String] {
+        var details = [String: String]()
+    
+        if let show = show.programName {
+            details["Show"]  = show
+        }
+        
+        if let hosts = show.hostNames?.joined(separator: ", ") {
+            details["Host"]  = hosts
+        }
+    
+        if let showDate = show.startTime {
+            details["Date"]  = DateFormatter.nowPlayingFormatter.string(from: showDate)
+        }
+        
+        return details
+    }
 }

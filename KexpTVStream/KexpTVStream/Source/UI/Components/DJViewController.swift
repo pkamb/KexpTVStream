@@ -64,7 +64,7 @@ class DJViewController: BaseViewController {
         super.viewDidLoad()
         
         Timer.scheduledTimer(withTimeInterval: 30, repeats: true, block: { [weak self] _ in
-            self?.updateShowDetails()
+            self?.updateShowDetails(fireAnalytic: false)
         })
     }
     
@@ -88,22 +88,29 @@ class DJViewController: BaseViewController {
         ])
     }
     
-    func updateShowDetails(completion: Completion? = nil) {
+    func updateShowDetails(fireAnalytic: Bool, completion: Completion? = nil) {
         if let showId = currentlyPlayingArchiveShow?.show.id {
-            updateArchiveShowDetails(with: String(showId), completion: completion)
+            updateArchiveShowDetails(with: String(showId), fireAnalytic: fireAnalytic, completion: completion)
         } else {
-            updateLiveShowDetails(completion: completion)
+            updateLiveShowDetails(fireAnalytic: fireAnalytic, completion: completion)
         }
     }
     
-    private func updateLiveShowDetails(completion: Completion? = nil) {
+    private func updateLiveShowDetails(fireAnalytic: Bool, completion: Completion? = nil) {
         networkManager.getShow { [weak self] result in
             guard let strongSelf = self else { return }
             
             switch result {
             case .success(let shows):
-                strongSelf.populateShowDetail(show: shows?.shows?.first)
-
+                if let currentShow = shows?.shows?.first {
+                    strongSelf.populateShowDetail(show: currentShow)
+                    if fireAnalytic {
+                        AnalyticsManager.fire(.startLiveStream(currentShow))
+                    }
+                } else {
+                   strongSelf.showNotFound()
+                }
+    
             case .failure:
                 strongSelf.showNotFound()
             }
@@ -112,13 +119,21 @@ class DJViewController: BaseViewController {
         }
     }
     
-    private func updateArchiveShowDetails(with showId: String, completion: Completion? = nil) {
+    private func updateArchiveShowDetails(with showId: String, fireAnalytic: Bool, completion: Completion? = nil) {
         networkManager.getShowDetails(with: showId) { [weak self] result in
             guard let strongSelf = self else { return }
             
             switch result {
             case .success(let show):
-                strongSelf.populateShowDetail(show: show)
+                if let archiveShow = show {
+                    strongSelf.populateShowDetail(show: archiveShow)
+                    
+                    if fireAnalytic {
+                        AnalyticsManager.fire(.startArchiveStream(archiveShow))
+                    }
+                } else {
+                    strongSelf.showNotFound()
+                }
 
             case .failure:
                 strongSelf.showNotFound()
