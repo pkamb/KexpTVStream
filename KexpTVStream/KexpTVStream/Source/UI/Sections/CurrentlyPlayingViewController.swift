@@ -253,4 +253,9 @@ extension CurrentlyPlayingViewController: PlayerDelegate {
     func handleAudioInterruption() {
         playPauseAction(playPauseButton)
     }
+    
+    func handlePlaybackError() {
+        showAlert(with: "Failed to Play", message: "Check your Internet connection.")
+        playPauseAction(playPauseButton)
+    }
 }

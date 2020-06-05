@@ -11,9 +11,10 @@ import KEXPPower
 
 protocol PlayerDelegate: class {
     func handleAudioInterruption()
+    func handlePlaybackError()
 }
 
-class Player {
+class Player: NSObject {
     static let shared = Player()
 
     //`nil` means nothing has been played
@@ -26,9 +27,14 @@ class Player {
     
     weak var delegate: PlayerDelegate?
     
-    private init() {
+    private override init() {
+        super.init()
+
         NotificationCenter.default.addObserver(self, selector: #selector(handleInterruption(_:)), name: AVAudioSession.interruptionNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleInterruption(_:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handlePlaybackError), name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: nil)
+
     }
     
     func play(with playUrl: URL?) {
@@ -70,7 +76,7 @@ class Player {
         isPlaying = true
         player.play()
     }
-    
+
     // MARK: - NSNotification
     // This is called when audio is taken from another app. Sending a HardStop when an AVAudioSessionInterruptionType is fired
     @objc
@@ -83,5 +89,10 @@ class Player {
         {
             delegate?.handleAudioInterruption()
         }
+    }
+    
+    @objc
+    private func handlePlaybackError() {
+        delegate?.handlePlaybackError()
     }
 }
