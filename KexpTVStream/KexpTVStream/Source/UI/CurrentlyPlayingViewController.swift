@@ -15,6 +15,7 @@ class CurrentlyPlayingViewController: BaseViewController {
     private let djVC = DJViewController()
     private let networkManager = NetworkManager()
     private let archiveManager = ArchiveManager()
+    private var isPlayingArchive = false
 
     private let mainStackView: UIStackView = {
         let stackView = UIStackView()
@@ -58,6 +59,12 @@ class CurrentlyPlayingViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(resetPlaylistIfNeeded),
+            name: UIApplication.willEnterForegroundNotification,
+            object: nil)
+        
         setupRemoteCommandCenter()
         showLoadingIndicator()
         djVC.updateShowDetails {
@@ -69,6 +76,10 @@ class CurrentlyPlayingViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if !isPlayingArchive {
+            playlistVC.livePlaylistShowTime()
+        }
         
         playlistVC.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .left, animated: true)
     }
@@ -135,6 +146,7 @@ class CurrentlyPlayingViewController: BaseViewController {
         Player.sharedInstance.play(with: retrieveLiveStream())
         
         djVC.currentlyPlayingArchiveShow = nil
+        isPlayingArchive = true
         
         djVC.updateShowDetails {
             self.removeLoadingIndicator()
@@ -175,6 +187,15 @@ class CurrentlyPlayingViewController: BaseViewController {
 
         show(navigationController, sender: self)
     }
+    
+    @objc
+    private func resetPlaylistIfNeeded() {
+       if !isPlayingArchive {
+           playlistVC.livePlaylistShowTime()
+       }
+       
+       playlistVC.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .left, animated: true)
+    }
 
     private func playArchiveShow(archiveShow: ArchiveShow, startTimeDate: Date? = nil) {
         showLoadingIndicator()
@@ -210,6 +231,7 @@ class CurrentlyPlayingViewController: BaseViewController {
 
 extension CurrentlyPlayingViewController: ArchiveDelegate {
     func playShow(archiveShow: ArchiveShow) {
+        isPlayingArchive = true
         playArchiveShow(archiveShow: archiveShow)
     }
 }
