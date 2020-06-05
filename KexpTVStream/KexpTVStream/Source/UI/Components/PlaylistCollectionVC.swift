@@ -18,6 +18,8 @@ class PlaylistCollectionVC: UICollectionViewController {
     
     var isCurrentlyStreaming = false {
         didSet {
+            guard !plays.isEmpty else { return }
+            
             collectionView.reloadItems(at: [IndexPath(row: 0, section: 0)])
         }
     }
