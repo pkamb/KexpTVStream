@@ -9,9 +9,12 @@
 import AVFoundation
 import KEXPPower
 
+protocol PlayerDelegate: class {
+    func handleAudioInterruption()
+}
+
 class Player {
-    static let sharedInstance = Player()
-    private init(){}
+    static let shared = Player()
 
     //`nil` means nothing has been played
     var isPlaying: Bool?
@@ -20,6 +23,13 @@ class Player {
     private var playerItem: AVPlayerItem?
     private var currentStreamURL: URL?
     private var archiveStreamURLs = [URL]()
+    
+    weak var delegate: PlayerDelegate?
+    
+    private init() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleInterruption(_:)), name: AVAudioSession.interruptionNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleInterruption(_:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: nil)
+    }
     
     func play(with playUrl: URL?) {
         guard let playUrl = playUrl else { return }
@@ -51,7 +61,6 @@ class Player {
         player.play()
     }
     
-    
     func pause() {
         isPlaying = false
         player.pause()
@@ -60,5 +69,19 @@ class Player {
     func resume() {
         isPlaying = true
         player.play()
+    }
+    
+    // MARK: - NSNotification
+    // This is called when audio is taken from another app. Sending a HardStop when an AVAudioSessionInterruptionType is fired
+    @objc
+    private func handleInterruption(_ notification: Notification) {
+        guard let interruptionTypeUInt = (notification as NSNotification).userInfo?[AVAudioSessionInterruptionTypeKey] as? UInt else { return }
+
+        if
+            let interruptionType = AVAudioSession.InterruptionType(rawValue: interruptionTypeUInt),
+            interruptionType == .began
+        {
+            delegate?.handleAudioInterruption()
+        }
     }
 }

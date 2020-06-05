@@ -70,6 +70,8 @@ class CurrentlyPlayingViewController: BaseViewController {
             name: UIApplication.willEnterForegroundNotification,
             object: nil)
         
+
+        Player.shared.delegate = self
         setupRemoteCommandCenter()
         showLoadingIndicator()
         djVC.updateShowDetails(fireAnalytic: false) {
@@ -148,7 +150,7 @@ class CurrentlyPlayingViewController: BaseViewController {
     @objc
     private func playLiveStreamAction(_ sender: UIButton) {
         playPauseButton.setImage(UIImage(named: "pauseButton"), for: .normal)
-        Player.sharedInstance.play(with: retrieveLiveStream())
+        Player.shared.play(with: retrieveLiveStream())
         
         djVC.currentlyPlayingArchiveShow = nil
         isPlayingArchive = true
@@ -164,12 +166,12 @@ class CurrentlyPlayingViewController: BaseViewController {
     
     @objc
     private func playPauseAction(_ sender: UIButton) {
-        if Player.sharedInstance.isPlaying == true {
-            Player.sharedInstance.pause()
+        if Player.shared.isPlaying == true {
+            Player.shared.pause()
             playPauseButton.setImage(UIImage(named: "playButton"), for: .normal)
             playlistVC.isCurrentlyStreaming = false
-        } else if Player.sharedInstance.isPlaying == false {
-            Player.sharedInstance.resume()
+        } else if Player.shared.isPlaying == false {
+            Player.shared.resume()
             playlistVC.isCurrentlyStreaming = true
             playPauseButton.setImage(UIImage(named: "pauseButton"), for: .normal)
         } else {
@@ -206,7 +208,7 @@ class CurrentlyPlayingViewController: BaseViewController {
         showLoadingIndicator()
 
         archiveManager.getStreamURLs(for: archiveShow, playbackStartDate: startTimeDate) { [weak self] streamURLs, offset in
-            Player.sharedInstance.playArchive(with: streamURLs, offset: offset)
+            Player.shared.playArchive(with: streamURLs, offset: offset)
             self?.playlistVC.isCurrentlyStreaming = true
             self?.jumpToTimeButton.isHidden = false
             self?.listenLiveButton.isHidden = false
@@ -244,5 +246,11 @@ extension CurrentlyPlayingViewController: ArchiveDelegate {
 extension CurrentlyPlayingViewController: StartTimesDelegate {
     func playShow(archiveShow: ArchiveShow, archiveShowStart: ArchiveShowStart) {
         playArchiveShow(archiveShow: archiveShow, startTimeDate: archiveShowStart.startTimeDate)
+    }
+}
+
+extension CurrentlyPlayingViewController: PlayerDelegate {
+    func handleAudioInterruption() {
+        playPauseAction(playPauseButton)
     }
 }

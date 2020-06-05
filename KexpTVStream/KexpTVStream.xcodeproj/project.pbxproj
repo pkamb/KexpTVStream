@@ -14,6 +14,7 @@
 		8B0C3D2C244A8C2800ABAE9C /* PlaylistCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0C3D2B244A8C2800ABAE9C /* PlaylistCollectionVC.swift */; };
 		8B0C3D2E244B8E4A00ABAE9C /* DJViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0C3D2D244B8E4A00ABAE9C /* DJViewController.swift */; };
 		8B17260C248A1BEF00E8D2A4 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B17260B248A1BEF00E8D2A4 /* AnalyticsManager.swift */; };
+		8B17260F248AEDF200E8D2A4 /* UIViewController+KEXPTVStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B17260E248AEDF200E8D2A4 /* UIViewController+KEXPTVStream.swift */; };
 		8B1FA78A2480CD22000C8287 /* PlayingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1FA7892480CD22000C8287 /* PlayingIndicatorView.swift */; };
 		8B1FA78C2481CB2F000C8287 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B1FA78B2481CB2F000C8287 /* LaunchScreen.storyboard */; };
 		8B20EEA3245DE865007F418A /* CustomActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20EEA2245DE865007F418A /* CustomActivityIndicator.swift */; };
@@ -65,6 +66,7 @@
 		8B0C3D2B244A8C2800ABAE9C /* PlaylistCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistCollectionVC.swift; sourceTree = "<group>"; };
 		8B0C3D2D244B8E4A00ABAE9C /* DJViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJViewController.swift; sourceTree = "<group>"; };
 		8B17260B248A1BEF00E8D2A4 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
+		8B17260E248AEDF200E8D2A4 /* UIViewController+KEXPTVStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+KEXPTVStream.swift"; sourceTree = "<group>"; };
 		8B1FA7892480CD22000C8287 /* PlayingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingIndicatorView.swift; sourceTree = "<group>"; };
 		8B1FA78B2481CB2F000C8287 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B20EEA2245DE865007F418A /* CustomActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomActivityIndicator.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				8B2D076924798B9E0094F0A2 /* UIColor+Theme.swift */,
 				8B17260B248A1BEF00E8D2A4 /* AnalyticsManager.swift */,
 				8B2D076B2479927E0094F0A2 /* BaseViewController.swift */,
+				8B17260E248AEDF200E8D2A4 /* UIViewController+KEXPTVStream.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -469,6 +472,7 @@
 				8B17260C248A1BEF00E8D2A4 /* AnalyticsManager.swift in Sources */,
 				8BE8A242243911FE000B905D /* SettingsViewController.swift in Sources */,
 				8B20EEA8245E6A59007F418A /* Player.swift in Sources */,
+				8B17260F248AEDF200E8D2A4 /* UIViewController+KEXPTVStream.swift in Sources */,
 				8B2D076C2479927E0094F0A2 /* BaseViewController.swift in Sources */,
 				8B0C3D2C244A8C2800ABAE9C /* PlaylistCollectionVC.swift in Sources */,
 				8B5BBC40243ECF3C00FAE988 /* ArchiveCalendarCollectionVC.swift in Sources */,
