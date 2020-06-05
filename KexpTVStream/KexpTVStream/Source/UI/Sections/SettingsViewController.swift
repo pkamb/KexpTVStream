@@ -43,6 +43,7 @@ class SettingsViewController: BaseViewController {
         contentStackView.addArrangedSubview(SettingsRowView(title: "Disable Idle Timer:", view: disableIdleTimerSegmentedControl))
         contentStackView.addArrangedSubview(SettingsRowView(title: "Version:", value: appVersion))
         contentStackView.addArrangedSubview(SettingsRowView(title: "Build:", value: appBuild))
+        contentStackView.addArrangedSubview(SettingsRowView(title: "Donate at kexp.org/donate"))
     }
     
      override func constructConstraints() {
@@ -102,6 +103,15 @@ class SettingsRowView: UIView {
         addPinnedSubview(rowStackView)
         rowStackView.addArrangedSubview(titleLabel)
         rowStackView.addArrangedSubview(view)
+    }
+    
+    init(title: String) {
+        super.init(frame: .zero)
+        
+        titleLabel.text = title
+        titleLabel.textAlignment = .center
+        addPinnedSubview(rowStackView)
+        rowStackView.addArrangedSubview(titleLabel)
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
