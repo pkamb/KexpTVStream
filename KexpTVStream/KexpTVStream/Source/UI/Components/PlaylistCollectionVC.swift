@@ -55,8 +55,6 @@ class PlaylistCollectionVC: UICollectionViewController {
                 self?.getArchivePlayItem()
             }
         })
-        
-        getPlays(paging: true)
     }
 
     func updateArchievePlaylistShowTime(startTime: Date?) {
