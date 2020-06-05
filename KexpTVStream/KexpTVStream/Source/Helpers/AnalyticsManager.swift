@@ -13,14 +13,19 @@ struct AnalyticsManager {
     enum Event {
         case startLiveStream(Show)
         case startArchiveStream(Show)
+        case archiveShowJumpToTime(Show, String)
     }
     
     static func fire(_ event: Event) {
         switch event {
         case .startLiveStream(let liveShow):
-            Flurry.logEvent("Start_Live_Stream", withParameters: self.showDetails(with: liveShow))
+            Flurry.logEvent("Start_Live_Stream", withParameters: showDetails(with: liveShow))
         case .startArchiveStream(let archiveShow):
-            Flurry.logEvent("Start_Archive_Stream", withParameters: self.showDetails(with: archiveShow))
+            Flurry.logEvent("Start_Archive_Stream", withParameters: showDetails(with: archiveShow))
+        case .archiveShowJumpToTime(let archiveShow, let startTime):
+            var details = showDetails(with: archiveShow)
+            details["StartTime"] = startTime
+            Flurry.logEvent("Archive_Jump_To_Time", withParameters: details)
         }
     }
     

@@ -79,6 +79,8 @@ extension StartTimesCollectionViewController: UICollectionViewDataSource, UIColl
         guard let selectedStartTime = archiveShowStartTimes?[indexPath.row] else { return }
         
         startTimesDelegate?.playShow(archiveShow: archiveShow, archiveShowStart: selectedStartTime)
+        
+        AnalyticsManager.fire(.archiveShowJumpToTime(archiveShow.show, selectedStartTime.startTimeDisplay))
         dismiss(animated: true, completion: nil)
     }
 
