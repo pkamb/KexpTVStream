@@ -50,6 +50,4 @@ extension DateFormatter {
         formatter.timeZone = TimeZone.current
         return formatter
     }()
-    
-    
 }

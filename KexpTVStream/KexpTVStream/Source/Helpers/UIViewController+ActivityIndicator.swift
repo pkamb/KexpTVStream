@@ -9,6 +9,10 @@
 import UIKit
 
 extension UIViewController {
+    private enum Style {
+        static let activityIndicatorSize = CGFloat(50)
+    }
+    
     func showLoadingIndicator() {
         let loadingOverlayView = UIView()
         loadingOverlayView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
@@ -22,8 +26,8 @@ extension UIViewController {
         NSLayoutConstraint.activate([
             activityIndicator.centerXAnchor.constraint(equalTo: loadingOverlayView.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: loadingOverlayView.centerYAnchor),
-            activityIndicator.heightAnchor.constraint(equalToConstant: 50),
-            activityIndicator.widthAnchor.constraint(equalToConstant: 50)
+            activityIndicator.heightAnchor.constraint(equalToConstant: Style.activityIndicatorSize),
+            activityIndicator.widthAnchor.constraint(equalToConstant: Style.activityIndicatorSize)
         ])
 
         activityIndicator.showActivityLoading()

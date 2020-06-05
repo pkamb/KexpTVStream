@@ -14,7 +14,12 @@ protocol ArchiveDelegate: class {
 }
 
 class ArchiveViewController: BaseViewController {
-    weak var delegate: ArchiveDelegate?
+    private enum Style {
+        static let archiveTopInset = CGFloat(40)
+        static let containerViewPadding = CGFloat(100)
+        static let containerViewTopInset = CGFloat(40)
+    }
+    
     private let archiveManager = ArchiveManager()
     private let calendarCollectionVC = ArchiveCalendarCollectionVC(displayType: .full)
     private let hostArchieveCollectionVC = ArchiveDetailCollectionVC(with: .host)
@@ -56,6 +61,8 @@ class ArchiveViewController: BaseViewController {
         segmentedControl.addTarget(self, action: #selector(handleUpdate(sender:)), for: .valueChanged)
         return segmentedControl
     }()
+
+    weak var delegate: ArchiveDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,14 +116,14 @@ class ArchiveViewController: BaseViewController {
             ])
         
         NSLayoutConstraint.activate(
-            [archiveSelectionLabel.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 40),
+            [archiveSelectionLabel.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: Style.archiveTopInset),
              archiveSelectionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
             ])
         
         NSLayoutConstraint.activate(
-            [containerView.topAnchor.constraint(equalTo: archiveSelectionLabel.bottomAnchor, constant: 40),
-             containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -100),
-             containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 100),
+            [containerView.topAnchor.constraint(equalTo: archiveSelectionLabel.bottomAnchor, constant: Style.containerViewTopInset),
+             containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Style.containerViewPadding),
+             containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Style.containerViewPadding),
              containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
             ])
         

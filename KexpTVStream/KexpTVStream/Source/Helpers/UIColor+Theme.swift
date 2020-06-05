@@ -32,8 +32,3 @@ extension UIColor {
         return UIColor(hexString: "#2F4F4F")!
     }
 }
-
-
-    
-
-    

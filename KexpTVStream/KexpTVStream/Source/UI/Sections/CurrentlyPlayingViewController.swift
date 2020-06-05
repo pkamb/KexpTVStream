@@ -11,6 +11,11 @@ import MediaPlayer
 import UIKit
 
 class CurrentlyPlayingViewController: BaseViewController {
+    private enum Style {
+        static let liveButtonHeight = CGFloat(50)
+        static let playlistViewTopInset = CGFloat(10)
+    }
+    
     private let playlistVC = PlaylistCollectionVC()
     private let djVC = DJViewController()
     private let networkManager = NetworkManager()
@@ -117,7 +122,7 @@ class CurrentlyPlayingViewController: BaseViewController {
     }
     
     override func constructConstraints() {
-        listenLiveButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        listenLiveButton.heightAnchor.constraint(equalToConstant: Style.liveButtonHeight).isActive = true
     
         NSLayoutConstraint.activate(
             [djVC.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -132,7 +137,7 @@ class CurrentlyPlayingViewController: BaseViewController {
         )
 
         NSLayoutConstraint.activate(
-            [playlistVC.view.topAnchor.constraint(equalTo: mainStackView.bottomAnchor, constant: 10),
+            [playlistVC.view.topAnchor.constraint(equalTo: mainStackView.bottomAnchor, constant: Style.playlistViewTopInset),
              playlistVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
              playlistVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
              playlistVC.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
