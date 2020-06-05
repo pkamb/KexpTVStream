@@ -135,6 +135,8 @@ extension ArchiveDetailCollectionVC: UICollectionViewDelegateFlowLayout, UIColle
             tralingPadding -
             leadingPadding
         
+        print("containerWidth : \(containerWidth)")
+        
         let cellWidth = containerWidth / 2.0
     
         return CGSize(width: cellWidth, height: getCellHeight())
@@ -290,14 +292,14 @@ private class ArchiveDetailCollectionCell: UICollectionViewCell {
         
         switch type {
         case .host:
-            archiveImageView.fromURLSting(archiveShow?.imageURI)
+            archiveImageView.fromURLSting(archiveShow?.imageURI, placeHolder: UIImage(named: "avatar"))
             topLabel.text = archiveShow?.hostNames?.first
             middleLabel.text = archiveShow?.programName?.uppercased()
             bottomLabel.text = archiveShow?.programTags
             infoLabel.text = infoText
             
         case .show, .day:
-            archiveImageView.fromURLSting(archiveShow?.imageURI)
+            archiveImageView.fromURLSting(archiveShow?.imageURI, placeHolder: UIImage(named: "avatar"))
             topLabel.text = archiveShow?.programName
             middleLabel.text = archiveShow?.hostNames?.joined(separator: ", ").uppercased()
             bottomLabel.text = archiveShow?.programTags
