@@ -125,18 +125,17 @@ extension ArchiveDetailCollectionVC: UICollectionViewDelegateFlowLayout, UIColle
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard var containerWidth = view?.frame.width else { return CGSize.zero }
         
-        let window = UIApplication.shared.windows.first { $0.isKeyWindow }
-        let leadingPadding = window?.safeAreaInsets.left ?? 0
-        let tralingPadding = window?.safeAreaInsets.right ?? 0
-
         containerWidth = containerWidth -
             collectionView.contentInset.left -
-            collectionView.contentInset.right -
-            tralingPadding -
-            leadingPadding
-        
-        print("containerWidth : \(containerWidth)")
-        
+            collectionView.contentInset.right
+    
+        if archiveType == .day {
+            let window = UIApplication.shared.windows.first { $0.isKeyWindow }
+            let leadingPadding = window?.safeAreaInsets.left ?? 0
+            let tralingPadding = window?.safeAreaInsets.right ?? 0
+            containerWidth = containerWidth - tralingPadding  - leadingPadding
+        }
+
         let cellWidth = containerWidth / 2.0
     
         return CGSize(width: cellWidth, height: getCellHeight())

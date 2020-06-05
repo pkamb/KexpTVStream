@@ -122,8 +122,8 @@ class ArchiveViewController: BaseViewController {
         
         NSLayoutConstraint.activate(
             [containerView.topAnchor.constraint(equalTo: archiveSelectionLabel.bottomAnchor, constant: Style.containerViewTopInset),
-             containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Style.containerViewPadding),
-             containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Style.containerViewPadding),
+             containerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
+             containerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
              containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
             ])
         
