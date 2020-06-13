@@ -13,8 +13,16 @@ class PlaylistCollectionVC: UICollectionViewController {
     fileprivate enum Style {
         static let cellWidth = CGFloat(300)
         static let cellHeight = CGFloat(550)
-        static let albumArtSize = Style.cellWidth
+        static let albumArtSize = Style.cellWidth - (Style.padding * 2)
+        static let padding = CGFloat(5)
     }
+
+    private let layout = UICollectionViewFlowLayout()
+    private let networkManager = NetworkManager()
+    private var plays = [Play]()
+    private var offset = 0
+    private var archiveShowTime: Date?
+    private var timer: Timer?
     
     var isCurrentlyStreaming = false {
         didSet {
@@ -23,12 +31,6 @@ class PlaylistCollectionVC: UICollectionViewController {
             collectionView.reloadItems(at: [IndexPath(row: 0, section: 0)])
         }
     }
-
-    private let layout = UICollectionViewFlowLayout()
-    private let networkManager = NetworkManager()
-    private var plays = [Play]()
-    private var offset = 0
-    private var archiveShowTime: Date?
 
     init() {
         layout.minimumLineSpacing = 50
@@ -50,19 +52,14 @@ class PlaylistCollectionVC: UICollectionViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        Timer.scheduledTimer(withTimeInterval: 15, repeats: true, block: { [weak self] _ in
-            if self?.archiveShowTime == nil {
-                self?.getPlays(paging: false)
-            } else if self?.isCurrentlyStreaming == true {
-                self?.getArchivePlayItem()
-            }
-        })
+        updateTimer()
     }
 
     func updateArchievePlaylistShowTime(startTime: Date?) {
         archiveShowTime = startTime
         plays.removeAll()
         collectionView.reloadData()
+        updateTimer()
         getArchivePlayItem()
     }
     
@@ -75,7 +72,23 @@ class PlaylistCollectionVC: UICollectionViewController {
             offset = 0
         }
         
+        updateTimer()
         getPlays(paging: true)
+    }
+    
+    private func updateTimer() {
+        timer?.invalidate()
+        timer = nil
+        
+        let interval = TimeInterval(exactly: archiveShowTime == nil ? 15 : 30)!
+        
+        timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true, block: { [weak self] _ in
+            if self?.archiveShowTime == nil {
+                self?.getPlays(paging: false)
+            } else if self?.isCurrentlyStreaming == true {
+                self?.getArchivePlayItem()
+            }
+        })
     }
     
     private func getPlays(paging: Bool) {
@@ -375,9 +388,9 @@ private class PlaylistCell: UICollectionViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            contentStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            contentStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            contentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            contentStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: PlaylistCollectionVC.Style.padding),
+            contentStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: PlaylistCollectionVC.Style.padding),
+            contentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -PlaylistCollectionVC.Style.padding),
             contentStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
         
@@ -438,4 +451,3 @@ private class PlaylistCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
-
