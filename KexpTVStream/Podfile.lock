@@ -1,35 +1,20 @@
 PODS:
-  - Flurry-iOS-SDK/FlurryTVOS (10.2.0)
-  - KEXPPower (0.6)
-  - Sentry (5.0.0-beta.0):
-    - Sentry/Core (= 5.0.0-beta.0)
-  - Sentry/Core (5.0.0-beta.0)
+  - Flurry-iOS-SDK/FlurryTVOS (10.3.1)
+  - KEXPPower (0.9)
 
 DEPENDENCIES:
   - Flurry-iOS-SDK/FlurryTVOS
   - KEXPPower
-  - Sentry (from `https://github.com/getsentry/sentry-cocoa.git`, tag `5.0.0-beta.0`)
 
 SPEC REPOS:
   trunk:
     - Flurry-iOS-SDK
     - KEXPPower
 
-EXTERNAL SOURCES:
-  Sentry:
-    :git: https://github.com/getsentry/sentry-cocoa.git
-    :tag: 5.0.0-beta.0
-
-CHECKOUT OPTIONS:
-  Sentry:
-    :git: https://github.com/getsentry/sentry-cocoa.git
-    :tag: 5.0.0-beta.0
-
 SPEC CHECKSUMS:
-  Flurry-iOS-SDK: ca3540dd9607a05a8a13a7dd36dfffdd5e0fd0ef
-  KEXPPower: 5ce9502ef6709ce7f4fb0a7c6e00fdec455860b9
-  Sentry: 5657b4b53c666d4143ae288697e7ec49dff370a3
+  Flurry-iOS-SDK: 2cc5b4f494db71d90a8bd195ba7ebb7cdebf3535
+  KEXPPower: 08b5889e040cb4852dec0e15c4ac3d11d8d7f994
 
-PODFILE CHECKSUM: c621644d03eba306d9d0fa039fa451dcd70c758c
+PODFILE CHECKSUM: 2f79ff61d3997f0081c709248cb80414353e9d7d
 
 COCOAPODS: 1.9.1

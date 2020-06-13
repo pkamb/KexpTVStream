@@ -9,21 +9,33 @@
 /* Begin PBXBuildFile section */
 		46CDFB201C30A7170001A004 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB1F1C30A7170001A004 /* AppDelegate.swift */; };
 		46CDFB251C30A7170001A004 /* KexpTVStream.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB231C30A7170001A004 /* KexpTVStream.xcdatamodeld */; };
-		46CDFB281C30A7170001A004 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46CDFB261C30A7170001A004 /* Main.storyboard */; };
 		46CDFB2A1C30A7180001A004 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46CDFB291C30A7180001A004 /* Assets.xcassets */; };
-		46CDFB401C30A7630001A004 /* KexpNowPlayingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB3F1C30A7630001A004 /* KexpNowPlayingVC.swift */; };
-		46CDFB451C30A8AD0001A004 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB421C30A8AD0001A004 /* AudioManager.swift */; };
-		46CDFB491C30B0F30001A004 /* KexpStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDFB481C30B0F30001A004 /* KexpStyle.swift */; };
+		8B0C3D2C244A8C2800ABAE9C /* PlaylistCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0C3D2B244A8C2800ABAE9C /* PlaylistCollectionVC.swift */; };
+		8B0C3D2E244B8E4A00ABAE9C /* DJViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0C3D2D244B8E4A00ABAE9C /* DJViewController.swift */; };
+		8B17260C248A1BEF00E8D2A4 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B17260B248A1BEF00E8D2A4 /* AnalyticsManager.swift */; };
+		8B17260F248AEDF200E8D2A4 /* UIViewController+KEXPTVStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B17260E248AEDF200E8D2A4 /* UIViewController+KEXPTVStream.swift */; };
+		8B1FA78A2480CD22000C8287 /* PlayingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1FA7892480CD22000C8287 /* PlayingIndicatorView.swift */; };
+		8B1FA78C2481CB2F000C8287 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B1FA78B2481CB2F000C8287 /* LaunchScreen.storyboard */; };
+		8B20EEA3245DE865007F418A /* CustomActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20EEA2245DE865007F418A /* CustomActivityIndicator.swift */; };
+		8B20EEA5245E35DA007F418A /* UIViewController+ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20EEA4245E35DA007F418A /* UIViewController+ActivityIndicator.swift */; };
+		8B20EEA8245E6A59007F418A /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20EEA7245E6A59007F418A /* Player.swift */; };
+		8B20EEAA246292CD007F418A /* StartTimesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20EEA9246292CD007F418A /* StartTimesCollectionViewController.swift */; };
+		8B2D07682478A3070094F0A2 /* UIImage+AverageColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2D07672478A3070094F0A2 /* UIImage+AverageColor.swift */; };
+		8B2D076A24798B9E0094F0A2 /* UIColor+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2D076924798B9E0094F0A2 /* UIColor+Theme.swift */; };
+		8B2D076C2479927E0094F0A2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2D076B2479927E0094F0A2 /* BaseViewController.swift */; };
+		8B2E49B7246CEEED000A793A /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2E49B6246CEEED000A793A /* ThemeManager.swift */; };
+		8B3962692446D58200CD60F5 /* DisplayFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3962682446D58200CD60F5 /* DisplayFormatters.swift */; };
+		8B39626D2447EA7100CD60F5 /* UIView+NSLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B39626C2447EA7100CD60F5 /* UIView+NSLayoutConstraint.swift */; };
+		8B4C3EBB2443962500269ADF /* ArchiveDetailCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4C3EBA2443962500269ADF /* ArchiveDetailCollectionVC.swift */; };
+		8B5BBC3E243EC18400FAE988 /* ArchiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BBC3D243EC18400FAE988 /* ArchiveViewController.swift */; };
+		8B5BBC40243ECF3C00FAE988 /* ArchiveCalendarCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BBC3F243ECF3C00FAE988 /* ArchiveCalendarCollectionVC.swift */; };
 		8BBBD02B2439501800953C59 /* UserSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBBD02A2439501800953C59 /* UserSettingsManager.swift */; };
-		8BE8A2402436B7D5000B905D /* SettingsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE8A23F2436B7D5000B905D /* SettingsButton.swift */; };
 		8BE8A242243911FE000B905D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE8A241243911FE000B905D /* SettingsViewController.swift */; };
+		8BF3209B243D93DC0028B852 /* CurrentlyPlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF3209A243D93DC0028B852 /* CurrentlyPlayingViewController.swift */; };
 		8BFFED0C22DC3FFA00E3378C /* podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8BFFED0B22DC3FFA00E3378C /* podfile */; };
 		962A140DF48B6B2932FE9465 /* Pods_KexpTVStreamTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0CAA22E221BBEB7D01447E /* Pods_KexpTVStreamTests.framework */; };
 		ACB85C390EF5C43F0B11AF88 /* Pods_KexpTVStream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6623FCBF1F274641DABA19F /* Pods_KexpTVStream.framework */; };
 		C9B01C971F5F93EC00183199 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B01C961F5F93EC00183199 /* AVKit.framework */; };
-		C9EDD0B21C8E195600562A9C /* KexpPlaylistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EDD0B11C8E195600562A9C /* KexpPlaylistCell.swift */; };
-		C9FACB711F76C1320098F214 /* FocusGuideRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FACB701F76C1320098F214 /* FocusGuideRepresentation.swift */; };
-		C9FACB731F76F39D0098F214 /* ArtworkPlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FACB721F76F39D0098F214 /* ArtworkPlayButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,31 +51,43 @@
 /* Begin PBXFileReference section */
 		26F19CA66E8D2DCA47312557 /* Pods-KexpTVStream.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KexpTVStream.release.xcconfig"; path = "Pods/Target Support Files/Pods-KexpTVStream/Pods-KexpTVStream.release.xcconfig"; sourceTree = "<group>"; };
 		2F0CAA22E221BBEB7D01447E /* Pods_KexpTVStreamTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KexpTVStreamTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		46CDFB1C1C30A7170001A004 /* KexpTVStream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KexpTVStream.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		46CDFB1C1C30A7170001A004 /* K E X P.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "K E X P.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46CDFB1F1C30A7170001A004 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		46CDFB241C30A7170001A004 /* KexpTVStream.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KexpTVStream.xcdatamodel; sourceTree = "<group>"; };
-		46CDFB271C30A7170001A004 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		46CDFB291C30A7180001A004 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		46CDFB2B1C30A7180001A004 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		46CDFB301C30A7180001A004 /* KexpTVStreamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KexpTVStreamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		46CDFB361C30A7180001A004 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		46CDFB3F1C30A7630001A004 /* KexpNowPlayingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpNowPlayingVC.swift; sourceTree = "<group>"; };
-		46CDFB421C30A8AD0001A004 /* AudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
-		46CDFB481C30B0F30001A004 /* KexpStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpStyle.swift; sourceTree = "<group>"; };
 		4A88670E65745188983D52A4 /* Pods-KexpTVStreamTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KexpTVStreamTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KexpTVStreamTests/Pods-KexpTVStreamTests.release.xcconfig"; sourceTree = "<group>"; };
 		4C57EEF456081D1CB64BCCF9 /* Pods-KexpTVStream.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KexpTVStream.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KexpTVStream/Pods-KexpTVStream.debug.xcconfig"; sourceTree = "<group>"; };
 		78E3AB477D2FF07E1439780E /* Pods-KexpTVStreamTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KexpTVStreamTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KexpTVStreamTests/Pods-KexpTVStreamTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8B0C3D2B244A8C2800ABAE9C /* PlaylistCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistCollectionVC.swift; sourceTree = "<group>"; };
+		8B0C3D2D244B8E4A00ABAE9C /* DJViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJViewController.swift; sourceTree = "<group>"; };
+		8B17260B248A1BEF00E8D2A4 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
+		8B17260E248AEDF200E8D2A4 /* UIViewController+KEXPTVStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+KEXPTVStream.swift"; sourceTree = "<group>"; };
+		8B1FA7892480CD22000C8287 /* PlayingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingIndicatorView.swift; sourceTree = "<group>"; };
+		8B1FA78B2481CB2F000C8287 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8B20EEA2245DE865007F418A /* CustomActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomActivityIndicator.swift; sourceTree = "<group>"; };
+		8B20EEA4245E35DA007F418A /* UIViewController+ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ActivityIndicator.swift"; sourceTree = "<group>"; };
+		8B20EEA7245E6A59007F418A /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		8B20EEA9246292CD007F418A /* StartTimesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTimesCollectionViewController.swift; sourceTree = "<group>"; };
+		8B2D07672478A3070094F0A2 /* UIImage+AverageColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+AverageColor.swift"; sourceTree = "<group>"; };
+		8B2D076924798B9E0094F0A2 /* UIColor+Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Theme.swift"; sourceTree = "<group>"; };
+		8B2D076B2479927E0094F0A2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		8B2E49B6246CEEED000A793A /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		8B3962682446D58200CD60F5 /* DisplayFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayFormatters.swift; sourceTree = "<group>"; };
+		8B39626C2447EA7100CD60F5 /* UIView+NSLayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+NSLayoutConstraint.swift"; sourceTree = "<group>"; };
+		8B4C3EBA2443962500269ADF /* ArchiveDetailCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveDetailCollectionVC.swift; sourceTree = "<group>"; };
+		8B5BBC3D243EC18400FAE988 /* ArchiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveViewController.swift; sourceTree = "<group>"; };
+		8B5BBC3F243ECF3C00FAE988 /* ArchiveCalendarCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveCalendarCollectionVC.swift; sourceTree = "<group>"; };
 		8BBBD02A2439501800953C59 /* UserSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsManager.swift; sourceTree = "<group>"; };
-		8BE8A23F2436B7D5000B905D /* SettingsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsButton.swift; sourceTree = "<group>"; };
 		8BE8A241243911FE000B905D /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		8BF3209A243D93DC0028B852 /* CurrentlyPlayingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentlyPlayingViewController.swift; sourceTree = "<group>"; };
 		8BFFED0B22DC3FFA00E3378C /* podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A6623FCBF1F274641DABA19F /* Pods_KexpTVStream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KexpTVStream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C92F93AF1C8BEB7200FD469E /* KexpTVStream-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KexpTVStream-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		C9B01C961F5F93EC00183199 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		C9B1645C1C4C4AA200AFC7F6 /* KexpTVStreamTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "KexpTVStreamTests-Bridging-Header.h"; path = "KexpTVStreamTests/KexpTVStreamTests-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
-		C9EDD0B11C8E195600562A9C /* KexpPlaylistCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KexpPlaylistCell.swift; sourceTree = "<group>"; };
-		C9FACB701F76C1320098F214 /* FocusGuideRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusGuideRepresentation.swift; sourceTree = "<group>"; };
-		C9FACB721F76F39D0098F214 /* ArtworkPlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkPlayButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +126,7 @@
 		46CDFB1D1C30A7170001A004 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				46CDFB1C1C30A7170001A004 /* KexpTVStream.app */,
+				46CDFB1C1C30A7170001A004 /* K E X P.app */,
 				46CDFB301C30A7180001A004 /* KexpTVStreamTests.xctest */,
 			);
 			name = Products;
@@ -111,11 +135,7 @@
 		46CDFB1E1C30A7170001A004 /* KexpTVStream */ = {
 			isa = PBXGroup;
 			children = (
-				C9FACB6F1F76C1120098F214 /* Helpers */,
-				C9EDD0B31C8E408D00562A9C /* Style */,
-				C917092E1C3E049F00E010A6 /* Audio */,
-				C917092C1C3E048400E010A6 /* UI */,
-				46CDFB1F1C30A7170001A004 /* AppDelegate.swift */,
+				8BF32098243D93890028B852 /* Source */,
 				46CDFB411C30A7730001A004 /* Supporting files */,
 			);
 			path = KexpTVStream;
@@ -132,9 +152,9 @@
 		46CDFB411C30A7730001A004 /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
+				8B1FA78B2481CB2F000C8287 /* LaunchScreen.storyboard */,
 				C92F93AF1C8BEB7200FD469E /* KexpTVStream-Bridging-Header.h */,
 				C9B1645C1C4C4AA200AFC7F6 /* KexpTVStreamTests-Bridging-Header.h */,
-				46CDFB261C30A7170001A004 /* Main.storyboard */,
 				46CDFB291C30A7180001A004 /* Assets.xcassets */,
 				46CDFB2B1C30A7180001A004 /* Info.plist */,
 				46CDFB231C30A7170001A004 /* KexpTVStream.xcdatamodeld */,
@@ -153,65 +173,73 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		8BBBD0252439157C00953C59 /* VCs */ = {
+		8B17260D248A1C2400E8D2A4 /* Sections */ = {
 			isa = PBXGroup;
 			children = (
-				46CDFB3F1C30A7630001A004 /* KexpNowPlayingVC.swift */,
+				8B5BBC3D243EC18400FAE988 /* ArchiveViewController.swift */,
+				8BF3209A243D93DC0028B852 /* CurrentlyPlayingViewController.swift */,
 				8BE8A241243911FE000B905D /* SettingsViewController.swift */,
 			);
-			name = VCs;
+			path = Sections;
 			sourceTree = "<group>";
 		};
-		8BBBD0262439158E00953C59 /* Components */ = {
+		8B20EEA6245E6A4B007F418A /* Audio */ = {
 			isa = PBXGroup;
 			children = (
-				C9FACB721F76F39D0098F214 /* ArtworkPlayButton.swift */,
-				8BE8A23F2436B7D5000B905D /* SettingsButton.swift */,
+				8B20EEA7245E6A59007F418A /* Player.swift */,
 			);
-			name = Components;
+			path = Audio;
 			sourceTree = "<group>";
 		};
-		C917092C1C3E048400E010A6 /* UI */ = {
+		8B3962672446D53500CD60F5 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				8BBBD0262439158E00953C59 /* Components */,
-				8BBBD0252439157C00953C59 /* VCs */,
-				C9EDD0B01C8E18B600562A9C /* Playlist */,
-			);
-			name = UI;
-			sourceTree = "<group>";
-		};
-		C917092E1C3E049F00E010A6 /* Audio */ = {
-			isa = PBXGroup;
-			children = (
-				46CDFB421C30A8AD0001A004 /* AudioManager.swift */,
-			);
-			name = Audio;
-			sourceTree = "<group>";
-		};
-		C9EDD0B01C8E18B600562A9C /* Playlist */ = {
-			isa = PBXGroup;
-			children = (
-				C9EDD0B11C8E195600562A9C /* KexpPlaylistCell.swift */,
-			);
-			name = Playlist;
-			sourceTree = "<group>";
-		};
-		C9EDD0B31C8E408D00562A9C /* Style */ = {
-			isa = PBXGroup;
-			children = (
-				46CDFB481C30B0F30001A004 /* KexpStyle.swift */,
-			);
-			name = Style;
-			sourceTree = "<group>";
-		};
-		C9FACB6F1F76C1120098F214 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				C9FACB701F76C1320098F214 /* FocusGuideRepresentation.swift */,
+				8B2E49B6246CEEED000A793A /* ThemeManager.swift */,
 				8BBBD02A2439501800953C59 /* UserSettingsManager.swift */,
+				8B3962682446D58200CD60F5 /* DisplayFormatters.swift */,
+				8B39626C2447EA7100CD60F5 /* UIView+NSLayoutConstraint.swift */,
+				8B20EEA4245E35DA007F418A /* UIViewController+ActivityIndicator.swift */,
+				8B2D07672478A3070094F0A2 /* UIImage+AverageColor.swift */,
+				8B2D076924798B9E0094F0A2 /* UIColor+Theme.swift */,
+				8B17260B248A1BEF00E8D2A4 /* AnalyticsManager.swift */,
+				8B2D076B2479927E0094F0A2 /* BaseViewController.swift */,
+				8B17260E248AEDF200E8D2A4 /* UIViewController+KEXPTVStream.swift */,
 			);
-			name = Helpers;
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		8BF32098243D93890028B852 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				8B20EEA6245E6A4B007F418A /* Audio */,
+				8B3962672446D53500CD60F5 /* Helpers */,
+				8BF32099243D939B0028B852 /* UI */,
+				46CDFB1F1C30A7170001A004 /* AppDelegate.swift */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		8BF32099243D939B0028B852 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				8B17260D248A1C2400E8D2A4 /* Sections */,
+				8BF86E8E243D972B0010DA15 /* Components */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		8BF86E8E243D972B0010DA15 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				8B20EEA2245DE865007F418A /* CustomActivityIndicator.swift */,
+				8B5BBC3F243ECF3C00FAE988 /* ArchiveCalendarCollectionVC.swift */,
+				8B4C3EBA2443962500269ADF /* ArchiveDetailCollectionVC.swift */,
+				8B0C3D2B244A8C2800ABAE9C /* PlaylistCollectionVC.swift */,
+				8B0C3D2D244B8E4A00ABAE9C /* DJViewController.swift */,
+				8B20EEA9246292CD007F418A /* StartTimesCollectionViewController.swift */,
+				8B1FA7892480CD22000C8287 /* PlayingIndicatorView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		D5E8CBEBBEA5CF3DFE8F27F9 /* Frameworks */ = {
@@ -237,7 +265,6 @@
 				46CDFB1A1C30A7170001A004 /* Resources */,
 				C9BC2DA21D45AEE600B05DF7 /* Build Number */,
 				3CEF08B0622092F1E739AEC3 /* [CP] Embed Pods Frameworks */,
-				8B89CFAE243AF69B004B258E /* Upload dSYMs */,
 			);
 			buildRules = (
 			);
@@ -245,7 +272,7 @@
 			);
 			name = KexpTVStream;
 			productName = KexpTVStream;
-			productReference = 46CDFB1C1C30A7170001A004 /* KexpTVStream.app */;
+			productReference = 46CDFB1C1C30A7170001A004 /* K E X P.app */;
 			productType = "com.apple.product-type.application";
 		};
 		46CDFB2F1C30A7180001A004 /* KexpTVStreamTests */ = {
@@ -319,9 +346,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B1FA78C2481CB2F000C8287 /* LaunchScreen.storyboard in Resources */,
 				8BFFED0C22DC3FFA00E3378C /* podfile in Resources */,
 				46CDFB2A1C30A7180001A004 /* Assets.xcassets in Resources */,
-				46CDFB281C30A7170001A004 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,13 +389,11 @@
 				"${PODS_ROOT}/Target Support Files/Pods-KexpTVStream/Pods-KexpTVStream-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Flurry-iOS-SDK/Flurry_iOS_SDK.framework",
 				"${BUILT_PRODUCTS_DIR}/KEXPPower/KEXPPower.framework",
-				"${BUILT_PRODUCTS_DIR}/Sentry/Sentry.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Flurry_iOS_SDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KEXPPower.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sentry.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -411,25 +436,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8B89CFAE243AF69B004B258E /* Upload dSYMs */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
-			);
-			name = "Upload dSYMs";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which sentry-cli >/dev/null; then\nexport SENTRY_ORG=dus\nexport SENTRY_PROJECT=kexp-tv-stream\nexport SENTRY_LOG_LEVEL=[info|debug]\nexport SENTRY_AUTH_TOKEN=c8ffc82b4cc04a7abff7813737bed314b53e7b7e57294b8eb6e6221f99f7a837\nERROR=$(sentry-cli upload-dif \"$DWARF_DSYM_FOLDER_PATH\" 2>&1 >/dev/null)\nif [ ! $? -eq 0 ]; then\necho \"warning: sentry-cli - $ERROR\"\nfi\nelse\necho \"warning: sentry-cli not installed, download from https://github.com/getsentry/sentry-cli/releases\"\nfi\n";
-		};
 		C9BC2DA21D45AEE600B05DF7 /* Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -451,17 +457,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C9FACB711F76C1320098F214 /* FocusGuideRepresentation.swift in Sources */,
-				8BE8A2402436B7D5000B905D /* SettingsButton.swift in Sources */,
 				46CDFB201C30A7170001A004 /* AppDelegate.swift in Sources */,
+				8B17260C248A1BEF00E8D2A4 /* AnalyticsManager.swift in Sources */,
 				8BE8A242243911FE000B905D /* SettingsViewController.swift in Sources */,
-				46CDFB401C30A7630001A004 /* KexpNowPlayingVC.swift in Sources */,
-				C9FACB731F76F39D0098F214 /* ArtworkPlayButton.swift in Sources */,
-				46CDFB451C30A8AD0001A004 /* AudioManager.swift in Sources */,
-				C9EDD0B21C8E195600562A9C /* KexpPlaylistCell.swift in Sources */,
+				8B20EEA8245E6A59007F418A /* Player.swift in Sources */,
+				8B17260F248AEDF200E8D2A4 /* UIViewController+KEXPTVStream.swift in Sources */,
+				8B2D076C2479927E0094F0A2 /* BaseViewController.swift in Sources */,
+				8B0C3D2C244A8C2800ABAE9C /* PlaylistCollectionVC.swift in Sources */,
+				8B5BBC40243ECF3C00FAE988 /* ArchiveCalendarCollectionVC.swift in Sources */,
+				8BF3209B243D93DC0028B852 /* CurrentlyPlayingViewController.swift in Sources */,
+				8B20EEA5245E35DA007F418A /* UIViewController+ActivityIndicator.swift in Sources */,
+				8B2E49B7246CEEED000A793A /* ThemeManager.swift in Sources */,
 				46CDFB251C30A7170001A004 /* KexpTVStream.xcdatamodeld in Sources */,
 				8BBBD02B2439501800953C59 /* UserSettingsManager.swift in Sources */,
-				46CDFB491C30B0F30001A004 /* KexpStyle.swift in Sources */,
+				8B1FA78A2480CD22000C8287 /* PlayingIndicatorView.swift in Sources */,
+				8B5BBC3E243EC18400FAE988 /* ArchiveViewController.swift in Sources */,
+				8B4C3EBB2443962500269ADF /* ArchiveDetailCollectionVC.swift in Sources */,
+				8B2D076A24798B9E0094F0A2 /* UIColor+Theme.swift in Sources */,
+				8B2D07682478A3070094F0A2 /* UIImage+AverageColor.swift in Sources */,
+				8B39626D2447EA7100CD60F5 /* UIView+NSLayoutConstraint.swift in Sources */,
+				8B0C3D2E244B8E4A00ABAE9C /* DJViewController.swift in Sources */,
+				8B3962692446D58200CD60F5 /* DisplayFormatters.swift in Sources */,
+				8B20EEAA246292CD007F418A /* StartTimesCollectionViewController.swift in Sources */,
+				8B20EEA3245DE865007F418A /* CustomActivityIndicator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,17 +499,6 @@
 			targetProxy = 46CDFB311C30A7180001A004 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		46CDFB261C30A7170001A004 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				46CDFB271C30A7170001A004 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		46CDFB371C30A7180001A004 /* Debug */ = {
@@ -620,13 +627,13 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/KexpTVStream",
 				);
-				MARKETING_VERSION = 1.7.0;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dus.KexpTVStream;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "K E X P";
 				SWIFT_OBJC_BRIDGING_HEADER = "KexpTVStream-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TVOS_DEPLOYMENT_TARGET = 11.0;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
 			};
 			name = Debug;
 		};
@@ -645,12 +652,12 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/KexpTVStream",
 				);
-				MARKETING_VERSION = 1.7.0;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dus.KexpTVStream;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "K E X P";
 				SWIFT_OBJC_BRIDGING_HEADER = "KexpTVStream-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TVOS_DEPLOYMENT_TARGET = 11.0;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
 			};
 			name = Release;
 		};
