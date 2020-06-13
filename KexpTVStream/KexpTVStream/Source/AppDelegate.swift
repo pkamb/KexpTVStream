@@ -40,15 +40,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let tabBarController = UITabBarController()
         
-        let currentlyPlayingTabBarItem = UITabBarItem()
-        currentlyPlayingTabBarItem.title = "Currently Playing"
-        let listenLiveVC = CurrentlyPlayingViewController()
-        listenLiveVC.tabBarItem = currentlyPlayingTabBarItem
+        let nowPlayingTabBarItem = UITabBarItem()
+        nowPlayingTabBarItem.title = "Now Playing"
+        let nowPlayingVC = NowPlayingViewController()
+        nowPlayingVC.tabBarItem = nowPlayingTabBarItem
         
         let archiveTabBarItem = UITabBarItem()
         archiveTabBarItem.title = "Archive"
         let archiveVC = ArchiveViewController()
-        archiveVC.delegate = listenLiveVC
+        archiveVC.delegate = nowPlayingVC
         archiveVC.tabBarItem = archiveTabBarItem
         
         let settingsTabBarItem = UITabBarItem()
@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         imageView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
         tabBarController.tabBar.leadingAccessoryView.addSubview(imageView)
 
-        tabBarController.viewControllers = [listenLiveVC, archiveVC, settingsVC]
+        tabBarController.viewControllers = [nowPlayingVC, archiveVC, settingsVC]
          
         return tabBarController
     }
