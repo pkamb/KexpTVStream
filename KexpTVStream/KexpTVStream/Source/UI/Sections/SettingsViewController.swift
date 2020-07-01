@@ -43,6 +43,7 @@ class SettingsViewController: BaseViewController {
         contentStackView.addArrangedSubview(SettingsRowView(title: "Disable Idle Timer:", view: disableIdleTimerSegmentedControl))
         contentStackView.addArrangedSubview(SettingsRowView(title: "Version:", value: appVersion))
         contentStackView.addArrangedSubview(SettingsRowView(title: "Build:", value: appBuild))
+        contentStackView.addArrangedSubview(SettingsRowView(title: "App Feedback: feedback@kexp.org"))
         contentStackView.addArrangedSubview(SettingsRowView(title: "Donate at kexp.org/donate"))
     }
     
@@ -55,6 +56,8 @@ class SettingsViewController: BaseViewController {
     
    @objc private func doneAction(_ sender: Any) {
         let isDisplayTimerIdle = disableIdleTimerSegmentedControl.selectedSegmentIndex == 0 ? true : false
+        AnalyticsManager.fire(.disableIdleTimer(isDisplayTimerIdle))
+        
         UserSettingsManager.disableTimer = isDisplayTimerIdle
         UIApplication.shared.isIdleTimerDisabled = isDisplayTimerIdle
     }

@@ -14,6 +14,7 @@ struct AnalyticsManager {
         case startLiveStream(Show)
         case startArchiveStream(Show)
         case archiveShowJumpToTime(Show, String)
+        case disableIdleTimer(Bool)
     }
     
     static func fire(_ event: Event) {
@@ -26,6 +27,9 @@ struct AnalyticsManager {
             var details = showDetails(with: archiveShow)
             details["StartTime"] = startTime
             Flurry.logEvent("Archive_Jump_To_Time", withParameters: details)
+        case .disableIdleTimer(let isDisabled):
+            let event = isDisabled ? "Idle_Timer_Disabled" : "Idle_Timer_Enabled"
+            Flurry.logEvent(event)
         }
     }
     

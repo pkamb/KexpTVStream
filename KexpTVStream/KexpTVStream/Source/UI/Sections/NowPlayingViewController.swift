@@ -1,5 +1,5 @@
 //
-//  CurrentlyPlayingViewController.swift
+//  NowPlayingViewController.swift
 //  KexpTVStream
 //
 //  Created by Dustin Bergman on 4/7/20.
@@ -10,7 +10,7 @@ import KEXPPower
 import MediaPlayer
 import UIKit
 
-class CurrentlyPlayingViewController: BaseViewController {
+class NowPlayingViewController: BaseViewController {
     private enum Style {
         static let liveButtonHeight = CGFloat(50)
         static let playlistViewTopInset = CGFloat(10)
@@ -236,20 +236,20 @@ class CurrentlyPlayingViewController: BaseViewController {
     }
 }
 
-extension CurrentlyPlayingViewController: ArchiveDelegate {
+extension NowPlayingViewController: ArchiveDelegate {
     func playShow(archiveShow: ArchiveShow) {
         isPlayingArchive = true
         playArchiveShow(archiveShow: archiveShow)
     }
 }
 
-extension CurrentlyPlayingViewController: StartTimesDelegate {
+extension NowPlayingViewController: StartTimesDelegate {
     func playShow(archiveShow: ArchiveShow, archiveShowStart: ArchiveShowStart) {
         playArchiveShow(archiveShow: archiveShow, startTimeDate: archiveShowStart.startTimeDate)
     }
 }
 
-extension CurrentlyPlayingViewController: PlayerDelegate {
+extension NowPlayingViewController: PlayerDelegate {
     func handleAudioInterruption() {
         playPauseAction(playPauseButton)
     }
