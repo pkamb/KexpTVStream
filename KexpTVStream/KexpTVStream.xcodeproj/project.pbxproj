@@ -31,7 +31,7 @@
 		8B5BBC40243ECF3C00FAE988 /* ArchiveCalendarCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BBC3F243ECF3C00FAE988 /* ArchiveCalendarCollectionVC.swift */; };
 		8BBBD02B2439501800953C59 /* UserSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBBD02A2439501800953C59 /* UserSettingsManager.swift */; };
 		8BE8A242243911FE000B905D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE8A241243911FE000B905D /* SettingsViewController.swift */; };
-		8BF3209B243D93DC0028B852 /* CurrentlyPlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF3209A243D93DC0028B852 /* CurrentlyPlayingViewController.swift */; };
+		8BF3209B243D93DC0028B852 /* NowPlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF3209A243D93DC0028B852 /* NowPlayingViewController.swift */; };
 		8BFFED0C22DC3FFA00E3378C /* podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8BFFED0B22DC3FFA00E3378C /* podfile */; };
 		962A140DF48B6B2932FE9465 /* Pods_KexpTVStreamTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0CAA22E221BBEB7D01447E /* Pods_KexpTVStreamTests.framework */; };
 		ACB85C390EF5C43F0B11AF88 /* Pods_KexpTVStream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6623FCBF1F274641DABA19F /* Pods_KexpTVStream.framework */; };
@@ -82,7 +82,7 @@
 		8B5BBC3F243ECF3C00FAE988 /* ArchiveCalendarCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveCalendarCollectionVC.swift; sourceTree = "<group>"; };
 		8BBBD02A2439501800953C59 /* UserSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsManager.swift; sourceTree = "<group>"; };
 		8BE8A241243911FE000B905D /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		8BF3209A243D93DC0028B852 /* CurrentlyPlayingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentlyPlayingViewController.swift; sourceTree = "<group>"; };
+		8BF3209A243D93DC0028B852 /* NowPlayingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingViewController.swift; sourceTree = "<group>"; };
 		8BFFED0B22DC3FFA00E3378C /* podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A6623FCBF1F274641DABA19F /* Pods_KexpTVStream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KexpTVStream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C92F93AF1C8BEB7200FD469E /* KexpTVStream-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KexpTVStream-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
@@ -177,7 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				8B5BBC3D243EC18400FAE988 /* ArchiveViewController.swift */,
-				8BF3209A243D93DC0028B852 /* CurrentlyPlayingViewController.swift */,
+				8BF3209A243D93DC0028B852 /* NowPlayingViewController.swift */,
 				8BE8A241243911FE000B905D /* SettingsViewController.swift */,
 			);
 			path = Sections;
@@ -465,7 +465,7 @@
 				8B2D076C2479927E0094F0A2 /* BaseViewController.swift in Sources */,
 				8B0C3D2C244A8C2800ABAE9C /* PlaylistCollectionVC.swift in Sources */,
 				8B5BBC40243ECF3C00FAE988 /* ArchiveCalendarCollectionVC.swift in Sources */,
-				8BF3209B243D93DC0028B852 /* CurrentlyPlayingViewController.swift in Sources */,
+				8BF3209B243D93DC0028B852 /* NowPlayingViewController.swift in Sources */,
 				8B20EEA5245E35DA007F418A /* UIViewController+ActivityIndicator.swift in Sources */,
 				8B2E49B7246CEEED000A793A /* ThemeManager.swift in Sources */,
 				46CDFB251C30A7170001A004 /* KexpTVStream.xcdatamodeld in Sources */,
@@ -627,7 +627,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/KexpTVStream",
 				);
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dus.KexpTVStream;
 				PRODUCT_NAME = "K E X P";
 				SWIFT_OBJC_BRIDGING_HEADER = "KexpTVStream-Bridging-Header.h";
@@ -652,7 +652,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/KexpTVStream",
 				);
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dus.KexpTVStream;
 				PRODUCT_NAME = "K E X P";
 				SWIFT_OBJC_BRIDGING_HEADER = "KexpTVStream-Bridging-Header.h";
