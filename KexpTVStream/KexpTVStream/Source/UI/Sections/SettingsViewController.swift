@@ -22,8 +22,8 @@ class SettingsViewController: BaseViewController {
         let segmentedControl = UISegmentedControl()
         let font: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font: ThemeManager.Settings.font as Any]
         segmentedControl.setTitleTextAttributes(font, for: .normal)
-        segmentedControl.insertSegment(withTitle: "Disabled", at: 0, animated: true)
-        segmentedControl.insertSegment(withTitle: "Enabled", at: 1, animated: true)
+        segmentedControl.insertSegment(withTitle: "Enabled", at: 0, animated: true)
+        segmentedControl.insertSegment(withTitle: "Disabled", at: 1, animated: true)
         segmentedControl.addTarget(self, action: #selector(idleTimerControlDidChange(_:)), for: .valueChanged)
         return segmentedControl
     }()
@@ -36,7 +36,7 @@ class SettingsViewController: BaseViewController {
 
         view.backgroundColor = .white
         
-        idleTimerSegmentedControl.selectedSegmentIndex = UserSettingsManager.disableTimer == true ? 0 : 1
+        idleTimerSegmentedControl.selectedSegmentIndex = UserSettingsManager.disableTimer ? 1 : 0
     }
     
     override func constructSubviews() {
@@ -55,7 +55,7 @@ class SettingsViewController: BaseViewController {
     }
     
     @objc private func idleTimerControlDidChange(_ sender: Any) {
-        let isIdleTimerDisabled = idleTimerSegmentedControl.selectedSegmentIndex == 0
+        let isIdleTimerDisabled = idleTimerSegmentedControl.selectedSegmentIndex == 1
         AnalyticsManager.fire(.disableIdleTimer(isIdleTimerDisabled))
         
         UserSettingsManager.disableTimer = isIdleTimerDisabled
