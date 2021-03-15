@@ -18,13 +18,13 @@ class SettingsViewController: BaseViewController {
         return stackView
     }()
     
-    private lazy var disableIdleTimerSegmentedControl: UISegmentedControl = {
+    private lazy var idleTimerSegmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl()
         let font: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font: ThemeManager.Settings.font as Any]
         segmentedControl.setTitleTextAttributes(font, for: .normal)
         segmentedControl.insertSegment(withTitle: "Disabled", at: 0, animated: true)
         segmentedControl.insertSegment(withTitle: "Enabled", at: 1, animated: true)
-        segmentedControl.addTarget(self, action: #selector(doneAction(_:)), for: .valueChanged)
+        segmentedControl.addTarget(self, action: #selector(idleTimerControlDidChange(_:)), for: .valueChanged)
         return segmentedControl
     }()
     
@@ -36,7 +36,7 @@ class SettingsViewController: BaseViewController {
 
         view.backgroundColor = .white
         
-        disableIdleTimerSegmentedControl.selectedSegmentIndex = UserSettingsManager.disableTimer == true ? 0 : 1
+        idleTimerSegmentedControl.selectedSegmentIndex = UserSettingsManager.disableTimer == true ? 0 : 1
     }
     
     override func constructSubviews() {
@@ -54,8 +54,8 @@ class SettingsViewController: BaseViewController {
         ])
     }
     
-   @objc private func doneAction(_ sender: Any) {
-        let isDisplayTimerIdle = disableIdleTimerSegmentedControl.selectedSegmentIndex == 0 ? true : false
+   @objc private func idleTimerControlDidChange(_ sender: Any) {
+        let isDisplayTimerIdle = idleTimerSegmentedControl.selectedSegmentIndex == 0 ? true : false
         AnalyticsManager.fire(.disableIdleTimer(isDisplayTimerIdle))
         
         UserSettingsManager.disableTimer = isDisplayTimerIdle
