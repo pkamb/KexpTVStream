@@ -55,11 +55,11 @@ class SettingsViewController: BaseViewController {
     }
     
     @objc private func idleTimerControlDidChange(_ sender: Any) {
-        let isDisplayTimerIdle = idleTimerSegmentedControl.selectedSegmentIndex == 0 ? true : false
-        AnalyticsManager.fire(.disableIdleTimer(isDisplayTimerIdle))
+        let isIdleTimerDisabled = idleTimerSegmentedControl.selectedSegmentIndex == 0
+        AnalyticsManager.fire(.disableIdleTimer(isIdleTimerDisabled))
         
-        UserSettingsManager.disableTimer = isDisplayTimerIdle
-        UIApplication.shared.isIdleTimerDisabled = isDisplayTimerIdle
+        UserSettingsManager.disableTimer = isIdleTimerDisabled
+        UIApplication.shared.isIdleTimerDisabled = isIdleTimerDisabled
     }
 }
 
