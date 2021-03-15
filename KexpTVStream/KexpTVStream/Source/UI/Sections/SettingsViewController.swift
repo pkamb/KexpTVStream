@@ -22,8 +22,8 @@ class SettingsViewController: BaseViewController {
         let segmentedControl = UISegmentedControl()
         let font: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font: ThemeManager.Settings.font as Any]
         segmentedControl.setTitleTextAttributes(font, for: .normal)
-        segmentedControl.insertSegment(withTitle: "Yes", at: 0, animated: true)
-        segmentedControl.insertSegment(withTitle: "No", at: 1, animated: true)
+        segmentedControl.insertSegment(withTitle: "Disabled", at: 0, animated: true)
+        segmentedControl.insertSegment(withTitle: "Enabled", at: 1, animated: true)
         segmentedControl.addTarget(self, action: #selector(doneAction(_:)), for: .valueChanged)
         return segmentedControl
     }()
@@ -40,7 +40,7 @@ class SettingsViewController: BaseViewController {
     }
     
     override func constructSubviews() {
-        contentStackView.addArrangedSubview(SettingsRowView(title: "Disable Idle Timer:", view: disableIdleTimerSegmentedControl))
+        contentStackView.addArrangedSubview(SettingsRowView(title: "Idle Timer:", view: disableIdleTimerSegmentedControl))
         contentStackView.addArrangedSubview(SettingsRowView(title: "Version:", value: appVersion))
         contentStackView.addArrangedSubview(SettingsRowView(title: "Build:", value: appBuild))
         contentStackView.addArrangedSubview(SettingsRowView(title: "App Feedback: feedback@kexp.org"))
