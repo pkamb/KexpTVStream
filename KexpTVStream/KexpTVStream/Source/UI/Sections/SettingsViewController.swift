@@ -47,14 +47,14 @@ class SettingsViewController: BaseViewController {
         contentStackView.addArrangedSubview(SettingsRowView(title: "Donate at kexp.org/donate"))
     }
     
-     override func constructConstraints() {
+    override func constructConstraints() {
         view.addSubview(contentStackView, constraints: [
             contentStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             contentStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
     
-   @objc private func idleTimerControlDidChange(_ sender: Any) {
+    @objc private func idleTimerControlDidChange(_ sender: Any) {
         let isDisplayTimerIdle = idleTimerSegmentedControl.selectedSegmentIndex == 0 ? true : false
         AnalyticsManager.fire(.disableIdleTimer(isDisplayTimerIdle))
         
